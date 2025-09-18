@@ -52,11 +52,11 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"   # Node SSR
+      - "5173:5173"   # Node SSR
     networks:
       - xyresults
     restart: unless-stopped
-    command: node build   # production Node server
+    #command: node build   # production Node server
 
 networks:
   xyresults:
