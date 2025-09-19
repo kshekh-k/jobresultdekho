@@ -4,17 +4,21 @@
 
 <nav>
   {#each categories as cat}
-    {#if cat.children?.length}
-      <details>
-        <summary>{cat.name}</summary>
-        <ul>
+    {#if cat.title.toLowerCase() === 'home'}
+      <a href="/">{cat.title}</a>
+
+    {:else if cat.children?.length}
+      <div class="dropdown">
+        <span>{cat.title}</span>
+        <div class="dropdown-menu">
           {#each cat.children as child}
-            <li><a href={`/categories/${child.slug}`}>{child.name}</a></li>
+            <a href={`/categories/${child.slug}`}>{child.title}</a>
           {/each}
-        </ul>
-      </details>
+        </div>
+      </div>
+
     {:else}
-      <a href={`/categories/${cat.slug}`}>{cat.name}</a>
+      <a href={`/categories/${cat.slug}`}>{cat.title}</a>
     {/if}
   {/each}
 </nav>

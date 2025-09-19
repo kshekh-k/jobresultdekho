@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	server: {
-		host: '0.0.0.0',  // 👈 allows access from localhost and LAN
+		host: '127.0.0.1',  // 👈 allows access from localhost and LAN
 		port: 5173        // 👈 sets the default port
 	}
 });

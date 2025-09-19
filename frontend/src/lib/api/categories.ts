@@ -11,11 +11,11 @@ export interface Category {
   parent?: Category | null;
 }
 
-export async function getCategoryTree(): Promise<Category[]> {
-  return await apiGet<Category[]>("/categories/tree");
+export async function getCategoryTree(customFetch?: typeof fetch): Promise<Category[]> {
+  return await apiGet<Category[]>("/categories/tree", customFetch);
 }
 
-export async function getCategoryBySlug(slug: string): Promise<Category> {
-  return await apiGet<Category>(`/categories/${slug}`);
+export async function getCategoryBySlug(slug: string, customFetch?: typeof fetch): Promise<Category> {
+  return await apiGet<Category>(`/categories/${slug}`, customFetch);
 }
 
