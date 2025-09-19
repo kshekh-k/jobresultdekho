@@ -4,17 +4,23 @@
  * category router
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::category.category', {
-  config: {
-    find: {
-      policies: [],
-      middlewares: [],
+module.exports = {
+  routes: [
+    {
+      method: 'GET',
+      path: '/categories/tree',
+      handler: 'category.tree',
+      config: {
+        auth: false
+      }
     },
-    findOne: {},
-    create: {},
-    update: {},
-    delete: {},
-  },
-});
+    {
+      method: 'GET',
+      path: '/categories/:slug',
+      handler: 'category.findOne',
+      config: {
+        auth: false
+      }
+    }
+  ],
+};
