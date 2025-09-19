@@ -12,13 +12,13 @@
         <span>{cat.title}</span>
         <div class="dropdown-menu">
           {#each cat.children as child}
-            <a href={`/categories/${child.slug}`}>{child.title}</a>
+            <a href={`/${child.slug}`}>{child.title}</a>
           {/each}
         </div>
       </div>
 
     {:else}
-      <a href={`/categories/${cat.slug}`}>{cat.title}</a>
+      <a href={`/${cat.slug}`}>{cat.title}</a>
     {/if}
   {/each}
 </nav>
