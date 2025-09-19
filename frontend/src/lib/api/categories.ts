@@ -19,3 +19,5 @@ export async function getCategoryBySlug(slug: string, customFetch?: typeof fetch
   return await apiGet<Category>(`/categories/${slug}`, customFetch);
 }
 
+
+

@@ -6,6 +6,21 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
+async function buildCategoryTree(categoryId) {
+  const category = await strapi.db.query('api::category.category').findOne({
+    where: { id: categoryId },
+    populate: { children: true, parent: true },
+  });
+
+  if (category?.children?.length) {
+    category.children = await Promise.all(
+      category.children.map(child => buildCategoryTree(child.id))
+    );
+  }
+
+  return category;
+}
+
 module.exports = createCoreController('api::category.category', ({ strapi }) => ({
   async tree(ctx) {
     // Get all categories
@@ -24,15 +39,18 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
 
     return rootCategories;
   },
-
+  
   async findOne(ctx) {
     const { slug } = ctx.params;
-
     const category = await strapi.db.query('api::category.category').findOne({
       where: { slug },
       populate: {
-        children: { populate: '*' },
-        parent: true
+      parent: true,
+        children: {
+          populate: {
+            children: true
+          }
+        }
       }
     });
 
