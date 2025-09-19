@@ -16,9 +16,6 @@
       "type": "string",
       "required": true
     },
-    "link": {
-      "type": "string"
-    },
     "parent": {
       "type": "relation",
       "relation": "manyToOne",
@@ -30,6 +27,16 @@
       "relation": "oneToMany",
       "target": "api::category.category",
       "mappedBy": "parent"
+    },
+    "description": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

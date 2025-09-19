@@ -124,6 +124,11 @@ The backend is built with Strapi 5. To develop the backend:
    ```bash
    node -e "console.log([require('crypto').randomBytes(32).toString('hex'), require('crypto').randomBytes(32).toString('hex')])"
    ```
+5. To resolve frontend "upgrade required" error
+   ```bash
+   cd frontend
+   yarn dev --host 0.0.0.0 --port 5173
+   ```
 
 ## Category Content Type
 
