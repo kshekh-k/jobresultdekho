@@ -1,4 +1,4 @@
-// src/lib/api/categories.ts
+// src/lib/api/category.ts
 import { apiGet } from "./client";
 
 export interface Category {
