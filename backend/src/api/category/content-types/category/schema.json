@@ -16,6 +16,23 @@
       "type": "string",
       "required": true
     },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "pages": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::page.page",
+      "inversedBy": "categories"
+    },
     "parent": {
       "type": "relation",
       "relation": "manyToOne",
@@ -27,16 +44,6 @@
       "relation": "oneToMany",
       "target": "api::category.category",
       "mappedBy": "parent"
-    },
-    "description": {
-      "type": "text"
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
-    "order": {
-      "type": "integer"
     }
   }
 }

@@ -44,12 +44,16 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     const { slug } = ctx.params;
     const category = await strapi.db.query('api::category.category').findOne({
       where: { slug },
+      select: ['id','title','slug','description'],
       populate: {
-      parent: true,
+        parent: {
+          select: ['id','title','slug']
+        },
         children: {
-          populate: {
-            children: true
-          }
+          select: ['id','title','slug','description']
+        },
+        pages: {
+          select: ['id','title','slug','description']
         }
       }
     });
