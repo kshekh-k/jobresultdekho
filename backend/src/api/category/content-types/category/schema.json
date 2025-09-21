@@ -27,11 +27,41 @@
     "order": {
       "type": "integer"
     },
-    "pages": {
+    "jobs": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::page.page",
-      "inversedBy": "categories"
+      "relation": "oneToMany",
+      "target": "api::job.job",
+      "mappedBy": "category"
+    },
+    "admit_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::admit-card.admit-card",
+      "mappedBy": "category"
+    },
+    "results": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::result.result",
+      "mappedBy": "category"
+    },
+    "study_materials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::study-material.study-material",
+      "mappedBy": "category"
+    },
+    "admissions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::admission.admission",
+      "mappedBy": "category"
+    },
+    "answer_keys": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer-key.answer-key",
+      "mappedBy": "category"
     },
     "parent": {
       "type": "relation",
@@ -44,6 +74,12 @@
       "relation": "oneToMany",
       "target": "api::category.category",
       "mappedBy": "parent"
+    },
+    "pages": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::page.page",
+      "inversedBy": "categories"
     }
   }
 }
