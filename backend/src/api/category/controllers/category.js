@@ -47,12 +47,27 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
       select: ['id','title','slug','description'],
       populate: {
         parent: {
-          select: ['id','title','slug']
+          select: ['id','title','slug','description']
         },
         children: {
           select: ['id','title','slug','description']
         },
-        pages: {
+        jobs: {
+          select: ['id','title','slug','description']
+        },
+        admit_cards: {
+          select: ['id','title','slug','description']
+        },
+        results: {
+          select: ['id','title','slug','description']
+        },
+        syllabus: {
+          select: ['id','title','slug','description']
+        },
+        admissions: {
+          select: ['id','title','slug','description']
+        },
+        answer_keys: {
           select: ['id','title','slug','description']
         }
       }

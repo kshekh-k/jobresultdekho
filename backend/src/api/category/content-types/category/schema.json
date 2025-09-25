@@ -45,16 +45,16 @@
       "target": "api::result.result",
       "mappedBy": "category"
     },
-    "study_materials": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::study-material.study-material",
-      "mappedBy": "category"
-    },
     "admissions": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::admission.admission",
+      "mappedBy": "category"
+    },
+    "syllabus": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::syllabus.syllabus",
       "mappedBy": "category"
     },
     "answer_keys": {
@@ -74,12 +74,6 @@
       "relation": "oneToMany",
       "target": "api::category.category",
       "mappedBy": "parent"
-    },
-    "pages": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::page.page",
-      "inversedBy": "categories"
     }
   }
 }
