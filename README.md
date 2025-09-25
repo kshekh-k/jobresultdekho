@@ -113,6 +113,7 @@ The backend is built with Strapi 5. To develop the backend:
 3. Start the development server:
    ```bash
    yarn develop
+   yarn develop --no-watch-admin
    ```
 
 4. Generate STRAPI_API_TOKEN_SALT & STRAPI_TOKEN_SALT and configure backend/.env
@@ -123,6 +124,11 @@ The backend is built with Strapi 5. To develop the backend:
 5. Generate STRAPI_APP_KEYS & configure backend/.env
    ```bash
    node -e "console.log([require('crypto').randomBytes(32).toString('hex'), require('crypto').randomBytes(32).toString('hex')])"
+   ```
+5. To resolve frontend "upgrade required" error
+   ```bash
+   cd frontend
+   yarn dev --host 0.0.0.0 --port 5173
    ```
 
 ## Category Content Type

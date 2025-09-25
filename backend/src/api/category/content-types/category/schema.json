@@ -16,8 +16,52 @@
       "type": "string",
       "required": true
     },
-    "link": {
-      "type": "string"
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "jobs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::job.job",
+      "mappedBy": "category"
+    },
+    "admit_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::admit-card.admit-card",
+      "mappedBy": "category"
+    },
+    "results": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::result.result",
+      "mappedBy": "category"
+    },
+    "admissions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::admission.admission",
+      "mappedBy": "category"
+    },
+    "syllabus": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::syllabus.syllabus",
+      "mappedBy": "category"
+    },
+    "answer_keys": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer-key.answer-key",
+      "mappedBy": "category"
     },
     "parent": {
       "type": "relation",
