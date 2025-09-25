@@ -1,9 +1,10 @@
-'use strict';
-
-/**
- * admit-card router
- */
-
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::admit-card.admit-card');
+module.exports = {
+  routes: [
+    {
+      method: 'GET',
+      path: '/admit-cards/:slug',
+      handler: 'admit-card.findOne',
+      config: { auth: false }
+    }
+  ]
+};

@@ -11,7 +11,7 @@ export interface AdmitCard {
 }
 
 export async function getAdmitCardBySlug(slug: string, customFetch?: typeof fetch): Promise<AdmitCard> {
-  return await apiGet<AdmitCard>(`/admit-card/${slug}`, customFetch);
+  return await apiGet<AdmitCard>(`/admit-cards/${slug}`, customFetch);
 }
 
 

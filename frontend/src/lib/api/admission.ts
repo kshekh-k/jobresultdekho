@@ -11,7 +11,7 @@ export interface Admission {
 }
 
 export async function getAdmissionBySlug(slug: string, customFetch?: typeof fetch): Promise<Admission> {
-  return await apiGet<Admission>(`/admission/${slug}`, customFetch);
+  return await apiGet<Admission>(`/admissions/${slug}`, customFetch);
 }
 
 

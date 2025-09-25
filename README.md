@@ -113,6 +113,7 @@ The backend is built with Strapi 5. To develop the backend:
 3. Start the development server:
    ```bash
    yarn develop
+   yarn develop --no-watch-admin
    ```
 
 4. Generate STRAPI_API_TOKEN_SALT & STRAPI_TOKEN_SALT and configure backend/.env

@@ -11,7 +11,7 @@ export interface AnswerKey {
 }
 
 export async function getAnswerKeyBySlug(slug: string, customFetch?: typeof fetch): Promise<AnswerKey> {
-  return await apiGet<AnswerKey>(`/pages/${slug}`, customFetch);
+  return await apiGet<AnswerKey>(`/answer-keys/${slug}`, customFetch);
 }
 
 

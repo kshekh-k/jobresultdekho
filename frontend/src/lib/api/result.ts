@@ -11,7 +11,7 @@ export interface Result {
 }
 
 export async function getResultBySlug(slug: string, customFetch?: typeof fetch): Promise<Result> {
-  return await apiGet<Result>(`/result/${slug}`, customFetch);
+  return await apiGet<Result>(`/results/${slug}`, customFetch);
 }
 
 
