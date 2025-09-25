@@ -506,15 +506,11 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     order: Schema.Attribute.Integer;
-    pages: Schema.Attribute.Relation<'manyToMany', 'api::page.page'>;
     parent: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     publishedAt: Schema.Attribute.DateTime;
     results: Schema.Attribute.Relation<'oneToMany', 'api::result.result'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    study_materials: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::study-material.study-material'
-    >;
+    syllabus: Schema.Attribute.Relation<'oneToMany', 'api::syllabus.syllabus'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -541,38 +537,6 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiPagePage extends Struct.CollectionTypeSchema {
-  collectionName: 'pages';
-  info: {
-    displayName: 'Page';
-    pluralName: 'pages';
-    singularName: 'page';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::category.category'
-    >;
-    content: Schema.Attribute.Blocks;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -615,13 +579,12 @@ export interface ApiResultResult extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiStudyMaterialStudyMaterial
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'study_materials';
+export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
+  collectionName: 'syllabi';
   info: {
-    displayName: 'Study Material';
-    pluralName: 'study-materials';
-    singularName: 'study-material';
+    displayName: 'Syllabus';
+    pluralName: 'syllabi';
+    singularName: 'syllabus';
   };
   options: {
     draftAndPublish: true;
@@ -636,7 +599,7 @@ export interface ApiStudyMaterialStudyMaterial
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::study-material.study-material'
+      'api::syllabus.syllabus'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -1162,9 +1125,8 @@ declare module '@strapi/strapi' {
       'api::answer-key.answer-key': ApiAnswerKeyAnswerKey;
       'api::category.category': ApiCategoryCategory;
       'api::job.job': ApiJobJob;
-      'api::page.page': ApiPagePage;
       'api::result.result': ApiResultResult;
-      'api::study-material.study-material': ApiStudyMaterialStudyMaterial;
+      'api::syllabus.syllabus': ApiSyllabusSyllabus;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
