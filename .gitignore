@@ -37,3 +37,6 @@ pnpm-debug.log*
 
 # Docker
 docker-compose-local*
+
+# Strapi updater file
+.strapi-updater.json
