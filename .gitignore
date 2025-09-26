@@ -4,6 +4,8 @@
 /.svelte-kit
 frontend/.svelte-kit
 /build
+frontend/build
+backend/build
 /.vercel
 /.netlify
 /.wrangler
