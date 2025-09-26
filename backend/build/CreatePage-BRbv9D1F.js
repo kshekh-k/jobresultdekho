@@ -1,1 +1,0 @@
-import{aY as r,j as e,P as o}from"./strapi-DG1ojUdo.js";import{E as i}from"./EditPage-BRMPHBr4.js";import"./selectors-3qfMep_F.js";import"./useWebhooks-BcfQKXK_.js";const c=()=>{const s=r(t=>t.admin_app.permissions.settings?.webhooks.create);return e.jsx(o.Protect,{permissions:s,children:e.jsx(i,{})})};export{c as ProtectedCreatePage};
