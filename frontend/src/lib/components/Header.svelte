@@ -1,51 +1,36 @@
 <script lang="ts">
-	import Input from "./ui/input/input.svelte"; 
-	 import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js";
-	import Navbar from "./Navbar.svelte";
+	import Input from './ui/input/input.svelte';
+	import Navbar from './Navbar.svelte'; 
+	import Icon from './ui/Icon.svelte';
+	import { Search } from 'lucide-svelte';
+	import Annoucment from './Annoucment.svelte';
+	import { Button } from "$lib/components/ui/button/index.js";
+	export let categories: any[] = [];
 	let isMobileMenuOpen = false;
 	let isMoreOpen = false;
-	// Example alerts (you can fetch from API later)
-	const alerts = [
-		'🔥 New Admit Card Released for SSC 2025!',
-		'📢 Latest Job Openings in Banking Sector!',
-		'⚡ Answer Key for UPSC Prelims Out Now!'
-	];
+	
 </script>
 
 <header class="w-full border-b border-black/10 bg-white">
 	<!-- 🔴 High Alerts Row -->
-	<div class="text-white text-sm font-medium bg-sky-500 py-1">
-		<div class="max-w-7xl mx-auto px-4 py-1 flex items-center gap-2">
-			<span class="font-semibold bg-red-500 border border-white rounded py-3 px-3 leading-1 block">High Alerts</span>
-			<marquee behavior="scroll" direction="left" scrollamount="5" class="flex-1">
-				{alerts.join(' • ')}
-			</marquee>
-		</div>
-	</div>
+	 <Annoucment />
 	<!-- Top Section -->
 	<div class="max-w-screen-xl mx-auto px-3">
 		<div class="flex items-center justify-between py-3">
 			<!-- Logo -->
-			<div class="text-xl font-bold text-blue-600">JobResultWale</div>
-
+			<div class="text-xl font-bold text-blue-600"><a href="/">JobResultWale</a></div>
 			<!-- Desktop Menu -->
-           
-			<div class="hidden md:flex ">
-				<Navbar />
+			<div class="hidden md:flex">
+				<Navbar {categories} />
 			</div>
-
 			<!-- Search + Button -->
 			<div class="hidden md:flex items-center space-x-4">
-                <div class="relative">
-                    <Input type="search" placeholder="Search..." class="" />
-			 
-            </div>
-				<a
-					href="/contact"
-					class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
-				>
-					Contact
-				</a>
+				<div class="relative">
+					<Input type="search" placeholder="Search..." class="bg-white shadow-none pr-6" />
+					<button class="border-none bg-transparent hover:bg-transparent hover:text-sky-600 absolute top-0 right-0 cursor-pointer"><Icon name={Search} size={16} /></button>
+				</div>
+				<Button href="/contact" variant="success">Contact</Button>
+				 
 			</div>
 
 			<!-- Mobile Menu Button -->

@@ -2,7 +2,7 @@
   // Props
   export let name: any; // the imported icon component itself
   export let size: number = 20;
-  export let className: string = "text-gray-600";
+  export let className: string = "";
 </script>
 
 <svelte:component
