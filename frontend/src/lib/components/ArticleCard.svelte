@@ -1,51 +1,103 @@
 <script lang="ts">
-  import * as Card from "$lib/components/ui/card/index.js"; 
-  import { ChevronDown} from "lucide-svelte";
-  import { cn } from "$lib/utils.js";
-	import Icon from "./ui/Icon.svelte";
-	import Button from "./ui/button/button.svelte";
+	import * as Card from '$lib/components/ui/card/index.js';
+	import { ChevronDown } from 'lucide-svelte';
+	import { cn } from '$lib/utils.js';
+	import Icon from './ui/Icon.svelte';
+	import Button from './ui/button/button.svelte';
 
-  export let title: string;
-  export let items: { label: string; href: string, buttonLabel:string }[] = [];
-  export let viewText: string = "View All";
-  export let cat: string = "/latest-job"
+	export let title: string; 
+	export let articleId: string | undefined; 
+	export let articleWrap: string ; 
+	export let headerColor: string = 'bg-sky-500';
+	export let buttonLabel: string;
+	export let items: {
+		id?: number;
+		department: string;
+		label?: string;
+		href?: string;
+		date?: string; 
+		timeLeft?: string;
+		target?: string; 
+	}[] = [];
+	// Heading/Titles
+	export let headers: {
+		id?: string;
+		department?: string;
+		label?: string;
+		date?: string;  
+    timeLeft?:string;
+		action?: string;
+	}[] = [];
 
-  let open = true;
+	export let viewText: string = 'View All';
+	export let cat: string = '/latest-job';
 
-  const toggle = () => {
-    open = !open;
-  };
+	export let open: boolean = true;
+
+	const toggle = () => {
+		open = !open;
+	};
 </script>
+<div id={articleId} class={articleWrap}>
+<Card.Root  class="overflow-hidden p-0 rounded-md gap-0">
+	<!-- Header -->
+	<Card.Header class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 {headerColor}" onclick={toggle} role="button">
+		<h3 class="text-lg font-semibold text-white">{title}</h3>
+		<span
+			
+		 
+			class="p-1 rounded-sm hover:bg-white/20 focus:outline-none text-white"
+		>
+			<Icon name={ChevronDown} className={open ? 'rotate-180' : 'rotate-0'} size={20} />
+		</span>
+	</Card.Header>
 
-<Card.Root class="overflow-hidden p-0 rounded-md gap-3">
-  <!-- Header -->
-  <Card.Header class="flex items-center justify-between cursor-pointer bg-sky-500 py-2 px-4 gap-3" >
-    <h3 class="text-lg font-semibold text-white">{title}</h3>
-    <button on:click={toggle}
-      type="button"
-      class="p-1 rounded-sm hover:bg-white/20 focus:outline-none text-white"
-    >
-    <Icon name={ChevronDown} className="{open ? 'rotate-180' : 'rotate-0'}" size={20} />
-     
-    </button>
-  </Card.Header>
-
-  <!-- Collapsible Content -->
-  {#if open}
-    <Card.Content class="p-0 divide-y">
-      {#each items as item}
-     <div class="flex justify-between items-center gap-2 flex-wrap px-4">
-        <a href={item.href}
-          class="block hover:text-sky-600 text-slate-600 font-medium transition-colors flex-1 hover:underline py-2" >
-          {item.label}
-        </a>
-        <a href={item.href} class="text-sky-600 font-semibold py-1 px-2 rounded-sm ease-in-out duration-200 hover:bg-sky-100 shrink-0">{item.buttonLabel}</a>
-    </div>
-      {/each}
-    </Card.Content>
-    <!-- Footer -->
-    <Card.Footer class="flex !p-3 border-t justify-center">
-      <Button href={cat} variant="success">{viewText}</Button>
-    </Card.Footer>
-  {/if}
+	<!-- Collapsible Content -->
+	{#if open}
+		<Card.Content class="p-0 divide-y">
+			<div class="hidden md:flex flex-wrap gap-2 px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800">
+				{#each headers as header}
+					<div class="w-8 shrink-0">{header.id}</div>
+					<div class="w-24 shrink-0">{header.department}</div>
+					<div class="flex-1">{header.label}</div>
+					<div class="w-24 shrink-0">{header.date}</div>
+          {#if header.timeLeft}
+					<div class="w-16 shrink-0">{header.timeLeft}</div>
+          {/if}
+					<div class="w-20 shrink-0 text-center">{header.action}</div>
+				{/each}
+			</div>
+			{#each items as item}
+      	{#each headers as header}
+				<div
+					class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
+				>
+					<div class="w-8 shrink-0 order-0 hidden md:block">{item.id}.</div>
+					<div class="w-28 md:w-24 shrink-0 order-2 md:order-1 flex gap-1 text-xs"><span class="block md:hidden text-sky-900">{header.department}:</span> {item.department}</div>
+					<div class="md:flex-1 w-[calc(100%-32px)] md:w-auto order-1 md:order-2 ">
+						<a
+							href={item.href}
+							target={item.target}
+							class="block hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1 text-sm"
+						>
+							{item.label}
+						</a>
+					</div>
+					<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 text-xs"><span class="block md:hidden text-sky-800 text-xs whitespace-nowrap">{header.date}:</span> {item.date}</div>
+          {#if item.timeLeft}
+					<div class="md:w-16 shrink-0 order-4 md:order-5 flex gap-1 text-xs"><span class="block md:hidden text-sky-800 text-xs">{header.timeLeft}:</span> {item.timeLeft}</div>
+          {/if}
+					<div class="w-full md:w-20 shrink-0 flex justify-end md:justify-center order-6">
+            <Button href={item.href} target={item.target} variant="primary" size="xs">{buttonLabel}</Button>						 
+					</div>
+				</div>
+			{/each}
+			{/each}
+		</Card.Content>
+		<!-- Footer -->
+		<Card.Footer class="flex !p-3 border-t justify-end">
+			<Button href={cat} variant="success">{viewText}</Button>
+		</Card.Footer>
+	{/if}
 </Card.Root>
+</div>

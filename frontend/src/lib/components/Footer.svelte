@@ -7,9 +7,9 @@
       </div>
       
       <div class="flex space-x-4">
-        <a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
-        <a href="#" class="hover:text-blue-400 transition-colors">Terms of Service</a>
-        <a href="#" class="hover:text-blue-400 transition-colors">Contact</a>
+        <a href="/#" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
+        <a href="/#" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+        <a href="/#" class="hover:text-blue-400 transition-colors">Contact</a>
       </div>
     </div>
   </div>
