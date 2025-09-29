@@ -2,7 +2,7 @@
 	import { Button, type ButtonProps } from '$lib/components/ui/button/index.js';
 	import { createEventDispatcher } from 'svelte';
 
-	export let options: { label: string; value?: string; href?: string }[] = [];
+	export let options: { label: string; value?: string; href?: string, icon?: any }[] = [];
 	export let selected: string | null = null;
 
 	export let variant: 'grouped' | 'separated' | 'vertical' | 'vertical-separated' = 'grouped';
@@ -17,7 +17,7 @@
 		click: MouseEvent;
 		select: string;
 	}>();
-    function handleClick(option: { label: string; value?: string; href?: string }, event: MouseEvent) {
+    function handleClick(option: { label: string; value?: string; href?: string, icon?:any }, event: MouseEvent) {
 		// update selected state
 		selected = option.value ?? option.href ?? option.label;
 
@@ -28,7 +28,7 @@
 </script>
 
 {#if variant === 'separated'}
-	<div class="flex gap-2 w-full" class:justify-between={distribution === 'justify'}>
+	<div class="flex flex-wrap gap-2 w-full" class:justify-between={distribution === 'justify'}>
 		{#each options as option}
 			{#if option.href}
 				<!-- ✅ Render as Link -->
@@ -36,7 +36,8 @@
 					href={option.href}
 					{size}
 					variant={selected === option.value ? selectedVariant : normalVariant}
-                    class="{distribution === 'equal' && 'flex-1'}"					 
+                    className="{distribution === 'equal' ? 'flex-1' : ''}"		
+					icon={option.icon}		 
 					onClick={(e:any) => handleClick(option, e)}
 				>
 					{option.label}
@@ -46,7 +47,8 @@
 				<Button
 					{size}
 					variant={selected === option.value ? selectedVariant : normalVariant}
-					class="{distribution === 'equal' && 'flex-1'}"
+					className="{distribution === 'equal' ? 'flex-1' : ''}"
+					icon={option.icon}	
 					onClick={(e:any) => handleClick(option, e)}
 				>
 					{option.label}
