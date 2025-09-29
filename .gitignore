@@ -4,6 +4,8 @@
 /.svelte-kit
 frontend/.svelte-kit
 /build
+frontend/build
+backend/build
 /.vercel
 /.netlify
 /.wrangler
@@ -35,3 +37,6 @@ pnpm-debug.log*
 
 # Docker
 docker-compose-local*
+
+# Strapi updater file
+backend/.strapi-updater.json
