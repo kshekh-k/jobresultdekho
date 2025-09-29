@@ -389,7 +389,12 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    department: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::department.department'
+    >;
     description: Schema.Attribute.Text;
+    last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -421,7 +426,12 @@ export interface ApiAdmitCardAdmitCard extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    department: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::department.department'
+    >;
     description: Schema.Attribute.Text;
+    last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -453,7 +463,12 @@ export interface ApiAnswerKeyAnswerKey extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    department: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::department.department'
+    >;
     description: Schema.Attribute.Text;
+    last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -518,6 +533,35 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDepartmentDepartment extends Struct.CollectionTypeSchema {
+  collectionName: 'departments';
+  info: {
+    displayName: 'Department';
+    pluralName: 'departments';
+    singularName: 'department';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::department.department'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiJobJob extends Struct.CollectionTypeSchema {
   collectionName: 'jobs';
   info: {
@@ -534,7 +578,12 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    department: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::department.department'
+    >;
     description: Schema.Attribute.Text;
+    last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
       Schema.Attribute.Private;
@@ -563,6 +612,10 @@ export interface ApiResultResult extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    department: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::department.department'
+    >;
     description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -595,6 +648,10 @@ export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    department: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::department.department'
+    >;
     description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1124,6 +1181,7 @@ declare module '@strapi/strapi' {
       'api::admit-card.admit-card': ApiAdmitCardAdmitCard;
       'api::answer-key.answer-key': ApiAnswerKeyAnswerKey;
       'api::category.category': ApiCategoryCategory;
+      'api::department.department': ApiDepartmentDepartment;
       'api::job.job': ApiJobJob;
       'api::result.result': ApiResultResult;
       'api::syllabus.syllabus': ApiSyllabusSyllabus;

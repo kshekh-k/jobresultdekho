@@ -7,6 +7,27 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::job.job', ({strapi}) => ({
+    async findLatest(ctx) {
+        try {
+            const jobs = await strapi.db.query('api::job.job').findMany({
+                where: { publishedAt: { $notNull: true } },
+                orderBy: { createdAt: 'desc' },
+                limit: 10,
+                select: ['id', 'title', 'slug', 'description', 'content'],
+                populate: {
+                    category: {
+                    select: ['id', 'title', 'slug'],
+                    },
+                },
+            });
+
+            return jobs;
+        } catch (err) {
+            strapi.log.error("❌ Error fetching jobs: " + err.message);
+            ctx.throw(500, "Unable to fetch jobs");
+        }
+    },
+
     async findOne(ctx) {
         const { slug } = ctx.params;
 
