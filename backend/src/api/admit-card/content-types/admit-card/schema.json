@@ -31,6 +31,14 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "admit_cards"
+    },
+    "last_date": {
+      "type": "date"
+    },
+    "department": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::department.department"
     }
   }
 }
