@@ -33,7 +33,7 @@
 				<Icon name={Menu} className="" size={20} />					 
 				</button>
 				<!-- Logo -->
-				<div class="xl:text-xl font-bold text-blue-600"><a href="/">JobResultWale</a></div>
+				<div class="xl:text-xl font-bold text-blue-600"><a href="/">JobResultDekho</a></div>
 			</div>
 			<!-- Desktop Menu -->
 			<div class="hidden lg:flex">
@@ -42,7 +42,7 @@
 			<!-- Search + Button -->
 			<div class="flex items-center sm:space-x-4">
 				<div class="relative">
-					<Input type="search" placeholder="Search..." class="bg-white shadow-none pr-6 w-32 sm:w-auto"  />
+					<Input type="search" placeholder="Search..." class="bg-white shadow-none pr-6 w-32 sm:w-64"  />
 					<Button
 						variant="ghost"
 						class="border-none hover:bg-transparent hover:text-sky-600 absolute top-0 right-0 cursor-pointer"

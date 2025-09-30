@@ -36,7 +36,7 @@
  
 </script>
 <div class="max-w-screen-xl mx-auto px-3">
-<section class="relative max-w-full overflow-hidden">	
+<section class="relative max-w-full">	
 	<div class="overflow-auto max-w-full">
 		<div class="flex justify-between md:grid md:grid-cols-3 gap-4 min-w-[1024px] md:min-w-min">
 			{#each hotPosts as item}

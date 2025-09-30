@@ -1,42 +1,50 @@
 <script lang="ts">
-	 
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
-	import { PanelRightDashed, Image, FileText, Calculator, Signature, CalendarRange, NotepadTextDashed, TypeOutline} from 'lucide-svelte';
+	import {
+		PanelRightDashed,
+		Image,
+		FileText,
+		Calculator,
+		Signature,
+		CalendarRange,
+		NotepadTextDashed,
+		TypeOutline
+	} from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
-import * as Card from '$lib/components/ui/card/index.js';
+	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
 	import Widget from './Widget.svelte';
 	// Sticky nav state
-  let isFixed = false;
-  let navEl: HTMLElement | null = null;
- let active: string | null = null;
-  onMount(() => {
-    if (!navEl) return;
+	let isFixed = false;
+	let navEl: HTMLElement | null = null;
+	let active: string | null = null;
+	onMount(() => {
+		if (!navEl) return;
 
-    const offsetTop = navEl.offsetTop;
+		const offsetTop = navEl.offsetTop;
 
-    const handleScroll = () => {
-      if (window.scrollY >= offsetTop) {
-        isFixed = true;
-      } else {
-        isFixed = false;
-      }
-    };
+		const handleScroll = () => {
+			if (window.scrollY >= offsetTop) {
+				isFixed = true;
+			} else {
+				isFixed = false;
+			}
+		};
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  });
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	});
 
-  // Smooth scroll to section
-  function scrollToSection(id: string) {
-    const el = document.getElementById(id.replace("#", ""));
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - (navEl?.offsetHeight || 0);
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-	  active = id; // mark clicked as active
-  }
+	// Smooth scroll to section
+	function scrollToSection(id: string) {
+		const el = document.getElementById(id.replace('#', ''));
+		if (el) {
+			const y = el.getBoundingClientRect().top + window.scrollY - (navEl?.offsetHeight || 0);
+			window.scrollTo({ top: y, behavior: 'smooth' });
+		}
+		active = id; // mark clicked as active
+	}
 
 	const options = [
 		{ label: 'Latest Jobs', href: '#latestJobs' },
@@ -54,7 +62,6 @@ import * as Card from '$lib/components/ui/card/index.js';
 		{ label: 'Syllabus', href: '/syllabus' },
 		{ label: 'Admissions', href: '/admission' }
 	];
- 
 
 	const resultsHeaders = [
 		{
@@ -288,121 +295,127 @@ import * as Card from '$lib/components/ui/card/index.js';
 		}
 	];
 
-
 	let userMenus = [
-    { label: "Image Resizer", href: "/image-resizer", icon: Image },
-    { label: "JPG to PDF Converter", href: "/jpg-to-pdf-Converter", icon: FileText },
-    { label: "Age Calculator", href: "/age-calculator", icon: Calculator },
-    { label: "Photo Signature Joiner", href: "/photo-signature-joiner", icon: Signature },
-    { label: "Name & Date on Photo Maker", href: "/name-date-on-photo-maker", icon: CalendarRange },
-    { label: "MPPEB Template", href: "/mppeb-template", icon: NotepadTextDashed },
-    { label: "Typing Test", href: "/typing-test", icon: TypeOutline },
-  ];
-
-
- 
+		{ label: 'Image Resizer', href: '/image-resizer', icon: Image },
+		{ label: 'JPG to PDF Converter', href: '/jpg-to-pdf-Converter', icon: FileText },
+		{ label: 'Age Calculator', href: '/age-calculator', icon: Calculator },
+		{ label: 'Photo Signature Joiner', href: '/photo-signature-joiner', icon: Signature },
+		{ label: 'Name & Date on Photo Maker', href: '/name-date-on-photo-maker', icon: CalendarRange },
+		{ label: 'MPPEB Template', href: '/mppeb-template', icon: NotepadTextDashed },
+		{ label: 'Typing Test', href: '/typing-test', icon: TypeOutline }
+	];
 </script>
+
 <div class="max-w-screen-xl mx-auto px-3 space-y-5">
-<div class="hidden md:block {isFixed ? "fixed inset-x-0 top-0 py-2 bg-white shadow-md" : "static"}" bind:this={navEl}>
-<div class="flex gap-2 flex-wrap {isFixed ? "max-w-screen-xl mx-auto px-3" : ""}"  >
-	<!-- Tab Buttons -->
-	{#each options as option}
-		<Button onclick={() => scrollToSection(option.href)} 
-			variant="light"			
-			class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == option.href ? '!bg-emerald-500 text-white' : ''}"
-			>{option.label}</Button
-		>
-	{/each}
-	<Button variant="bordered" class="lg:!hidden"
-		><Icon name={PanelRightDashed} className="" size={20} /></Button
+	<div
+		class="hidden md:block z-50 {isFixed
+			? 'fixed inset-x-0 top-0 py-2 bg-white shadow-md'
+			: 'static'}"
+		bind:this={navEl}
 	>
-</div>
-</div>
-<section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
-	<div class="lg:col-span-8 space-y-4 ">
-		<ArticleCard
-			articleWrap={isFixed ? "md:pt-20" : "pt-0"}
-			articleId="latestJobs"
-			headerColor="bg-sky-500"
-			headers={jobsHeaders}
-			title="Latest Jobs"
-			items={latestJobs}
-			viewText="See More"
-			cat={'/latest-job'}
-			buttonLabel="Apply"
-		/>
-
-		<ArticleCard
-		articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-		open={false}
-			articleId="results"
-			headerColor="bg-emerald-500"
-			headers={resultsHeaders}
-			title="Results"
-			items={results}
-			viewText="See More"
-			cat={'/result'}
-			buttonLabel="View"
-		/>
-
-		<ArticleCard
-		articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-		open={false}
-			articleId="admitCards"
-			headerColor="bg-indigo-500"
-			headers={admitCardHeaders}
-			title="Admit Cards"
-			items={admitCards}
-			viewText="See More"
-			cat={'/admit-card'}
-			buttonLabel="Download"
-		/>
-		<Card.Root class="" variant={'default'}>
-			<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
-		</Card.Root>
-		<ArticleCard
-		articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-		open={false}
-			articleId="answerKey"
-			headerColor="bg-pink-500"
-			headers={answerKeyHeaders}
-			title="Answer Key"
-			items={answerKey}
-			viewText="See More"
-			cat={'/answer-key'}
-			buttonLabel="Check"
-		/>
-		<ArticleCard
-		articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-		open={false}
-			articleId="syllabus"
-			headerColor="bg-teal-500"
-			headers={syllabusHeaders}
-			title="Syllabus"
-			items={syllabus}
-			viewText="See More"
-			cat={'/syllabus'}
-			buttonLabel="Check"
-		/>
-		<ArticleCard
-		articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-			open={false}
-			articleId="admission"
-			headerColor="bg-red-800"
-			headers={admissionHeaders}
-			title="Admissions"
-			items={admission}
-			viewText="See More"
-			cat={'/admissions'}
-			buttonLabel="Check"
-		/>
+		<div class="flex gap-2 flex-wrap {isFixed ? 'max-w-screen-xl mx-auto px-3' : ''}">
+			<!-- Tab Buttons -->
+			{#each options as option}
+				<Button
+					onclick={() => scrollToSection(option.href)}
+					variant="light"
+					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == option.href
+						? '!bg-emerald-500 text-white'
+						: ''}">{option.label}</Button
+				>
+			{/each}
+			<Button variant="bordered" class="lg:!hidden"
+				><Icon name={PanelRightDashed} className="" size={20} /></Button
+			>
+		</div>
 	</div>
-	<aside class="lg:col-span-4 space-y-4">
-		<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900"/>
-		<Card.Root class="bg-slate-300" variant={'default'}>
-			<Card.Content class="flex items-center justify-center text-center h-60 ">Ad Place here</Card.Content>
-		</Card.Root>
-		<Widget title="All Categories" menus={sidebarMenu} headerColor="bg-slate-900"/>
-	</aside>
-</section>
+	<section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
+		<div class="lg:col-span-8 space-y-4">
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-20' : 'pt-0'}
+				articleId="latestJobs"
+				headerColor="bg-sky-500"
+				headers={jobsHeaders}
+				title="Latest Jobs"
+				items={latestJobs}
+				viewText="See More"
+				cat={'/latest-job'}
+				buttonLabel="Apply"
+			/>
+
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="results"
+				headerColor="bg-emerald-500"
+				headers={resultsHeaders}
+				title="Results"
+				items={results}
+				viewText="See More"
+				cat={'/result'}
+				buttonLabel="View"
+			/>
+
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="admitCards"
+				headerColor="bg-indigo-500"
+				headers={admitCardHeaders}
+				title="Admit Cards"
+				items={admitCards}
+				viewText="See More"
+				cat={'/admit-card'}
+				buttonLabel="Download"
+			/>
+			<Card.Root class="" variant={'default'}>
+				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
+			</Card.Root>
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="answerKey"
+				headerColor="bg-pink-500"
+				headers={answerKeyHeaders}
+				title="Answer Key"
+				items={answerKey}
+				viewText="See More"
+				cat={'/answer-key'}
+				buttonLabel="Check"
+			/>
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="syllabus"
+				headerColor="bg-teal-500"
+				headers={syllabusHeaders}
+				title="Syllabus"
+				items={syllabus}
+				viewText="See More"
+				cat={'/syllabus'}
+				buttonLabel="Check"
+			/>
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="admission"
+				headerColor="bg-red-800"
+				headers={admissionHeaders}
+				title="Admissions"
+				items={admission}
+				viewText="See More"
+				cat={'/admissions'}
+				buttonLabel="Check"
+			/>
+		</div>
+		<aside class="lg:col-span-4 space-y-4">
+			<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
+			<Card.Root class="bg-slate-300" variant={'default'}>
+				<Card.Content class="flex items-center justify-center text-center h-60 "
+					>Ad Place here</Card.Content
+				>
+			</Card.Root>
+			<Widget title="All Categories" menus={sidebarMenu} headerColor="bg-slate-900" />
+		</aside>
+	</section>
 </div>

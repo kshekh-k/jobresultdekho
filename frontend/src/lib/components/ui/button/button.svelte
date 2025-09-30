@@ -16,7 +16,7 @@
 				secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
 				ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
 				link: "text-primary underline-offset-4 hover:underline",
-				white: "bg-white text-slate-500 shadow-xs hover:bg-slate-200",
+				white: "bg-white text-slate-700 shadow-xs hover:bg-slate-200",
 				success: "bg-emerald-500 text-white shadow-xs hover:bg-emerald-600",
 				dark: "hover:bg-slate-600 text-white bg-slate-500",
 				primary: "bg-sky-500 text-white shadow-xs hover:bg-sky-600",
