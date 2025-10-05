@@ -13,10 +13,13 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                 where: { publishedAt: { $notNull: true } },
                 orderBy: { createdAt: 'desc' },
                 limit: 10,
-                select: ['id', 'title', 'slug', 'description', 'content'],
+                select: ['id', 'title', 'last_date', 'slug',],
                 populate: {
+                    department: {
+                        select: ['title', 'slug']
+                    },
                     category: {
-                    select: ['id', 'title', 'slug'],
+                        select: ['title', 'slug'],
                     },
                 },
             });

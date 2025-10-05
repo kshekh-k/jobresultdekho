@@ -1,42 +1,43 @@
 <script lang="ts">
-	 
+	export let latestJobs;
+	
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
 	import { PanelRightDashed, Image, FileText, Calculator, Signature, CalendarRange, NotepadTextDashed, TypeOutline} from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
-import * as Card from '$lib/components/ui/card/index.js';
+	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
 	import Widget from './Widget.svelte';
+	
 	// Sticky nav state
-  let isFixed = false;
-  let navEl: HTMLElement | null = null;
- let active: string | null = null;
-  onMount(() => {
-    if (!navEl) return;
+  	let isFixed = false;
+  	let navEl: HTMLElement | null = null;
+ 	let active: string | null = null;
+  	onMount(() => {
+        if (!navEl) return;
+    	const offsetTop = navEl.offsetTop;
 
-    const offsetTop = navEl.offsetTop;
+    	const handleScroll = () => {
+      		if (window.scrollY >= offsetTop) {
+				isFixed = true;
+			} else {
+				isFixed = false;
+			}
+    	};
 
-    const handleScroll = () => {
-      if (window.scrollY >= offsetTop) {
-        isFixed = true;
-      } else {
-        isFixed = false;
-      }
-    };
+    	window.addEventListener("scroll", handleScroll);
+    	return () => window.removeEventListener("scroll", handleScroll);
+  	});
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  });
-
-  // Smooth scroll to section
-  function scrollToSection(id: string) {
-    const el = document.getElementById(id.replace("#", ""));
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - (navEl?.offsetHeight || 0);
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-	  active = id; // mark clicked as active
-  }
+	// Smooth scroll to section
+	function scrollToSection(id: string) {
+		const el = document.getElementById(id.replace("#", ""));
+		if (el) {
+		const y = el.getBoundingClientRect().top + window.scrollY - (navEl?.offsetHeight || 0);
+		window.scrollTo({ top: y, behavior: "smooth" });
+		}
+		active = id; // mark clicked as active
+	}
 
 	const options = [
 		{ label: 'Latest Jobs', href: '#latestJobs' },
@@ -54,7 +55,37 @@ import * as Card from '$lib/components/ui/card/index.js';
 		{ label: 'Syllabus', href: '/syllabus' },
 		{ label: 'Admissions', href: '/admission' }
 	];
- 
+
+	const jobsHeaders = [
+		{
+			id: 'No.',
+			department: 'Department',
+			label: 'Title',
+			date: 'Last Date',
+			timeLeft: 'Time Left',
+			action: 'Action'
+		}
+	];
+	/*const latestJobss = [
+		{
+			id: 1,
+			department: 'SSC',
+			label: 'SSC CPO SI Online Form 2025 – Start',
+			date: '15/10/2025',
+			timeLeft: '15 days',
+			href: '/post/one',
+			target: '_blank'
+		},
+		{
+			id: 2,
+			department: 'BPSC',
+			label: 'BPSC AEDO Online Form 2025 – Last Date Today',
+			date: '15/10/2025',
+			timeLeft: '15 days',
+			href: '/post/one',
+			target: '_blank'
+		}
+	];*/
 
 	const resultsHeaders = [
 		{
@@ -91,46 +122,7 @@ import * as Card from '$lib/components/ui/card/index.js';
 			href: '/post/one',
 			target: '_blank'
 		}
-	];
-	const jobsHeaders = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Last Date',
-			timeLeft: 'Time Left',
-			action: 'Action'
-		}
-	];
-	const latestJobs = [
-		{
-			id: 1,
-			department: 'SSC',
-			label: 'SSC CPO SI Online Form 2025 – Start',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'BPSC',
-			label: 'BPSC AEDO Online Form 2025 – Last Date Today',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 3,
-			department: 'Railway RRC',
-			label: 'Railway RRC ECR Patna Trade Apprentice Online Form 2025',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];
+	];	
 
 	const admitCardHeaders = [
 		{
@@ -298,10 +290,9 @@ import * as Card from '$lib/components/ui/card/index.js';
     { label: "MPPEB Template", href: "/mppeb-template", icon: NotepadTextDashed },
     { label: "Typing Test", href: "/typing-test", icon: TypeOutline },
   ];
-
-
  
 </script>
+
 <div class="max-w-screen-xl mx-auto px-3 space-y-5">
 <div class="hidden md:block {isFixed ? "fixed inset-x-0 top-0 py-2 bg-white shadow-md" : "static"}" bind:this={navEl}>
 <div class="flex gap-2 flex-wrap {isFixed ? "max-w-screen-xl mx-auto px-3" : ""}"  >
@@ -313,9 +304,9 @@ import * as Card from '$lib/components/ui/card/index.js';
 			>{option.label}</Button
 		>
 	{/each}
-	<Button variant="bordered" class="lg:!hidden"
-		><Icon name={PanelRightDashed} className="" size={20} /></Button
-	>
+	<Button variant="bordered" class="lg:!hidden">
+		<Icon name={PanelRightDashed} className="" size={20} />
+	</Button>
 </div>
 </div>
 <section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
