@@ -7,10 +7,34 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
+    async findLatest(ctx) {
+        try {
+            const syllabus = await strapi.db.query('api::syllabus.syllabus').findMany({
+                where: { publishedAt: { $notNull: true } },
+                orderBy: { createdAt: 'desc' },
+                limit: 10,
+                select: ['id', 'title', 'slug',],
+                populate: {
+                    department: {
+                        select: ['title', 'slug']
+                    },
+                    category: {
+                        select: ['title', 'slug'],
+                    },
+                },
+            });
+
+            return syllabus;
+        } catch (err) {
+            strapi.log.error("❌ Error fetching syllabus: " + err.message);
+            ctx.throw(500, "Unable to fetch syllabus");
+        }
+    },
+
     async findOne(ctx) {
         const { slug } = ctx.params;
 
-        const job = await strapi.db.query('api::syllabus.syllabus').findOne({
+        const syllabus = await strapi.db.query('api::syllabus.syllabus').findOne({
             where: { slug },
             select: ['id','title','slug','description','content'],
             populate: {
@@ -20,7 +44,7 @@ module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
             }
         });
 
-        if (!job) return ctx.notFound('Syllabus not found');
-        return job;
+        if (!syllabus) return ctx.notFound('Syllabus not found');
+        return syllabus;
     }
 }));

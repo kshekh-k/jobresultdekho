@@ -1,16 +1,40 @@
 'use strict';
 
 /**
- * Result controller
+ * result controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::result.result', ({strapi}) => ({
+    async findLatest(ctx) {
+        try {
+            const results = await strapi.db.query('api::result.result').findMany({
+                where: { publishedAt: { $notNull: true } },
+                orderBy: { createdAt: 'desc' },
+                limit: 10,
+                select: ['id', 'title', 'slug',],
+                populate: {
+                    department: {
+                        select: ['title', 'slug']
+                    },
+                    category: {
+                        select: ['title', 'slug'],
+                    },
+                },
+            });
+
+            return results;
+        } catch (err) {
+            strapi.log.error("❌ Error fetching result: " + err.message);
+            ctx.throw(500, "Unable to fetch result");
+        }
+    },
+
     async findOne(ctx) {
         const { slug } = ctx.params;
 
-        const job = await strapi.db.query('api::result.result').findOne({
+        const result = await strapi.db.query('api::result.result').findOne({
             where: { slug },
             select: ['id','title','slug','description','content'],
             populate: {
@@ -20,7 +44,7 @@ module.exports = createCoreController('api::result.result', ({strapi}) => ({
             }
         });
 
-        if (!job) return ctx.notFound('Result not found');
-        return job;
+        if (!result) return ctx.notFound('Result not found');
+        return result;
     }
 }));
