@@ -1,7 +1,21 @@
 <script lang="ts">
-	export let data: { latestJobs?: any[]; };
-	const { latestJobs = [] } = data;
-	console.log("latestJobs in +page.svelte:", latestJobs);
+	export let data: { 
+		latestAdmissions?: any[];
+		latestAdmitCards?: any[];
+		latestAnswerKeys?: any[];
+		latestJobs?: any[];
+		latestResults?: any[];
+		latestSyllabus?: any[];
+	};
+	const { 
+		latestAdmissions = [],
+		latestAdmitCards = [],
+		latestAnswerKeys = [],
+		latestJobs = [],
+		latestResults = [],
+		latestSyllabus = []
+	} = data;
+	console.log("latestJobs in +page.svelte:", latestAdmissions);
 
 	import * as Card from '$lib/components/ui/card/index.js';
 	import HotPosts from '$lib/components/HotPosts.svelte';
@@ -16,7 +30,7 @@
 		<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
 	</Card.Root>
 </div>
-	<HomeContent {latestJobs}/>
+	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} />
 	<Stats />
 </div>
  

@@ -13,7 +13,7 @@ module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
                 where: { publishedAt: { $notNull: true } },
                 orderBy: { createdAt: 'desc' },
                 limit: 10,
-                select: ['id', 'title', 'slug',],
+                select: ['id', 'title', 'last_date', 'slug',],
                 populate: {
                     department: {
                         select: ['title', 'slug']

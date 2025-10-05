@@ -7,6 +7,7 @@ export interface Syllabus {
   title: string;
   department?: string;
   category?: string;
+  last_date: string;
   slug?: string;
   description: string;
   content: string;
