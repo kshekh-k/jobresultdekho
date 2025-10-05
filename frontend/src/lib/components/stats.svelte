@@ -3,7 +3,6 @@
 	import { BriefcaseBusiness, History, School, UsersRound } from "lucide-svelte";
 	import Icon from "./ui/Icon.svelte";
 
-
     const stats = [
         {
             label:'Job Posted',
@@ -23,7 +22,7 @@
         {
             label:'Departments Covered',
             stat:'500+',
-            icon: School            
+            icon: School    
         },
     ]
 </script>
@@ -33,7 +32,14 @@
             <div class="col-span-6">
                 <div class="space-y-5 max-w-lg"> 
                 <h2 class="text-4xl text-left text-slate-900 font-bold">We are most trusted</h2>
-<p class="text-slate-500"><b>JobResultWale.com</b> – also known as Job Result Wale – is not just a website, it’s a trusted platform for millions of students and job seekers across the country. Since its inception, JobResultWale has earned the confidence of countless aspirants by providing timely, accurate, and reliable updates on government exams, results, admit cards, and career opportunities. Today, it stands as a dependable source for crores of youth preparing for their future in the public sector.</p>
+                <p class="text-slate-500"><b>JobResultWale.com
+                    </b> – also known as Job Result Wale – is not just a website, 
+                    it’s a trusted platform for millions of students and job seekers across the country. 
+                    Since its inception, JobResultWale has earned the confidence of countless aspirants by providing timely, 
+                    accurate, and reliable updates on government exams, results, admit cards, and career opportunities. 
+                    Today, it stands as a dependable source for crores of youth preparing for their 
+                    future in the public sector.
+                </p>
             </div>
             </div>
             <div class="col-span-6 grid grid-cols-2 gap-5">
