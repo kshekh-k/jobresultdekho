@@ -20,13 +20,13 @@
 		timeLeft?: string;
 		target?: string; 
 	}[] = [];
-	// Heading/Titles
+	
 	export let headers: {
 		id?: string;
 		department?: string;
 		label?: string;
 		date?: string;  
-    timeLeft?:string;
+    	timeLeft?:string;
 		action?: string;
 	}[] = [];
 
