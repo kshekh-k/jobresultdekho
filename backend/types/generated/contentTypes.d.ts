@@ -617,6 +617,7 @@ export interface ApiResultResult extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -653,6 +654,7 @@ export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

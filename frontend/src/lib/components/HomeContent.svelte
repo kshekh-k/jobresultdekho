@@ -1,17 +1,14 @@
 <script lang="ts">
+	export let latestAdmissions;
+	export let latestAdmitCards;
+	export let latestAnswerKeys;
 	export let latestJobs;
+	export let latestResults;
+	export let latestSyllabus;
 	
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
-	import {
-		PanelRightDashed,
-		Image,
-		FileText,
-		Calculator,
-		Signature,
-		CalendarRange,
-		NotepadTextDashed,
-		TypeOutline
-	} from 'lucide-svelte';
+	import { PanelRightDashed, Image, FileText,	Calculator,	Signature } from 'lucide-svelte';
+	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -65,229 +62,56 @@
 		{ label: 'Admissions', href: '/admission' }
 	];
 
-	const jobsHeaders = [
-		{
-			id: 'No.',
-			department: 'Department',
-			label: 'Title',
-			date: 'Last Date',
-			timeLeft: 'Time Left',
-			action: 'Action'
-		}
-	];
-	/*const latestJobss = [
-		{
-			id: 1,
-			department: 'SSC',
-			label: 'SSC CPO SI Online Form 2025 – Start',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'BPSC',
-			label: 'BPSC AEDO Online Form 2025 – Last Date Today',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];*/
+	const jobHeader = [{
+		id: 'No.',
+		department: 'Department',
+		label: 'Title',
+		date: 'Last Date',
+		timeLeft: 'Time Left',
+		action: 'Action'
+	}];
+	
+	const resultHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Result Date',
+		action: 'Action'
+	}];	
 
-	const resultsHeaders = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Result Date',
-			action: 'Action'
-		}
-	];
+	const admitCardHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Exam Date',
+		timeLeft: 'Time Left',
+		action: 'Action'
+	}];
+	
+	const answerKeyHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Release Date',
+		action: 'Action'
+	}];	
 
-	const results = [
-		{
-			id: 1,
-			department: 'Bihar Police',
-			label: 'Bihar Police CSBC Constable Result 2025 – Out',
-			date: '15/10/2025',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'IBPS',
-			label: 'IBPS PO MT XV 15 Pre Result 2025 – Out',
-			date: '15/10/2025',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 3,
-			department: 'MP ESB',
-			label: 'MP ESB Middle and Primary Teacher Result 2025 – Out',
-			date: '15/10/2025',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];	
-
-	const admitCardHeaders = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Exam Date',
-			timeLeft: 'Time Left',
-			action: 'Action'
-		}
-	];
-
-	const admitCards = [
-		{
-			id: 1,
-			department: 'IB',
-			label: 'IB Security Assistant/ Executive Admit Card 2025 – Out',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'LIC',
-			label: 'LIC AAO / AE Pre Admit Card 2025 – Out',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 3,
-			department: 'RPSC',
-			label: 'RPSC Assistant Engineer Pre Admit Card 2025 – Out',
-			date: '15/10/2025',
-			timeLeft: '15 days',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];
-
-	const answerKeyHeaders = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Release Date',
-			action: 'Action'
-		}
-	];
-
-	const answerKey = [
-		{
-			id: 1,
-			department: 'MPESB',
-			label: 'MPESB Excise Constable Answer Key 2025 – Out',
-			date: '15/10/2025',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'BPSC',
-			label: 'Bihar BPSC Assistant Engineer AE Final Answer Key 2025 – Out',
-			date: '15/10/2025',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 3,
-			department: 'RPSC',
-			label: 'RPSC Assistant Professor Answer Key 2025 – Out',
-			date: '15/10/2025',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];
-
-	const syllabusHeaders = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Exam Date',
-			action: 'Action'
-		}
-	];
-
-	const syllabus = [
-		{
-			id: 1,
-			department: 'SSC',
-			label: 'SSC Delhi Police Constable Syllabus & Exam Pattern 2025',
-			date: 'Not declare',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'Raj. Govt.',
-			label: 'Rajasthan Scholarship & Scooty Yojana 2025-26 – Start',
-			date: 'Not declare',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 3,
-			department: 'UP Police',
-			label: 'UP Police Recruitment Calendar 2025-26',
-			date: 'Not declare',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];
-
-	const admissionHeaders = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Last Date',
-			timeLeft: 'Time Left',
-			action: 'Action'
-		}
-	];
-
-	const admission = [
-		{
-			id: 1,
-			department: 'NVS',
-			label: 'NVS Class 9 Admission Online Form 2026 – Date Extended',
-			date: '15/10/2025',
-			timeLeft: '15 Days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 2,
-			department: 'JET',
-			label: 'Jharkhand Eligibility Test JET Online Form 2025 – Start',
-			date: '15/10/2025',
-			timeLeft: '15 Days',
-			href: '/post/one',
-			target: '_blank'
-		},
-		{
-			id: 3,
-			department: 'BCECE',
-			label: 'BCECE Mop-Up Revised Counselling Schedule 2025',
-			date: '15/10/2025',
-			timeLeft: '15 Days',
-			href: '/post/one',
-			target: '_blank'
-		}
-	];
+	const syllabusHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Exam Date',
+		action: 'Action'
+	}];
+	
+	const admissionHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Last Date',
+		timeLeft: 'Time Left',
+		action: 'Action'
+	}];	
 
 	let userMenus = [
     { label: "Image Resizer", href: "/image-resizer", icon: Image },
@@ -323,7 +147,7 @@
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
 				articleId="latestJobs"
 				headerColor="bg-sky-500"
-				headers={jobsHeaders}
+				headers={jobHeader}
 				title="Latest Jobs"
 				items={latestJobs}
 				viewText="See More"
@@ -335,9 +159,9 @@
 				open={false}
 				articleId="results"
 				headerColor="bg-emerald-500"
-				headers={resultsHeaders}
+				headers={resultHeader}
 				title="Results"
-				items={results}
+				items={latestResults}
 				viewText="See More"
 				cat={'/result'}
 				buttonLabel="View"
@@ -347,9 +171,9 @@
 				open={false}
 				articleId="admitCards"
 				headerColor="bg-indigo-500"
-				headers={admitCardHeaders}
+				headers={admitCardHeader}
 				title="Admit Cards"
-				items={admitCards}
+				items={latestAdmitCards}
 				viewText="See More"
 				cat={'/admit-card'}
 				buttonLabel="Download"
@@ -362,9 +186,9 @@
 				open={false}
 				articleId="answerKey"
 				headerColor="bg-pink-500"
-				headers={answerKeyHeaders}
+				headers={answerKeyHeader}
 				title="Answer Key"
-				items={answerKey}
+				items={latestAnswerKeys}
 				viewText="See More"
 				cat={'/answer-key'}
 				buttonLabel="Check"
@@ -374,9 +198,9 @@
 				open={false}
 				articleId="syllabus"
 				headerColor="bg-teal-500"
-				headers={syllabusHeaders}
+				headers={syllabusHeader}
 				title="Syllabus"
-				items={syllabus}
+				items={latestSyllabus}
 				viewText="See More"
 				cat={'/syllabus'}
 				buttonLabel="Check"
@@ -386,9 +210,9 @@
 				open={false}
 				articleId="admission"
 				headerColor="bg-red-800"
-				headers={admissionHeaders}
+				headers={admissionHeader}
 				title="Admissions"
-				items={admission}
+				items={latestAdmissions}
 				viewText="See More"
 				cat={'/admissions'}
 				buttonLabel="Check"
