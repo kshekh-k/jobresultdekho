@@ -40,7 +40,7 @@ import * as Accordion from "$lib/components/ui/accordion/index.js";
        <Accordion.Root type="single" class="space-y-2">
 			{#each faqs as faq, index}
 				<Accordion.Item value={`item-${index}`} class="bg-white p-5 shadow-sm rounded-md">				 
-                    <Accordion.Trigger class="py-0 text-xl text-slate-700 font-semibold hover:text-sky-600 hover:no-underline cursor-pointer items-center" onclick={() => toggleFAQ(index)}><span>{faq.question}</span></Accordion.Trigger>
+                    <Accordion.Trigger class="py-0 text-xl font-semibold  hover:no-underline cursor-pointer items-center {openIndex === index ? 'text-sky-600':'hover:text-sky-600 text-slate-700'}" onclick={() => toggleFAQ(index)}><span>{faq.question}</span></Accordion.Trigger>
 					{#if openIndex === index}
 						 <Accordion.Content class="py-4">
 							<p class="text-slate-500 text-left text-lg">{faq.answer}</p>

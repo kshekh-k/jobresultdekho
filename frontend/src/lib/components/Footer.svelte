@@ -10,15 +10,11 @@
       <NavbarFtr categories={categories} />
       <SocialMedia />
     </div>
-    <div class="flex flex-col-reverse md:flex-row justify-between items-center gap-1 py-2">
-         
-        <p class="text-sm text-white/60 py-1">JobResultDekho.com &copy; {new Date().getFullYear()} | All rights reserved</p>
-    
-      
+    <div class="flex flex-col-reverse md:flex-row justify-between items-center gap-1 py-2">         
+        <p class="text-sm text-white/60 py-1">JobResultDekho.com &copy; {new Date().getFullYear()} | All rights reserved</p> 
       <div class="flex space-x-4 text-sm">
-        <a href="/#" class="hover:text-white text-white/60 duration-200 transition-colors py-1">Privacy Policy</a>
-        <a href="/#" class="hover:text-white text-white/60 duration-200 transition-colors py-1">Terms of Service</a>
-   
+        <a href="/pivacy-policies" class="hover:text-white text-white/60 duration-200 transition-colors py-1">Privacy Policy</a>
+        <a href="/terms-conditions" class="hover:text-white text-white/60 duration-200 transition-colors py-1">Terms & Conditions</a>   
       </div>
     </div>
   </div>
