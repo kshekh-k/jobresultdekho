@@ -1,8 +1,7 @@
 <script lang="ts">
-	// Supports weights 100-900
 	import '@fontsource-variable/inter'; 
 	import Footer from '$lib/components/Footer.svelte';
-	 export let data: { categories: any[] };
+	export let data: { categories: any[] };
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';	 
 </script>
