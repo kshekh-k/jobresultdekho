@@ -2,7 +2,16 @@
 	export let latestJobs;
 	
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
-	import { PanelRightDashed, Image, FileText, Calculator, Signature, CalendarRange, NotepadTextDashed, TypeOutline} from 'lucide-svelte';
+	import {
+		PanelRightDashed,
+		Image,
+		FileText,
+		Calculator,
+		Signature,
+		CalendarRange,
+		NotepadTextDashed,
+		TypeOutline
+	} from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -280,7 +289,6 @@
 		}
 	];
 
-
 	let userMenus = [
     { label: "Image Resizer", href: "/image-resizer", icon: Image },
     { label: "JPG to PDF Converter", href: "/jpg-to-pdf-Converter", icon: FileText },
@@ -388,12 +396,93 @@
 			buttonLabel="Check"
 		/>
 	</div>
-	<aside class="lg:col-span-4 space-y-4">
-		<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900"/>
-		<Card.Root class="bg-slate-300" variant={'default'}>
-			<Card.Content class="flex items-center justify-center text-center h-60 ">Ad Place here</Card.Content>
-		</Card.Root>
-		<Widget title="All Categories" menus={sidebarMenu} headerColor="bg-slate-900"/>
-	</aside>
-</section>
+	<section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
+		<div class="lg:col-span-8 space-y-4">
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-20' : 'pt-0'}
+				articleId="latestJobs"
+				headerColor="bg-sky-500"
+				headers={jobsHeaders}
+				title="Latest Jobs"
+				items={latestJobs}
+				viewText="See More"
+				cat={'/latest-job'}
+				buttonLabel="Apply"
+			/>
+
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="results"
+				headerColor="bg-emerald-500"
+				headers={resultsHeaders}
+				title="Results"
+				items={results}
+				viewText="See More"
+				cat={'/result'}
+				buttonLabel="View"
+			/>
+
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="admitCards"
+				headerColor="bg-indigo-500"
+				headers={admitCardHeaders}
+				title="Admit Cards"
+				items={admitCards}
+				viewText="See More"
+				cat={'/admit-card'}
+				buttonLabel="Download"
+			/>
+			<Card.Root class="" variant={'default'}>
+				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
+			</Card.Root>
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="answerKey"
+				headerColor="bg-pink-500"
+				headers={answerKeyHeaders}
+				title="Answer Key"
+				items={answerKey}
+				viewText="See More"
+				cat={'/answer-key'}
+				buttonLabel="Check"
+			/>
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="syllabus"
+				headerColor="bg-teal-500"
+				headers={syllabusHeaders}
+				title="Syllabus"
+				items={syllabus}
+				viewText="See More"
+				cat={'/syllabus'}
+				buttonLabel="Check"
+			/>
+			<ArticleCard
+				articleWrap={isFixed ? 'md:pt-5' : 'pt-0'}
+				open={false}
+				articleId="admission"
+				headerColor="bg-red-800"
+				headers={admissionHeaders}
+				title="Admissions"
+				items={admission}
+				viewText="See More"
+				cat={'/admissions'}
+				buttonLabel="Check"
+			/>
+		</div>
+		<aside class="lg:col-span-4 space-y-4">
+			<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
+			<Card.Root class="bg-slate-300" variant={'default'}>
+				<Card.Content class="flex items-center justify-center text-center h-60 "
+					>Ad Place here</Card.Content
+				>
+			</Card.Root>
+			<Widget title="All Categories" menus={sidebarMenu} headerColor="bg-slate-900" />
+		</aside>
+	</section>
 </div>
