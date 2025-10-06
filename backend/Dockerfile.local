@@ -1,0 +1,22 @@
+FROM node:20-alpine
+
+# Install dependencies needed for Strapi plugins (sharp, sqlite, etc.)
+RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git python3
+
+# Create app directory
+WORKDIR /app
+
+# Copy package.json and yarn.lock
+COPY package.json yarn.lock* ./
+
+# Install dependencies
+RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
+
+# Copy the source code (but rely on volume mounts for live dev)
+COPY . .
+
+# Expose Strapi port
+EXPOSE 1337
+
+# Run Strapi in development mode with hot-reload
+CMD ["yarn", "develop"]

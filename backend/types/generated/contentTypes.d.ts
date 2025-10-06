@@ -394,6 +394,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -431,6 +432,7 @@ export interface ApiAdmitCardAdmitCard extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -468,6 +470,7 @@ export interface ApiAnswerKeyAnswerKey extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -583,6 +586,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
@@ -617,6 +621,7 @@ export interface ApiResultResult extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -654,6 +659,7 @@ export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
