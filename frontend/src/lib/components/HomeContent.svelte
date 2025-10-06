@@ -114,13 +114,13 @@
 	}];	
 
 	let userMenus = [
-    { label: "Image Resizer", href: "/image-resizer", icon: Image },
-    { label: "JPG to PDF Converter", href: "/jpg-to-pdf-Converter", icon: FileText },
-    { label: "Age Calculator", href: "/age-calculator", icon: Calculator },
-    { label: "Photo Signature Joiner", href: "/photo-signature-joiner", icon: Signature },
-    { label: "Name & Date on Photo Maker", href: "/name-date-on-photo-maker", icon: CalendarRange },
-    { label: "MPPEB Template", href: "/mppeb-template", icon: NotepadTextDashed },
-    { label: "Typing Test", href: "/typing-test", icon: TypeOutline },
+    { label: "Image Resizer", href: "#", icon: Image },
+    { label: "JPG to PDF Converter", href: "#", icon: FileText },
+    { label: "Age Calculator", href: "#", icon: Calculator },
+    { label: "Photo Signature Joiner", href: "#", icon: Signature },
+    { label: "Name & Date on Photo Maker", href: "#", icon: CalendarRange },
+    { label: "MPPEB Template", href: "#", icon: NotepadTextDashed },
+    { label: "Typing Test", href: "#", icon: TypeOutline },
   ];
  
 </script>
