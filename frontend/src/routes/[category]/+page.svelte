@@ -36,7 +36,7 @@ articleWrap={""}
  /> -->
  
   <ul>
-    {#each data.category.jobs as job}
+    {#each data.category.jobs as job}    
       <li>
         <a href={`/${data.category.slug}/jobs/${job.slug}`} class="block">{job.title}</a>
       </li>
