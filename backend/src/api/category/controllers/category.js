@@ -53,22 +53,52 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
           select: ['id','title','slug','description']
         },
         jobs: {
-          select: ['id','title','slug','description']
+          select: ['id','title','slug','last_date'],
+          populate: {
+            department: {
+              select: ['title', 'slug'],
+            },
+          },
         },
         admit_cards: {
-          select: ['id','title','slug','description']
+          select: ['id','title','slug','last_date'],
+          populate: {
+            department: {
+              select: ['title', 'slug'],
+            },
+          },
         },
         results: {
-          select: ['id','title','slug','description']
+          select: ['id','title','slug','last_date'],
+          populate: {
+            department: {
+              select: ['title', 'slug'],
+            },
+          },
         },
         syllabus: {
-          select: ['id','title','slug','description']
+          select: ['id','title','slug','last_date'],
+          populate: {
+            department: {
+              select: ['title', 'slug'],
+            },
+          },
         },
         admissions: {
-          select: ['id','title','slug','description']
+          select: ['id','title','slug','last_date'],
+          populate: {
+            department: {
+              select: ['title', 'slug'],
+            },
+          },
         },
         answer_keys: {
-          select: ['id','title','slug','description']
+          select: ['id','title','slug','last_date'],
+          populate: {
+            department: {
+              select: ['title', 'slug'],
+            },
+          },
         }
       }
     });
