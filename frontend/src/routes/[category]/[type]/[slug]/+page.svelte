@@ -1,5 +1,6 @@
 <script lang="ts">
   export let data: { content: any; type: string };
+  console.log('Job', data);
 </script>
 
 <article class="prose max-w-none">
@@ -7,7 +8,8 @@
   {#if data.content.description}
     <p class="mt-2 text-gray-700">{data.content.description}</p>
   {/if}
-
+    <p class="mt-2 text-gray-700">{data.content.last_date}</p>
+    <p class="mt-2 text-gray-700">{data.content.department.title}</p>
   {#if data.content.content}
     {#each data.content.content as block}
       {#if block.type === "paragraph"}

@@ -8,7 +8,7 @@
 {#if data.category.jobs?.length}
 <h2>Jobs</h2>
   <ul>
-    {#each data.category.jobs as job}
+    {#each data.category.jobs as job}    
       <li>
         <a href={`/${data.category.slug}/jobs/${job.slug}`} class="block">{job.title}</a>
       </li>
