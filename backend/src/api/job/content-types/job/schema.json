@@ -32,13 +32,18 @@
       "target": "api::category.category",
       "inversedBy": "jobs"
     },
-    "last_date": {
-      "type": "date"
-    },
     "department": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::department.department"
+    },
+    "last_date": {
+      "type": "date"
+    },
+    "important_links": {
+      "type": "component",
+      "component": "shared.link-item",
+      "repeatable": true
     }
   }
 }
