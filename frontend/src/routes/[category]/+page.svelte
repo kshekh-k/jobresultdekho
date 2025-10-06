@@ -10,7 +10,8 @@
   <ul>
     {#each data.category.jobs as job}    
       <li>
-        <a href={`/${data.category.slug}/jobs/${job.slug}`} class="block">{job.title}</a>
+        <a href={`/${data.category.slug}/jobs/${job.slug}`} class="block">{job.title}
+         - {job.last_date} - {job.department.title}</a>
       </li>
     {/each}
   </ul>
