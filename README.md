@@ -53,6 +53,9 @@ The project includes several utility scripts to make management easier:
 - **Stop**: `./scripts/stop.sh` - Stop all services
 - **Restart**: `./scripts/restart.sh` - Restart all services
 - **Logs**: `./scripts/logs.sh [service_name]` - View logs for a specific service or all services
+- **Docker**: `docker compose -f docker-compose-local.yml up -d` - First time build the application
+- **Docker Strat**: `docker compose -f docker-compose-local.yml start` - Start the application
+- **Docker Stop**: `docker compose -f docker-compose-local.yml stop` - Stop the application
 
 ## Project Structure
 

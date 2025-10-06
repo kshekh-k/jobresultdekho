@@ -41,7 +41,7 @@
 			{#each hotPosts as item}
 				<Card.Root class="p-0 ease-in-out duration-200 hover:-translate-y-1 min-w-64" variant={item.variant}>
 					<Card.Content class="p-0 flex-1 flex items-stretch">
-						<a href={item.slug} class="p-5 py-3 flex-1 flex justify-center items-center text-center font-semibold text-lg lg:text-xl xl:text-2xl"><span class="max-w-sm">{item.title}</span></a>
+						<a href={item.slug} rel="external" class="p-5 py-3 flex-1 flex justify-center items-center text-center font-semibold text-lg lg:text-xl xl:text-2xl"><span class="max-w-sm">{item.title}</span></a>
 					</Card.Content>
 				</Card.Root>
 			{/each}
