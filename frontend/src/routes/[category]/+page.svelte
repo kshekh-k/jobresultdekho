@@ -23,6 +23,17 @@
 </Card.Root>
 {#if data.category.jobs?.length}  
  
+<!-- <ArticleCard
+articleWrap={""}
+				articleId="" 
+				headerColor="bg-sky-500"
+				headers={jobHeader}
+				title="Latest Jobs"
+				items={data.category.jobs}
+				viewText="See More"
+				cat={'/latest-job'}
+				buttonLabel="Apply"
+ /> -->
  
   <ul>
     {#each data.category.jobs as job}

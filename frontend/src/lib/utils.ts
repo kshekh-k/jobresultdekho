@@ -24,9 +24,9 @@ export function daysLeft(dateString: string): any {
  if (diffDays < 1) {
     return "Today";
   } else if (diffDays < 30) {
-    return `${Math.floor(diffDays)} Days`;
+    return `${Math.floor(diffDays)} ${Math.floor(diffDays) >= 2 ? 'Days' : 'Day'} `;
   } else {
-    return `${Math.floor(diffMonths)} Months`;
+    return `${Math.floor(diffMonths)} ${Math.floor(diffMonths) >= 2 ? 'Months' : 'Month'} `;
   }
  // return Math.ceil((target.getTime() - today.getTime()) / msPerDay);
 
