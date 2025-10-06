@@ -39,6 +39,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::department.department"
+    },
+    "important_links": {
+      "type": "component",
+      "component": "shared.link-item",
+      "repeatable": true
     }
   }
 }

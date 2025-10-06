@@ -39,6 +39,11 @@
     },
     "last_date": {
       "type": "date"
+    },
+    "important_links": {
+      "type": "component",
+      "component": "shared.link-item",
+      "repeatable": true
     }
   }
 }
