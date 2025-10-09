@@ -27,7 +27,7 @@
 </script>
 
 <nav class="flex-1 flex justify-center">
-	<ul class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center gap-2 lg:gap-4 xl:gap-10 flex-1">
+	<ul class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center gap-2 lg:gap-2 xl:gap-5 flex-1">
 		{#each categories as cat}
 			{#if cat.title.toLowerCase() === 'home'}
 				<li><a href="/" class="block py-2 lg:py-4 text-base ease-in-out duration-200 font-medium text-center {currentPath() === '/' ? 'text-sky-600' : 'hover:text-sky-600 text-slate-500'}">{cat.title}</a></li>

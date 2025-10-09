@@ -140,7 +140,7 @@
 		<div class="flex gap-2 flex-wrap {isFixed ? "max-w-screen-xl mx-auto px-3" : ""}"  >
 			<!-- Tab Buttons -->
 			{#each options as option}
-				<Button onclick={() => handleClick(option.href)} 
+				<Button onclick={() => scrollToSection(option.href)} 
 					variant="light"			
 					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == option.href ? '!bg-emerald-500 text-white' : ''}"
 					>{option.label}</Button
@@ -155,7 +155,7 @@
 		<div class="lg:col-span-8 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
-				open={open}
+				open={true}
 				articleId={'latestJobs'}
 				type='jobs'
 				headerColor="bg-sky-500"
@@ -170,7 +170,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='results'
-				open={open}
+				open={false}
 				articleId={'results'}
 				headerColor="bg-emerald-500"
 				headers={resultHeader}
