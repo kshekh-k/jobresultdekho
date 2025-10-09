@@ -88,8 +88,10 @@
 					</div>
 					<div class="w-24 shrink-0">{header.department}</div>
 					<div class="w-24 shrink-0">{header.date}</div>
-					{#if header.timeLeft}
+					{#if header.timeLeft && (type === 'jobs' || type === 'admit-cards' || type === 'admissions')}
 						<div class="w-20 shrink-0">{header.timeLeft}</div>
+					{:else}
+						<div class="w-20 shrink-0">&nbsp;</div>
 					{/if}
 					<div class="md:w-32 shrink-0 text-right">{header.action}</div>
 				{/each}
@@ -122,13 +124,17 @@
 						<Icon name={Calendar} size={16} className="md:hidden" />
 						{new Date(item.last_date).toLocaleDateString('en-GB').replaceAll('/', '-')}
 					</div>
-					{#if item.last_date}
+					{#if item.last_date && ((type === 'jobs' || type === 'admit-cards' || type === 'admissions'))}
 						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 px-2 {daysLeft(item.last_date) < 10
 									? 'text-rose-700 '	: 'text-green-600 '}">
 							<Icon name={Clock} size={16} className="md:hidden" />
 							<b class="inline-flex font-semibold ">
 								{daysLeft(item.last_date)}
 							</b>
+						</div>
+					{:else}
+						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 px-2">
+							&nbsp;
 						</div>
 					{/if}
 					<div class="w-full md:w-32 gap-1 shrink-0 flex justify-between md:justify-end order-6">
@@ -138,7 +144,7 @@
 							variant="light"
 							size="sm"
 						>
-							View Detail
+							Detail
 						</Button>
 						<Button href={item.sourceUrl} target={item.target} variant="success" size="sm">
 							{buttonLabel}
