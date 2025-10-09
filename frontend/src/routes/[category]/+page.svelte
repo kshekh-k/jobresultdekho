@@ -2,31 +2,24 @@
 	import ArticleCardList from '$lib/components/ArticleCardList.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	export let data: { category: any };
-	const jobHeader = [
-		{
-			id: 'No.',
-			department: 'Dept',
-			label: 'Title',
-			date: 'Last Date',
-			timeLeft: 'Time Left',
-			action: 'Action'
-		}
-	];
-  const admitCardHeader = [{
-		id: 'No.',
-		department: 'Dept',
-		label: 'Title',
-		date: 'Exam Date',
-		timeLeft: 'Time Left',
-		action: 'Action'
+
+	// Job, Admit Card & Admission Header
+	const commanHeader = [{
+		id: 'No.',	department: 'Department', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
 	}];
+  	
  	const resultHeader = [{
-		id: 'No.',
-		department: 'Dept',
-		label: 'Title',
-		date: 'Result Date',
-		action: 'Action'
-	}];	
+		id: 'No.', department: 'Department', label: 'Title', date: 'Result Date', action: 'Action'
+	}];
+
+	const answerKeyHeader = [{
+		id: 'No.', department: 'Department', label: 'Title', date: 'Release Date', action: 'Action'
+	}];
+
+	const syllabusHeader = [{ 
+		id: 'No.', department: 'Department', label: 'Title', date: 'Exam Date', action: 'Action'
+	}];
+	
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3">
@@ -41,114 +34,70 @@
 				<p class="text-slate-600">{data.category.description}</p>
 			</Card.Content>
 		</Card.Root>
-    {#if data.category.jobs}	 
+    	{#if data.category.jobs.length}
 			<ArticleCardList
 				type="jobs"
 				headerColor="bg-sky-500"
-				headers={jobHeader}
+				headers={commanHeader}
 				title={data.category.title}
 				items={data.category.jobs}
 				catLabel={data.category.slug}		 
 			/>	 
 		{/if}
 
-{#if data.category.admit_cards}	 
+		{#if data.category.results.length}	 
 			<ArticleCardList
-				type="admit-card"
-				headerColor="bg-sky-500"
-				headers={admitCardHeader}
-				title={data.category.title}
-				items={data.category.admit_cards}
-				catLabel={data.category.slug}		 
-			/>	 
-		{/if}
-
-{#if data.category.results}	 
-			<ArticleCardList
-				type="result"
+				type="results"
 				headerColor="bg-sky-500"
 				headers={resultHeader}
 				title={data.category.title}
-				items={data.category.admit_cards}
+				items={data.category.results}
 				catLabel={data.category.slug}		 
 			/>	 
 		{/if}
 
+		{#if data.category.admit_cards.length}	 
+			<ArticleCardList
+				type="admit-cards"
+				headerColor="bg-sky-500"
+				headers={commanHeader}
+				title={data.category.title}
+				items={data.category.admit_cards}
+				catLabel={data.category.slug}		 
+			/>	 
+		{/if}		
 
-<!-- 
-		{#if data.category.admit_cards?.length}
-			<h2>Admit Cards</h2>
-			<ul>
-				{#each data.category.admit_cards as admit_card}
-					<li>
-						<a href={`/${data.category.slug}/admit-cards/${admit_card.slug}`} class="block"
-							>{admit_card.title}</a
-						>
-					</li>
-				{/each}
-			</ul>
-		{:else}
-			<p>No Admit Card found.</p>
+		{#if data.category.answer_keys.length}	 
+			<ArticleCardList
+				type="answer-keys"
+				headerColor="bg-sky-500"
+				headers={answerKeyHeader}
+				title={data.category.title}
+				items={data.category.answer_keys}
+				catLabel={data.category.slug}		 
+			/>	 
 		{/if}
 
-		{#if data.category.results?.length}
-			<h2>Results</h2>
-			<ul>
-				{#each data.category.results as result}
-					<li>
-						<a href={`/${data.category.slug}/results/${result.slug}`} class="block"
-							>{result.title}</a
-						>
-					</li>
-				{/each}
-			</ul>
-		{:else}
-			<p>No Result found.</p>
+		{#if data.category.syllabus.length}	 
+			<ArticleCardList
+				type="syllabus"
+				headerColor="bg-sky-500"
+				headers={syllabusHeader}
+				title={data.category.title}
+				items={data.category.syllabus}
+				catLabel={data.category.slug}		 
+			/>	 
 		{/if}
 
-		{#if data.category.syllabus?.length}
-			<h2>Syllabus</h2>
-			<ul>
-				{#each data.category.syllabus as syllabus}
-					<li>
-						<a href={`/${data.category.slug}/syllabus/${syllabus.slug}`} class="block"
-							>{syllabus.title}</a
-						>
-					</li>
-				{/each}
-			</ul>
-		{:else}
-			<p>No Syllabus found.</p>
+		{#if data.category.admissions.length}	 
+			<ArticleCardList
+				type="admissions"
+				headerColor="bg-sky-500"
+				headers={commanHeader}
+				title={data.category.title}
+				items={data.category.admissions}
+				catLabel={data.category.slug}		 
+			/>	 
 		{/if}
-
-		{#if data.category.admissions?.length}
-			<h2>Admissions</h2>
-			<ul>
-				{#each data.category.admissions as admission}
-					<li>
-						<a href={`/${data.category.slug}/admissions/${admission.slug}`} class="block"
-							>{admission.title}</a
-						>
-					</li>
-				{/each}
-			</ul>
-		{:else}
-			<p>No Admission found.</p>
-		{/if}
-
-		{#if data.category.answer_keys?.length}
-			<h2>Answer Keys</h2>
-			<ul>
-				{#each data.category.answer_keys as answer}
-					<li>
-						<a href={`/${data.category.slug}/answer-keys/${answer.slug}`} class="block"
-							>{answer.title}</a
-						>
-					</li>
-				{/each}
-			</ul>
-		{:else}
-			<p>No Answer key found.</p> 
-		{/if} -->
 	</div>
 </div>
