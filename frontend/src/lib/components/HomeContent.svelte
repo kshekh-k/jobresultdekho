@@ -16,6 +16,8 @@
 	
 	// Sticky nav state
   	let isFixed = false;
+	let open = false;
+	let articleId = '';
   	let navEl: HTMLElement | null = null;
  	let active: string | null = null;
   	onMount(() => {
@@ -33,7 +35,13 @@
     	window.addEventListener("scroll", handleScroll);
     	return () => window.removeEventListener("scroll", handleScroll);
   	});
-
+	
+// Smooth scroll to section and open it
+	function handleClick(id: string) {
+		articleId = id.replace('#', '');
+		open = true;
+		scrollToSection(id);
+	}
 	// Smooth scroll to section
 	function scrollToSection(id: string) {
 		const el = document.getElementById(id.replace("#", ""));
@@ -44,6 +52,9 @@
 		active = id; // mark clicked as active
 	}
 
+
+
+	
 	const options = [
 		{ label: 'Latest Jobs', href: '#latestJobs' },
 		{ label: 'Results', href: '#results' },
@@ -63,7 +74,7 @@
 
 	const jobHeader = [{
 		id: 'No.',
-		department: 'Department',
+		department: 'Dept',
 		label: 'Title',
 		date: 'Last Date',
 		timeLeft: 'Time Left',
@@ -129,7 +140,7 @@
 		<div class="flex gap-2 flex-wrap {isFixed ? "max-w-screen-xl mx-auto px-3" : ""}"  >
 			<!-- Tab Buttons -->
 			{#each options as option}
-				<Button onclick={() => scrollToSection(option.href)} 
+				<Button onclick={() => handleClick(option.href)} 
 					variant="light"			
 					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == option.href ? '!bg-emerald-500 text-white' : ''}"
 					>{option.label}</Button
@@ -144,7 +155,8 @@
 		<div class="lg:col-span-8 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
-				articleId="latestJobs"
+				open={open}
+				articleId={'latestJobs'}
 				type='jobs'
 				headerColor="bg-sky-500"
 				headers={jobHeader}
@@ -152,21 +164,21 @@
 				items={latestJobs}
 				viewText="See More"
 				catLabel={'latest-job'}
-				sourceUrl="https://google.com"
+				 
 			 
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='results'
-				open={false}
-				articleId="results"
+				open={open}
+				articleId={'results'}
 				headerColor="bg-emerald-500"
 				headers={resultHeader}
 				title="Results"
 				items={latestResults}
 				viewText="See More"
 				catLabel={'result'}
-				sourceUrl="https://google.com"
+			 
 			 
 			/>
 			<ArticleCard
@@ -180,8 +192,7 @@
 				items={latestAdmitCards}
 				viewText="See More"
 				catLabel={'admit-card'}
-				sourceUrl="https://google.com"
-				 
+			 
 			/>
 			<Card.Root class="" variant={'default'}>
 				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
@@ -197,7 +208,7 @@
 				items={latestAnswerKeys}
 				viewText="See More"
 				catLabel={'answer-key'}
-				sourceUrl="https://google.com"
+				 
 			
 			/>
 			<ArticleCard
@@ -211,7 +222,7 @@
 				items={latestSyllabus}
 				viewText="See More"
 				catLabel={'syllabus'}
-				sourceUrl="https://google.com"
+				 
 			
 			/>
 			<ArticleCard
@@ -225,7 +236,7 @@
 				items={latestAdmissions}
 				viewText="See More"
 				catLabel={'admissions'}
-				sourceUrl="https://google.com"
+			 
 			/>
 		</div>
 		<aside class="lg:col-span-4 space-y-4">

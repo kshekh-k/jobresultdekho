@@ -1,25 +1,38 @@
 <script lang="ts">
-	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
 	import ArticleCardList from '$lib/components/ArticleCardList.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	export let data: { category: any };
 	const jobHeader = [
 		{
 			id: 'No.',
-			department: 'Department',
+			department: 'Dept',
 			label: 'Title',
 			date: 'Last Date',
 			timeLeft: 'Time Left',
 			action: 'Action'
 		}
 	];
-	console.log(data.category.jobs);
+  const admitCardHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Exam Date',
+		timeLeft: 'Time Left',
+		action: 'Action'
+	}];
+ 	const resultHeader = [{
+		id: 'No.',
+		department: 'Dept',
+		label: 'Title',
+		date: 'Result Date',
+		action: 'Action'
+	}];	
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3">
 	<div class="space-y-5 py-5">
-		<Card.Root class="overflow-hidden p-0 rounded-md gap-0">
-			<Card.Header class="flex items-center justify-between py-2 px-4 gap-2">
+		<Card.Root class="overflow-hidden rounded-md gap-5">
+			<Card.Header class="flex items-center justify-between gap-2">
 				<h1 class="text-center text-2xl md:text-4xl xl:text-5xl font-bold text-slate-900">
 					{data.category.title}
 				</h1>
@@ -28,20 +41,41 @@
 				<p class="text-slate-600">{data.category.description}</p>
 			</Card.Content>
 		</Card.Root>
-		{#if data.category.jobs?.length}
+    {#if data.category.jobs}	 
 			<ArticleCardList
 				type="jobs"
 				headerColor="bg-sky-500"
 				headers={jobHeader}
 				title={data.category.title}
 				items={data.category.jobs}
-				catLabel={'latest-job'}
-				sourceUrl="https://www.google.com"
-			/>
-		{:else}
-			<p>No Jobs found.</p>
+				catLabel={data.category.slug}		 
+			/>	 
 		{/if}
 
+{#if data.category.admit_cards}	 
+			<ArticleCardList
+				type="admit-card"
+				headerColor="bg-sky-500"
+				headers={admitCardHeader}
+				title={data.category.title}
+				items={data.category.admit_cards}
+				catLabel={data.category.slug}		 
+			/>	 
+		{/if}
+
+{#if data.category.results}	 
+			<ArticleCardList
+				type="result"
+				headerColor="bg-sky-500"
+				headers={resultHeader}
+				title={data.category.title}
+				items={data.category.admit_cards}
+				catLabel={data.category.slug}		 
+			/>	 
+		{/if}
+
+
+<!-- 
 		{#if data.category.admit_cards?.length}
 			<h2>Admit Cards</h2>
 			<ul>
@@ -114,7 +148,7 @@
 				{/each}
 			</ul>
 		{:else}
-			<p>No Answer key found.</p>
-		{/if}
+			<p>No Answer key found.</p> 
+		{/if} -->
 	</div>
 </div>
