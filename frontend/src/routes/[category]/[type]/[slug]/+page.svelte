@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card/index.js';
+	import Icon from '$lib/components/ui/Icon.svelte';
   	import { daysLeft } from '$lib/utils';
+	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	export let data: { content: any; type: string };
 	console.log('Job', data);
   
@@ -15,7 +17,7 @@
 				</h1>
 
         <div class="flex flex-warp gap-3">
-          <p class="text-gray-700">Department: {data.content.department.title} | Last Date: {data.content.last_date} | Time Left: <b
+          <p class="text-gray-700"><Icon name={Landmark} size={24} /> {data.content.department.title} | <Icon name={Calendar} size={24} /> {data.content.last_date} | <Icon name={Clock} size={24} /> <b
 										class="inline-flex py-1 px-2 font-semibold {daysLeft(data.content.last_date) < 10
 											? 'text-rose-700 bg-rose-100'
 											: 'text-green-600 bg-green-100'}">{daysLeft(data.content.last_date)}</b
