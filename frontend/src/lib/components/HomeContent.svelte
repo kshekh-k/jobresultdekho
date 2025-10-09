@@ -4,9 +4,8 @@
 	export let latestAnswerKeys;
 	export let latestJobs;
 	export let latestResults;
-	export let latestSyllabus;
-	
-	import ArticleCard from '$lib/components/ArticleCard.svelte';
+	export let latestSyllabus;	
+	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
 	import { PanelRightDashed, Image, FileText,	Calculator,	Signature } from 'lucide-svelte';
 	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
@@ -146,16 +145,19 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
 				articleId="latestJobs"
+				type='jobs'
 				headerColor="bg-sky-500"
 				headers={jobHeader}
 				title="Latest Jobs"
 				items={latestJobs}
 				viewText="See More"
-				cat={'/latest-job'}
-				buttonLabel="Apply"
+				catLabel={'latest-job'}
+				sourceUrl="https://google.com"
+			 
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='results'
 				open={false}
 				articleId="results"
 				headerColor="bg-emerald-500"
@@ -163,11 +165,13 @@
 				title="Results"
 				items={latestResults}
 				viewText="See More"
-				cat={'/result'}
-				buttonLabel="View"
+				catLabel={'result'}
+				sourceUrl="https://google.com"
+			 
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='admit-card'
 				open={false}
 				articleId="admitCards"
 				headerColor="bg-indigo-500"
@@ -175,14 +179,16 @@
 				title="Admit Cards"
 				items={latestAdmitCards}
 				viewText="See More"
-				cat={'/admit-card'}
-				buttonLabel="Download"
+				catLabel={'admit-card'}
+				sourceUrl="https://google.com"
+				 
 			/>
 			<Card.Root class="" variant={'default'}>
 				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
 			</Card.Root>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='answer-key'
 				open={false}
 				articleId="answerKey"
 				headerColor="bg-pink-500"
@@ -190,11 +196,13 @@
 				title="Answer Key"
 				items={latestAnswerKeys}
 				viewText="See More"
-				cat={'/answer-key'}
-				buttonLabel="Check"
+				catLabel={'answer-key'}
+				sourceUrl="https://google.com"
+			
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='syllabus'
 				open={false}
 				articleId="syllabus"
 				headerColor="bg-teal-500"
@@ -202,11 +210,13 @@
 				title="Syllabus"
 				items={latestSyllabus}
 				viewText="See More"
-				cat={'/syllabus'}
-				buttonLabel="Check"
+				catLabel={'syllabus'}
+				sourceUrl="https://google.com"
+			
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='admission'
 				open={false}
 				articleId="admission"
 				headerColor="bg-red-800"
@@ -214,8 +224,8 @@
 				title="Admissions"
 				items={latestAdmissions}
 				viewText="See More"
-				cat={'/admissions'}
-				buttonLabel="Check"
+				catLabel={'admissions'}
+				sourceUrl="https://google.com"
 			/>
 		</div>
 		<aside class="lg:col-span-4 space-y-4">

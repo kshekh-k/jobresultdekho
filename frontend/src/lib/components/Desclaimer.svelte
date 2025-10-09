@@ -2,7 +2,7 @@
 	import Button from "./ui/button/button.svelte";
 
 </script>
-<section class="relative mb-10">
+<section class="relative py-10">
 	<div class="max-w-screen-lg mx-auto px-3">
 		<div class="bg-sky-800 rounded-md p-10">
 			<div class="max-w-5xl mx-auto space-y-4 flex flex-col justify-center items-center">

@@ -5,13 +5,34 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-export function daysLeft(dateString: string): number {
+export function daysLeft(dateString: string): any {
   const today = new Date();
   const target = new Date(dateString);
+
   today.setHours(0,0,0,0);
   target.setHours(0,0,0,0);
+
+  const start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const end = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+  const diffMs = end.getTime() - start.getTime();
+  if (diffMs <= 0) return "Expired";
+
   const msPerDay = 1000 * 60 * 60 * 24;
-  return Math.ceil((target.getTime() - today.getTime()) / msPerDay);
+  const diffDays = diffMs / msPerDay;
+  const diffMonths = diffDays / 30;
+  
+ if (diffDays < 1) {
+    return "Today";
+  } else if (diffDays < 30) {
+    return `${Math.floor(diffDays)} ${Math.floor(diffDays) >= 2 ? 'Days' : 'Day'} `;
+  } else {
+    return `${Math.floor(diffMonths)} ${Math.floor(diffMonths) >= 2 ? 'Months' : 'Month'} `;
+  }
+ // return Math.ceil((target.getTime() - today.getTime()) / msPerDay);
+
+  
+
+
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

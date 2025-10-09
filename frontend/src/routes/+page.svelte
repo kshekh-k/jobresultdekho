@@ -15,12 +15,14 @@
 		latestResults = [],
 		latestSyllabus = []
 	} = data;
-	console.log("latestJobs in +page.svelte:", latestAdmissions);
+
+	console.log("latestJobs in +page.svelte:", latestAdmissions, latestAdmitCards, latestJobs, latestAnswerKeys, latestResults, latestSyllabus );
 
 	import * as Card from '$lib/components/ui/card/index.js';
 	import HotPosts from '$lib/components/HotPosts.svelte';
 	import HomeContent from '$lib/components/HomeContent.svelte';
 	import Stats from '$lib/components/Stats.svelte';	
+	import Desclaimer from '$lib/components/Desclaimer.svelte';
 </script>
 
 <div class="space-y-5 py-5">
@@ -32,5 +34,6 @@
 </div>
 	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} />
 	<Stats />
+	<Desclaimer />
 </div>
  
