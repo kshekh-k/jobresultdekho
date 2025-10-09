@@ -11,17 +11,31 @@
 	export let headerColor: string = 'bg-sky-500';
 	export let catLabel: string = '/latest-job';
 	export let open: boolean = true;
-	export let buttonLabel: string | undefined = catLabel === 'latest-job' ? 'Apply' : catLabel === 'result' ? 'View' : catLabel === 'admit-card' ? 'Download' : catLabel === 'admission' ? 'View' : catLabel === 'answer-key' ? 'Match' : catLabel === 'syllabus' ? 'Check' : undefined;
-	export let sourceUrl: string | undefined;
+	export let buttonLabel: string | undefined =
+		catLabel === 'latest-job'
+			? 'Apply'
+			: catLabel === 'result'
+				? 'View'
+				: catLabel === 'admit-card'
+					? 'Download'
+					: catLabel === 'admission'
+						? 'View'
+						: catLabel === 'answer-key'
+							? 'Match'
+							: catLabel === 'syllabus'
+								? 'Check'
+								: undefined;
+
 	export let type: string | undefined;
 	export let items: {
 		id?: number;
 		department?: any;
 		slug?: string;
 		title?: string;
-		last_date?: string;
+		last_date?: any;
 		timeLeft?: string;
 		target?: string;
+		sourceUrl?: string;
 	}[] = [];
 
 	export let headers: {
@@ -36,7 +50,7 @@
 	const toggle = () => (open = !open);
 
 	// ✅ Pagination setup
-	let perPage = 50;
+	let perPage = 2;
 	let currentPage = 1;
 
 	// ✅ Derived pagination data
@@ -68,56 +82,65 @@
 				class="hidden md:flex flex-wrap gap-2 px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800"
 			>
 				{#each headers as header}
-					<div class="w-8 shrink-0">{header.id}</div>
+					<div class="flex gap-2 flex-1">
+						<div class="shrink-0 min-w-6">{header.id}</div>
+						<div class="flex-1">{header.label}</div>
+					</div>
 					<div class="w-24 shrink-0">{header.department}</div>
-					<div class="flex-1">{header.label}</div>
 					<div class="w-24 shrink-0">{header.date}</div>
 					{#if header.timeLeft}
 						<div class="w-20 shrink-0">{header.timeLeft}</div>
 					{/if}
-					<div class="md:w-28 shrink-0 text-right">{header.action}</div>
+					<div class="md:w-32 shrink-0 text-right">{header.action}</div>
 				{/each}
 			</div>
 
 			<!-- ✅ Show only current page items -->
-			{#each paginatedItems as item}
+			{#each paginatedItems as item, index}
 				<div
+					id="{catLabel}-{item.id}"
 					class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
 				>
-					<div class="w-8 shrink-0 order-0 hidden md:block">{item.id}.</div>
-					<div class="w-28 md:w-24 shrink-0 order-2 md:order-1 flex gap-1 text-xs">
-						<Icon name={Landmark} size={24} className="md:hidden" />
+					<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
+						<div class="shrink-0 md:min-w-6">{(currentPage - 1) * perPage + index + 1}.</div>
+						<div class="flex-1 order-1">
+							<a
+								href="{catLabel}/{type}/{item.slug}"
+								target={item.target}
+								class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-2 line-clamp-2"
+							>
+								{item.title} 
+							</a>
+						</div>
+					</div>
+					<div class="w-28 md:w-24 shrink-0 order-2 flex gap-1 items-center">
+						<Icon name={Landmark} size={16} className="md:hidden" />
 						{item.department.title}
 					</div>
-					<div class="md:flex-1 w-[calc(100%-32px)] md:w-auto order-1 md:order-2">
-						<a
-							href="{catLabel}/{type}/{item.slug}"
-							target={item.target}
-							class="block hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1 text-sm"
-						>
-							{item.title}
-						</a>
-					</div>
-					<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 text-xs">
-						<Icon name={Calendar} size={24} className="md:hidden" />
-						{item.last_date}
+
+					<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
+						<Icon name={Calendar} size={16} className="md:hidden" />
+						{new Date(item.last_date).toLocaleDateString('en-GB').replaceAll('/', '-')}
 					</div>
 					{#if item.last_date}
-						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 text-xs">
-							<Icon name={Clock} size={24} className="md:hidden" />
-							<b class="inline-flex py-1 px-2 font-semibold {daysLeft(item.last_date) < 10
-									? 'text-rose-700 bg-rose-100'
-									: 'text-green-600 bg-green-100'}"
-							>
+						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 px-2 {daysLeft(item.last_date) < 10
+									? 'text-rose-700 '	: 'text-green-600 '}">
+							<Icon name={Clock} size={16} className="md:hidden" />
+							<b class="inline-flex font-semibold ">
 								{daysLeft(item.last_date)}
 							</b>
 						</div>
 					{/if}
-					<div class="w-full md:w-28 gap-1 shrink-0 flex justify-end order-6">
-						<Button href="{catLabel}/{type}/{item.slug}" target={item.target} variant="light" size="xs">
+					<div class="w-full md:w-32 gap-1 shrink-0 flex justify-between md:justify-end order-6">
+						<Button
+							href="{catLabel}/{type}/{item.slug}"
+							target={item.target}
+							variant="light"
+							size="sm"
+						>
 							Detail
 						</Button>
-						<Button href={sourceUrl} target={item.target} variant="success" size="xs">
+						<Button href={item.sourceUrl} target={item.target} variant="success" size="sm">
 							{buttonLabel}
 						</Button>
 					</div>
@@ -131,10 +154,11 @@
 				<Pagination.Root count={totalItems} {perPage}>
 					{#snippet children({ pages, currentPage })}
 						<Pagination.Content>
+							<!-- Previous Button -->
 							<Pagination.Item>
 								<Pagination.PrevButton onclick={() => handlePageChange(currentPage - 1)} />
 							</Pagination.Item>
-
+							<!-- 🟢 Page Numbers -->
 							{#each pages as page (page.key)}
 								{#if page.type === 'ellipsis'}
 									<Pagination.Item>
@@ -152,7 +176,7 @@
 									</Pagination.Item>
 								{/if}
 							{/each}
-
+							<!-- Next Page Button -->
 							<Pagination.Item>
 								<Pagination.NextButton onclick={() => handlePageChange(currentPage + 1)} />
 							</Pagination.Item>

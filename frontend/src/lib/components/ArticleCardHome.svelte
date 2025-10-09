@@ -25,7 +25,6 @@
 							: catLabel === 'syllabus'
 								? 'Check'
 								: undefined;
-	export let sourceUrl: string | undefined;
 	export let type: string | undefined;
 	export let items: {
 		id?: number;
@@ -33,9 +32,10 @@
 		category?: any;
 		slug?: string;
 		title?: string;
-		last_date?: string;
+		last_date?: any;
 		timeLeft?: string;
 		target?: string;
+		sourceUrl?: string;
 	}[] = [];
 
 	export let headers: {
@@ -76,58 +76,60 @@
 					class="hidden md:flex flex-wrap gap-2 px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800"
 				>
 					{#each headers as header}
-						<div class="w-8 shrink-0">{header.id}</div>
-						<div class="w-24 shrink-0">{header.department}</div>
-						<div class="flex-1">{header.label}</div>
+					<div class="flex gap-2 flex-1">
+						<div class="shrink-0 md:min-w-6">{header.id}</div>
+						<div class="flex-1">{header.label}</div>						
+					</div>
+						<div class="w-20 shrink-0">{header.department}</div>
 						<div class="w-24 shrink-0">{header.date}</div>
 						{#if header.timeLeft}
 							<div class="w-20 shrink-0">{header.timeLeft}</div>
 						{/if}
-						<div class="w-full md:w-28 shrink-0 text-right">{header.action}</div>
+						<div class="w-full md:w-32 shrink-0 text-right">{header.action}</div>
 					{/each}
 				</div>
-				{#each items as item}
+				{#each items.slice(0, 10) as item, index}
 					<div
-						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
+						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center  font-medium text-slate-600"
 					>
-						<div class="w-8 shrink-0 order-0 hidden md:block">{item.id}.</div>
-						<div class="w-28 md:w-24 shrink-0 order-2 md:order-1 flex gap-1 text-xs">
-							<Icon name={Landmark} size={24} className="md:hidden" />
-							{item.department.title}
-						</div>
-						<div class="md:flex-1 w-[calc(100%-32px)] md:w-auto order-1 md:order-2">
+					<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
+						<div class="shrink-0 md:min-w-6">{index+1}.</div>
+						
+						<div class="flex-1">
 							<a
-								href="{item.category.slug}/{type}/{item.slug}"
+								href="{catLabel}/{type}/{item.slug}"
 								target={item.target}
-								class="block hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1 text-sm"
+								class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1.5 line-clamp-2 "
 							>
-								{item.title}
+								{item.title} 
 							</a>
 						</div>
-						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 text-xs">
-							<Icon name={Calendar} size={24} className="md:hidden" />
-							{item.last_date}
+					</div>
+					<div class="w-28 md:w-20 shrink-0 order-2 flex gap-1 items-center ">
+							<Icon name={Landmark} size={16} className="md:hidden" />
+							{item.department.title}
+						</div>
+						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center ">
+							<Icon name={Calendar} size={16} className="md:hidden" />
+							{new Date(item.last_date).toLocaleDateString('en-GB').replaceAll('/', '-')}
 						</div>
 						{#if item.last_date}
-							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 text-xs">
-								<Icon name={Clock} size={24} className="md:hidden" />
-								<b
-									class="inline-flex py-1 px-2 font-semibold {daysLeft(item.last_date) < 10
-										? 'text-rose-700 bg-rose-100'
-										: 'text-green-600 bg-green-100'}">{daysLeft(item.last_date)}</b
-								>
+							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(item.last_date) < 10
+										? 'text-rose-700' : 'text-green-600'}">
+								<Icon name={Clock} size={16} className="md:hidden" />
+								<b class="inline-flex py-1 font-semibold ">{daysLeft(item.last_date)}</b>
 							</div>
 						{/if}
-						<div class="w-full md:w-28 gap-1 shrink-0 flex justify-end order-6">
+						<div class="w-full md:w-32 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
 								href="{catLabel}/{type}/{item.slug}"
 								target={item.target}
 								variant="light"
-								size="xs"
+								size="sm"
 							>
 								Detail
 							</Button>
-							<Button href={sourceUrl} target={item.target} variant="success" size="xs">
+							<Button href={item.sourceUrl} target={item.target} variant="success" size="sm">
 								{buttonLabel}
 							</Button>
 						</div>
