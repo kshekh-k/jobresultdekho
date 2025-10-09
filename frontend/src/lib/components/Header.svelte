@@ -33,7 +33,9 @@
 				<Icon name={Menu} className="" size={20} />					 
 				</button>
 				<!-- Logo -->
-				<div class="xl:text-xl font-bold text-blue-600"><a href="/">JobResultDekho</a></div>
+				<div class="xl:text-xl font-bold text-blue-600"><a href="/">
+				<img src="/jobresultdekho-logo.svg" alt="Job Result Dekho logo" class="h-20" />
+				</a></div>
 			</div>
 			<!-- Desktop Menu -->
 			<div class="hidden lg:flex">

@@ -138,7 +138,7 @@
 							variant="light"
 							size="sm"
 						>
-							Detail
+							View Detail
 						</Button>
 						<Button href={item.sourceUrl} target={item.target} variant="success" size="sm">
 							{buttonLabel}
