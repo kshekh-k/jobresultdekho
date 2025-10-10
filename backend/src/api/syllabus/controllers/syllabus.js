@@ -13,7 +13,7 @@ module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
                 where: { publishedAt: { $notNull: true } },
                 orderBy: { createdAt: 'desc' },
                 limit: 10,
-                select: ['id', 'title', 'last_date', 'slug',],
+                select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
                 populate: {
                     department: {
                         select: ['title', 'slug']
@@ -36,10 +36,16 @@ module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
 
         const syllabus = await strapi.db.query('api::syllabus.syllabus').findOne({
             where: { slug },
-            select: ['id','title','slug','description','content'],
+            select: ['id','title','slug','reference_url','description','content'],
             populate: {
+                department: {
+                    select: ['title', 'slug']
+                },
                 category: {
                     select: ['id','title','slug']
+                },
+                important_links: {
+                    select: ['label', 'url']
                 }
             }
         });
