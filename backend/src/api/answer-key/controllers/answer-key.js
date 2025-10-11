@@ -13,7 +13,7 @@ module.exports = createCoreController('api::answer-key.answer-key', ({strapi}) =
                 where: { publishedAt: { $notNull: true } },
                 orderBy: { createdAt: 'desc' },
                 limit: 10,
-                select: ['id', 'title', 'last_date', 'slug',],
+                select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
                 populate: {
                     department: {
                         select: ['title', 'slug']
@@ -38,8 +38,14 @@ module.exports = createCoreController('api::answer-key.answer-key', ({strapi}) =
             where: { slug },
             select: ['id','title','slug','description','content'],
             populate: {
+                department: {
+                    select: ['title', 'slug']
+                },
                 category: {
                     select: ['id','title','slug']
+                },
+                important_links: {
+                    select: ['label', 'url']
                 }
             }
         });

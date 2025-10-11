@@ -44,6 +44,9 @@
       "type": "component",
       "component": "shared.link-item",
       "repeatable": true
+    },
+    "reference_url": {
+      "type": "string"
     }
   }
 }
