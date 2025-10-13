@@ -93,7 +93,7 @@
 					{:else}
 						<div class="w-20 shrink-0">&nbsp;</div>
 					{/if}
-					<div class="md:w-32 shrink-0 text-right">{header.action}</div>
+					<div class="md:w-48 shrink-0 text-right">{header.action}</div>
 				{/each}
 			</div>
 
@@ -125,7 +125,7 @@
 						{new Date(item.last_date).toLocaleDateString('en-GB').replaceAll('/', '-')}
 					</div>
 					{#if item.last_date && (type === 'jobs' || type === 'admit-cards' || type === 'admissions')}
-						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 px-2 {daysLeft(item.last_date) < 10
+						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 {daysLeft(item.last_date) < 10
 									? 'text-rose-700 '	: 'text-green-600 '}">
 							<Icon name={Clock} size={16} className="md:hidden" />
 							<b class="inline-flex font-semibold ">
@@ -137,7 +137,7 @@
 							&nbsp;
 						</div>
 					{/if}
-					<div class="w-full md:w-32 gap-1 shrink-0 flex justify-between md:justify-end order-6">
+					<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 						<Button
 							href="{catLabel}/{type}/{item.slug}"
 							target={item.target}

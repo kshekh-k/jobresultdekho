@@ -85,7 +85,7 @@
 						{#if header.timeLeft}
 							<div class="w-20 shrink-0">{header.timeLeft}</div>
 						{/if}
-						<div class="w-full md:w-32 shrink-0 text-right">{header.action}</div>
+						<div class="w-full md:w-48 shrink-0 text-right">{header.action}</div>
 					{/each}
 				</div>
 				{#each items.slice(0, 10) as item, index}
@@ -120,7 +120,7 @@
 								<b class="inline-flex py-1 font-semibold ">{daysLeft(item.last_date)}</b>
 							</div>
 						{/if}
-						<div class="w-full md:w-32 gap-1 shrink-0 flex justify-between md:justify-end order-6">
+						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
 								href="{catLabel}/{type}/{item.slug}"
 								target={item.target}
