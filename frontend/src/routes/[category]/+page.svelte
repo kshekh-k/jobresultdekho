@@ -5,19 +5,19 @@
 
 	// Job, Admit Card & Admission Header
 	const commanHeader = [{
-		id: 'No.',	department: 'Department', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
+		id: 'No.',	department: 'Dept', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
 	}];
   	
  	const resultHeader = [{
-		id: 'No.', department: 'Department', label: 'Title', date: 'Result Date', action: 'Action'
+		id: 'No.', department: 'Dept', label: 'Title', date: 'Result Date', action: 'Action'
 	}];
 
 	const answerKeyHeader = [{
-		id: 'No.', department: 'Department', label: 'Title', date: 'Release Date', action: 'Action'
+		id: 'No.', department: 'Dept', label: 'Title', date: 'Release Date', action: 'Action'
 	}];
 
 	const syllabusHeader = [{ 
-		id: 'No.', department: 'Department', label: 'Title', date: 'Exam Date', action: 'Action'
+		id: 'No.', department: 'Dept', label: 'Title', date: 'Exam Date', action: 'Action'
 	}];
 	
 </script>
