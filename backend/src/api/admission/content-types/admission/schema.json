@@ -47,6 +47,11 @@
     },
     "reference_url": {
       "type": "string"
+    },
+    "FAQs": {
+      "type": "component",
+      "component": "shared.faq",
+      "repeatable": true
     }
   }
 }

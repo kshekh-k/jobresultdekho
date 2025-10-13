@@ -38,14 +38,17 @@ module.exports = createCoreController('api::answer-key.answer-key', ({strapi}) =
             where: { slug },
             select: ['id','title','slug','description','content','last_date','reference_url'],
             populate: {
-                department: {
-                    select: ['title', 'slug']
-                },
                 category: {
                     select: ['id','title','slug']
                 },
+                department: {
+                    select: ['title', 'slug']
+                },
                 important_links: {
                     select: ['label', 'url']
+                },
+                FAQs: {
+                    select: ['question', 'answer']
                 }
             }
         });
