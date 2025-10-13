@@ -35,7 +35,7 @@
 		last_date?: any;
 		timeLeft?: string;
 		target?: string;
-		sourceUrl?: string;
+		reference_url?: string;
 	}[] = [];
 
 	export let headers: {
@@ -129,7 +129,7 @@
 							>
 								View Detail
 							</Button>
-							<Button href={item.sourceUrl} target={item.target} variant="success" size="sm">
+							<Button href={item.reference_url} target={item.target} variant="success" size="sm">
 								{buttonLabel}
 							</Button>
 						</div>

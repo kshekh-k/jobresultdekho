@@ -4,8 +4,7 @@
 	import { daysLeft } from '$lib/utils';
 	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	export let data: { content: any; type: string };
-	console.log('Job', data);
-	
+	console.log('Job', JSON.stringify(data));
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3">
@@ -42,104 +41,110 @@
 			</Card.Header>
 			<Card.Content>
 				<div class="prose max-w-none">
-				{#if data.content.content}
-					{#each data.content.content as block}
-						{#if block.type === 'heading'}
-							{#if block.level === 1}
-								<h1>
-									{#each block.children as child}
-										{child.text}
-									{/each}
-								</h1>
-							{:else if block.level === 2}
-								<h2>
-									{#each block.children as child}
-										{child.text}
-									{/each}
-								</h2>
-							{:else if block.level === 3}
-								<h3>
-									{#each block.children as child}
-										{child.text}
-									{/each}
-								</h3>
-							{:else if block.level === 4}
-								<h4>
-									{#each block.children as child}
-										{child.text}
-									{/each}
-								</h4>
-							{:else if block.level === 5}
-								<h5>
-									{#each block.children as child}
-										{child.text}
-									{/each}
-								</h5>
-							{:else}
-								<h6>
-									{#each block.children as child}
-										{child.text}
-									{/each}
-								</h6>
-							{/if}
-						{/if}
-						{#if block.type === 'paragraph'}
-							<p>
-								{#each block.children as child}
-									{#if child.bold}<strong>{child.text}</strong>
-									{:else if child.italic}<em>{child.text}</em>
-									{:else if child.underline}<u>{child.text}</u>
-									{:else if child.strikethrough}<s>{child.text}</s>
-									{:else}
-										{child.text}
-									{/if}
-								{/each}
-							</p>
-						{/if}
-
-						{#if block.type === 'text'}
-							<div>
-								{#if block.bold}<strong>{block.text}</strong>{/if}
-								{#if block.italic}<em>{block.text}</em>{/if}
-								{#if block.underline}<u>{block.text}</u>{/if}
-								{#if block.strikethrough}<s>{block.text}</s>{/if}
-							</div>
-						{/if}
-
-						{#if block.type === 'list'}
-							{#if block.format === 'ordered'}
-								<ol class="list-decimal">
-									{#each block.children as item}
-										<li> 
-										{#if item.bold}<strong>{item.children[0].text}</strong>
-									{:else if item.italic}<em>{item.children[0].text}</em>
-									{:else if item.underline}<u>{item.children[0].text}</u>
-									{:else if item.strikethrough}<s>{item.children[0].text}</s>
-									{:else}
-										{item.children[0].text}
-									{/if}</li>
-									{/each}
-								</ol>
-							{:else if block.format === 'unordered'}
-								<ul class="list-disc">
-									{#each block.children as item}									 
-										<li> 
-										{#if item.bold}<strong>{item.children[0].text}</strong>
-									{:else if item.italic}<em>{item.children[0].text}</em>
-									{:else if item.underline}<u>{item.children[0].text}</u>
-									{:else if item.strikethrough}<s>{item.children[0].text}</s>
-									{:else}
-										{item.children[0].text}
-									{/if}</li>
-									{/each}
-								</ul>
-							{/if}
-						{/if}
+					{#each data.content.important_links as link, index}
+						<a href={link.Label}>{link.Label}{index}----{link.URL}</a>
 					{/each}
-				{/if}
+					 
+					<p>{data.content.reference_url}</p>
 
-<p>{data.content.department.reference_url}</p>
+					{#if data.content.content}
+						{#each data.content.content as block}
+							{#if block.type === 'heading'}
+								{#if block.level === 1}
+									<h1>
+										{#each block.children as child}
+											{child.text}
+										{/each}
+									</h1>
+								{:else if block.level === 2}
+									<h2>
+										{#each block.children as child}
+											{child.text}
+										{/each}
+									</h2>
+								{:else if block.level === 3}
+									<h3>
+										{#each block.children as child}
+											{child.text}
+										{/each}
+									</h3>
+								{:else if block.level === 4}
+									<h4>
+										{#each block.children as child}
+											{child.text}
+										{/each}
+									</h4>
+								{:else if block.level === 5}
+									<h5>
+										{#each block.children as child}
+											{child.text}
+										{/each}
+									</h5>
+								{:else}
+									<h6>
+										{#each block.children as child}
+											{child.text}
+										{/each}
+									</h6>
+								{/if}
+							{/if}
+							{#if block.type === 'paragraph'}
+								<p>
+									{#each block.children as child}
+										{#if child.bold}<strong>{child.text}</strong>
+										{:else if child.italic}<em>{child.text}</em>
+										{:else if child.underline}<u>{child.text}</u>
+										{:else if child.strikethrough}<s>{child.text}</s>
+										{:else}
+											{child.text}
+										{/if}
+									{/each}
+								</p>
+							{/if}
 
+							{#if block.type === 'list'}
+								{#if block.format === 'ordered'}
+									<ol class="list-decimal">
+										{#each block.children as item}
+											<li>
+												{#each item.children as child}
+													{#if child.bold}<strong>{child.text}</strong>
+													{:else if child.italic}<em>{child.text}</em>
+													{:else if child.underline}<u>{child.text}</u>
+													{:else if child.strikethrough}<s>{child.text}</s>
+													{:else}
+														{child.text}
+													{/if}
+												{/each}
+											</li>
+										{/each}
+									</ol>
+								{:else if block.format === 'unordered'}
+									<ul class="list-disc">
+										{#each block.children as item}
+											<li>
+												{#each item.children as child}
+													{#if child.bold}<strong>{child.text}</strong>
+													{:else if child.italic && child.bold}<strong><em>{child.text}</em></strong>
+													{:else if child.italic && child.bold && child.underline}<strong><em><u>{child.text}</u></em></strong>
+													{:else if child.bold && child.underline}<strong><u>{child.text}</u></strong>
+													{:else if child.bold && child.strikethrough}<strong><s>{child.text}</s></strong>
+													{:else if child.italic}<em>{child.text}</em>
+													{:else if child.italic && child.underline}<em><u>{child.text}</u></em>
+													{:else if child.italic && child.strikethrough}<em><s>{child.text}</s></em>
+													{:else if child.underline}<u>{child.text}</u>
+													{:else if child.strikethrough}<s>{child.text}</s>
+													{:else}
+														{child.text}
+													{/if}
+												{/each}
+											</li>
+										{/each}
+									</ul>
+								{/if}
+							{/if}
+						{/each}
+					{/if}
 				</div>
 			</Card.Content>
 		</Card.Root>
