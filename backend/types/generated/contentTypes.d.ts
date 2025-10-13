@@ -394,6 +394,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -433,6 +434,7 @@ export interface ApiAdmitCardAdmitCard extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -472,6 +474,7 @@ export interface ApiAnswerKeyAnswerKey extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -589,6 +592,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -625,6 +629,7 @@ export interface ApiResultResult extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -664,6 +669,7 @@ export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
