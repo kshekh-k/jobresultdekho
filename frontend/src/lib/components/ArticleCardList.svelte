@@ -146,7 +146,7 @@
 						>
 							Detail
 						</Button>
-						<Button href={item.reference_url} target={item.target} variant="success" size="sm">
+						<Button href={item.reference_url} target="_blank" variant="success" size="sm">
 							{buttonLabel}
 						</Button>
 					</div>
