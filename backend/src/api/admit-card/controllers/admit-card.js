@@ -36,7 +36,7 @@ module.exports = createCoreController('api::admit-card.admit-card', ({strapi}) =
 
         const admitCard = await strapi.db.query('api::admit-card.admit-card').findOne({
             where: { slug },
-            select: ['id','title','slug','description','content'],
+            select: ['id','title','slug','description','content','last_date','reference_url'],
             populate: {
                 department: {
                     select: ['title', 'slug']
