@@ -36,7 +36,7 @@ module.exports = createCoreController('api::answer-key.answer-key', ({strapi}) =
 
         const answerKey = await strapi.db.query('api::answer-key.answer-key').findOne({
             where: { slug },
-            select: ['id','title','slug','description','content'],
+            select: ['id','title','slug','description','content','last_date','reference_url'],
             populate: {
                 department: {
                     select: ['title', 'slug']
