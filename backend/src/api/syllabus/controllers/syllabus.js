@@ -36,7 +36,7 @@ module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
 
         const syllabus = await strapi.db.query('api::syllabus.syllabus').findOne({
             where: { slug },
-            select: ['id','title','slug','reference_url','description','content'],
+            select: ['id','title','slug','description','content','last_date','reference_url'],
             populate: {
                 department: {
                     select: ['title', 'slug']

@@ -36,13 +36,16 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
 
         const job = await strapi.db.query('api::job.job').findOne({
             where: { slug },
-            select: ['id','title','slug','description','content','last_date'],
+            select: ['id','title','slug','description','content','last_date','reference_url'],
             populate: {
                 department: {
                     select: ['title', 'slug']
                 },
                 category: {
                     select: ['id','title','slug']
+                },
+                important_links: {
+                    select: ['label', 'url']
                 }
             }
         });
