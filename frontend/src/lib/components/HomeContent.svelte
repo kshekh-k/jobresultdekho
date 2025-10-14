@@ -13,14 +13,22 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
 	import Widget from './Widget.svelte';
-	
+	const options = [
+		{ label: 'Latest Jobs', href: '#latestJobs' },
+		{ label: 'Results', href: '#results' },
+		{ label: 'Admit Cards', href: '#admitCards' },
+		{ label: 'Answer Keys', href: '#answerKey' },
+		{ label: 'Syllabus', href: '#syllabus' },
+		{ label: 'Admissions', href: '#admission' }
+	];
 	// Sticky nav state
   	let isFixed = false;
-	let open = false;
+	let open: string | null =null;
 	let articleId = '';
   	let navEl: HTMLElement | null = null;
  	let active: string | null = null;
   	onMount(() => {
+		open = null;
         if (!navEl) return;
     	const offsetTop = navEl.offsetTop;
 
@@ -38,9 +46,12 @@
 	
 // Smooth scroll to section and open it
 	function handleClick(id: string) {
-		articleId = id.replace('#', '');
-		open = true;
+		// const articleId = document.getElementById(id.replace("#", ""));
+		const section = id.replace('#',"");
+		open = section;
 		scrollToSection(id);
+		active = id;
+		// alert(open)
 	}
 	// Smooth scroll to section
 	function scrollToSection(id: string) {
@@ -55,14 +66,7 @@
 
 
 	
-	const options = [
-		{ label: 'Latest Jobs', href: '#latestJobs' },
-		{ label: 'Results', href: '#results' },
-		{ label: 'Admit Cards', href: '#admitCards' },
-		{ label: 'Answer Keys', href: '#answerKey' },
-		{ label: 'Syllabus', href: '#syllabus' },
-		{ label: 'Admissions', href: '#admission' }
-	];
+	
 	const sidebarMenu = [
 		{ label: 'Latest Jobs', href: '/latest-jobs' },
 		{ label: 'Results', href: '/result' },
@@ -140,7 +144,7 @@
 		<div class="flex gap-2 flex-wrap {isFixed ? "max-w-screen-xl mx-auto px-3" : ""}"  >
 			<!-- Tab Buttons -->
 			{#each options as option}
-				<Button onclick={() => scrollToSection(option.href)} 
+				<Button onclick={() => handleClick(option.href)} 
 					variant="light"			
 					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == option.href ? '!bg-emerald-500 text-white' : ''}"
 					>{option.label}</Button
@@ -155,7 +159,7 @@
 		<div class="lg:col-span-8 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
-				open={true}
+				open={open==='latestJobs'}
 				articleId={'latestJobs'}
 				type='jobs'
 				headerColor="bg-sky-500"
@@ -170,7 +174,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='results'
-				open={false}
+				open={open==='results'}
 				articleId={'results'}
 				headerColor="bg-emerald-500"
 				headers={resultHeader}
@@ -184,7 +188,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admit-card'
-				open={false}
+				open={open==='admitCards'}
 				articleId="admitCards"
 				headerColor="bg-indigo-500"
 				headers={admitCardHeader}
@@ -200,7 +204,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='answer-key'
-				open={false}
+				open={open==='answerKey'}
 				articleId="answerKey"
 				headerColor="bg-pink-500"
 				headers={answerKeyHeader}
@@ -214,7 +218,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='syllabus'
-				open={false}
+				open={open==='syllabus'}
 				articleId="syllabus"
 				headerColor="bg-teal-500"
 				headers={syllabusHeader}
@@ -228,7 +232,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admission'
-				open={false}
+				open={open==='admission'}
 				articleId="admission"
 				headerColor="bg-red-800"
 				headers={admissionHeader}

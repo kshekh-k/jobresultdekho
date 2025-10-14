@@ -1,32 +1,25 @@
-<!-- File: src/routes/contact/+page.svelte -->
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { Button } from '$lib/components/ui/button';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { Textarea } from '$lib/components/ui/textarea';
-	import { createEventDispatcher } from 'svelte';
+	import { Mail, Phone, MapPin } from 'lucide-svelte'; // ✅ Icons import
 
 	const dispatch = createEventDispatcher();
 
 	let firstName = '';
-	let laststName = '';
+	let lastName = '';
 	let email = '';
-	let phone = '';
-	let subject = '';
 	let message = '';
 
 	function handleSubmit(e: Event) {
 		e.preventDefault();
-		// Here you can integrate backend API, email service, or form submission logic
-		console.log({ firstName, laststName, email, phone, subject, message });
-		dispatch('submit', {firstName, laststName, email, phone, subject, message });
+		console.log({ firstName, lastName, email, message });
+		dispatch('submit', { firstName, lastName, email, message });
 		alert('Thank you for contacting us! We will get back to you soon.');
-
-		// Reset form
 		firstName = '';
-		laststName = '';
+		lastName = '';
 		email = '';
-		phone = '';
-		subject = '';
 		message = '';
 	}
 </script>
@@ -39,74 +32,137 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen bg-slate-100 text-slate-800 py-5">
-	<div class="max-w-screen-xl px-4 mx-auto">
-		<header class="mb-5 bg-white p-5 rounded-xl shadow-md">
-			<h1 class="text-3xl md:text-4xl font-bold mb-2 text-slate-900">Contact Us</h1>
-			<p class="text-slate-600">
-				We’d love to hear from you! Reach out via the form below or using the details provided.
-			</p>
-		</header>
-		<div class="md:grid md:grid-cols-2 gap-5">
-			<!-- Contact Details -->
-			<div class="bg-white p-5 rounded-xl shadow-md space-y-4">
-				<h2 class="text-xl font-medium">Get in Touch</h2>
-				<p class="text-slate-700">
-					<strong>Email:</strong>
-					<a href="mailto:help@jobresultdekho.com" class="text-sky-600 underline"
-						>help@jobresultdekho.com</a
-					>
-				</p>
-				<p class="text-slate-700">
-					<strong>Address:</strong><br />Plot No. 47, Narayanpuri,<br />Near Jai Hind School,
-					Jhotwara,<br />Jaipur (Raj.) PIN 302012
-				</p>
+<!-- MAIN CONTAINER -->
+<div class="min-h-screen bg-slate-50">
+  <!-- Blue Banner -->
+  <section
+    class="bg-sky-500 text-white text-center py-10 relative overflow-hidden rounded-[1.5rem] shadow-md mt-8 max-w-5xl mx-auto px-5"
+  >
+    <div
+      class="absolute inset-0 opacity-20 bg-[url('/waves.svg')] bg-cover bg-center pointer-events-none"
+    ></div>
+
+    <div class="relative z-10">
+      <button
+        class="px-4 py-1 border border-white rounded-full text-sm font-medium mb-3 hover:bg-white hover:text-sky-500 transition"
+      >
+        Write to us
+      </button>
+      <h1 class="text-3xl md:text-4xl font-bold">Get In Touch</h1>
+    </div>
+  </section>
+
+
+<!-- Content Section -->
+<div class="max-w-6xl mx-auto py-12 px-5 md:px-10 grid md:grid-cols-2 gap-10">
+  <!-- Left Form -->
+  <div class="bg-white p-8 rounded-2xl shadow-lg">
+    <h2 class="text-3xl font-bold mb-4">Let's Talk!</h2>
+    <p class="text-slate-600 mb-8">
+      Get in touch with us using the enquiry form or contact details below.
+    </p>
+
+    <form on:submit|preventDefault={handleSubmit} class="space-y-6">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <!-- <label class="block text-sm font-medium text-slate-700 mb-2">First Name</label> -->
+          <Input type="text" placeholder="First Name" bind:value={firstName} required class="bg-white p-2 rounded-lg border border-slate-300 w-full" />
+        </div>
+        <div>
+          <!-- <label class="block text-sm font-medium text-slate-700 mb-2">Last Name</label> -->
+          <Input type="text" placeholder="Last Name" bind:value={lastName} required class="bg-white p-2 rounded-lg border border-slate-300 w-full" />
+        </div>
+      </div>
+
+      <div>
+        <!-- <label class="block text-sm font-medium text-slate-700 mb-2">Email</label> -->
+        <Input type="email" placeholder="Email" bind:value={email} required class="bg-white p-2 rounded-lg border border-slate-300 w-full" />
+      </div>
+
+      <div>
+        <!-- <label class="block text-sm font-medium text-slate-700 mb-2">Message</label> -->
+        <Textarea
+          placeholder="Type your message..."
+          bind:value={message}
+          required
+          class="bg-white p-3 rounded-lg border border-slate-300 w-full h-32"
+        />
+      </div>
+
+      <div class="space-y-3 text-sm">
+        <label class="flex items-start gap-2">
+          <input type="checkbox" required class="mt-1 accent-blue-600" />
+          <span>I agree to receive other communication messages.</span>
+        </label>
+        <label class="flex items-start gap-2">
+          <input type="checkbox" required class="mt-1 accent-blue-600" />
+          <span>I give my consent to JobResultDekho to store my data.</span>
+        </label>
+      </div>
+
+      <Button type="submit" variant="primary" class="w-full bg-[#007BFF] hover:bg-blue-700 py-3 text-lg">
+        Send Message
+      </Button>
+    </form>
+  </div>
+
+
+
+		<!-- Right Side -->
+		<div class="space-y-5">
+			<!-- Image Section -->
+			<div class="rounded-2xl shadow-lg p-6 flex justify-center items-center h-[17rem]">
+				<!-- <img
+					src="/image/contactStudent2.jpg"
+					alt="Contact"
+					class="rounded-xl object-contain w-[100%] max-h-[15rem]"
+				/> -->
 			</div>
 
-			<!-- Contact Form -->
-			<div class="bg-white p-5 rounded-xl shadow-md">
-				<form on:submit|preventDefault={handleSubmit} class="space-y-4">
-                    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-2">
-					<div class="space-y-2">
-						<label for="first-name" class="block text-sm font-medium text-slate-700">First Name</label>
-						<Input id="irst-name" type="text" bind:value={firstName} required class="bg-white" />
+			<!-- Contact Details -->
+			<div class="bg-white p-6 rounded-2xl shadow-lg space-y-5 text-slate-700">
+				<!-- Quick Contact -->
+				<div class="flex items-start gap-4">
+					<div class="p-3 rounded-xl border border-sky-100 bg-sky-50">
+						<Mail class="w-5 h-5 text-[#007BFF]" />
 					</div>
-                    <div class="space-y-2">
-						<label for="last-name" class="block text-sm font-medium text-slate-700">Last Name</label>
-						<Input id="last-name" type="text" bind:value={laststName} required class="bg-white" />
+					<div>
+						<h3 class="text-base font-semibold mb-1">Quick Contact</h3>
+						<p>
+							Email:
+							<a href="mailto:info@jobresultdekho.com" class="text-sky-600 hover:underline">
+								info@jobresultdekho.com
+							</a>
+						</p>
 					</div>
-                </div>
-					<div class="flex flex-col gap-4 lg:grid lg:grid-cols-2">
-						<div class="space-y-2">
-							<label for="email" class="block text-sm font-medium text-slate-700">Email</label>
-							<Input id="email" type="email" bind:value={email} required class="bg-white" />
-						</div>
+				</div>
 
-						<div class="space-y-2">
-							<label for="phone" class="block text-sm font-medium text-slate-700">Phone</label>
-							<Input id="phone" type="phone" bind:value={phone} required class="bg-white" />
-						</div>
+				<!-- Phone Number -->
+				<div class="flex items-start gap-4">
+					<div class="p-3 rounded-xl border border-sky-100 bg-sky-50">
+						<Phone class="w-5 h-5 text-[#007BFF]" />
 					</div>
-
-					<div class="space-y-2">
-						<label for="subject" class="block text-sm font-medium text-slate-700">Subject</label>
-						<Input id="subject" type="subject" bind:value={subject} required class="bg-white" />
+					<div>
+						<h3 class="text-base font-semibold mb-1">Phone Number</h3>
+						<p>India: +91 98765 43210</p>
+						<p>Support: +91 99988 77665</p>
 					</div>
+				</div>
 
-					<div class="space-y-2">
-						<label for="message" class="block text-sm font-medium text-slate-700">Message</label>
-						<Textarea
-							id="message"
-							placeholder="Type your message here."
-							class="bg-white"
-							bind:value={message}
-							required
-						/>
+				<!-- Headquarter -->
+				<div class="flex items-start gap-4">
+					<div class="p-3 rounded-xl border border-sky-100 bg-sky-50">
+						<MapPin class="w-5 h-5 text-[#007BFF]" />
 					</div>
-
-                    <Button type="submit" variant="primary">Send Message</Button>
-				 
-				</form>
+					<div>
+						<h3 class="text-base font-semibold mb-1">Headquarter</h3>
+						<p>
+							Plot No. 47, Narayanpuri,<br />
+							Near Jai Hind School, Jhotwara,<br />
+							Jaipur (Raj.) PIN 302012
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
