@@ -26,7 +26,7 @@
 		{...restProps}
 	>
 		{@render children?.()}
-		<Icon name={ChevronDownIcon} size={24} className="" />
+		<Icon name={ChevronDownIcon} size={24} className="shrink-0" />
 	 
 	</AccordionPrimitive.Trigger>
 </AccordionPrimitive.Header>

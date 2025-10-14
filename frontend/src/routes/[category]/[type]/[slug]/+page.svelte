@@ -7,7 +7,7 @@
 	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	export let data: { content: any; type: string };
 
-	console.log('Job', JSON.stringify(data));
+	// console.log('Job', JSON.stringify(data));
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3">
@@ -78,7 +78,8 @@
 							href={data.content.reference_url}
 							variant="success"
 							target="_blank"
-							class="no-underline w-40" size="lg">Apply Now</Button
+							class="no-underline w-40"
+							size="lg">Apply Now</Button
 						>
 					</div>
 				</div>
@@ -213,17 +214,19 @@
 						{/each}
 					{/if}
 
-					<div class="flex justify-center py-5 ">
+					<div class="flex justify-center py-5">
 						<Button
 							href={data.content.reference_url}
 							variant="success"
 							target="_blank"
-							class="no-underline w-40" size="lg" >Apply Now</Button
+							class="no-underline w-40"
+							size="lg">Apply Now</Button
 						>
 					</div>
 				</div>
 			</Card.Content>
 		</Card.Root>
+		{#if data.content.important_links}
 		<Card.Root class="overflow-hidden rounded-md gap-0"
 			><Card.Content class="px-3 lg:px-6">
 				<div class="prose max-w-none">
@@ -247,7 +250,9 @@
 						<tbody class="divide-y">
 							{#each data.content.important_links as link, index}
 								<tr class="odd:bg-white even:bg-slate-50">
-									<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell">{index + 1}.</td>
+									<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell"
+										>{index + 1}.</td
+									>
 									<th class="sm:px-4 p-2 text-xs sm:text-sm border">{link.Label}</th>
 									<td class="sm:px-4 p-2 text-xs sm:text-sm border"
 										><a
@@ -264,36 +269,58 @@
 				</div>
 			</Card.Content></Card.Root
 		>
-		
-				<div class="flex flex-col gap-3 max-w-2xl mx-auto prose mt-10">
-					<h3 class="text-rose-700 text-center">{data.content.title}: Important Question</h3>
-					<Accordion.Root type="single" class="gap-2">
-						{#each data.content.FAQs as question, index}
-							<Accordion.Item value="item-{index}" class="mb-5">
-								<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
-			><Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
+		{/if}
+{#if data.content.FAQs}
+		<div class="flex flex-col gap-3 max-w-none prose mt-10">
+			<h3 class="text-rose-700 text-center">{data.content.title}: <span class="block uppercase">Important Question</span></h3>
+			<Accordion.Root type="single" class="gap-2">
+				<div class="grid grid-cols-2 gap-5">
+				{#each data.content.FAQs as question, index}
+				{#if index  % 2 === 0}
+					<Accordion.Item value="item-{index}" class="mb-5 border-0">
+						<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
+							><Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
 								<Accordion.Trigger class="lg:text-lg hover:no-underline"
 									>{question.Question}</Accordion.Trigger
-								></Card.Header>
-								<Card.Content class="px-2 sm:px-4">
+								></Card.Header
+							>
+							<Card.Content class="px-2 sm:px-4">
 								<Accordion.Content class="lg:text-lg">
 									{question.Answer}
 								</Accordion.Content>
-									</Card.Content></Card.Root
-		>
-							</Accordion.Item>
-						{/each}
-					</Accordion.Root>
-					<div class="flex justify-center py-5 ">
-						<Button
-							href={data.content.reference_url}
-							variant="success"
-							target="_blank"
-							class="no-underline w-40" size="lg">Apply Now</Button
+							</Card.Content></Card.Root
 						>
-					</div>
+					</Accordion.Item>
+					{:else}
+					<Accordion.Item value="item-{index}" class="mb-5 border-0">
+						<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
+							><Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
+								<Accordion.Trigger class="lg:text-lg hover:no-underline"
+									>{question.Question}</Accordion.Trigger
+								></Card.Header
+							>
+							<Card.Content class="px-2 sm:px-4">
+								<Accordion.Content class="lg:text-lg">
+									{question.Answer}
+								</Accordion.Content>
+							</Card.Content></Card.Root
+						>
+					</Accordion.Item>
+					{/if}
+				{/each}
 				</div>
-		
+			</Accordion.Root>
+			<div class="flex justify-center py-5">
+				<Button
+					href={data.content.reference_url}
+					variant="success"
+					target="_blank"
+					class="no-underline w-40"
+					size="lg">Apply Now</Button
+				>
+			</div>
+		</div>
+		{/if}
 	</div>
 
 	<!--   
