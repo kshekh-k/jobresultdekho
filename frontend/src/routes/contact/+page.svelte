@@ -4,12 +4,16 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { Mail, Phone, MapPin } from 'lucide-svelte'; // ✅ Icons import
+	import Icon from '$lib/components/ui/Icon.svelte';
+	import SocialMedia from '$lib/components/Social-media.svelte';
+	import InnerHero from '$lib/components/InnerHero.svelte';
 
 	const dispatch = createEventDispatcher();
 
 	let firstName = '';
 	let lastName = '';
 	let email = '';
+	let phone = '';
 	let message = '';
 
 	function handleSubmit(e: Event) {
@@ -33,137 +37,147 @@
 </svelte:head>
 
 <!-- MAIN CONTAINER -->
-<div class="min-h-screen bg-slate-50">
-  <!-- Blue Banner -->
-  <section
-    class="bg-sky-500 text-white text-center py-10 relative overflow-hidden rounded-[1.5rem] shadow-md mt-8 max-w-5xl mx-auto px-5"
-  >
-    <div
-      class="absolute inset-0 opacity-20 bg-[url('/waves.svg')] bg-cover bg-center pointer-events-none"
-    ></div>
+ 
+	<!-- Blue Banner -->	 
+	<InnerHero heading="Get In Touch" bgColor="bg-sky-800" textColor="text-white" className="px-5 md:px-10"></InnerHero>
 
-    <div class="relative z-10">
-      <button
-        class="px-4 py-1 border border-white rounded-full text-sm font-medium mb-3 hover:bg-white hover:text-sky-500 transition"
-      >
-        Write to us
-      </button>
-      <h1 class="text-3xl md:text-4xl font-bold">Get In Touch</h1>
-    </div>
-  </section>
-
-
-<!-- Content Section -->
-<div class="max-w-6xl mx-auto py-12 px-5 md:px-10 grid md:grid-cols-2 gap-10">
-  <!-- Left Form -->
-  <div class="bg-white p-8 rounded-2xl shadow-lg">
-    <h2 class="text-3xl font-bold mb-4">Let's Talk!</h2>
-    <p class="text-slate-600 mb-8">
-      Get in touch with us using the enquiry form or contact details below.
-    </p>
-
-    <form on:submit|preventDefault={handleSubmit} class="space-y-6">
-      <div class="grid md:grid-cols-2 gap-6">
-        <div>
-          <!-- <label class="block text-sm font-medium text-slate-700 mb-2">First Name</label> -->
-          <Input type="text" placeholder="First Name" bind:value={firstName} required class="bg-white p-2 rounded-lg border border-slate-300 w-full" />
-        </div>
-        <div>
-          <!-- <label class="block text-sm font-medium text-slate-700 mb-2">Last Name</label> -->
-          <Input type="text" placeholder="Last Name" bind:value={lastName} required class="bg-white p-2 rounded-lg border border-slate-300 w-full" />
-        </div>
-      </div>
-
-      <div>
-        <!-- <label class="block text-sm font-medium text-slate-700 mb-2">Email</label> -->
-        <Input type="email" placeholder="Email" bind:value={email} required class="bg-white p-2 rounded-lg border border-slate-300 w-full" />
-      </div>
-
-      <div>
-        <!-- <label class="block text-sm font-medium text-slate-700 mb-2">Message</label> -->
-        <Textarea
-          placeholder="Type your message..."
-          bind:value={message}
-          required
-          class="bg-white p-3 rounded-lg border border-slate-300 w-full h-32"
-        />
-      </div>
-
-      <div class="space-y-3 text-sm">
-        <label class="flex items-start gap-2">
-          <input type="checkbox" required class="mt-1 accent-blue-600" />
-          <span>I agree to receive other communication messages.</span>
-        </label>
-        <label class="flex items-start gap-2">
-          <input type="checkbox" required class="mt-1 accent-blue-600" />
-          <span>I give my consent to JobResultDekho to store my data.</span>
-        </label>
-      </div>
-
-      <Button type="submit" variant="primary" class="w-full bg-[#007BFF] hover:bg-blue-700 py-3 text-lg">
-        Send Message
-      </Button>
-    </form>
-  </div>
-
-
-
-		<!-- Right Side -->
-		<div class="space-y-5">
-			<!-- Image Section -->
-			<div class="rounded-2xl shadow-lg p-6 flex justify-center items-center h-[17rem]">
-				<!-- <img
-					src="/image/contactStudent2.jpg"
-					alt="Contact"
-					class="rounded-xl object-contain w-[100%] max-h-[15rem]"
-				/> -->
-			</div>
-
-			<!-- Contact Details -->
-			<div class="bg-white p-6 rounded-2xl shadow-lg space-y-5 text-slate-700">
+	<!-- Content Section -->
+	<section class="max-w-6xl mx-auto p-5 md:py-12 md:px-10 grid md:grid-cols-2 gap-10">
+		<!-- Left Form -->
+		  
+			
+			<div class="space-y-5 text-slate-700 md:p-8 ">
+				<!-- Contact Details -->
+				<h2 class="text-3xl font-bold mb-4">Quick Contact</h2>
+			<p class="text-slate-600 mb-8">
+				Get in touch with us using the enquiry form or contact details below.
+			</p>
 				<!-- Quick Contact -->
 				<div class="flex items-start gap-4">
-					<div class="p-3 rounded-xl border border-sky-100 bg-sky-50">
-						<Mail class="w-5 h-5 text-[#007BFF]" />
+					<div class="p-3 rounded-sm border border-sky-200  bg-sky-100 text-sky-800  shrink-0">
+						<Icon name={Mail} size={20} className="text-sky-800" />
 					</div>
-					<div>
-						<h3 class="text-base font-semibold mb-1">Quick Contact</h3>
-						<p>
-							Email:
-							<a href="mailto:info@jobresultdekho.com" class="text-sky-600 hover:underline">
+					<div class="flex flex-col gap-1">
+						<h3 class="text-lg font-semibold">Email</h3>
+						<p>						 
+							<a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">
 								info@jobresultdekho.com
 							</a>
 						</p>
 					</div>
 				</div>
-
-				<!-- Phone Number -->
+<!-- Phone Number -->
 				<div class="flex items-start gap-4">
-					<div class="p-3 rounded-xl border border-sky-100 bg-sky-50">
-						<Phone class="w-5 h-5 text-[#007BFF]" />
+					<div class="p-3 rounded-sm border border-sky-200  bg-sky-100 text-sky-800  shrink-0">
+						<Icon name={Phone} size={20} className="text-sky-800" />
 					</div>
-					<div>
-						<h3 class="text-base font-semibold mb-1">Phone Number</h3>
-						<p>India: +91 98765 43210</p>
-						<p>Support: +91 99988 77665</p>
+					<div class="flex flex-col gap-1">
+						<h3 class="text-lg font-semibold">Phone</h3>
+						<p>						 
+							<a href="tel:+919828368878" class="text-sky-800 hover:underline">
+								+91 98283 68878
+							</a>
+						</p>
 					</div>
 				</div>
 
-				<!-- Headquarter -->
+				<!-- Address -->
 				<div class="flex items-start gap-4">
-					<div class="p-3 rounded-xl border border-sky-100 bg-sky-50">
-						<MapPin class="w-5 h-5 text-[#007BFF]" />
+					<div class="p-3 rounded-sm border border-sky-200 bg-sky-100 text-sky-800 shrink-0">
+						<Icon name={MapPin} size={20} className="text-sky-800" />
 					</div>
-					<div>
-						<h3 class="text-base font-semibold mb-1">Headquarter</h3>
-						<p>
+					<div class="flex flex-col gap-1">
+						<h3 class="text-lg font-semibold">Address</h3>
+						<p class="text-sky-800 ">						 
 							Plot No. 47, Narayanpuri,<br />
 							Near Jai Hind School, Jhotwara,<br />
 							Jaipur (Raj.) PIN 302012
 						</p>
 					</div>
 				</div>
+				<div class="flex flex-col justify-sart items-start gap-2">
+				<h3 class="text-lg font-semibold">Follow us</h3>
+				 <SocialMedia className="border border-sky-200 bg-sky-100 hover:border-sky-100 hover:bg-sky-800 hover:text-white text-sky-800 size-10 rounded-sm [&>i]:text-xl mr-1"/>
+				</div>
+				 
+				 
 			</div>
+	 
+		<!-- Right Side -->
+		<div class="bg-white p-5 md:p-8 rounded-2xl">
+			<h2 class="text-2xl font-bold mb-4 text-slate-700">Send inquiry</h2>
+			 
+			<form on:submit|preventDefault={handleSubmit} class="space-y-6">
+				<div class="grid md:grid-cols-2 gap-6">
+					 
+					 
+						<Input
+							type="text"
+							placeholder="First Name"
+							bind:value={firstName}
+							required
+							class="bg-slate-50 h-12 py-3 px-4 rounded-sm border border-slate-300 w-full shadow-none"
+						/>
+				 
+			 
+				 
+						<Input
+							type="text"
+							placeholder="Last Name"
+							bind:value={lastName}
+							required
+							class="bg-slate-50 h-12 py-3 px-4 rounded-sm border border-slate-300 w-full shadow-none"
+						/>
+				 
+				 
+			 
+					<Input
+						type="email"
+						placeholder="Email"
+						bind:value={email}
+						required
+						class="bg-slate-50 h-12 py-3 px-4 rounded-sm border border-slate-300 w-full shadow-none"
+					/>
+			 
+					<Input
+						type="tel"
+						placeholder="Phone"
+						bind:value={phone}
+						required
+						class="bg-slate-50 h-12 py-3 px-4 rounded-sm border border-slate-300 w-full shadow-none"
+					/>
+				</div>
+
+			 
+				 
+					<Textarea
+						placeholder="Type your message..."
+						bind:value={message}
+						required
+						class="bg-slate-50 py-3 px-4 rounded-sm border border-slate-300 w-full h-32"
+					/>
+				 
+
+				<div class="space-y-3 text-sm">
+					<label class="flex items-center gap-2 text-slate-500">
+						<input type="checkbox" required class="accent-sky-600 size-4" />
+						<span>I agree to receive other communication messages.</span>
+					</label>
+					<label class="flex items-center gap-2 text-slate-500">
+						<input type="checkbox" required class="accent-sky-600 size-4" />
+						<span>I give my consent to JobResultDekho to store my data.</span>
+					</label>
+				</div>
+
+				<Button
+					type="submit"
+					variant="primary"
+					class="w-full bg-sky-800 hover:bg-sky-700 py-3 text-lg h-12"
+				>
+					Send Message
+				</Button>
+			</form>
 		</div>
-	</div>
-</div>
+	</section>
+ 
+ 

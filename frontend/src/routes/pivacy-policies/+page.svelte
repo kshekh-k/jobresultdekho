@@ -1,5 +1,6 @@
 <!-- File: src/routes/privacy/+page.svelte -->
 <script lang="ts">
+	import InnerHero from '$lib/components/InnerHero.svelte';
   import { onMount } from 'svelte';
 
   // If you use shadcn-svelte components, import them here. If not available,
@@ -30,12 +31,11 @@
   <meta name="description" content="Privacy Policy for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
 
-<div class="min-h-screen bg-slate-100 text-slate-800 py-5">
-  <div class="max-w-screen-xl px-4 mx-auto">
-    <header class="mb-5 bg-white p-5 rounded-xl shadow-md">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-slate-900">Privacy Policy</h1>
-      <p class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></p>
-      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-600 hover:underline">help@jobresultdekho.com</a></p>
+ <InnerHero heading="Privacy Policy" bgColor="bg-sky-800" textColor="text-white" className="px-4 md:px-4 mb-5"></InnerHero>
+  <div class="max-w-6xl px-4 mx-auto">
+    <header class="mb-5 bg-white p-5 rounded-xl shadow-md">   
+      <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
+      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a></p>
     </header>
 
     <article class="flex flex-col gap-5">
@@ -99,12 +99,12 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">8. Children’s Privacy</h2>
-        <p class="text-slate-700 leading-relaxed">The site is designed for students and job aspirants aged 13 and above. We do not knowingly collect personal information from children under 13. If you believe we may have collected such data, contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-600 hover:underline">help@jobresultdekho.com</a> and we will remove it.</p>
+        <p class="text-slate-700 leading-relaxed">The site is designed for students and job aspirants aged 13 and above. We do not knowingly collect personal information from children under 13. If you believe we may have collected such data, contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a> and we will remove it.</p>
       </section>
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">9. Your Rights</h2>
-        <p class="text-slate-700 leading-relaxed">You can request to access, correct or delete your personal information, and opt out of promotional emails. Contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-600 hover:underline">help@jobresultdekho.com</a>.</p>
+        <p class="text-slate-700 leading-relaxed">You can request to access, correct or delete your personal information, and opt out of promotional emails. Contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a>.</p>
       </section>
 
       <section class="bg-white p-5 rounded-xl shadow-md">
@@ -114,7 +114,7 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">11. Contact</h2>
-        <p class="text-slate-700 leading-relaxed">If you have questions or concerns, reach us at <a href="mailto:help@jobresultdekho.com" class="text-sky-600 hover:underline">help@jobresultdekho.com</a>.</p>
+        <p class="text-slate-700 leading-relaxed">If you have questions or concerns, reach us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a>.</p>
       </section>
 
     </article>
@@ -130,5 +130,5 @@
       </div>
     </div>
   {/if}
-</div>
+ 
  

@@ -8,6 +8,7 @@ import 'remixicon/fonts/remixicon.css';
     { name: "WhatsApp", url: "https://wa.me/1234567890", icon: 'ri-whatsapp-line' },
     { name: "Telegram", url: "https://t.me/username", icon: 'ri-telegram-2-fill' }
   ];
+	export let className: string | undefined = 'bg-white/10 text-white hover:bg-blue-600';
 </script>
  
 <div class="flex items-center gap-1">
@@ -17,7 +18,7 @@ import 'remixicon/fonts/remixicon.css';
       target="_blank"
       rel="noopener noreferrer"
       aria-label={name} title={name}
-      class="size-8 rounded-full bg-white/10 text-white hover:bg-blue-600 ease-in-out duration-200 flex justify-center items-center"
+      class="size-8 rounded-full ease-in-out duration-200 flex justify-center items-center {className}"
     >
     <i class="text-base {icon}"></i>       
          
