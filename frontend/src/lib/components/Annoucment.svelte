@@ -29,15 +29,29 @@
 			loop: true,
 			autoplay: { delay: 3000 },
 			pagination: false,
-			navigation: false
+			navigation: false,
+			 breakpoints: {
+        640: {
+          slidesPerView: 1,
+          
+        },
+        768: {
+          slidesPerView: 2,
+           
+        },
+        1024: {
+          slidesPerView: 3,
+           
+        },
+      },
 		});
 	});
 </script>
 
-<div class="text-white text-sm font-medium bg-sky-500 py-1">
+<div class="text-slate-900 text-sm font-medium bg-white py-1">
 	<div class="max-w-screen-xl mx-auto px-3 py-1 after:table after:clear-both">
 		<span
-			class="font-semibold bg-red-500 border border-white rounded py-2 px-1 sm:p-3 text-sm leading-1 hidden sm:block shrink-0 sm:float-left"
+			class="font-semibold text-white bg-red-500 rounded py-2 px-1 sm:p-3 text-sm leading-1 hidden sm:block shrink-0 sm:float-left"
 			>High Alerts</span
 		>
 		<div class="sm:float-left sm:w-[calc(100%-100px)] sm:pt-1 sm:pl-2">
@@ -46,7 +60,7 @@
 					{#each alerts as cat}
 						<div class="swiper-slide">
 							<div class="flex justify-center">
-								<a href="/" class="py-1 px-3 ease-in-out duration-200 hover:bg-white/20 rounded-sm"
+								<a href="/" class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/20 rounded-sm"
 									>{cat}</a
 								>
 							</div>

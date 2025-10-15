@@ -18,23 +18,20 @@
 //   }
 </script>
 
-<header class="w-full border-b border-black/10 bg-white">
+<header class="w-full bg-sky-800">
 	<!-- 🔴 High Alerts Row -->
 	<Annoucment />
 	<!-- Top Section -->
 	<div class="max-w-screen-xl mx-auto px-3">
-		<div class="flex items-center justify-between py-2 md:py-0">
+		<div class="flex items-center justify-between py-3">
 			<div class="flex gap-2">
 				<!-- Mobile Menu Button -->
-				<button
-					class="lg:hidden text-gray-700"
-					onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
-				>
+				<button class="lg:hidden text-white" onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}>
 				<Icon name={Menu} className="" size={20} />					 
 				</button>
 				<!-- Logo -->
 				<div class="xl:text-xl font-bold text-blue-600"><a href="/">
-				<img src="/jobresultdekho-logo.svg" alt="Job Result Dekho logo" class="h-20" />
+				<img src="/image/jobresultdekho-logo-white.svg" alt="Job Result Dekho logo" class="h-6 md:h-10" />
 				</a></div>
 			</div>
 			<!-- Desktop Menu -->
@@ -42,23 +39,23 @@
 				<Navbar {categories} />
 			</div>
 			<!-- Search + Button -->
-			<div class="flex items-center sm:space-x-4">
+			<!-- <div class="flex items-center sm:space-x-4"> -->
 				<div class="relative">
-					<Input type="search" placeholder="Search..." class="bg-white shadow-none pr-6 w-32 sm:w-64"  />
+					<Input type="search" placeholder="Search..." class="bg-white border-none shadow-none pr-6 w-32 sm:w-64 rounded-sm"  />
 					<Button
 						variant="ghost"
-						class="border-none hover:bg-transparent hover:text-sky-600 absolute top-0 right-0 cursor-pointer"
+						class="border-none hover:bg-transparent hover:text-sky-800 absolute top-0 right-0 cursor-pointer"
 						><Icon name={Search} size={16} /></Button
 					>
 				</div>
-				<Button href="/contact" variant="success" class="hidden sm:flex">Contact</Button>
-			</div>
+				<!-- <Button href="/contact" variant="success" class="hidden sm:flex">Contact</Button> -->
+			<!-- </div> -->
 		</div>
 	</div>
 	<!-- Mobile Menu -->
 	{#if isMobileMenuOpen}
-		<div class="lg:hidden fixed inset-0 bg-white z-50 flex justify-center items-center gap-2 py-5">
-			<button class="text-gray-700 absolute top-5 right-5 z-10" onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}>
+		<div class="lg:hidden fixed inset-0 bg-sky-800 z-50 flex justify-center items-center gap-2 py-5">
+			<button class="text-white absolute top-5 right-5 z-10" onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}>
 				<Icon name={X} className="" size={20} />					 
 			</button>
 			<div class="max-h-[calc(100vh-40px)] overflow-auto w-full px-5">

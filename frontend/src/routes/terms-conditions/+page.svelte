@@ -1,5 +1,6 @@
 <!-- File: src/routes/terms/+page.svelte -->
 <script lang="ts">
+	import InnerHero from '$lib/components/InnerHero.svelte';
   import { onMount } from 'svelte';
 
   let showCookieBanner = false;
@@ -24,13 +25,12 @@
   <title>Terms & Conditions — JobResultDekho</title>
   <meta name="description" content="Terms and Conditions for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
-
-<div class="min-h-screen bg-slate-100 text-slate-800 py-5">
-  <div class="max-w-screen-xl px-4 mx-auto">
-     <header class="mb-5 bg-white p-5 rounded-xl shadow-md">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-slate-900">Terms &amp; Conditions</h1>
-      <p class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></p>
-      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-600 hover:underline">help@jobresultdekho.com</a></p>
+<InnerHero heading="Terms &amp; Conditions" bgColor="bg-sky-800" textColor="text-white" className="px-4 md:px-4 mb-5"></InnerHero>
+ 
+  <div class="max-w-6xl px-4 mx-auto">
+     <header class="mb-5 bg-white p-5 rounded-xl shadow-md">    
+      <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
+      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a></p>
     </header>
 
    <article class="flex flex-col gap-5">
@@ -75,7 +75,7 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">8. Privacy</h2>
-        <p class="text-slate-700 leading-relaxed">Your use of the website is also governed by our <a href="/privacy" class="text-sky-600 hover:underline">Privacy Policy</a>.</p>
+        <p class="text-slate-700 leading-relaxed">Your use of the website is also governed by our <a href="/privacy" class="text-sky-800 hover:underline">Privacy Policy</a>.</p>
       </section>
 
       <section class="bg-white p-5 rounded-xl shadow-md">
@@ -90,7 +90,7 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">11. Contact</h2>
-        <p class="text-slate-700 leading-relaxed">If you have questions or concerns regarding these Terms, contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-600 hover:underline">help@jobresultdekho.com</a>.</p>
+        <p class="text-slate-700 leading-relaxed">If you have questions or concerns regarding these Terms, contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a>.</p>
       </section>
     </article>
    
@@ -105,5 +105,5 @@
       </div>
     </div>
   {/if}
-  </div>
+ 
  

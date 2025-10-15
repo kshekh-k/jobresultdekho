@@ -7,7 +7,7 @@
 	import { daysLeft } from '$lib/utils';
 
 	export let title: string | undefined;
-	export let articleId: string | undefined;
+	export let articleId: any | undefined;
 	export let articleWrap: string | undefined;
 	export let headerColor: string = 'bg-sky-500';
 	export let catLabel: string = '/latest-job';
