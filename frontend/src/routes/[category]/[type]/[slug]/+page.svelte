@@ -6,7 +6,20 @@
 	import { daysLeft } from '$lib/utils';
 	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	export let data: { content: any; type: string };
-
+	export let buttonLabel: string | undefined =
+		data.content.type === 'jobs'
+			? 'Apply Now'
+			: data.content.type === 'result'
+				? 'View Now'
+				: data.content.type === 'admit-cards'
+					? 'Download Now'
+					: data.content.type === 'admissions'
+						? 'View Now'
+						: data.content.type === 'answer-key'
+							? 'Match Now'
+							: data.content.type === 'syllabus'
+								? 'Check Now'
+								: undefined;
 	// console.log('Job', JSON.stringify(data));
 </script>
 
@@ -79,7 +92,7 @@
 							variant="success"
 							target="_blank"
 							class="no-underline w-40"
-							size="lg">Apply Now</Button
+							size="lg">{buttonLabel}</Button
 						>
 					</div>
 				</div>
@@ -220,7 +233,7 @@
 							variant="success"
 							target="_blank"
 							class="no-underline w-40"
-							size="lg">Apply Now</Button
+							size="lg">{buttonLabel}</Button
 						>
 					</div>
 				</div>
@@ -322,7 +335,7 @@
 						variant="success"
 						target="_blank"
 						class="no-underline w-40"
-						size="lg">Apply Now</Button
+						size="lg">{buttonLabel}</Button
 					>
 				</div>
 			</div>
