@@ -35,8 +35,8 @@
 	]; 
 </script>
 <div class="max-w-screen-xl mx-auto px-3">
-<section class="relative max-w-full">	
-	<div class="overflow-x-auto max-w-full">
+<section class="relative">	
+	<div class="overflow-x-auto max-w-full py-2 -my-2">
 		<div class="flex justify-between md:grid md:grid-cols-3 gap-4 min-w-[1024px] md:min-w-min">
 			{#each hotPosts as item}
 				<Card.Root class="p-0 ease-in-out duration-200 hover:-translate-y-1 min-w-64" variant={item.variant}>

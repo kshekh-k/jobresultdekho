@@ -25,7 +25,7 @@
 	import Desclaimer from '$lib/components/Desclaimer.svelte';
 </script>
 
-<div class="space-y-5 py-5">
+<div class="space-y-5">
 	<HotPosts />
 	<div class="max-w-screen-xl mx-auto px-3">
 	<Card.Root class="" variant={'default'}>
