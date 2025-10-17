@@ -1,66 +1,53 @@
 <script lang="ts">
-	import Input from './ui/input/input.svelte';
 	import Navbar from './Navbar.svelte';
 	import Icon from './ui/Icon.svelte';
-	import { Menu,  Search, X } from 'lucide-svelte';
+	import { Menu } from 'lucide-svelte';
 	import Annoucment from './Annoucment.svelte';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import SearchBox from './SearchBox.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
 	export let categories: any[] = [];
-	let isMobileMenuOpen = false;
+
 	let isMoreOpen = false;
-	 // Watch state change and update body class
-//   $: {
-//     if (isMobileMenuOpen) {
-//       document.body.classList.add("overflow-hidden");
-//     } else {
-//       document.body.classList.remove("overflow-hidden");
-//     }
-//   }
 </script>
 
 <header class="w-full bg-sky-800">
 	<!-- 🔴 High Alerts Row -->
 	<Annoucment />
+
 	<!-- Top Section -->
 	<div class="max-w-screen-xl mx-auto px-3">
 		<div class="flex items-center justify-between py-3">
-			<div class="flex gap-2">
-				<!-- Mobile Menu Button -->
-				<button class="lg:hidden text-white" onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}>
-				<Icon name={Menu} className="" size={20} />					 
-				</button>
-				<!-- Logo -->
-				<div class="xl:text-xl font-bold text-blue-600"><a href="/">
-				<img src="/image/jobresultdekho-logo-white.svg" alt="Job Result Dekho logo" class="h-6 md:h-10" />
-				</a></div>
+			<!-- Logo -->
+			<div class="xl:text-xl font-bold text-blue-600">
+				<a href="/">
+					<img src="/image/jobresultdekho-logo-white.svg"
+						alt="Job Result Dekho logo"
+						class="h-6 md:h-8 lg:h-10"
+					/>
+				</a>
 			</div>
+
 			<!-- Desktop Menu -->
 			<div class="hidden lg:flex">
 				<Navbar {categories} />
 			</div>
-			<!-- Search + Button -->
-			<!-- <div class="flex items-center sm:space-x-4"> -->
-				<div class="relative">
-					<Input type="search" placeholder="Search..." class="bg-white border-none shadow-none pr-6 w-32 sm:w-64 rounded-sm"  />
-					<Button
-						variant="ghost"
-						class="border-none hover:bg-transparent hover:text-sky-800 absolute top-0 right-0 cursor-pointer"
-						><Icon name={Search} size={16} /></Button
-					>
-				</div>
-				<!-- <Button href="/contact" variant="success" class="hidden sm:flex">Contact</Button> -->
-			<!-- </div> -->
-		</div>
-	</div>
-	<!-- Mobile Menu -->
-	{#if isMobileMenuOpen}
-		<div class="lg:hidden fixed inset-0 bg-sky-800 z-50 flex justify-center items-center gap-2 py-5">
-			<button class="text-white absolute top-5 right-5 z-10" onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}>
-				<Icon name={X} className="" size={20} />					 
-			</button>
-			<div class="max-h-[calc(100vh-40px)] overflow-auto w-full px-5">
-				<Navbar {categories} /> 
+
+			
+				<!-- Mobile Menu Button -->
+				<button class="lg:hidden text-white p-3" on:click={() => (isMoreOpen = true)}>
+					<Icon name={Menu} size={20} />
+				</button>
+
+				<!-- Search -->
+				 <div class="hidden lg:flex">
+				<SearchBox boxSize="w-full" />
 			</div>
 		</div>
-	{/if}
+	</div>
+
+	<!-- Drawer for Mobile Menu -->
+	<Panel open={isMoreOpen} close={() => (isMoreOpen = false)} side="left" title="Menu">
+		<Navbar {categories} />
+		<div slot="footer"><SearchBox boxSize="w-full" /></div>
+	</Panel>
 </header>
