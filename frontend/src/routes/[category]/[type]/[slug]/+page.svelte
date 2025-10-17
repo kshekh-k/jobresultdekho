@@ -7,7 +7,7 @@
 	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
-		data.content.type === 'jobs'
+		data.content.type === 'job'
 			? 'Apply Now'
 			: data.content.type === 'result'
 				? 'View Now'
@@ -21,6 +21,7 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
+	console.log('Job', data)
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3">
