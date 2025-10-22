@@ -1,4 +1,4 @@
-#version: '3.8'
+version: '3.8'
 
 services:
   postgres:
@@ -14,6 +14,11 @@ services:
     networks:
       - xyresults
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7
@@ -33,7 +38,7 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: ${NODE_ENV:-production}
       DATABASE_CLIENT: postgres
       DATABASE_HOST: postgres
       DATABASE_PORT: 5432
@@ -45,13 +50,14 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - "${STRAPI_PORT}:1337"
+    # ✅ Removed backend:/app volume to preserve admin build
     volumes:
-      - ./backend:/app
-      - /app/node_modules
       - ./uploads:/app/public/uploads
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - xyresults
     restart: unless-stopped
@@ -63,7 +69,7 @@ services:
       args:
         - VITE_API_URL=${API_URL}
     environment:
-      - NODE_ENV=${NODE_ENV}
+      - NODE_ENV=${NODE_ENV:-production}
       - VITE_API_URL=${API_URL}
     ports:
       - "${FRONTEND_PORT}:3000"
@@ -99,3 +105,4 @@ volumes:
   redis_data:
   caddy_data:
   caddy_config:
+
