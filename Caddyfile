@@ -1,0 +1,26 @@
+# ========== LOCAL (Dev) ==========
+:80 {
+    encode gzip
+    reverse_proxy frontend:3000
+}
+
+:8080 {
+    encode gzip
+    reverse_proxy strapi:1337
+}
+
+# ========== PRODUCTION ==========
+jobresultdekho.com {
+    encode gzip
+    reverse_proxy frontend:3000
+}
+
+api.jobresultdekho.com {
+    encode gzip
+    reverse_proxy strapi:1337
+}
+
+# Optional: redirect www → non-www
+www.jobresultdekho.com {
+    redir https://jobresultdekho.com{uri}
+}
