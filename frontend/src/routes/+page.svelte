@@ -16,8 +16,6 @@
 		latestSyllabus = []
 	} = data;
 
-	console.log("latestJobs in +page.svelte:", latestAdmissions, latestAdmitCards, latestJobs, latestAnswerKeys, latestResults, latestSyllabus );
-
 	import * as Card from '$lib/components/ui/card/index.js';
 	import HotPosts from '$lib/components/HotPosts.svelte';
 	import HomeContent from '$lib/components/HomeContent.svelte';
