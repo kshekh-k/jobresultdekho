@@ -23,6 +23,7 @@ Thumbs.db
 .env
 .env.*
 !.env.backend
+!.env.frontend
 !.env.root
 
 # Vite temp timestamps
@@ -38,5 +39,6 @@ pnpm-debug.log*
 # Docker
 docker-compose-local*
 
-# Strapi updater file
+# Strapi
 backend/.strapi-updater.json
+backend/.strapi

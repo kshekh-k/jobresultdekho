@@ -34,7 +34,15 @@ services:
       - ./backend/.env
     environment:
       NODE_ENV: ${NODE_ENV}
-      NODE_OPTIONS: --max-old-space-size=2048
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USERNAME: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - "${STRAPI_PORT}:1337"
     volumes:
@@ -43,6 +51,7 @@ services:
       - ./uploads:/app/public/uploads
     depends_on:
       - postgres
+      - redis
     networks:
       - xyresults
     restart: unless-stopped
@@ -51,8 +60,32 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${API_URL}
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VITE_API_URL=${API_URL}
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT}:3000"
+    networks:
+      - xyresults
+    restart: unless-stopped
+    depends_on:
+      - strapi
+
+  caddy:
+    image: caddy:2.8
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - strapi
     networks:
       - xyresults
     restart: unless-stopped
@@ -64,3 +97,5 @@ networks:
 volumes:
   postgres_data:
   redis_data:
+  caddy_data:
+  caddy_config:
