@@ -1,5 +1,5 @@
 // src/lib/api/client.ts
-export const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:1337/api';
+export const API_URL = import.meta.env.VITE_API_URL || 'https://api.jobresultdekho.com/api';
 console.log('API URL:', API_URL);
 
 export async function apiGet<T>(endpoint: string, customFetch: typeof fetch = fetch): Promise<T> {

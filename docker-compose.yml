@@ -60,11 +60,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${API_URL}
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VITE_API_URL=${API_URL}
     ports:
       - "${FRONTEND_PORT}:3000"
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      VITE_API_URL: ${VITE_API_URL}
     networks:
       - xyresults
     restart: unless-stopped
