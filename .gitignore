@@ -23,6 +23,7 @@ Thumbs.db
 .env
 .env.*
 !.env.backend
+!.env.frontend
 !.env.root
 
 # Vite temp timestamps
