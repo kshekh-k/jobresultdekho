@@ -17,7 +17,7 @@ jobresultdekho.com {
 
 api.jobresultdekho.com {
     encode gzip
-    reverse_proxy strapi:1337
+    reverse_proxy xyresults-strapi-1:1337
 }
 
 # Optional: redirect www → non-www
