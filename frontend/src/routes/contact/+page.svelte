@@ -5,7 +5,7 @@
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { Mail, Phone, MapPin } from 'lucide-svelte'; // ✅ Icons import
 	import Icon from '$lib/components/ui/Icon.svelte';
-	import SocialMedia from '$lib/components/Social-media.svelte';
+	import SocialMedia from '$lib/components/SocialMedia.svelte';
 	import InnerHero from '$lib/components/InnerHero.svelte';
 
 	const dispatch = createEventDispatcher();

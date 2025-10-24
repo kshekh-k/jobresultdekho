@@ -2,14 +2,12 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from './ui/Icon.svelte';
 	import { ChevronDown } from 'lucide-svelte';
-	// Props
 
 	export let title: string = 'Widget Title';
 	export let headerColor: string = 'bg-sky-500';
-	export let menus: { label: string; href?: string; icon?: any }[] = [];
+	export let menus: { title: string; slug?: string; icon?: any }[] = [];
 
 	let open = true;
-
 	const toggle = () => {
 		open = !open;
 	};
@@ -23,9 +21,7 @@
 		<h3 class="text-lg font-semibold text-white">{title}</h3>
 		<button
 			onclick={toggle}
-			type="button"
-			class="p-1 rounded-sm hover:bg-white/20 focus:outline-none text-white"
-		>
+			type="button" class="p-1 rounded-sm hover:bg-white/20 focus:outline-none text-white">
 			<Icon name={ChevronDown} className={open ? 'rotate-180' : 'rotate-0'} size={20} />
 		</button>
 	</Card.Header>
@@ -36,13 +32,13 @@
 				{#each menus as menu}
 					<li>
 						<a
-							href={menu.href || '/#'}
+							href={menu.slug || '/#'}
 							class="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition"
 						>
 							{#if menu.icon}
                             <Icon name={menu.icon} size={20} />								 
 							{/if}
-							{menu.label}
+							{menu.title}
 						</a>
 					</li>
 				{/each}

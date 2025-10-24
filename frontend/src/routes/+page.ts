@@ -6,6 +6,7 @@ import { getLatestAnswerKeys } from '$lib/api/answer-key';
 import { getLatestJobs } from '$lib/api/job';
 import { getLatestResults } from '$lib/api/result';
 import { getLatestSyllabus } from '$lib/api/syllabus';
+import { getCategoryTree } from '$lib/api/category';
 
 export async function load({ fetch }: { fetch: typeof window.fetch }) {
 	const latestAdmissions = await getLatestAdmissions(fetch);
@@ -14,6 +15,7 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
   	const latestJobs = await getLatestJobs(fetch);
 	const latestResults = await getLatestResults(fetch);
 	const latestSyllabus = await getLatestSyllabus(fetch);
+	const categoryTree = await getCategoryTree(fetch);
 	
   	return { 
 		latestAdmissions, 
@@ -21,6 +23,7 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
 		latestAnswerKeys, 
 		latestJobs, 
 		latestResults, 
-		latestSyllabus 
+		latestSyllabus,
+		categoryTree
 	};
 }
