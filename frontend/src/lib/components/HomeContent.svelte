@@ -4,7 +4,9 @@
 	export let latestAnswerKeys;
 	export let latestJobs;
 	export let latestResults;
-	export let latestSyllabus;	
+	export let latestSyllabus;
+	export let categoryTree;
+
 	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
 	import { PanelRightDashed, Image, FileText,	Calculator,	Signature } from 'lucide-svelte';
 	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
@@ -13,20 +15,34 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
 	import Widget from './Widget.svelte';
-	const options = [
-		{ label: 'Latest Jobs', href: '#latestJobs' },
-		{ label: 'Results', href: '#results' },
-		{ label: 'Admit Cards', href: '#admitCards' },
-		{ label: 'Answer Keys', href: '#answerKey' },
-		{ label: 'Syllabus', href: '#syllabus' },
-		{ label: 'Admissions', href: '#admission' }
-	];
+
+	// Parent & children category
+	const parents = [];
+	const children = [];
+	for (const cat of categoryTree) {
+		if (!cat.parent) parents.push({ title: cat.title, slug: cat.slug });
+		if (cat.children?.length) {
+			for (const child of cat.children) {
+				children.push({ title: child.title, slug: child.slug });
+			}
+		}
+	}
+
+	// Slugs to exclude
+  	const excludedSlugs = ["home", "more"];
+
+	// Filter out unwanted slugs
+	$: filteredParents = parents.filter(
+		(p) => !excludedSlugs.includes(p.slug)
+	);	
+
 	// Sticky nav state
   	let isFixed = false;
 	let open: string | null =null;
 	let articleId = '';
   	let navEl: HTMLElement | null = null;
  	let active: string | null = null;
+
   	onMount(() => {
 		open = null;
         if (!navEl) return;
@@ -44,7 +60,7 @@
     	return () => window.removeEventListener("scroll", handleScroll);
   	});
 	
-// Smooth scroll to section and open it
+	// Smooth scroll to section and open it
 	function handleClick(id: string) {
 		// const articleId = document.getElementById(id.replace("#", ""));
 		const section = id.replace('#',"");
@@ -53,6 +69,7 @@
 		active = id;
 		// alert(open)
 	}
+	
 	// Smooth scroll to section
 	function scrollToSection(id: string) {
 		const el = document.getElementById(id.replace("#", ""));
@@ -61,20 +78,7 @@
 		window.scrollTo({ top: y, behavior: "smooth" });
 		}
 		active = id; // mark clicked as active
-	}
-
-
-
-	
-	
-	const sidebarMenu = [
-		{ label: 'Latest Jobs', href: '/latest-jobs' },
-		{ label: 'Results', href: '/result' },
-		{ label: 'Admit Cards', href: '/admit-cards' },
-		{ label: 'Answer Keys', href: '/answer=key' },
-		{ label: 'Syllabus', href: '/syllabus' },
-		{ label: 'Admissions', href: '/admission' }
-	];
+	}	
 
 	const jobHeader = [{
 		id: 'No.',
@@ -128,13 +132,13 @@
 	}];	
 
 	let userMenus = [
-    { label: "Image Resizer", href: "#", icon: Image },
-    { label: "JPG to PDF Converter", href: "#", icon: FileText },
-    { label: "Age Calculator", href: "#", icon: Calculator },
-    { label: "Photo Signature Joiner", href: "#", icon: Signature },
-    { label: "Name & Date on Photo Maker", href: "#", icon: CalendarRange },
-    { label: "MPPEB Template", href: "#", icon: NotepadTextDashed },
-    { label: "Typing Test", href: "#", icon: TypeOutline },
+    { title: "Image Resizer", slug: "#", icon: Image },
+    { title: "JPG to PDF Converter", slug: "#", icon: FileText },
+    { title: "Age Calculator", slug: "#", icon: Calculator },
+    { title: "Photo Signature Joiner", slug: "#", icon: Signature },
+    { title: "Name & Date on Photo Maker", slug: "#", icon: CalendarRange },
+    { title: "MPPEB Template", slug: "#", icon: NotepadTextDashed },
+    { title: "Typing Test", slug: "#", icon: TypeOutline },
   ];
  
 </script>
@@ -143,11 +147,11 @@
 	<div class="hidden md:block {isFixed ? "fixed inset-x-0 top-0 py-2 bg-white shadow-md" : "static"}" bind:this={navEl}>
 		<div class="flex gap-2 flex-wrap {isFixed ? "max-w-screen-xl mx-auto px-3" : ""}"  >
 			<!-- Tab Buttons -->
-			{#each options as option}
-				<Button onclick={() => handleClick(option.href)} 
+			{#each filteredParents as parent}
+				<Button onclick={() => handleClick(parent.slug)} 
 					variant="light"			
-					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == option.href ? '!bg-emerald-500 text-white' : ''}"
-					>{option.label}</Button
+					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == parent.slug ? '!bg-emerald-500 text-white' : ''}"
+					>{parent.title}</Button
 				>
 			{/each}
 			<Button variant="bordered" class="lg:!hidden">
@@ -159,8 +163,8 @@
 		<div class="lg:col-span-8 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
-				open={open==='latestJobs'}
-				articleId={'latestJobs'}
+				open={open==='latest-job'}
+				articleId={'latest-job'}
 				type='jobs'
 				headerColor="bg-sky-500"
 				headers={jobHeader}
@@ -168,35 +172,30 @@
 				items={latestJobs}
 				viewText="See More"
 				catLabel={'latest-job'}
-				 
-			 
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='results'
-				open={open==='results'}
-				articleId={'results'}
+				open={open==='result'}
+				articleId={'result'}
 				headerColor="bg-emerald-500"
 				headers={resultHeader}
 				title="Results"
 				items={latestResults}
 				viewText="See More"
 				catLabel={'result'}
-			 
-			 
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admit-card'
-				open={open==='admitCards'}
-				articleId="admitCards"
+				open={open==='admit-card'}
+				articleId="admit-card"
 				headerColor="bg-indigo-500"
 				headers={admitCardHeader}
 				title="Admit Cards"
 				items={latestAdmitCards}
 				viewText="See More"
-				catLabel={'admit-card'}
-			 
+				catLabel={'admit-card'}			 
 			/>
 			<Card.Root class="" variant={'default'}>
 				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
@@ -204,16 +203,14 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='answer-key'
-				open={open==='answerKey'}
-				articleId="answerKey"
+				open={open==='answer-key'}
+				articleId="answer-key"
 				headerColor="bg-pink-500"
 				headers={answerKeyHeader}
 				title="Answer Key"
 				items={latestAnswerKeys}
 				viewText="See More"
 				catLabel={'answer-key'}
-				 
-			
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
@@ -226,8 +223,6 @@
 				items={latestSyllabus}
 				viewText="See More"
 				catLabel={'syllabus'}
-				 
-			
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
@@ -240,7 +235,6 @@
 				items={latestAdmissions}
 				viewText="See More"
 				catLabel={'admissions'}
-			 
 			/>
 		</div>
 		<aside class="lg:col-span-4 space-y-4">
@@ -248,7 +242,7 @@
 			<Card.Root class="bg-slate-300" variant={'default'}>
 				<Card.Content class="flex items-center justify-center text-center h-60 ">Ad Place here</Card.Content>
 			</Card.Root>
-			<Widget title="All Categories" menus={sidebarMenu} headerColor="bg-slate-900" />
+			<Widget title="All Categories" menus={filteredParents} headerColor="bg-slate-900" />
 		</aside>
 	</section>
 </div>

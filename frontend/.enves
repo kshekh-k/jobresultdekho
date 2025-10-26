@@ -1,0 +1,4 @@
+# Local development
+# VITE_API_URL=http://127.0.0.1:1337/api
+# In production (Caddy reverse proxy)
+VITE_API_URL=https://api.jobresultdekho.com/api

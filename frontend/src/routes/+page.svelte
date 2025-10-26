@@ -6,6 +6,7 @@
 		latestJobs?: any[];
 		latestResults?: any[];
 		latestSyllabus?: any[];
+		categoryTree?: any[];
 	};
 	const { 
 		latestAdmissions = [],
@@ -13,7 +14,8 @@
 		latestAnswerKeys = [],
 		latestJobs = [],
 		latestResults = [],
-		latestSyllabus = []
+		latestSyllabus = [],
+		categoryTree = [],
 	} = data;
 
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -30,7 +32,7 @@
 		<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
 	</Card.Root>
 </div>
-	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} />
+	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
 	<Stats />
 	<Desclaimer />
 </div>

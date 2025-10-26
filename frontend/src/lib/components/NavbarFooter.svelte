@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { ChevronDown } from 'lucide-svelte';
-	import Icon from './ui/Icon.svelte'; 
-
- 
-
+	import Icon from './ui/Icon.svelte';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
+	
 	export let categories: {
 		title: string;
 		slug: string;
@@ -44,10 +42,9 @@
 							: 'hover:text-white text-white/60'}">{cat.title}</a
 					>
 				</li>
-			{:else if cat.children?.length}
-				 
+			{:else if cat.children?.length}				 
 				{#each cat.children as child}
-					<li class="relative">
+					<!--li class="relative">
 						<a
 							href={`/${child.slug}`}
 							class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center {isActive(
@@ -58,7 +55,7 @@
 						>
 							{child.title}
 						</a>
-					</li>
+					</li-->
 				{/each}
 			{:else}
 				<li>
@@ -68,7 +65,7 @@
 							cat.slug
 						)
 							? 'text-white'
-								: 'hover:text-white text-white/60'}">{cat.title}</a
+							: 'hover:text-white text-white/60'}">{cat.title}</a
 					>
 				</li>
 			{/if}
