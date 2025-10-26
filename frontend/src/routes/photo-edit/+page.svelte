@@ -1,15 +1,16 @@
 <script lang="ts">
 	import InnerHero from '$lib/components/InnerHero.svelte';
-	import PhotoEditor from '$lib/components/PhotoEditor.svelte';
+	import PhotoCropper from '$lib/components/PhotoCropper.svelte';
+	import PhotoEditor from '$lib/components/PhotoCropper.svelte';
 
 	// No JS needed for this static page
 </script>
 
 <svelte:head>
-	<title>Disclaimer — JobResultDekho</title>
+	<title>Photo Editor — JobResultDekho</title>
 	<meta
 		name="description"
-		content="Disclaimer for JobResultDekho.com — jobs, results, admit cards and study material for Indian students."
+		content="Photo Editor for JobResultDekho.com — jobs, results, admit cards and study material for Indian students."
 	/>
 </svelte:head>
 <InnerHero
@@ -18,5 +19,5 @@
 	textColor="text-white"
 	className="px-4 md:px-4 mb-5"
 ></InnerHero>
-<div>Kamran</div>
 <PhotoEditor />
+ <!-- <PhotoCropper /> -->

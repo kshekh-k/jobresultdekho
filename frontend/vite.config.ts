@@ -1,11 +1,40 @@
+// import tailwindcss from '@tailwindcss/vite';
+// import { sveltekit } from '@sveltejs/kit/vite';
+// import { defineConfig } from 'vite';
+
+// export default defineConfig({
+// 	plugins: [tailwindcss(), sveltekit()],
+// 	server: {
+// 		host: '127.0.0.1',  // 👈 allows access from localhost and LAN
+// 		port: 5173        // 👈 sets the default port
+// 	}
+// });
+
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
-	server: {
-		host: '127.0.0.1',  // 👈 allows access from localhost and LAN
-		port: 5173        // 👈 sets the default port
-	}
+  plugins: [
+    tailwindcss(),
+    sveltekit(),
+    {
+      name: 'ignore-appspecific',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url?.startsWith('/.well-known/appspecific')) {
+            res.statusCode = 404; // Return 404 instead of 500
+            res.end();
+          } else {
+            next();
+          }
+        });
+      }
+    }
+  ],
+  server: {
+    host: '127.0.0.1', // allows access from localhost and LAN
+    port: 5173         // sets the default port
+  }
 });
+
