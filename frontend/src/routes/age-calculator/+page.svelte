@@ -16,7 +16,7 @@
 	heading="Age Calculator"
 	bgColor="bg-sky-800"
 	textColor="text-white"
-	className="px-4 md:px-4 mb-5"
+	className="mb-5 max-w-screen-xl mx-auto px-3"
 ></InnerHero>
 <!-- <div>Kamran</div> -->
 <AgeCalculator />

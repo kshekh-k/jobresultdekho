@@ -11,8 +11,8 @@
 	/>
 </svelte:head>
  <!-- Blue Banner -->	 
-	<InnerHero heading="About Us" bgColor="bg-sky-800" textColor="text-white" className="px-4 md:px-4 mb-5"></InnerHero>
-	<div class="max-w-6xl px-4 mx-auto">
+	<InnerHero heading="About Us" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
+	<div class="max-w-screen-xl mx-auto px-3">
 		<Card.Root class="overflow-hidden p-0 rounded-md gap-0 py-5">
 			<Card.Header class="py-2">
 				 

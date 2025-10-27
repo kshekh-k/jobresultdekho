@@ -39,13 +39,12 @@
 <!-- MAIN CONTAINER -->
  
 	<!-- Blue Banner -->	 
-	<InnerHero heading="Get In Touch" bgColor="bg-sky-800" textColor="text-white" className="px-5 md:px-10"></InnerHero>
+	<InnerHero heading="Get In Touch" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
 
 	<!-- Content Section -->
-	<section class="max-w-6xl mx-auto p-5 md:py-12 md:px-10 grid md:grid-cols-2 gap-10">
+	<section class="max-w-screen-xl mx-auto px-3 py-5 md:py-12 md:px-10 grid md:grid-cols-2 gap-10">
 		<!-- Left Form -->
-		  
-			
+	 
 			<div class="space-y-5 text-slate-700 md:p-8 ">
 				<!-- Contact Details -->
 				<h2 class="text-3xl font-bold mb-4">Quick Contact</h2>

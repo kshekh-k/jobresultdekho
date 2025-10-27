@@ -15,9 +15,9 @@
 	heading="Disclaimer"
 	bgColor="bg-sky-800"
 	textColor="text-white"
-	className="px-4 md:px-4 mb-5"
+	className="mb-5 max-w-screen-xl mx-auto px-3"
 ></InnerHero>
-<section class="max-w-6xl mx-auto px-4 text-slate-500 leading-relaxed space-y-6">
+<section class="max-w-screen-xl mx-auto px-3 text-slate-500 leading-relaxed space-y-6">
 	<header class="mb-5 bg-white p-5 rounded-xl shadow-md">
 		<h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
 		<p class="text-sm text-slate-600 mt-1">

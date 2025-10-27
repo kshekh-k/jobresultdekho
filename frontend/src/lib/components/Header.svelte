@@ -33,14 +33,14 @@
 			</div>
 
 			
-				<!-- Mobile Menu Button -->
-				<button class="lg:hidden text-white p-3" on:click={() => (isMoreOpen = true)}>
-					<Icon name={Menu} size={20} />
-				</button>
+			<!-- Mobile Menu Button -->
+			<button class="lg:hidden text-white p-3" on:click={() => (isMoreOpen = true)}>
+				<Icon name={Menu} size={20} />
+			</button>
 
-				<!-- Search -->
-				 <div class="hidden lg:flex">
-				<SearchBox boxSize="w-full" />
+			<!-- Search -->
+			<div class="hidden lg:flex">
+			<SearchBox boxSize="w-full" />
 			</div>
 		</div>
 	</div>

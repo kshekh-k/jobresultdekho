@@ -31,8 +31,8 @@
   <meta name="description" content="Privacy Policy for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
 
- <InnerHero heading="Privacy Policy" bgColor="bg-sky-800" textColor="text-white" className="px-4 md:px-4 mb-5"></InnerHero>
-  <div class="max-w-6xl px-4 mx-auto">
+ <InnerHero heading="Privacy Policy" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
+  <div class="max-w-screen-xl mx-auto px-3">
     <header class="mb-5 bg-white p-5 rounded-xl shadow-md">   
       <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
       <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a></p>
