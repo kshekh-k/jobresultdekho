@@ -1,5 +1,5 @@
 <script lang="ts">
-	import html2canvas from 'html2canvas';
+	import html2canvas from 'html2canvas-pro';
 	import jsPDF from 'jspdf';
 
 	let imageUrl: string | null = null;
@@ -15,15 +15,15 @@
 	let position = { x: 50, y: 50 };
 	let dragging = false;
 	let offset = { x: 0, y: 0 };
-	let imageRef: HTMLDivElement;
+	let imageRef: HTMLDivElement | null = null;
 
-	// 🖼️ Handle image upload
+	// Upload
 	function handleImageUpload(e: Event) {
 		const file = (e.target as HTMLInputElement).files?.[0];
 		if (file) imageUrl = URL.createObjectURL(file);
 	}
 
-	// 🎯 Drag events
+	// Dragging
 	function handleMouseDown(event: MouseEvent) {
 		if (isFullWidth) return;
 		dragging = true;
@@ -38,7 +38,6 @@
 		dragging = false;
 	}
 
-	// 🔠 Text transformations
 	function transformText(text: string): string {
 		if (textCase === 'uppercase') return text.toUpperCase();
 		if (textCase === 'lowercase') return text.toLowerCase();
@@ -46,68 +45,103 @@
 		return text;
 	}
 
-	// 🧩 Utility: convert oklch → rgb
-	function fixColors(node: HTMLElement) {
-		const elements = node.querySelectorAll('*');
+	// Force computed styles onto inline styles for canvas-safe rendering
+	function applyComputedStylesRecursively(node: HTMLElement) {
+		const elements = node.querySelectorAll<HTMLElement>('*');
 		elements.forEach((el) => {
-			const style = getComputedStyle(el);
-			if (style.color.includes('oklch'))
-				(el as HTMLElement).style.color = toRGB(style.color);
-			if (style.backgroundColor.includes('oklch'))
-				(el as HTMLElement).style.backgroundColor = toRGB(style.backgroundColor);
+			const cs = getComputedStyle(el);
+
+			// copy subset of properties that matter for text rendering
+			try {
+				el.style.color = cs.color;
+				el.style.backgroundColor = cs.backgroundColor;
+				el.style.fontSize = cs.fontSize;
+				el.style.fontWeight = cs.fontWeight;
+				el.style.lineHeight = cs.lineHeight;
+				el.style.textAlign = cs.textAlign;
+				el.style.padding = cs.padding;
+				el.style.margin = cs.margin;
+				el.style.letterSpacing = cs.letterSpacing;
+				// keep display / width for layout
+				el.style.display = cs.display;
+			} catch (e) {
+				// ignore elements we can't set
+			}
+		});
+
+		// Also set computed styles on the root node
+		const rootCs = getComputedStyle(node);
+		node.style.backgroundColor = rootCs.backgroundColor || '#ffffff';
+		node.style.color = rootCs.color || '#000';
+	}
+
+	// ensure image loaded
+	function waitForImageLoad(node: HTMLElement) {
+		const img = node.querySelector('img');
+		if (!img) return Promise.resolve();
+		const imageEl = img as HTMLImageElement;
+		if (imageEl.complete && imageEl.naturalWidth !== 0) return Promise.resolve();
+		return new Promise<void>((resolve, reject) => {
+			imageEl.onload = () => resolve();
+			imageEl.onerror = () => reject(new Error('image load error'));
 		});
 	}
 
-	function toRGB(color: string) {
-		const temp = document.createElement('div');
-		temp.style.color = color;
-		document.body.appendChild(temp);
-		const rgb = getComputedStyle(temp).color;
-		document.body.removeChild(temp);
-		return rgb;
-	}
-
-	// 🖼️ Download as PNG
+	// Download PNG
 	async function downloadAsImage() {
 		try {
 			if (!imageRef) return;
-			const img = imageRef.querySelector('img');
-			if (!img?.complete) {
-				await new Promise<void>((resolve) => (img.onload = () => resolve()));
-			}
 
-			fixColors(imageRef);
+			// wait image load
+			await waitForImageLoad(imageRef);
+
+			// make sure cross-origin flagged image doesn't taint. using blobs/local images is best.
+			imageRef.style.backgroundColor = '#ffffff';
+			imageRef.style.colorScheme = 'light';
+
+			// force computed styles onto inline styles (so html2canvas sees real rgb values)
+			applyComputedStylesRecursively(imageRef);
+
+			// small delay to allow style changes to apply
+			await new Promise((r) => setTimeout(r, 80));
 
 			const canvas = await html2canvas(imageRef, {
 				useCORS: true,
 				backgroundColor: '#ffffff',
-				scale: 2
+				scale: 2,
+				logging: false
 			});
 
 			const link = document.createElement('a');
 			link.download = 'photo-with-text.png';
 			link.href = canvas.toDataURL('image/png');
+			document.body.appendChild(link);
 			link.click();
+			document.body.removeChild(link);
 		} catch (err) {
 			console.error('❌ Image download failed:', err);
+			alert('Error while generating image: ' + (err?.message || err));
 		}
 	}
 
-	// 📄 Download as PDF
+	// Download PDF
 	async function downloadAsPDF() {
 		try {
 			if (!imageRef) return;
-			const img = imageRef.querySelector('img');
-			if (!img?.complete) {
-				await new Promise<void>((resolve) => (img.onload = () => resolve()));
-			}
 
-			fixColors(imageRef);
+			await waitForImageLoad(imageRef);
+
+			imageRef.style.backgroundColor = '#ffffff';
+			imageRef.style.colorScheme = 'light';
+
+			applyComputedStylesRecursively(imageRef);
+			await new Promise((r) => setTimeout(r, 80));
 
 			const canvas = await html2canvas(imageRef, {
 				useCORS: true,
 				backgroundColor: '#ffffff',
-				scale: 2
+				scale: 2,
+				logging: false
 			});
 
 			const imgData = canvas.toDataURL('image/png');
@@ -122,9 +156,11 @@
 			pdf.save('photo-with-text.pdf');
 		} catch (err) {
 			console.error('❌ PDF download failed:', err);
+			alert('Error while generating PDF: ' + (err?.message || err));
 		}
 	}
 </script>
+
 
 <!-- UI Layout -->
 <div class="max-w-2xl mx-auto p-4 space-y-4">
@@ -196,35 +232,42 @@
 
 		<!-- Preview -->
 		<div class="relative mt-6 flex justify-center">
+			<!-- This wrapper ensures everything captured together -->
 			<div
+				role="img"
 				bind:this={imageRef}
-				class="relative size-96 overflow-hidden inline-block"
+				class="relative inline-block bg-white"
+				style="touch-action:none; position: relative;"
 				on:mousemove={handleMouseMove}
 				on:mousedown={handleMouseDown}
 				on:mouseup={handleMouseUp}
 				on:mouseleave={handleMouseUp}
-				style="touch-action: none;"
 			>
-				<img src={imageUrl} alt="Uploaded" class="max-w-full" />
+				<img
+					src={imageUrl}
+					alt="Uploaded"
+					class="max-w-full h-auto block"
+					crossorigin="anonymous"
+				/>
 
-				<!-- Draggable Text -->
+				<!-- Text overlay -->
 				<div
-					class="absolute cursor-move select-none"
+					class="absolute select-none"
 					style="
-						top: {isFullWidth ? '100%' : position.y + 'px'};
-						left: {isFullWidth ? '0' : position.x + 'px'};
-						width: {isFullWidth ? '100%' : 'auto'};
+						top: {position.y}px;
+						left: {position.x}px;
 						text-align: center;
+						pointer-events: none;
 					"
 				>
 					<div
-						class="px-2 py-1 inline-block"
 						style="
 							color: {textColor};
 							background-color: {bgColor};
 							font-size: {fontSize}px;
 							font-weight: {isBold ? 'bold' : 'normal'};
-							width: {isFullWidth ? '100%' : 'auto'};
+							padding: 4px 8px;
+							display: inline-block;
 						"
 					>
 						{#if name}{transformText(name)}{/if}
@@ -233,6 +276,7 @@
 				</div>
 			</div>
 		</div>
+
 
 		<!-- Download Buttons -->
 		<div class="flex justify-center gap-4 mt-4">
