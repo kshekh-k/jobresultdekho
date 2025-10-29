@@ -17,7 +17,7 @@
 	import Widget from './Widget.svelte';
 
 	// Parent & children category
-	const parents = [];
+	const parents: { title: any; slug: any; }[] = [];
 	const children = [];
 	for (const cat of categoryTree) {
 		if (!cat.parent) parents.push({ title: cat.title, slug: cat.slug });
