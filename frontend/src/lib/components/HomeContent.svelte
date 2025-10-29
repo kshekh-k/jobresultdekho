@@ -134,13 +134,13 @@
 	let userMenus = [
     { title: "Image Resizer", slug: "#", icon: Image },
     { title: "JPG to PDF Converter", slug: "#", icon: FileText },
-    { title: "Age Calculator", slug: "#", icon: Calculator },
+    { title: "Age Calculator", slug: "age-calculator", icon: Calculator },
     { title: "Photo Signature Joiner", slug: "#", icon: Signature },
-    { title: "Name & Date on Photo Maker", slug: "#", icon: CalendarRange },
+    { title: "Name & Date on Photo Maker", slug: "/photo-editor", icon: CalendarRange },
     { title: "MPPEB Template", slug: "#", icon: NotepadTextDashed },
     { title: "Typing Test", slug: "#", icon: TypeOutline },
-  ];
- 
+  ];  
+  
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3 space-y-5">
@@ -175,18 +175,6 @@
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='results'
-				open={open==='result'}
-				articleId={'result'}
-				headerColor="bg-emerald-500"
-				headers={resultHeader}
-				title="Results"
-				items={latestResults}
-				viewText="See More"
-				catLabel={'result'}
-			/>
-			<ArticleCard
-				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admit-card'
 				open={open==='admit-card'}
 				articleId="admit-card"
@@ -197,6 +185,18 @@
 				viewText="See More"
 				catLabel={'admit-card'}			 
 			/>
+			<ArticleCard
+				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='results'
+				open={open==='result'}
+				articleId={'result'}
+				headerColor="bg-emerald-500"
+				headers={resultHeader}
+				title="Results"
+				items={latestResults}
+				viewText="See More"
+				catLabel={'result'}
+			/>			
 			<Card.Root class="" variant={'default'}>
 				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
 			</Card.Root>
