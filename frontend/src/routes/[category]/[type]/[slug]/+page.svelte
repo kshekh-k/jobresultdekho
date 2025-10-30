@@ -36,7 +36,7 @@
 				<div class="flex flex-warp gap-3">
 					<p class="text-gray-700 flex flex-wrap gap-2 items-center">
 						<span class="flex gap-1 items-center"
-							><Icon name={Landmark} size={20} /> {data.content.department.title}</span
+							><Icon name={Landmark} size={20} />{data.content.department?.title || '—'}</span
 						>
 						|
 						<span class="flex gap-1 items-center"
@@ -69,7 +69,7 @@
 						</thead>
 						<tbody class="divide-y">
 							<tr>
-								<td class="px-4 py-3 text-sm border">{data.content.department.title}</td>
+								<td class="px-4 py-3 text-sm border">{data.content.department?.title || '—'}</td>
 								<td class="px-4 py-3 text-sm border"
 									>{new Date(data.content.last_date)
 										.toLocaleDateString('en-GB')
@@ -364,7 +364,7 @@
     <p class="mt-2 text-gray-700">{data.content.description}</p>
   {/if}
     <p class="mt-2 text-gray-700">{data.content.last_date}</p>
-    <p class="mt-2 text-gray-700">{data.content.department.title}</p>
+    <p class="mt-2 text-gray-700">{data.content.department?.title || '—'}</p>
   {#if data.content.content}
     {#each data.content.content as block}
       {#if block.type === "paragraph"}
