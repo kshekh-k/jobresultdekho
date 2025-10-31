@@ -50,7 +50,7 @@
 	const toggle = () => (open = !open);
 
 	// ✅ Pagination setup
-	let perPage = 2;
+	let perPage = 20;
 	let currentPage = 1;
 
 	// ✅ Derived pagination data
