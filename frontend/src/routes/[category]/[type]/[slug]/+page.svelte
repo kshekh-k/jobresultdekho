@@ -33,7 +33,6 @@
 					<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
 						{data.content.title}
 					</h1>
-
 				 
 					<div class="prose max-w-none w-full">
 						<p class="text-slate-600">
@@ -348,8 +347,7 @@
 						Ad Place here
 					</div>
 				</div>
-			</div>
-		</div>
-		<Sidebar />
-	</section>
-</div>
+			</div> 
+	
+ 
+		</Layout>

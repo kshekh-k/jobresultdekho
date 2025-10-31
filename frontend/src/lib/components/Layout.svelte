@@ -1,5 +1,6 @@
 <script lang="ts">
 	import InnerHero from './InnerHero.svelte';
+	import Sidebar from './Sidebar.svelte';
 	export let heading: string | undefined;
 	export let header: boolean = true;
 </script>
@@ -18,6 +19,6 @@
 		<div class="lg:col-span-8 xl:col-span-9 space-y-5">
 			<slot />
 		</div>
-		<!-- <Sidebar {filteredParents} /> -->
+			<Sidebar />
 	</section>
 </div>
