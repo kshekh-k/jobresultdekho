@@ -24,8 +24,6 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
-	console.log('Job', data);
-	// Parent & children category
 	 
 </script>
 
@@ -351,4 +349,7 @@
 					</div>
 				</div>
 			</div>
- </Layout>
+		</div>
+		<Sidebar />
+	</section>
+</div>

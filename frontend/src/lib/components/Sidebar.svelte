@@ -1,10 +1,14 @@
 <script lang="ts">
 	export let filteredParents;
 	export let className: string = "lg:col-span-4 xl:col-span-3 space-y-4";
+    export let categoryTree;
+    console.log(categoryTree);
+    
 	import { Image, FileText, Calculator, Signature } from 'lucide-svelte';
 	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
     import * as Card from '$lib/components/ui/card/index.js';
 	import Widget from './Widget.svelte';
+
 	let userMenus = [
     { title: "Image Resizer", slug: "#", icon: Image },
     { title: "JPG to PDF Converter", slug: "#", icon: FileText },
