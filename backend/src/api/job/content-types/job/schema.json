@@ -52,6 +52,19 @@
       "type": "component",
       "component": "shared.faq",
       "repeatable": true
+    },
+    "Stage": {
+      "type": "enumeration",
+      "required": true,
+      "default": "job",
+      "enum": [
+        "job",
+        "admin-card",
+        "result",
+        "admission",
+        "syllabus",
+        "answer-key"
+      ]
     }
   }
 }
