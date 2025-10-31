@@ -8,13 +8,11 @@
 	export let categoryTree;
 
 	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
-	import { PanelRightDashed, Image, FileText,	Calculator,	Signature } from 'lucide-svelte';
-	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
+	import { PanelRightDashed } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
-	import Widget from './Widget.svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 
 	// Parent & children category
