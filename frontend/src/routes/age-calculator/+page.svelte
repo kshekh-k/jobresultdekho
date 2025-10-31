@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AgeCalculator from '$lib/components/AgeCalculator.svelte';
 	import InnerHero from '$lib/components/InnerHero.svelte';
+	import Layout from '$lib/components/Layout.svelte';
 
 	// No JS needed for this static page
 </script>
@@ -12,11 +13,7 @@
 		content="Age Calculator for JobResultDekho.com — jobs, results, admit cards and study material for Indian students."
 	/>
 </svelte:head>
-<InnerHero
-	heading="Age Calculator"
-	bgColor="bg-sky-800"
-	textColor="text-white"
-	className="mb-5 max-w-screen-xl mx-auto px-3"
-></InnerHero>
-<!-- <div>Kamran</div> -->
-<AgeCalculator />
+
+<Layout heading={'Age Calculator'}>
+	<AgeCalculator />
+</Layout>

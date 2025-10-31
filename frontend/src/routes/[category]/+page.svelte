@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ArticleCardList from '$lib/components/ArticleCardList.svelte';
+	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	export let data: { category: any };
 
@@ -22,14 +23,8 @@
 	
 </script>
 
-<div class="max-w-screen-xl mx-auto px-3">
-	<div class="space-y-5 py-5">
-		<Card.Root class="overflow-hidden rounded-md gap-5">
-			<Card.Header class="flex items-center justify-between gap-2">
-				<h1 class="text-center text-2xl md:text-4xl xl:text-5xl font-bold text-slate-900">
-					{data.category.title}
-				</h1>
-			</Card.Header>
+  <Layout heading={data.category.title}>
+		<Card.Root class="overflow-hidden rounded-md gap-5">			 
 			<Card.Content>
 				<p class="text-slate-600">{data.category.description}</p>
 			</Card.Content>
@@ -99,5 +94,4 @@
 				catLabel={data.category.slug}		 
 			/>	 
 		{/if}
-	</div>
-</div>
+ </Layout>

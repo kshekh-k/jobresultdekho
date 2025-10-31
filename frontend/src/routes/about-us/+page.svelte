@@ -1,5 +1,6 @@
 <script lang="ts">
 	import InnerHero from '$lib/components/InnerHero.svelte';
+	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 </script>
 
@@ -10,9 +11,8 @@
 		content="About Us JobResultDekho.com for support, queries, and feedback."
 	/>
 </svelte:head>
- <!-- Blue Banner -->	 
-	<InnerHero heading="About Us" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
-	<div class="max-w-screen-xl mx-auto px-3">
+ 
+	  <Layout heading={"About Us"}>
 		<Card.Root class="overflow-hidden p-0 rounded-md gap-0 py-5">
 			<Card.Header class="py-2">
 				 
@@ -63,5 +63,5 @@
 
 			</Card.Content>
 		</Card.Root>
-	</div>
+ </Layout>
  
