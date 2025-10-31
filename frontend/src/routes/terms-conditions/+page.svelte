@@ -30,7 +30,7 @@
   <div class="max-w-screen-xl mx-auto px-3">
      <header class="mb-5 bg-white p-5 rounded-xl shadow-md">    
       <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
-      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a></p>
+      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a></p>
     </header>
 
    <article class="flex flex-col gap-5">
@@ -90,7 +90,7 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">11. Contact</h2>
-        <p class="text-slate-700 leading-relaxed">If you have questions or concerns regarding these Terms, contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a>.</p>
+        <p class="text-slate-700 leading-relaxed">If you have questions or concerns regarding these Terms, contact us at <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a>.</p>
       </section>
     </article>
    

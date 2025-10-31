@@ -5,7 +5,7 @@
 	import { cn } from '$lib/utils.js';
 	import Icon from './ui/Icon.svelte';
 	import Button from './ui/button/button.svelte';
-	import { daysLeft } from '$lib/utils';
+	import { daysLeft, daysLeftLabel } from '$lib/utils';
 
 	export let title: string | undefined;
 	export let headerColor: string = 'bg-sky-500';
@@ -129,7 +129,7 @@
 									? 'text-rose-700 '	: 'text-green-600 '}">
 							<Icon name={Clock} size={16} className="md:hidden" />
 							<b class="inline-flex font-semibold ">
-								{daysLeft(item.last_date)}
+								{daysLeftLabel(item.last_date)}
 							</b>
 						</div>
 					{:else}

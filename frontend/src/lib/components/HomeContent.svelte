@@ -149,7 +149,7 @@
 		</div>
 	</div>
 	<section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
-		<div class="lg:col-span-8 space-y-4 ">
+		<div class="lg:col-span-8 xl:col-span-9 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
 				open={open==='latest-job'}

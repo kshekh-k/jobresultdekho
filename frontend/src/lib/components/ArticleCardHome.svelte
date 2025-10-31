@@ -4,7 +4,7 @@
 	import { cn } from '$lib/utils.js';
 	import Icon from './ui/Icon.svelte';
 	import Button from './ui/button/button.svelte';
-	import { daysLeft } from '$lib/utils';
+	import { daysLeft, daysLeftLabel } from '$lib/utils';
 
 	export let title: string | undefined;
 	export let articleId: any | undefined;
@@ -117,7 +117,7 @@
 							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(item.last_date) < 10
 										? 'text-rose-700' : 'text-green-600'}">
 								<Icon name={Clock} size={16} className="md:hidden" />
-								<b class="inline-flex py-1 font-semibold ">{daysLeft(item.last_date)}</b>
+								<b class="inline-flex py-1 font-semibold ">{daysLeftLabel(item.last_date)}</b>
 							</div>
 						{/if}
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">

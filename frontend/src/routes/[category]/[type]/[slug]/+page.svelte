@@ -3,7 +3,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { daysLeft } from '$lib/utils';
+	import { daysLeft, daysLeftLabel } from '$lib/utils';
 	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
@@ -48,7 +48,7 @@
 								? 'text-rose-700'
 								: 'text-green-600'}"
 							><Icon name={Clock} size={20} />
-							<b class="inline-flex py-1 font-semibold">{daysLeft(data.content.last_date)}</b></span
+							<b class="inline-flex py-1 font-semibold">{daysLeftLabel(data.content.last_date)}</b></span
 						>
 					</p>
 				</div>
@@ -81,7 +81,7 @@
 									10
 										? 'text-rose-700'
 										: 'text-green-600'}"
-									>{daysLeft(data.content.last_date)}
+									>{daysLeftLabel(data.content.last_date)}
 								</td>
 								<!-- {/if} -->
 							</tr>

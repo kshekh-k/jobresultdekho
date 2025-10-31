@@ -21,8 +21,8 @@
 	<header class="mb-5 bg-white p-5 rounded-xl shadow-md">
 		<h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
 		<p class="text-sm text-slate-600 mt-1">
-			Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline"
-				>help@jobresultdekho.com</a
+			Contact: <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline"
+				>info@jobresultdekho.com</a
 			>
 		</p>
 	</header>
@@ -71,8 +71,8 @@
 
 			<p>
 				If you find any <strong>missing or broken links</strong>, please report them to
-				<a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">
-					help@jobresultdekho.com
+				<a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">
+					info@jobresultdekho.com
 				</a>.
 			</p>
 
@@ -87,8 +87,8 @@
 			<p>
 				If you have any <strong>objections or concerns</strong> regarding the content, or if you
 				notice a serious error, please contact us at
-				<a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">
-					help@jobresultdekho.com
+				<a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">
+					info@jobresultdekho.com
 				</a>
 				—we will review and respond as soon as possible.
 			</p>
@@ -96,8 +96,8 @@
 			<p>
 				If you spot a <strong>typo or an update</strong> that needs to be made, please email us
 				briefly describing the page and the correction. Send your message to
-				<a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">
-					help@jobresultdekho.com
+				<a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">
+					info@jobresultdekho.com
 				</a>, and we will do our best to update it promptly.
 			</p>
 
