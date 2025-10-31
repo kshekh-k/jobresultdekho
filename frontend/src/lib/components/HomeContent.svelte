@@ -8,13 +8,12 @@
 	export let categoryTree;
 
 	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
-	import { PanelRightDashed, Image, FileText,	Calculator,	Signature, CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
+	import { PanelRightDashed } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
-	import Widget from './Widget.svelte';
-	import Sidebar from './sidebar.svelte';
+	import Sidebar from '$lib/components/Sidebar.svelte';
 
 	// Parent & children category
 	const parents: { title: any; slug: any; }[] = [];
@@ -130,17 +129,7 @@
 		timeLeft: 'Time Left',
 		action: 'Action'
 	}];	
-
-	let userMenus = [
-    { title: "Image Resizer", slug: "#", icon: Image },
-    { title: "JPG to PDF Converter", slug: "#", icon: FileText },
-    { title: "Age Calculator", slug: "#", icon: Calculator },
-    { title: "Photo Signature Joiner", slug: "#", icon: Signature },
-    { title: "Name & Date on Photo Maker", slug: "#", icon: CalendarRange },
-    { title: "MPPEB Template", slug: "#", icon: NotepadTextDashed },
-    { title: "Typing Test", slug: "#", icon: TypeOutline },
-  ];
- 
+  
 </script>
 
 <div class="max-w-screen-xl mx-auto px-3 space-y-5">
@@ -175,18 +164,6 @@
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='results'
-				open={open==='result'}
-				articleId={'result'}
-				headerColor="bg-emerald-500"
-				headers={resultHeader}
-				title="Results"
-				items={latestResults}
-				viewText="See More"
-				catLabel={'result'}
-			/>
-			<ArticleCard
-				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admit-card'
 				open={open==='admit-card'}
 				articleId="admit-card"
@@ -197,6 +174,18 @@
 				viewText="See More"
 				catLabel={'admit-card'}			 
 			/>
+			<ArticleCard
+				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='results'
+				open={open==='result'}
+				articleId={'result'}
+				headerColor="bg-emerald-500"
+				headers={resultHeader}
+				title="Results"
+				items={latestResults}
+				viewText="See More"
+				catLabel={'result'}
+			/>			
 			<Card.Root class="" variant={'default'}>
 				<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
 			</Card.Root>
@@ -237,6 +226,6 @@
 				catLabel={'admissions'}
 			/>
 		</div>
-		 
+		<Sidebar filteredParents={filteredParents} />		
 	</section>
 </div>

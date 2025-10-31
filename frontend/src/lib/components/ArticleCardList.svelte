@@ -117,7 +117,7 @@
 					</div>
 					<div class="w-28 md:w-24 shrink-0 order-2 flex gap-1 items-center">
 						<Icon name={Landmark} size={16} className="md:hidden" />
-						{item.department.title}
+						{item.department?.title || '—'}
 					</div>
 
 					<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
