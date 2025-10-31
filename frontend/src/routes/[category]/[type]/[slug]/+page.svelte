@@ -4,8 +4,6 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { daysLeft, daysLeftLabel } from '$lib/utils';
-	import { Calendar, Clock, Landmark } from 'lucide-svelte';
-	import Sidebar from '$lib/components/Sidebar.svelte';
 	import Layout from '$lib/components/Layout.svelte';
  
 	export let data: { content: any; type: string };
@@ -43,7 +41,7 @@
 						<table class="min-w-full border border-collapse table-auto !m-0">
 							<thead>
 								<tr class="bg-slate-100">
-									<th class="px-4 py-2 text-left text-sm font-medium border">Department:</th>
+									<th class="px-4 py-2 text-left text-sm font-medium border">Department</th>
 									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Last Date</th>
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
 									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Time Left</th>
@@ -88,6 +86,93 @@
 				</Card.Header>
 				<Card.Content class="px-3 lg:px-6">
 					<div class="prose max-w-none">
+
+
+
+						<div class="grid grid-cols-12 gap-5 xl:gap-10">
+
+	<!-- Important Dates -->
+	<div class="col-span-12 md:col-span-6 flex flex-col space-y-3">
+		<h3 class="text-xl font-semibold">Important Dates</h3>
+
+		<div class="max-w-full overflow-auto">
+			<table class="w-full border border-gray-300">
+				<tbody>
+					<tr class="border-b">
+						<td class="p-2 font-medium">Application start date</td>
+						<td class="p-2">21 October 2025</td>
+					</tr>
+					<tr class="border-b">
+						<td class="p-2 font-medium">Last date to apply</td>
+						<td class="p-2">21 October 2025</td>
+					</tr>
+					<tr class="border-b">
+						<td class="p-2 font-medium">Last date for fee payment</td>
+						<td class="p-2">21 October 2025</td>
+					</tr>
+					<tr class="border-b">
+						<td class="p-2 font-medium">Form correction window</td>
+						<td class="p-2">21 October 2025</td>
+					</tr>
+					<tr>
+						<td class="p-2 font-medium">Exam date</td>
+						<td class="p-2">21 October 2025</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Application Fee -->
+	<div class="col-span-12 md:col-span-6 flex flex-col">
+	 
+		<h3 class="text-xl font-semibold">Application Fee</h3>
+
+		<div class="max-w-full overflow-auto">
+			<table class="w-full border border-gray-300">
+				<tbody>
+					<tr class="border-b">
+						<td class="p-2 font-medium">General / OBC / EWS</td>
+						<td class="p-2">Update Here</td>
+					</tr>
+					<tr class="border-b">
+						<td class="p-2 font-medium">SC / ST / EBC</td>
+						<td class="p-2">Update Here</td>
+					</tr>
+					<tr class="border-b">
+						<td class="p-2 font-medium">All Category Female</td>
+						<td class="p-2">Update Here</td>
+					</tr>
+					<tr class="border-b">
+						<td class="p-2 font-medium">Fee Refund</td>
+						<td class="p-2">Update Here</td>
+					</tr>
+					<tr>
+						<td class="p-2 font-medium">Payment Mode</td>
+						<td class="p-2">Online Only</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+<!-- Application Fee -->
+	<div class="col-span-12 md:col-span-6 flex flex-col">
+	 
+		<h3 class="text-xl font-semibold">Eligiblity Criterea</h3>
+<ul>
+	<li>Age Limit: 18 Years to 33 Years</li>
+	<li>Education: Graduion</li>
+	<li>RRB provides age relaxation for the NTPC Graduate Level position as per their regulations.</li>
+</ul>
+		 
+	</div>
+
+
+
 						{#if data.content.content}
 							{#each data.content.content as block}
 								{#if block.type === 'paragraph'}
@@ -282,7 +367,7 @@
 				</Card.Content>
 			</Card.Root>
 
-			<div class="flex flex-col md:grid md:grid-cols-2 gap-5 items-start">
+			 
 				{#if data.content.FAQs}
 					<div class="flex flex-col gap-3 max-w-none prose mt-10">
 						<h3 class="text-rose-700 text-center md:text-left">
@@ -341,13 +426,8 @@
 						</div>
 					</div>
 				{/if}
-				<!-- Ad Places -->
-				<div class="flex justify-center items-center">
-					<div class="rounded-sm bg-gray-300 p-5 size-96 flex justify-center items-center">
-						Ad Place here
-					</div>
-				</div>
-			</div> 
+				 
+		 
 	
  
 		</Layout>
