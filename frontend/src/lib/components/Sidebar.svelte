@@ -1,11 +1,10 @@
 <script lang="ts">
 	export let filteredParents;
-
+	export let className: string = "lg:col-span-4 xl:col-span-3 space-y-4";
 	import { Image, FileText, Calculator, Signature } from 'lucide-svelte';
 	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
     import * as Card from '$lib/components/ui/card/index.js';
 	import Widget from './Widget.svelte';
-
 	let userMenus = [
     { title: "Image Resizer", slug: "#", icon: Image },
     { title: "JPG to PDF Converter", slug: "#", icon: FileText },
@@ -18,7 +17,7 @@
   
 </script>
 
-<aside class="lg:col-span-4 space-y-4">
+<aside class="{className}">
     <Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
     <Card.Root class="bg-slate-300" variant={'default'}>
         <Card.Content class="flex items-center justify-center text-center h-60 ">Ad Place here</Card.Content>
