@@ -1,6 +1,7 @@
 <!-- File: src/routes/privacy/+page.svelte -->
 <script lang="ts">
 	import InnerHero from '$lib/components/InnerHero.svelte';
+	import Layout from '$lib/components/Layout.svelte';
   import { onMount } from 'svelte';
 
   // If you use shadcn-svelte components, import them here. If not available,
@@ -30,9 +31,8 @@
   <title>Privacy Policy — JobResultDekho</title>
   <meta name="description" content="Privacy Policy for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
-
- <InnerHero heading="Privacy Policy" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
-  <div class="max-w-screen-xl mx-auto px-3">
+  <Layout heading={'Privacy Policy'}>	
+    <div class="text-slate-500 leading-relaxed space-y-6">
     <header class="mb-5 bg-white p-5 rounded-xl shadow-md">   
       <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
       <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a></p>
@@ -118,8 +118,8 @@
       </section>
 
     </article>
- 
-  </div>
+ </div>
+  </Layout>
 
   {#if showCookieBanner}
     <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-3xl bg-white border shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center z-50">

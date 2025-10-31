@@ -7,6 +7,7 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import SocialMedia from '$lib/components/SocialMedia.svelte';
 	import InnerHero from '$lib/components/InnerHero.svelte';
+	import Layout from '$lib/components/Layout.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -38,13 +39,10 @@
 
 <!-- MAIN CONTAINER -->
  
-	<!-- Blue Banner -->	 
-	<InnerHero heading="Get In Touch" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
-
 	<!-- Content Section -->
-	<section class="max-w-screen-xl mx-auto px-3 py-5 md:py-12 md:px-10 grid md:grid-cols-2 gap-10">
-		<!-- Left Form -->
-	 
+<Layout heading={'Contact us'}>
+	 <div class="lg:grid lg:grid-cols-2 flex flex-col gap-10">
+		<!-- Left Form -->	 
 			<div class="space-y-5 text-slate-700 md:p-8 ">
 				<!-- Contact Details -->
 				<h2 class="text-3xl font-bold mb-4">Quick Contact</h2>
@@ -73,8 +71,8 @@
 					<div class="flex flex-col gap-1">
 						<h3 class="text-lg font-semibold">Phone</h3>
 						<p>						 
-							<a href="tel:+919828368878" class="text-sky-800 hover:underline">
-								+91 9530023380
+							<a href="tel:+919530023380" class="text-sky-800 hover:underline">
+								+91 95300 23380
 							</a>
 						</p>
 					</div>
@@ -177,6 +175,7 @@
 				</Button>
 			</form>
 		</div>
-	</section>
+	</div>
+ </Layout>
  
  

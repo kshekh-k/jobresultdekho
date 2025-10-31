@@ -6,6 +6,7 @@
 	import { daysLeft, daysLeftLabel } from '$lib/utils';
 	import { Calendar, Clock, Landmark } from 'lucide-svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
+	import Layout from '$lib/components/Layout.svelte';
  
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
@@ -28,55 +29,35 @@
 	 
 </script>
 
-<div class="max-w-screen-xl mx-auto px-3">
-	<section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
-		<div class="lg:col-span-8 xl:col-span-9 py-5 space-y-5">
+ <Layout header={false} heading={''}>
 			<Card.Root class="overflow-hidden rounded-md gap-0">
 				<Card.Header class="flex flex-col items-start justify-start gap-3 px-3 lg:px-6">
 					<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
 						{data.content.title}
 					</h1>
 
-					<div class="flex flex-warp gap-3">
-						<p class="text-gray-700 flex flex-wrap gap-2 items-center">
-							<span class="flex gap-1 items-center"
-								><Icon name={Landmark} size={20} />{data.content.department?.title || '—'}</span
-							>
-							|
-							<span class="flex gap-1 items-center"
-								><Icon name={Calendar} size={20} /> {data.content.last_date}</span
-							>
-							|
-							<span
-								class="flex gap-1 items-center {daysLeft(data.content.last_date) < 10
-									? 'text-rose-700'
-									: 'text-green-600'}"
-								><Icon name={Clock} size={20} />
-								<b class="inline-flex py-1 font-semibold">{daysLeftLabel(data.content.last_date)}</b
-								></span
-							>
-						</p>
-					</div>
+				 
 					<div class="prose max-w-none w-full">
 						<p class="text-slate-600">
 							{data.content.description}
 						</p>
-
-						<table class="min-w-full border border-collapse table-auto">
+<div class="overflow-auto max-w-full pb-1 mb-5">
+	<div class="min-w-sm pb-1">
+						<table class="min-w-full border border-collapse table-auto !m-0">
 							<thead>
 								<tr class="bg-slate-100">
 									<th class="px-4 py-2 text-left text-sm font-medium border">Department:</th>
-									<th class="px-4 py-2 text-left text-sm font-medium border">Last Date</th>
+									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Last Date</th>
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
-									<th class="px-4 py-2 text-left text-sm font-medium border">Time Left</th>
+									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Time Left</th>
 									<!-- {/if} -->
-									 <th class="px-4 py-2 text-left text-sm font-medium border">Total Posts</th>
+									 <th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Total Posts</th>
 								</tr>
 							</thead>
 							<tbody class="divide-y">
 								<tr>
 									<td class="px-4 py-3 text-sm border">{data.content.department?.title || '—'}</td>
-									<td class="px-4 py-3 text-sm border"
+									<td class="px-4 py-3 text-sm border whitespace-nowrap"
 										>{new Date(data.content.last_date)
 											.toLocaleDateString('en-GB')
 											.replaceAll('/', '-')}</td
@@ -86,7 +67,7 @@
 										class="px-4 py-3 text-sm border font-semibold {daysLeft(
 											data.content.last_date
 										) < 10
-											? 'text-rose-700'
+											? 'text-rose-700 bg-rose-50'
 											: 'text-green-600'}"
 										>{daysLeftLabel(data.content.last_date)}
 									</td>
@@ -95,7 +76,8 @@
 								</tr>
 							</tbody>
 						</table>
-
+</div>
+</div>
 						<div class="flex justify-end pb-5 lg:pb-0">
 							<Button
 								href={data.content.reference_url}
@@ -303,7 +285,7 @@
 				</Card.Content>
 			</Card.Root>
 
-			<div class="flex flex-col md:grid md:grid-cols-2 gap-5">
+			<div class="flex flex-col md:grid md:grid-cols-2 gap-5 items-start">
 				{#if data.content.FAQs}
 					<div class="flex flex-col gap-3 max-w-none prose mt-10">
 						<h3 class="text-rose-700 text-center md:text-left">
@@ -369,7 +351,4 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- <Sidebar {filteredParents} /> -->
-	</section>
-</div>
+ </Layout>
