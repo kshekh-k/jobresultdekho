@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_application_fees",
+  "info": {
+    "displayName": "Application Fee"
+  },
+  "options": {},
+  "attributes": {
+    "general_obc_ews": {
+      "type": "integer"
+    },
+    "female_transgender": {
+      "type": "integer"
+    },
+    "sc_st_pwd": {
+      "type": "integer"
+    },
+    "online_payment": {
+      "type": "string",
+      "default": "Online Fee Payment Options: Credit Card, Debit Card, and Net Banking"
+    },
+    "offline_payment": {
+      "type": "string",
+      "default": "Through E-Challan"
+    }
+  },
+  "config": {}
+}

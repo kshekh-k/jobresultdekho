@@ -53,17 +53,39 @@
       "component": "shared.faq",
       "repeatable": true
     },
-    "Stage": {
+    "total_posts": {
+      "type": "integer"
+    },
+    "job_disclaimer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-disclaimer.job-disclaimer"
+    },
+    "important_dates": {
+      "type": "component",
+      "component": "shared.important-dates",
+      "repeatable": false
+    },
+    "application_fee": {
+      "type": "component",
+      "component": "shared.application-fee",
+      "repeatable": false
+    },
+    "eligiblity_criterea": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::eligiblity-criterea.eligiblity-criterea"
+    },
+    "stage": {
       "type": "enumeration",
-      "required": true,
       "default": "job",
       "enum": [
-        "job",
-        "admin-card",
-        "result",
-        "admission",
+        "jobs",
+        "admit-cards",
+        "results",
+        "admissions",
         "syllabus",
-        "answer-key"
+        "answer-keys"
       ]
     }
   }

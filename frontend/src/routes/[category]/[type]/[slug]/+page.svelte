@@ -3,8 +3,10 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { daysLeft, daysLeftLabel } from '$lib/utils';
+	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
+	import ImportantDates from '$lib/components/job/Dates.svelte'
+	import ApplicationFees from '$lib/components/job/Fee.svelte'
  
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
@@ -22,22 +24,20 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
+	console.log('Job full page', data);
 	 
 </script>
 
- <Layout header={false} heading={''}>
-			<Card.Root class="overflow-hidden rounded-md gap-0">
-				<Card.Header class="flex flex-col items-start justify-start gap-3 px-3 lg:px-6">
-					<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
-						{data.content.title}
-					</h1>
-				 
-					<div class="prose max-w-none w-full">
-						<p class="text-slate-600">
-							{data.content.description}
-						</p>
-<div class="overflow-auto max-w-full pb-1 mb-5">
-	<div class="min-w-sm pb-1">
+<Layout header={false} heading={''}>
+	<Card.Root class="overflow-hidden rounded-md gap-0">
+		<Card.Header class="flex flex-col items-start justify-start gap-3 px-3 lg:px-6">
+			<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
+				{data.content.title}
+			</h1>
+			<div class="prose max-w-none w-full">
+				<p class="text-slate-600">{data.content.description}</p>
+				<div class="overflow-auto max-w-full pb-1 mb-5">
+					<div class="min-w-sm pb-1">
 						<table class="min-w-full border border-collapse table-auto !m-0">
 							<thead>
 								<tr class="bg-slate-100">
@@ -46,17 +46,13 @@
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
 									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Time Left</th>
 									<!-- {/if} -->
-									 <th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Total Posts</th>
+									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Total Posts</th>
 								</tr>
 							</thead>
 							<tbody class="divide-y">
 								<tr>
 									<td class="px-4 py-3 text-sm border">{data.content.department?.title || '—'}</td>
-									<td class="px-4 py-3 text-sm border whitespace-nowrap"
-										>{new Date(data.content.last_date)
-											.toLocaleDateString('en-GB')
-											.replaceAll('/', '-')}</td
-									>
+									<td class="px-4 py-3 text-sm border whitespace-nowrap">{formatDate(data.content.last_date)}</td>
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
 									<td
 										class="px-4 py-3 text-sm border font-semibold {daysLeft(
@@ -67,109 +63,44 @@
 										>{daysLeftLabel(data.content.last_date)}
 									</td>
 									<!-- {/if} -->
-									 <td class="px-4 py-3 text-sm border font-semibold"></td>
+									<td class="px-4 py-3 text-sm border font-semibold">{data.content.total_posts}</td>
 								</tr>
 							</tbody>
 						</table>
-</div>
-</div>
-						<div class="flex justify-end pb-5 lg:pb-0">
-							<Button
-								href={data.content.reference_url}
-								variant="success"
-								target="_blank"
-								class="no-underline w-40"
-								size="lg">{buttonLabel}</Button
-							>
-						</div>
 					</div>
-				</Card.Header>
-				<Card.Content class="px-3 lg:px-6">
-					<div class="prose max-w-none">
+				</div>
+					<div class="flex justify-end pb-5 lg:pb-0">
+						<Button
+							href={data.content.reference_url}
+							variant="success"
+							target="_blank"
+							class="no-underline w-40"
+							size="lg">{buttonLabel}</Button
+						>
+				</div>
+			</div>
+		</Card.Header>
+		<Card.Content class="px-3 lg:px-6">
+			<div class="prose max-w-none">
+				<div class="grid grid-cols-12 gap-5 xl:gap-10">
+					<!-- Important Dates -->
+					<ImportantDates dates={data.content.important_dates} />	
+
+					<!-- Application Fee -->
+					<ApplicationFees fees={data.content.application_fee} />
+
+				</div>
 
 
-
-						<div class="grid grid-cols-12 gap-5 xl:gap-10">
-
-	<!-- Important Dates -->
-	<div class="col-span-12 md:col-span-6 flex flex-col space-y-3">
-		<h3 class="text-xl font-semibold">Important Dates</h3>
-
-		<div class="max-w-full overflow-auto">
-			<table class="w-full border border-gray-300">
-				<tbody>
-					<tr class="border-b">
-						<td class="p-2 font-medium">Application start date</td>
-						<td class="p-2">21 October 2025</td>
-					</tr>
-					<tr class="border-b">
-						<td class="p-2 font-medium">Last date to apply</td>
-						<td class="p-2">21 October 2025</td>
-					</tr>
-					<tr class="border-b">
-						<td class="p-2 font-medium">Last date for fee payment</td>
-						<td class="p-2">21 October 2025</td>
-					</tr>
-					<tr class="border-b">
-						<td class="p-2 font-medium">Form correction window</td>
-						<td class="p-2">21 October 2025</td>
-					</tr>
-					<tr>
-						<td class="p-2 font-medium">Exam date</td>
-						<td class="p-2">21 October 2025</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-	<!-- Application Fee -->
-	<div class="col-span-12 md:col-span-6 flex flex-col">
-	 
-		<h3 class="text-xl font-semibold">Application Fee</h3>
-
-		<div class="max-w-full overflow-auto">
-			<table class="w-full border border-gray-300">
-				<tbody>
-					<tr class="border-b">
-						<td class="p-2 font-medium">General / OBC / EWS</td>
-						<td class="p-2">Update Here</td>
-					</tr>
-					<tr class="border-b">
-						<td class="p-2 font-medium">SC / ST / EBC</td>
-						<td class="p-2">Update Here</td>
-					</tr>
-					<tr class="border-b">
-						<td class="p-2 font-medium">All Category Female</td>
-						<td class="p-2">Update Here</td>
-					</tr>
-					<tr class="border-b">
-						<td class="p-2 font-medium">Fee Refund</td>
-						<td class="p-2">Update Here</td>
-					</tr>
-					<tr>
-						<td class="p-2 font-medium">Payment Mode</td>
-						<td class="p-2">Online Only</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-</div>
-
-
-<!-- Application Fee -->
-	<div class="col-span-12 md:col-span-6 flex flex-col">
-	 
-		<h3 class="text-xl font-semibold">Eligiblity Criterea</h3>
-<ul>
-	<li>Age Limit: 18 Years to 33 Years</li>
-	<li>Education: Graduion</li>
-	<li>RRB provides age relaxation for the NTPC Graduate Level position as per their regulations.</li>
-</ul>
-		 
-	</div>
+				<!-- Education Criterea -->
+				<div class="col-span-12 md:col-span-6 flex flex-col">	 
+					<h3 class="text-xl font-semibold">Eligiblity Criterea</h3>
+					<ul>
+						<li>Age Limit: 18 Years to 33 Years</li>
+						<li>Education: Graduion</li>
+						<li>RRB provides age relaxation for the NTPC Graduate Level position as per their regulations.</li>
+					</ul>		 
+				</div>
 
 
 
@@ -430,4 +361,4 @@
 		 
 	
  
-		</Layout>
+</Layout>
