@@ -1,6 +1,8 @@
 <script lang="ts">
 	export let filteredParents;
 
+	import { Image, FileText, Calculator, Signature } from 'lucide-svelte';
+	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
     import * as Card from '$lib/components/ui/card/index.js';
 	import Widget from './Widget.svelte';
 
