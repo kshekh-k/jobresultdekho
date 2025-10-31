@@ -15,6 +15,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
 	import Widget from './Widget.svelte';
+	import Sidebar from '$lib/components/Sidebar.svelte';
 
 	// Parent & children category
 	const parents: { title: any; slug: any; }[] = [];
@@ -130,16 +131,6 @@
 		timeLeft: 'Time Left',
 		action: 'Action'
 	}];	
-
-	let userMenus = [
-    { title: "Image Resizer", slug: "#", icon: Image },
-    { title: "JPG to PDF Converter", slug: "#", icon: FileText },
-    { title: "Age Calculator", slug: "age-calculator", icon: Calculator },
-    { title: "Photo Signature Joiner", slug: "#", icon: Signature },
-    { title: "Name & Date on Photo Maker", slug: "/photo-editor", icon: CalendarRange },
-    { title: "MPPEB Template", slug: "#", icon: NotepadTextDashed },
-    { title: "Typing Test", slug: "#", icon: TypeOutline },
-  ];  
   
 </script>
 
@@ -237,12 +228,6 @@
 				catLabel={'admissions'}
 			/>
 		</div>
-		<aside class="lg:col-span-4 space-y-4">
-			<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
-			<Card.Root class="bg-slate-300" variant={'default'}>
-				<Card.Content class="flex items-center justify-center text-center h-60 ">Ad Place here</Card.Content>
-			</Card.Root>
-			<Widget title="All Categories" menus={filteredParents} headerColor="bg-slate-900" />
-		</aside>
+		<Sidebar filteredParents={filteredParents} />		
 	</section>
 </div>

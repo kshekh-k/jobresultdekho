@@ -601,6 +601,11 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    Stage: Schema.Attribute.Enumeration<
+      ['job', 'admin-card', 'result', 'admission', 'syllabus', 'answer-key']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'job'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
