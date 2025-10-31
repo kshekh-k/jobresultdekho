@@ -43,7 +43,7 @@
  	let active: string | null = null;
 
   	onMount(() => {
-		open = null;
+		open = 'latest-job';
         if (!navEl) return;
     	const offsetTop = navEl.offsetTop;
 
