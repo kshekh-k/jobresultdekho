@@ -8,13 +8,13 @@
 	export let categoryTree;
 
 	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
-	import { PanelRightDashed, Image, FileText,	Calculator,	Signature } from 'lucide-svelte';
-	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
+	import { PanelRightDashed, Image, FileText,	Calculator,	Signature, CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
 	import Icon from './ui/Icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount } from 'svelte';
 	import Widget from './Widget.svelte';
+	import Sidebar from './sidebar.svelte';
 
 	// Parent & children category
 	const parents: { title: any; slug: any; }[] = [];
@@ -160,7 +160,7 @@
 		</div>
 	</div>
 	<section class="lg:grid lg:grid-cols-12 flex flex-col gap-6">
-		<div class="lg:col-span-8 space-y-4 ">
+		<div class="lg:col-span-8 xl:col-span-9 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
 				open={open==='latest-job'}
@@ -237,12 +237,6 @@
 				catLabel={'admissions'}
 			/>
 		</div>
-		<aside class="lg:col-span-4 space-y-4">
-			<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
-			<Card.Root class="bg-slate-300" variant={'default'}>
-				<Card.Content class="flex items-center justify-center text-center h-60 ">Ad Place here</Card.Content>
-			</Card.Root>
-			<Widget title="All Categories" menus={filteredParents} headerColor="bg-slate-900" />
-		</aside>
+		 
 	</section>
 </div>

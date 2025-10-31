@@ -35,7 +35,7 @@
   <div class="max-w-screen-xl mx-auto px-3">
     <header class="mb-5 bg-white p-5 rounded-xl shadow-md">   
       <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>
-      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a></p>
+      <p class="text-sm text-slate-600 mt-1">Contact: <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a></p>
     </header>
 
     <article class="flex flex-col gap-5">
@@ -99,12 +99,12 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">8. Children’s Privacy</h2>
-        <p class="text-slate-700 leading-relaxed">The site is designed for students and job aspirants aged 13 and above. We do not knowingly collect personal information from children under 13. If you believe we may have collected such data, contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a> and we will remove it.</p>
+        <p class="text-slate-700 leading-relaxed">The site is designed for students and job aspirants aged 13 and above. We do not knowingly collect personal information from children under 13. If you believe we may have collected such data, contact us at <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a> and we will remove it.</p>
       </section>
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">9. Your Rights</h2>
-        <p class="text-slate-700 leading-relaxed">You can request to access, correct or delete your personal information, and opt out of promotional emails. Contact us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a>.</p>
+        <p class="text-slate-700 leading-relaxed">You can request to access, correct or delete your personal information, and opt out of promotional emails. Contact us at <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a>.</p>
       </section>
 
       <section class="bg-white p-5 rounded-xl shadow-md">
@@ -114,7 +114,7 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">11. Contact</h2>
-        <p class="text-slate-700 leading-relaxed">If you have questions or concerns, reach us at <a href="mailto:help@jobresultdekho.com" class="text-sky-800 hover:underline">help@jobresultdekho.com</a>.</p>
+        <p class="text-slate-700 leading-relaxed">If you have questions or concerns, reach us at <a href="mailto:info@jobresultdekho.com" class="text-sky-800 hover:underline">info@jobresultdekho.com</a>.</p>
       </section>
 
     </article>

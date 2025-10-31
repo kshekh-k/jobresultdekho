@@ -74,7 +74,7 @@
 						<h3 class="text-lg font-semibold">Phone</h3>
 						<p>						 
 							<a href="tel:+919828368878" class="text-sky-800 hover:underline">
-								+91 98283 68878
+								+91 9530023380
 							</a>
 						</p>
 					</div>
