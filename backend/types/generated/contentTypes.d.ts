@@ -571,6 +571,68 @@ export interface ApiDepartmentDepartment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEligiblityCritereaEligiblityCriterea
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'eligiblity_critereas';
+  info: {
+    displayName: 'Eligiblity Criterea';
+    pluralName: 'eligiblity-critereas';
+    singularName: 'eligiblity-criterea';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::eligiblity-criterea.eligiblity-criterea'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiJobDisclaimerJobDisclaimer
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'job_disclaimers';
+  info: {
+    displayName: 'Job Disclaimer';
+    pluralName: 'job-disclaimers';
+    singularName: 'job-disclaimer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-disclaimer.job-disclaimer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiJobJob extends Struct.CollectionTypeSchema {
   collectionName: 'jobs';
   info: {
@@ -582,6 +644,10 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    application_fee: Schema.Attribute.Component<
+      'shared.application-fee',
+      false
+    >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
@@ -592,8 +658,20 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     description: Schema.Attribute.Text;
+    eligiblity_criterea: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::eligiblity-criterea.eligiblity-criterea'
+    >;
     FAQs: Schema.Attribute.Component<'shared.faq', true>;
+    important_dates: Schema.Attribute.Component<
+      'shared.important-dates',
+      false
+    >;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
+    job_disclaimer: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::job-disclaimer.job-disclaimer'
+    >;
     last_date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
@@ -601,12 +679,19 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    Stage: Schema.Attribute.Enumeration<
-      ['job', 'admin-card', 'result', 'admission', 'syllabus', 'answer-key']
+    stage: Schema.Attribute.Enumeration<
+      [
+        'jobs',
+        'admit-cards',
+        'results',
+        'admissions',
+        'syllabus',
+        'answer-keys',
+      ]
     > &
-      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'job'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    total_posts: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1207,6 +1292,8 @@ declare module '@strapi/strapi' {
       'api::answer-key.answer-key': ApiAnswerKeyAnswerKey;
       'api::category.category': ApiCategoryCategory;
       'api::department.department': ApiDepartmentDepartment;
+      'api::eligiblity-criterea.eligiblity-criterea': ApiEligiblityCritereaEligiblityCriterea;
+      'api::job-disclaimer.job-disclaimer': ApiJobDisclaimerJobDisclaimer;
       'api::job.job': ApiJobJob;
       'api::result.result': ApiResultResult;
       'api::syllabus.syllabus': ApiSyllabusSyllabus;

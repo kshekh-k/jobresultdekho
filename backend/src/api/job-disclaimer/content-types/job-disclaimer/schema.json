@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_disclaimers",
+  "info": {
+    "singularName": "job-disclaimer",
+    "pluralName": "job-disclaimers",
+    "displayName": "Job Disclaimer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "content": {
+      "type": "blocks"
+    }
+  }
+}

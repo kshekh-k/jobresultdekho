@@ -5,32 +5,25 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-// export function daysLeft(dateString: string): any {
-//   const today = new Date();
-//   const target = new Date(dateString);
-
-//   today.setHours(0,0,0,0);
-//   target.setHours(0,0,0,0);
-
-//   const start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-//   const end = new Date(target.getFullYear(), target.getMonth(), target.getDate());
-//   const diffMs = end.getTime() - start.getTime();
-//   if (diffMs <= 0) return "Expired";
-
-//   const msPerDay = 1000 * 60 * 60 * 24;
-//   const diffDays = diffMs / msPerDay;
-//   const diffMonths = diffDays / 30;
+// Utility: format the date in dd MM yyyy format
+export function formatDate(value: string) {
+  if (!value) return '';
+  const d = new Date(value);
+  if (isNaN(d.getTime())) return value;
   
-//  if (diffDays < 1) {
-//     return "Today";
-//   } else if (diffDays < 30) {
-//     return `${Math.floor(diffDays)} ${Math.floor(diffDays) >= 2 ? 'Days' : 'Day'} `;
-//   } else {
-//     return `${Math.floor(diffMonths)} ${Math.floor(diffMonths) >= 2 ? 'Months' : 'Month'} `;
-//   }
-//  // return Math.ceil((target.getTime() - today.getTime()) / msPerDay);
+  return d.toLocaleDateString('en-IN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 
-// }
+// Utility: format the key name into readable label
+export function formatKeyValue(key: string) {
+    return key
+    .replace(/_/g, ' ') // replace underscores with spaces
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 export function daysLeft(dateString: string): number {
   const today = new Date();

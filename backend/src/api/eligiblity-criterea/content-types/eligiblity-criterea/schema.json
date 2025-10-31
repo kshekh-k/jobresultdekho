@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "eligiblity_critereas",
+  "info": {
+    "singularName": "eligiblity-criterea",
+    "pluralName": "eligiblity-critereas",
+    "displayName": "Eligiblity Criterea"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "content": {
+      "type": "blocks"
+    }
+  }
+}
