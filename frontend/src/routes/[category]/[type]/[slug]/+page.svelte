@@ -46,8 +46,7 @@
 										>Last Date</th
 									>
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-										>Time Left</th
+									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white">Time Left</th
 									>
 									<!-- {/if} -->
 									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Total Posts</th>
@@ -329,27 +328,9 @@
 				<span class="block">FAQs: </span>{data.content.title}
 			</h3>
 			<Accordion.Root type="single" class="gap-2">
-				<!-- <div class="grid grid-cols-2 gap-5"> -->
-				<div class="flex flex-col gap-2">
+			 
 					{#each data.content.FAQs as question, index}
-						<!-- {#if index % 2 === 0}
-								<Accordion.Item value="item-{index}" class="mb-5 border-0">
-									<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
-										><Card.Header
-											class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4"
-										>
-											<Accordion.Trigger class="lg:text-lg hover:no-underline"
-												>{question.Question}</Accordion.Trigger
-											></Card.Header
-										>
-										<Card.Content class="px-2 sm:px-4">
-											<Accordion.Content class="lg:text-lg">
-												{question.Answer}
-											</Accordion.Content>
-										</Card.Content></Card.Root
-									>
-								</Accordion.Item>
-							{:else} -->
+					 
 						<Accordion.Item value="item-{index}" class="mb-2 border-0">
 							<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
 								><Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
@@ -361,13 +342,15 @@
 									<Accordion.Content class="lg:text-lg">
 										{question.Answer}
 									</Accordion.Content>
-								</Card.Content></Card.Root
-							>
-						</div>
-					</div>
-				{/if}
+								</Card.Content>
+								</Card.Root>
+						</Accordion.Item>
+					{/each}
 				 
-		 
+	 
+			</Accordion.Root> 
+		</div>
+	{/if}
 	
  
 </Layout>
