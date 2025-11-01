@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_important_dates",
+  "info": {
+    "displayName": "Important Dates"
+  },
+  "options": {},
+  "attributes": {
+    "vacancy_notification_date": {
+      "type": "date"
+    },
+    "apply_online_start_date": {
+      "type": "date"
+    },
+    "apply_online_end_date": {
+      "type": "date"
+    },
+    "fee_payment_last_date": {
+      "type": "date"
+    },
+    "correction_date": {
+      "type": "date"
+    },
+    "admit_card": {
+      "type": "date"
+    },
+    "exam_date": {
+      "type": "date"
+    },
+    "result_date": {
+      "type": "date"
+    }
+  },
+  "config": {}
+}

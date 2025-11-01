@@ -3,9 +3,11 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { daysLeft, daysLeftLabel } from '$lib/utils';
+	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
-
+	import ImportantDates from '$lib/components/job/Dates.svelte'
+	import ApplicationFees from '$lib/components/job/Fee.svelte'
+ 
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
 		data.type === 'jobs'
@@ -22,26 +24,21 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
+	console.log('Job full page', data);
+	 
 </script>
 
 <Layout header={false} heading={''}>
-	<Card.Root class="overflow-hidden rounded-md gap-5">
+	<Card.Root class="overflow-hidden rounded-md gap-0">
 		<Card.Header class="flex flex-col items-start justify-start gap-3 px-3 lg:px-6">
-			<h1 class="text-center text-2xl md:text-4xl font-bold text-indigo-700">
-				<a href={data.content.reference_url} class="hover:text-rose-700" target="_blank">{data.content.title}</a>
+			<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
+				{data.content.title}
 			</h1>
-
 			<div class="prose max-w-none w-full">
-				<p class="text-slate-600">
-					{data.content.description}
-				</p>			
-			</div>
-		</Card.Header>
-		<Card.Content class="px-3 lg:px-6">
-			<div class="prose max-w-none">
+				<p class="text-slate-600">{data.content.description}</p>
 				<div class="overflow-auto max-w-full pb-1 mb-5">
 					<div class="min-w-sm pb-1">
-						<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
+						<table class="min-w-full border border-collapse table-auto !m-0">
 							<thead>
 								<tr class="bg-indigo-600 text-white">
 									<th class="px-4 py-2 text-left text-sm font-medium border text-white">Department</th>
@@ -52,22 +49,13 @@
 									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white">Time Left</th
 									>
 									<!-- {/if} -->
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-										>Total Posts</th
-									>
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-										>Action</th
-									>
+									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap">Total Posts</th>
 								</tr>
 							</thead>
 							<tbody class="divide-y">
 								<tr>
 									<td class="px-4 py-3 text-sm border">{data.content.department?.title || '—'}</td>
-									<td class="px-4 py-3 text-sm border whitespace-nowrap"
-										>{new Date(data.content.last_date)
-											.toLocaleDateString('en-GB')
-											.replaceAll('/', '-')}</td
-									>
+									<td class="px-4 py-3 text-sm border whitespace-nowrap">{formatDate(data.content.last_date)}</td>
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
 									<td
 										class="px-4 py-3 text-sm border font-semibold {daysLeft(
@@ -78,83 +66,43 @@
 										>{daysLeftLabel(data.content.last_date)}
 									</td>
 									<!-- {/if} -->
-									<td class="px-4 py-3 text-sm border font-semibold"></td>
-									<td class="px-4 py-3 text-sm border font-semibold">
-										<Button href={data.content.reference_url} target="_blank" variant="success" size="sm" class={'no-underline'}>
-											{buttonLabel}
-										</Button> 
-									</td>
+									<td class="px-4 py-3 text-sm border font-semibold">{data.content.total_posts}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
+					<div class="flex justify-end pb-5 lg:pb-0">
+						<Button
+							href={data.content.reference_url}
+							variant="success"
+							target="_blank"
+							class="no-underline w-40"
+							size="lg">{buttonLabel}</Button
+						>
+				</div>
+			</div>
+		</Card.Header>
+		<Card.Content class="px-3 lg:px-6">
+			<div class="prose max-w-none">
 				<div class="grid grid-cols-12 gap-5 xl:gap-10">
 					<!-- Important Dates -->
-					<div class="col-span-12 md:col-span-6 flex flex-col">
-						<div class="bg-indigo-600 py-2 px-3">
-							<h3 class="text-xl font-semibold text-white !m-0 p-0">Important Dates</h3>
-						</div>
-						<div class="max-w-full overflow-auto m-0">
-							<table class="w-full border border-gray-300 !m-0">
-								<tbody>
-									<tr class="border-b">
-										<td class="p-2 font-medium">Application start date</td>
-										<td class="p-2">21 October 2025</td>
-									</tr>
-									<tr class="border-b">
-										<td class="p-2 font-medium">Last date to apply</td>
-										<td class="p-2">21 October 2025</td>
-									</tr>
-									<tr class="border-b">
-										<td class="p-2 font-medium">Last date for fee payment</td>
-										<td class="p-2">21 October 2025</td>
-									</tr>
-									<tr class="border-b">
-										<td class="p-2 font-medium">Form correction window</td>
-										<td class="p-2">21 October 2025</td>
-									</tr>
-									<tr>
-										<td class="p-2 font-medium">Exam date</td>
-										<td class="p-2">21 October 2025</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<ImportantDates dates={data.content.important_dates} />	
 
 					<!-- Application Fee -->
-					<div class="col-span-12 md:col-span-6 flex flex-col">
-						<div class="bg-indigo-600 py-2 px-3">
-							<h3 class="text-xl font-semibold text-white !m-0 p-0">Application Fee</h3>
-						</div>
-						<div class="max-w-full overflow-auto m-0">
-							<table class="w-full border border-gray-300 !m-0">
-								<tbody>
-									<tr class="border-b">
-										<td class="p-2 font-medium">General / OBC / EWS</td>
-										<td class="p-2">Update Here</td>
-									</tr>
-									<tr class="border-b">
-										<td class="p-2 font-medium">SC / ST / EBC</td>
-										<td class="p-2">Update Here</td>
-									</tr>
-									<tr class="border-b">
-										<td class="p-2 font-medium">All Category Female</td>
-										<td class="p-2">Update Here</td>
-									</tr>
-									<tr class="border-b">
-										<td class="p-2 font-medium">Fee Refund</td>
-										<td class="p-2">Update Here</td>
-									</tr>
-									<tr>
-										<td class="p-2 font-medium">Payment Mode</td>
-										<td class="p-2">Online Only</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<ApplicationFees fees={data.content.application_fee} />
+
+				</div>
+
+
+				<!-- Education Criterea -->
+				<div class="col-span-12 md:col-span-6 flex flex-col">	 
+					<h3 class="text-xl font-semibold">Eligiblity Criterea</h3>
+					<ul>
+						<li>Age Limit: 18 Years to 33 Years</li>
+						<li>Education: Graduion</li>
+						<li>RRB provides age relaxation for the NTPC Graduate Level position as per their regulations.</li>
+					</ul>		 
 				</div>
 
 				<!-- Eligibility Criteria -->
@@ -380,27 +328,9 @@
 				<span class="block">FAQs: </span>{data.content.title}
 			</h3>
 			<Accordion.Root type="single" class="gap-2">
-				<!-- <div class="grid grid-cols-2 gap-5"> -->
-				<div class="flex flex-col gap-2">
+			 
 					{#each data.content.FAQs as question, index}
-						<!-- {#if index % 2 === 0}
-								<Accordion.Item value="item-{index}" class="mb-5 border-0">
-									<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
-										><Card.Header
-											class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4"
-										>
-											<Accordion.Trigger class="lg:text-lg hover:no-underline"
-												>{question.Question}</Accordion.Trigger
-											></Card.Header
-										>
-										<Card.Content class="px-2 sm:px-4">
-											<Accordion.Content class="lg:text-lg">
-												{question.Answer}
-											</Accordion.Content>
-										</Card.Content></Card.Root
-									>
-								</Accordion.Item>
-							{:else} -->
+					 
 						<Accordion.Item value="item-{index}" class="mb-2 border-0">
 							<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
 								><Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
@@ -412,22 +342,15 @@
 									<Accordion.Content class="lg:text-lg">
 										{question.Answer}
 									</Accordion.Content>
-								</Card.Content></Card.Root
-							>
+								</Card.Content>
+								</Card.Root>
 						</Accordion.Item>
-						<!-- {/if} -->
 					{/each}
-				</div>
-			</Accordion.Root>
-			<div class="flex justify-center py-5">
-				<Button
-					href={data.content.reference_url}
-					variant="success"
-					target="_blank"
-					class="no-underline w-64 py-3"
-					size="xl">{buttonLabel}</Button
-				>
-			</div>
+				 
+	 
+			</Accordion.Root> 
 		</div>
 	{/if}
+	
+ 
 </Layout>

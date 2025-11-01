@@ -36,13 +36,36 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
 
         const job = await strapi.db.query('api::job.job').findOne({
             where: { slug },
-            select: ['id','title','slug','description','content','last_date','reference_url'],
+            select: [
+                'title','slug','description','content','last_date',
+                'reference_url', 'total_posts', 'stage'
+            ],
             populate: {
                 category: {
                     select: ['id','title','slug']
                 },
                 department: {
                     select: ['title', 'slug']
+                },
+                important_dates: {
+                    select: [
+                        'vacancy_notification_date', 'apply_online_start_date', 'apply_online_end_date',
+                        'fee_payment_last_date', 'correction_date', 'admit_card', 'exam_date', 'result_date'
+                    ]
+                },
+                application_fee: {
+                    select: [
+                        'general_obc_ews', 'sc_st_pwd', 'female_transgender',
+                        'online_payment', 'offline_payment'
+                    ]
+                },
+                eligiblity_criterea: {
+                    select: [
+                        'title', 'content'
+                    ]
+                },
+                job_disclaimer : {
+                    select: ['title', 'content']
                 },
                 important_links: {
                     select: ['label', 'url']
