@@ -128,10 +128,8 @@
 					<h3 class="text-xl font-semibold">Disclaimer</h3>
 					<RichTextRenderer content={data.content.job_disclaimer?.content} />		 
 				</div>
-			</div>
-			
-		</Card.Content>
-		
+			</div>			
+		</Card.Content>		
 	</Card.Root>
 
 	<Card.Root class="overflow-hidden rounded-md gap-0">
@@ -188,7 +186,7 @@
 	{#if data.content.FAQs}
 		<div class="flex flex-col gap-3 max-w-none prose mt-10">
 			<h3 class="text-rose-700 text-center md:text-left">
-				<span class="block">FAQs: </span>{data.content.title}
+				<span class="block">FAQs: {data.content.title}</span>
 			</h3>
 			<Accordion.Root type="single" class="gap-2">
 			 
