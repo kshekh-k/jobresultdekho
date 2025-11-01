@@ -5,9 +5,9 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-// Utility: format the date in dd MM yyyy format
+//Date format in - dd MM yyyy
 export function formatDate(value: string) {
-  if (!value) return '';
+  if (!value) return 'Will be updated soon';
   const d = new Date(value);
   if (isNaN(d.getTime())) return value;
   
@@ -18,7 +18,7 @@ export function formatDate(value: string) {
   });
 }
 
-// Utility: format the key name into readable label
+//format the key name into readable label
 export function formatKeyValue(key: string) {
     return key
     .replace(/_/g, ' ') // replace underscores with spaces
