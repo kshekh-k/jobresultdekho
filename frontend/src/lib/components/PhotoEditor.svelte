@@ -1,18 +1,21 @@
 <script lang="ts">
 	import html2canvas from 'html2canvas-pro';
 	import jsPDF from 'jspdf';
-
+	import Input from './ui/input/input.svelte';
+	import * as Card from '$lib/components/ui/card/index.js';
+	import Icon from './ui/Icon.svelte';
+	import { Calendar } from 'lucide-svelte';
 	let imageUrl: string | null = null;
 	let name = '';
 	let date = '';
-	let textColor = '#ffffff';
-	let bgColor = '#000000';
-	let fontSize = 24;
+	let textColor = '#000';
+	let bgColor = '#fff';
+	let fontSize = 14;
 	let isBold = false;
 	let textCase = 'none';
-	let isFullWidth = false;
+	let isFullWidth = true;
 
-	let position = { x: 50, y: 50 };
+	let position = { x: 10, y: 100 };
 	let dragging = false;
 	let offset = { x: 0, y: 0 };
 	let imageRef: HTMLDivElement | null = null;
@@ -148,9 +151,10 @@
 			const pdf = new jsPDF('p', 'mm', 'a4');
 			const pageWidth = pdf.internal.pageSize.getWidth();
 			const imgHeight = (canvas.height * pageWidth) / canvas.width;
-			const y = imgHeight < pdf.internal.pageSize.getHeight()
-				? (pdf.internal.pageSize.getHeight() - imgHeight) / 2
-				: 0;
+			const y =
+				imgHeight < pdf.internal.pageSize.getHeight()
+					? (pdf.internal.pageSize.getHeight() - imgHeight) / 2
+					: 0;
 
 			pdf.addImage(imgData, 'PNG', 0, y, pageWidth, imgHeight);
 			pdf.save('photo-with-text.pdf');
@@ -159,140 +163,226 @@
 			alert('Error while generating PDF: ' + (err?.message || err));
 		}
 	}
+
+	function openPicker() {
+		const el = document.getElementById('dob') as HTMLInputElement;
+		if (el) el.showPicker();
+	}
+
+	function onChange(e: Event) {
+		const target = e.target as HTMLInputElement;
+		date = target.value;
+	}
 </script>
 
-
 <!-- UI Layout -->
-<div class="max-w-2xl mx-auto p-4 space-y-4">
-	<!-- Upload -->
-	<div>
-		<label class="block text-sm font-medium mb-2">Upload Photo</label>
-		<input
-			type="file"
-			accept="image/*"
-			on:change={handleImageUpload}
-			class="block w-full border border-gray-300 p-2 rounded-md"
-		/>
-	</div>
 
-	{#if imageUrl}
-		<!-- Controls -->
-		<div class="grid grid-cols-2 gap-3">
-			<div>
-				<label class="text-sm">Name</label>
-				<input
-					type="text"
-					bind:value={name}
-					class="w-full border border-gray-300 p-2 rounded-md"
-					placeholder="Enter name"
-				/>
-			</div>
-
-			<div>
-				<label class="text-sm">Date (DOB)</label>
-				<input type="date" bind:value={date} class="w-full border border-gray-300 p-2 rounded-md" />
-			</div>
-
-			<div>
-				<label class="text-sm">Text Color</label>
-				<input type="color" bind:value={textColor} class="w-full h-10 rounded-md" />
-			</div>
-
-			<div>
-				<label class="text-sm">Background Color</label>
-				<input type="color" bind:value={bgColor} class="w-full h-10 rounded-md" />
-			</div>
-
-			<div>
-				<label class="text-sm">Font Size</label>
-				<input type="range" min="12" max="72" step="1" bind:value={fontSize} class="w-full" />
-				<span class="text-xs">{fontSize}px</span>
-			</div>
-
-			<div class="flex items-center space-x-2">
-				<input id="bold" type="checkbox" bind:checked={isBold} />
-				<label for="bold" class="text-sm">Bold</label>
-			</div>
-
-			<div class="flex items-center space-x-2">
-				<input id="isFullWidth" type="checkbox" bind:checked={isFullWidth} />
-				<label for="isFullWidth" class="text-sm">Full width</label>
-			</div>
-
-			<div>
-				<label class="text-sm">Case</label>
-				<select bind:value={textCase} class="w-full border border-gray-300 p-2 rounded-md">
-					<option value="none">Normal</option>
-					<option value="uppercase">UPPERCASE</option>
-					<option value="lowercase">lowercase</option>
-					<option value="capitalize">Capitalize</option>
-				</select>
-			</div>
-		</div>
-
-		<!-- Preview -->
-		<div class="relative mt-6 flex justify-center">
-			<!-- This wrapper ensures everything captured together -->
-			<div
-				role="img"
-				bind:this={imageRef}
-				class="relative inline-block bg-white"
-				style="touch-action:none; position: relative;"
-				on:mousemove={handleMouseMove}
-				on:mousedown={handleMouseDown}
-				on:mouseup={handleMouseUp}
-				on:mouseleave={handleMouseUp}
-			>
-				<img
-					src={imageUrl}
-					alt="Uploaded"
-					class="max-w-full h-auto block"
-					crossorigin="anonymous"
-				/>
-
-				<!-- Text overlay -->
-				<div
-					class="absolute select-none"
-					style="
-						top: {position.y}px;
-						left: {position.x}px;
-						text-align: center;
-						pointer-events: none;
-					"
-				>
+<Card.Root class="" variant={'default'}>
+	<Card.Content class="flex-1 md:!px-6 !px-3">
+		<div class="max-w-2xl mx-auto space-y-4">
+			<!-- Preview -->
+			<div class="relative flex justify-center w-64 mx-auto">
+				<!-- This wrapper ensures everything captured together -->
+				<!-- Upload -->
+				<div class="flex flex-col gap-3">
+					<div class="space-y-1 relative">
+						<input
+							id="upload-photo"
+							type="file"
+							accept="image/*"
+							on:change={handleImageUpload}
+							class="block w-full border border-gray-300 p-2 rounded-md {imageUrl
+								? 'visible'
+								: 'invisible absolute'}"
+						/>
+					</div>
 					<div
-						style="
-							color: {textColor};
-							background-color: {bgColor};
-							font-size: {fontSize}px;
-							font-weight: {isBold ? 'bold' : 'normal'};
-							padding: 4px 8px;
-							display: inline-block;
-						"
+						role="img"
+						bind:this={imageRef}
+						class="block bg-white relative touch-none border border-slate-300 p-1"
+						on:mousemove={handleMouseMove}
+						on:mousedown={handleMouseDown}
+						on:mouseup={handleMouseUp}
+						on:mouseleave={handleMouseUp}
 					>
-						{#if name}{transformText(name)}{/if}
-						{#if date}<div>{transformText(date)}</div>{/if}
+						<div class="relative overflow-hidden">
+							<label for="upload-photo" class="relative">
+								<img
+									src={imageUrl || '/image/photo-placeholder.png'}
+									alt="Uploaded"
+									class="w-full h-auto block mx-auto"
+									crossorigin="anonymous"
+								/>
+								{#if !imageUrl}
+									<span
+										class="text-lg text-center font-bold text-slate-600 absolute inset-x-0 bottom-0 pb-5"
+										>Upload your photo</span
+									>
+								{/if}
+							</label>
+
+							<!-- Text overlay -->
+							{#if name}
+								<div
+									class="absolute select-none text-center pointer-none {isFullWidth
+										? 'lefft-0 bottom-0 w-full'
+										: 'top-(--position-y) left-(--position-x)'}"
+									style="--position-y: {position.y}px; --position-x: {position.x}px;"
+								>
+									<div
+										class="text-(color:--textColor) bg-(color:--bgColor) text-(length:--fontSize) font-(weight:--isBold) {isFullWidth
+											? 'block'
+											: 'inline-block'}"
+										style="
+							--textColor: {textColor};
+							--bgColor: {bgColor};
+							--fontSize: {fontSize}px;
+							--isBold: {isBold ? '700' : '400'};
+							padding: 4px 8px;
+							 
+						"
+									>
+										<p>{transformText(name)}</p>
+										{#if date}
+											<p class="text-(length:--font-size)" style="--font-size:{fontSize / 1.25}px">
+												D.O.B. {new Date(date).toLocaleDateString('en-GB').replaceAll('/', '-')}
+											</p>
+										{/if}
+									</div>
+								</div>
+							{/if}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Download Buttons -->
+			<div class="flex flex-wrap justify-center gap-4 mt-4">
+				<button
+					on:click={downloadAsImage}
+					class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 sm:w-auto w-full"
+				>
+					Download PNG
+				</button>
+
+				<button
+					on:click={downloadAsPDF}
+					class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 sm:w-auto w-full"
+				>
+					Download PDF
+				</button>
+			</div>
+			<!-- Controls -->
+			<div class="space-y-3">
+				<div class="space-y-2">
+					<label for="name" class="text-sm block font-medium">Name</label>
+					<Input
+						id="name"
+						type="text"
+						bind:value={name}
+						class="w-full bg-white shadow-none h-12 border-slate-300"
+						placeholder="Enter name"
+					/>
+				</div>
+				<div class="sm:grid sm:grid-cols-2 gap-3 flex flex-col">
+					<div class="space-y-2 relative">
+						<label for="dob" class="text-sm block font-medium">Date (DOB)</label>
+						<input
+							id="dob"
+							type="date"
+							bind:value={date}
+							on:change={onChange}
+							class="w-full !block bg-white shadow-none h-12 border-slate-300 absolute invisible"
+						/>
+						<div
+							class="w-full flex items-center justify-between border border-slate-300 h-12 rounded-md px-4 py-2 bg-white cursor-pointer"
+							on:click={openPicker}
+						>
+							<span class="text-slate-900">
+								{#if date}
+									{new Date(date).toLocaleDateString('en-GB').replaceAll('/', '-')}
+								{:else}
+									Select date
+								{/if}
+							</span>
+							<!-- Custom calendar icon -->
+							<Icon name={Calendar} size={20} className="text-slate-600" />
+						</div>
+					</div>
+					<div class="space-y-2">
+						<label class="text-sm block font-medium">Case</label>
+						<select
+							bind:value={textCase}
+							class="w-full border border-slate-300 p-2 rounded-md h-12"
+						>
+							<option value="none">Normal</option>
+							<option value="uppercase">UPPERCASE</option>
+							<option value="lowercase">lowercase</option>
+							<option value="capitalize">Capitalize</option>
+						</select>
+					</div>
+				</div>
+				<div class="flex gap-2 flex-wrap justify-between pt-4">
+					<div class="space-y-2">
+						<label for="text-color" class="text-sm block font-medium">Text Color</label>
+						<label
+							class="size-10 relative p-1 rounded-full border border-slate-500 flex justify-center items-center"
+							style="--bgColor:{textColor}"
+						>
+							<div class="bg-(color:--bgColor) rounded-full size-8">
+								<input
+									id="text-color"
+									type="color"
+									bind:value={textColor}
+									class="w-full size-8 invisible absolute"
+								/>
+							</div>
+						</label>
+					</div>
+
+					<div class="space-y-2">
+						<label for="bg-color" class="text-sm block font-medium">Background Color</label>
+						<label
+							class="size-10 relative p-1 rounded-full border border-slate-500 flex justify-center items-center"
+							style="--bgColor:{bgColor}"
+						>
+							<div class="bg-(color:--bgColor) rounded-full size-8">
+								<input
+									id="bg-color"
+									type="color"
+									bind:value={bgColor}
+									class="w-full size-8 invisible absolute"
+								/>
+							</div>
+						</label>
+					</div>
+
+					<div class="space-y-2">
+						<label for="font-size" class="text-sm block font-medium">Font Size</label>
+						<Input
+							id="font-size"
+							type="number"
+							min="12"
+							max="72"
+							step="1"
+							bind:value={fontSize}
+							class="w-full bg-white shadow-none h-12 border-slate-300"
+						/>
+						<span class="text-xs hidden">Font Size: {fontSize}px</span>
+					</div>
+
+					<div class="flex items-center space-x-2 md:pt-3">
+						<input id="bold" type="checkbox" class="size-5" bind:checked={isBold} />
+						<label for="bold" class="text-sm font-medium">Bold</label>
+					</div>
+
+					<div class="flex items-center space-x-2 md:pt-3">
+						<input id="isFullWidth" type="checkbox" class="size-5" bind:checked={isFullWidth} />
+						<label for="isFullWidth" class="text-sm font-medium">Full width</label>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
-		<!-- Download Buttons -->
-		<div class="flex justify-center gap-4 mt-4">
-			<button
-				on:click={downloadAsImage}
-				class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-			>
-				Download PNG
-			</button>
-
-			<button
-				on:click={downloadAsPDF}
-				class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-			>
-				Download PDF
-			</button>
-		</div>
-	{/if}
-</div>
+	</Card.Content>
+</Card.Root>
+<!-- {#if imageUrl}{/if} -->

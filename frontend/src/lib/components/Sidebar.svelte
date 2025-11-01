@@ -10,11 +10,10 @@
 	import Widget from './Widget.svelte';
 
 	let userMenus = [
-    { title: "Image Resizer", slug: "#", icon: Image },
-    { title: "JPG to PDF Converter", slug: "#", icon: FileText },
+    { title: "Name & DOB on photo", slug: "photo-editor", icon: CalendarRange },
+    { title: "Image to PDF Converter", slug: "image-to-pdf", icon: FileText },
     { title: "Age Calculator", slug: "age-calculator", icon: Calculator },
-    { title: "Photo Signature Joiner", slug: "#", icon: Signature },
-    { title: "Name & Date on Photo Maker", slug: "/photo-editor", icon: CalendarRange },
+    // { title: "Photo Signature", slug: "#", icon: Signature }, 
     { title: "MPPEB Template", slug: "#", icon: NotepadTextDashed },
     { title: "Typing Test", slug: "#", icon: TypeOutline },
   ];  
