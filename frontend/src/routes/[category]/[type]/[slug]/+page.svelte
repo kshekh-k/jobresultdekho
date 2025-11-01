@@ -34,9 +34,7 @@
 			<div class="prose max-w-none w-full">
 				<p class="text-slate-600">
 					{data.content.description}
-				</p>
-				
-				
+				</p>			
 			</div>
 		</Card.Header>
 		<Card.Content class="px-3 lg:px-6">
@@ -51,8 +49,7 @@
 										>Last Date</th
 									>
 									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-										>Time Left</th
+									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white">Time Left</th
 									>
 									<!-- {/if} -->
 									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white"
@@ -84,8 +81,9 @@
 									<td class="px-4 py-3 text-sm border font-semibold"></td>
 									<td class="px-4 py-3 text-sm border font-semibold">
 										<Button href={data.content.reference_url} target="_blank" variant="success" size="sm" class={'no-underline'}>
-							{buttonLabel}
-						</Button> </td>
+											{buttonLabel}
+										</Button> 
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -426,8 +424,8 @@
 					href={data.content.reference_url}
 					variant="success"
 					target="_blank"
-					class="no-underline w-40"
-					size="lg">{buttonLabel}</Button
+					class="no-underline w-64 py-3"
+					size="xl">{buttonLabel}</Button
 				>
 			</div>
 		</div>
