@@ -120,7 +120,7 @@
 						<tbody class="divide-y">
 							<tr>
 								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
-								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap"
+								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap {daysLeft(data.content.last_date) < 10 ? 'text-rose-700' : 'text-slate-600'}"
 									>{new Date(data.content.last_date)
 										.toLocaleDateString('en-GB')
 										.replaceAll('/', '-')}</td
@@ -186,7 +186,7 @@
 						<div class="bg-sky-800 py-2 px-3">
 							<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
 						</div>
-						<div class="border border-slate-200 !mt-0">
+						<div class="border border-slate-200 !mt-0 px-3 sm:px-5">
 							<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
 						</div>
 					</div>
