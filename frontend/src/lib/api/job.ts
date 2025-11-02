@@ -9,7 +9,7 @@ export interface Job {
   category?: string;
   last_date: string;
   slug?: string;
-  description: string;
+  short_description: string;
   content: string;
 }
 

@@ -20,8 +20,8 @@
       "targetField": "title",
       "required": true
     },
-    "description": {
-      "type": "text"
+    "short_description": {
+      "type": "blocks"
     },
     "content": {
       "type": "blocks"
