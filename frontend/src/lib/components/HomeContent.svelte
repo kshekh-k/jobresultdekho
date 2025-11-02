@@ -226,6 +226,6 @@
 				catLabel={'admissions'}
 			/>
 		</div>
-		<Sidebar filteredParents={filteredParents} />		
+		<Sidebar />		
 	</section>
 </div>
