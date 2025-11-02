@@ -180,20 +180,20 @@
 					<!-- Application Fee -->
 					<ApplicationFees fees={data.content.application_fee} />
 				</div>
-				{#if data.content.eligiblity_criterea?.content}
+				 
 					<!-- Eligibility Criteria -->
 					<div class="flex flex-col mt-5">
 						<div class="bg-sky-800 py-2 px-3">
 							<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
 						</div>
-						<div class="py-2 px-10 border border-slate-200 !mt-0">
+						<div class="border border-slate-200 !mt-0">
 							<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
 						</div>
 					</div>
-				{/if}
+				 
 
 				<div class="flex flex-col mt-5">
-					<h2 class="!m-0">Detailed Overview & Vacancy Details</h2>
+					<h2 class="!m-0 text-sky-800">Detailed Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
 				</div>
 			</div>
@@ -209,7 +209,7 @@
 				</div>
 				{#if data.content.important_links}
 					<div class="prose max-w-none bg-indigo-50 rounded-sm p-3 col-span-7">
-						<h3 class="text-rose-700 text-center uppercase">Important Links</h3>
+						<h3 class="text-sky-800 text-center uppercase">Important Links</h3>
 						<table class="min-w-full border border-collapse table-auto">
 							<thead>
 								<tr class="bg-sky-800 text-white">
@@ -252,7 +252,7 @@
 
 	{#if data.content.FAQs}
 		<div class="flex flex-col gap-3 max-w-none prose mt-10">
-			<h3 class="text-rose-700 text-center md:text-left">
+			<h3 class="text-sky-800 text-center md:text-left">
 				<span class="block">FAQs: {data.content.title}</span>
 			</h3>
 			<Accordion.Root type="single" class="gap-2">
@@ -277,7 +277,7 @@
 	<!-- Education Criterea -->
 	<Card.Root class="overflow-hidden rounded-md gap-0 p-2">
 		<Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
-			<h3 class="text-rose-700 text-center uppercase font-semibold">Disclaimer</h3>
+			<h3 class="text-sky-800 text-center uppercase font-semibold">Disclaimer</h3>
 		</Card.Header>
 		<Card.Content class="p-2 sm:px-4 ">
 			<RichTextRenderer content={data.content.job_disclaimer?.content} />

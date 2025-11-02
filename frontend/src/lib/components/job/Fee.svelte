@@ -14,7 +14,7 @@
 				{#if feeEntries.length > 0}
                     {#each feeEntries as [key, value]}
                         <tr class="border-b">
-                            <td class="p-2 ">{formatKeyValue(key)}:</td>
+                            <td class="p-2 whitespace-nowrap">{formatKeyValue(key)}:</td>
                             <td class="p-2 font-medium">{value}</td>
                         </tr>
                     {/each}
