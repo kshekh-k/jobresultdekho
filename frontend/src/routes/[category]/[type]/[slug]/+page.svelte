@@ -35,9 +35,7 @@
 				{data.content.title}
 			</h1>
 			<div class="prose max-w-none w-full">
-				<p class="text-slate-600">
-					<RichTextRenderer content={data.content.short_description} />
-				</p>
+				<RichTextRenderer content={data.content.short_description} />
 				<div class="hidden sm:block pb-1">
 					<table class="min-w-full border border-collapse table-auto !m-0">
 						<thead>
