@@ -5,10 +5,10 @@
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
-	import ImportantDates from '$lib/components/job/Dates.svelte'
-	import ApplicationFees from '$lib/components/job/Fee.svelte'
-	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte'
- 
+	import ImportantDates from '$lib/components/job/Dates.svelte';
+	import ApplicationFees from '$lib/components/job/Fee.svelte';
+	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
+
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
 		data.type === 'jobs'
@@ -26,7 +26,6 @@
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
 	console.log('Job full page', data);
-	 
 </script>
 
 <Layout header={false} heading={''}>
@@ -37,99 +36,169 @@
 			</h1>
 			<div class="prose max-w-none w-full">
 				<p class="text-slate-600">{data.content.description}</p>
-				<div class="overflow-auto max-w-full pb-1 mb-5">
-					<div class="min-w-sm pb-1">
-						<table class="min-w-full border border-collapse table-auto !m-0">
-							<thead>
-								<tr class="bg-indigo-600 text-white">
-									<th class="px-4 py-2 text-left text-sm font-medium border text-white">Department</th>
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white">Last Date</th>
-									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white">Time Left</th>
-									<!-- {/if} -->
-									<th class="px-4 py-2 text-left text-sm font-medium border whitespace-nowrap text-white">Total Posts</th>
-								</tr>
-							</thead>
-							<tbody class="divide-y">
-								<tr>
-									<td class="px-4 py-3 text-sm border">{data.content.department?.title || '—'}</td>
-									<td class="px-4 py-3 text-sm border whitespace-nowrap">{formatDate(data.content.last_date)}</td>
-									<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
-									<td
-										class="px-4 py-3 text-sm border font-semibold {daysLeft(
-											data.content.last_date
-										) < 10
-											? 'text-rose-700 bg-rose-50'
-											: 'text-green-600'}"
-										>{daysLeftLabel(data.content.last_date)}
-									</td>
-									<!-- {/if} -->
-									<td class="px-4 py-3 text-sm border font-semibold">{data.content.total_posts}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+
+				<div class="hidden sm:block pb-1">
+					<table class="min-w-full border border-collapse table-auto !m-0">
+						<thead>
+							<tr class="bg-sky-800 text-white">
+								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white"
+									>Department</th
+								>
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
+									>Last Date</th
+								>
+								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
+									>Time Left</th
+								>
+								<!-- {/if} -->
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
+									>Total Posts</th
+								>
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
+									>Action</th
+								>
+							</tr>
+						</thead>
+						<tbody class="divide-y">
+							<tr>
+								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
+								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap"
+									>{new Date(data.content.last_date)
+										.toLocaleDateString('en-GB')
+										.replaceAll('/', '-')}</td
+								>
+								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								<td
+									class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
+										data.content.last_date
+									) < 10
+										? 'text-rose-700 bg-rose-50'
+										: 'text-green-600'}"
+									>{daysLeftLabel(data.content.last_date)}
+								</td>
+								<!-- {/if} -->
+								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600">{data.content.total_posts}</td>
+								<td class="sm:px-4 p-2 text-sm border font-semibold">
+									<Button
+										href={data.content.reference_url}
+										target="_blank"
+										variant="success"
+										size="sm"
+										class={'no-underline !w-full'}
+									>
+										{buttonLabel}
+									</Button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div class="flex justify-end pb-5 lg:pb-0">
-					<Button
-						href={data.content.reference_url}
-						variant="success"
-						target="_blank"
-						class="no-underline w-40"
-						size="lg">{buttonLabel}</Button
-					>
+
+				<div class="flex flex-col gap-5 pb-1 sm:hidden">
+					<table class="min-w-full border border-collapse table-auto !m-0">
+						<thead>
+							<tr class="bg-sky-800 text-white">
+								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white w-1/2"
+									>Department</th
+								>
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
+									>Last Date</th
+								>
+								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
+									>Time Left</th
+								>
+								<!-- {/if} -->
+							</tr>
+						</thead>
+						<tbody class="divide-y">
+							<tr>
+								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
+								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap"
+									>{new Date(data.content.last_date)
+										.toLocaleDateString('en-GB')
+										.replaceAll('/', '-')}</td
+								>
+								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								<td
+									class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
+										data.content.last_date
+									) < 10
+										? 'text-rose-700 bg-rose-50'
+										: 'text-green-600'}"
+									>{daysLeftLabel(data.content.last_date)}
+								</td>
+								<!-- {/if} -->
+							</tr>
+						</tbody>
+					</table>
+					<table class="min-w-full border border-collapse table-auto !m-0">
+						<thead>
+							<tr class="bg-sky-800 text-white">
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
+									>Total Posts</th
+								>
+								<th
+									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
+									>Action</th
+								>
+							</tr>
+						</thead>
+						<tbody class="divide-y">
+							<tr>
+								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600">{data.content.total_posts}</td>
+								<td class="sm:px-4 p-2 text-sm border font-semibold">
+									<Button
+										href={data.content.reference_url}
+										target="_blank"
+										variant="success"
+										size="sm"
+										class={'no-underline !w-full'}
+									>
+										{buttonLabel}
+									</Button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</Card.Header>
 		<Card.Content class="px-3 lg:px-6">
-			<div class="prose max-w-none">
-				<div class="grid grid-cols-12 gap-5 xl:gap-10">
+			<div class="prose max-w-none pt-5">
+				<div class="grid grid-cols-12 gap-5">
 					<!-- Important Dates -->
-					<ImportantDates dates={data.content.important_dates} />	
+					<ImportantDates dates={data.content.important_dates} />
 
 					<!-- Application Fee -->
 					<ApplicationFees fees={data.content.application_fee} />
-				</div>				
-
-				<!-- Eligibility Criteria -->
-				<div class="flex flex-col mt-5">
-					<div class="bg-indigo-600 py-2 px-3">
-						<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
-					</div>					
-					<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
 				</div>
+				{#if data.content.eligiblity_criterea?.content}
+					<!-- Eligibility Criteria -->
+					<div class="flex flex-col mt-5">
+						<div class="bg-sky-800 py-2 px-3">
+							<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
+						</div>
+						<div class="py-2 px-10 border border-slate-200 !mt-0">
+							<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
+						</div>
+					</div>
+				{/if}
 
-				<div class="flex justify-end pb-5 lg:pb-0">
-					<Button
-						href={data.content.reference_url}
-						variant="success"
-						target="_blank"
-						class="no-underline w-40"
-						size="lg">{buttonLabel}</Button
-					>
-				</div>
 				<div class="flex flex-col mt-5">
-					<div class="bg-indigo-600 py-2 px-3">
-						<h3 class="text-xl font-semibold text-white !m-0 p-0">Detailed Overview & Vacancy Details</h3>
-					</div>					
+					<h2 class="!m-0">Detailed Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
-				</div>								
-				<div class="flex justify-center py-5">
-					<Button
-						href={data.content.reference_url}
-						variant="success"
-						target="_blank"
-						class="no-underline w-40"
-						size="lg">{buttonLabel}</Button
-					>
 				</div>
-				<!-- Education Criterea -->
-				<div class="col-span-12 md:col-span-6 flex flex-col">	 
-					<h3 class="text-xl font-semibold">Disclaimer</h3>
-					<RichTextRenderer content={data.content.job_disclaimer?.content} />		 
-				</div>
-			</div>			
-		</Card.Content>		
+			</div>
+		</Card.Content>
 	</Card.Root>
 
 	<Card.Root class="overflow-hidden rounded-md gap-0">
@@ -144,16 +213,25 @@
 						<h3 class="text-rose-700 text-center uppercase">Important Links</h3>
 						<table class="min-w-full border border-collapse table-auto">
 							<thead>
-								<tr class="bg-indigo-600 text-white">
-									<th	class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-nowrap text-white hidden sm:table-cell">Sr. No.</th>
-									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white">Title</th>
-									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white">Link</th>
+								<tr class="bg-sky-800 text-white">
+									<th
+										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-nowrap text-white hidden sm:table-cell"
+										>Sr. No.</th
+									>
+									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white"
+										>Title</th
+									>
+									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white"
+										>Link</th
+									>
 								</tr>
 							</thead>
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell">{index + 1}.</td>
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell"
+											>{index + 1}.</td
+										>
 										<th class="sm:px-4 p-2 text-xs sm:text-sm border w-full">{link.Label}</th>
 										<td class="sm:px-4 p-2 text-xs sm:text-sm border">
 											<a
@@ -178,20 +256,41 @@
 			<h3 class="text-rose-700 text-center md:text-left">
 				<span class="block">FAQs: {data.content.title}</span>
 			</h3>
-			<Accordion.Root type="single" class="gap-2">			 
-					{#each data.content.FAQs as question, index}					 
-						<Accordion.Item value="item-{index}" class="mb-2 border-0">
-							<Card.Root class="overflow-hidden rounded-md gap-0 p-2">
-								<Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
-									<Accordion.Trigger class="lg:text-lg hover:no-underline">{question.Question}</Accordion.Trigger>
-								</Card.Header>
-								<Card.Content class="px-2 sm:px-4">
-									<Accordion.Content class="lg:text-lg">{question.Answer}</Accordion.Content>
-								</Card.Content>
-							</Card.Root>
-						</Accordion.Item>
-					{/each}	 
-			</Accordion.Root> 
+			<Accordion.Root type="single" class="gap-2">
+				{#each data.content.FAQs as question, index}
+					<Accordion.Item value="item-{index}" class="mb-2 border-0">
+						<Card.Root class="overflow-hidden rounded-md gap-0 p-2">
+							<Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
+								<Accordion.Trigger class="lg:text-lg hover:no-underline"
+									>{question.Question}</Accordion.Trigger
+								>
+							</Card.Header>
+							<Card.Content class="px-2 sm:px-4">
+								<Accordion.Content class="lg:text-lg">{question.Answer}</Accordion.Content>
+							</Card.Content>
+						</Card.Root>
+					</Accordion.Item>
+				{/each}
+			</Accordion.Root>
 		</div>
-	{/if} 
+	{/if}
+
+	<!-- Education Criterea -->
+	<Card.Root class="overflow-hidden rounded-md gap-0 p-2">
+		<Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
+			<h3 class="text-rose-700 text-center uppercase font-semibold">Disclaimer</h3>
+		</Card.Header>
+		<Card.Content class="p-2 sm:px-4 ">
+			<RichTextRenderer content={data.content.job_disclaimer?.content} />
+		</Card.Content>
+	</Card.Root>
+	<div class="flex justify-center py-5">
+		<Button
+			href={data.content.reference_url}
+			variant="success"
+			target="_blank"
+			class="no-underline w-60"
+			size="xl">{buttonLabel}</Button
+		>
+	</div>
 </Layout>
