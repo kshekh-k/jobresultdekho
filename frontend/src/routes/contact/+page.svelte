@@ -94,7 +94,7 @@
 				</div>
 				<div class="flex flex-col justify-sart items-start gap-2">
 				<h3 class="text-lg font-semibold">Follow us</h3>
-				 <SocialMedia className="border border-sky-200 bg-sky-100 hover:border-sky-100 hover:bg-sky-800 hover:text-white text-sky-800 size-10 rounded-sm [&>i]:text-xl mr-1"/>
+				 <SocialMedia className="border border-sky-200 bg-sky-100 hover:text-white text-sky-800 size-10 rounded-sm [&>i]:text-xl mr-1"/>
 				</div>
 				 
 				 

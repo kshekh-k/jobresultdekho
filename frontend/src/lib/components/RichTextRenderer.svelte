@@ -17,16 +17,18 @@
     if (child.italic) text = `<em>${text}</em>`;
     if (child.underline) text = `<u>${text}</u>`;
     if (child.strikethrough) text = `<s>${text}</s>`;
-    if (child.code) text = `<code>${text}</code>`;
+    if (child.code) text = `<code>${text}</code>`;  
+    if (child.type === 'link') text = `<a href=${child.url} class="text-rose-700 no-underline hover:text-indigo-600 ease-in-out duration-200" target="_blank">${child.children.map(renderText).join('')}</a>`;     
     return text;
+   
   }
+  console.log(content)
 </script>
 
-<div>
+<div class="-mt-5">
   {#each content as block, i}
     {#if block.type === 'paragraph'}
       <p>{@html block.children.map(renderText).join('')}</p>
-
     {:else if block.type === 'heading'}
       {#if block.level === 1}
         <h1>{@html block.children.map(renderText).join('')}</h1>
@@ -48,16 +50,17 @@
       {:else}
         <ul>
           {#each block.children as item, j}
-            <li>{@html item.children.map(renderText).join('')}</li>
+            <li>  
+              {@html item.children.map(renderText).join('')}
+            </li>
           {/each}
         </ul>
       {/if}
 
-    {:else if block.type === 'link'}
+    {:else if block.type === 'link'}  
       <a href={block.url} target="_blank" rel="noopener">
         {@html block.children.map(renderText).join('')}
       </a>
-
     {:else if block.type === 'image'}
       <figure class="my-4">
         <img src={block.url} alt={block.alt || ''} class="rounded-md shadow" />
