@@ -25,7 +25,7 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
-	console.log('Job full page', data);
+	//console.log('Job full page', data);
 </script>
 
 <Layout header={false} heading={''}>
