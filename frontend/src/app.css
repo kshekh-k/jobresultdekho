@@ -9,6 +9,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --instagram: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  --instagram-linear: linear-gradient(
+      45deg,
+      #fdf497 0%,
+      #fd5949 30%,
+      #d6249f 60%,
+      #285AEB 100%
+  );;
   --radius: 0.625rem;
   --background: oklch(96.8% 0.007 247.896);
   --foreground: oklch(20.8% 0.042 265.755);
@@ -123,3 +131,5 @@
     @apply bg-background text-foreground;
   }
 }
+
+ 
