@@ -16,7 +16,7 @@
                         <tr class="border-b">
                             <td class="p-2 whitespace-nowrap">{formatKeyValue(key)}:</td>
                             {#if key === 'general_obc_ews' || key === 'sc_st_pwd' || key === 'female_transgender'}
-                                <td class="p-2 font-medium">₹ {value}</td>
+                                <td class="p-2 font-medium">₹{value}</td>
                             {:else}
                                 <td class="p-2 font-medium">{value}</td>
                             {/if}

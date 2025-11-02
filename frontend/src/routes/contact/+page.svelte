@@ -41,6 +41,7 @@
  
 	<!-- Content Section -->
 <Layout heading={'Contact us'}>
+	<div class="bg-white p-5 rounded-xl shadow-md flex flex-col gap-5">
 	 <div class="lg:grid lg:grid-cols-2 flex flex-col gap-10">
 		<!-- Left Form -->	 
 			<div class="space-y-5 text-slate-700 md:p-8 ">
@@ -101,7 +102,7 @@
 			</div>
 	 
 		<!-- Right Side -->
-		<div class="bg-white p-5 md:p-8 rounded-2xl">
+		<div class=" p-5 md:p-8 rounded-xl border border-slate-200 bg-slate-50">
 			<h2 class="text-2xl font-bold mb-4 text-slate-700">Send inquiry</h2>
 			 
 			<form on:submit|preventDefault={handleSubmit} class="space-y-6">
@@ -176,6 +177,7 @@
 			</form>
 		</div>
 	</div>
+</div>
  </Layout>
  
  
