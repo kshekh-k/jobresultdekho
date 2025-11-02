@@ -145,34 +145,24 @@
 						<table class="min-w-full border border-collapse table-auto">
 							<thead>
 								<tr class="bg-indigo-600 text-white">
-									<th
-										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-nowrap text-white hidden sm:table-cell"
-										>Sr. No.</th
-									>
-									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white"
-										>Title</th
-									>
-									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white"
-										>Link</th
-									>
+									<th	class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-nowrap text-white hidden sm:table-cell">Sr. No.</th>
+									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white">Title</th>
+									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white">Link</th>
 								</tr>
 							</thead>
-
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell"
-											>{index + 1}.</td
-										>
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell">{index + 1}.</td>
 										<th class="sm:px-4 p-2 text-xs sm:text-sm border w-full">{link.Label}</th>
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border"
-											><a
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border">
+											<a
 												href={link.URL}
 												target="_blank"
 												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
-												>Click Here</a
-											></td
-										>
+												>Click Here
+											</a>
+										</td>
 									</tr>
 								{/each}
 							</tbody>
@@ -188,30 +178,20 @@
 			<h3 class="text-rose-700 text-center md:text-left">
 				<span class="block">FAQs: {data.content.title}</span>
 			</h3>
-			<Accordion.Root type="single" class="gap-2">
-			 
-					{#each data.content.FAQs as question, index}
-					 
+			<Accordion.Root type="single" class="gap-2">			 
+					{#each data.content.FAQs as question, index}					 
 						<Accordion.Item value="item-{index}" class="mb-2 border-0">
-							<Card.Root class="overflow-hidden rounded-md gap-0 p-2"
-								><Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
-									<Accordion.Trigger class="lg:text-lg hover:no-underline"
-										>{question.Question}</Accordion.Trigger
-									></Card.Header
-								>
+							<Card.Root class="overflow-hidden rounded-md gap-0 p-2">
+								<Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
+									<Accordion.Trigger class="lg:text-lg hover:no-underline">{question.Question}</Accordion.Trigger>
+								</Card.Header>
 								<Card.Content class="px-2 sm:px-4">
-									<Accordion.Content class="lg:text-lg">
-										{question.Answer}
-									</Accordion.Content>
+									<Accordion.Content class="lg:text-lg">{question.Answer}</Accordion.Content>
 								</Card.Content>
-								</Card.Root>
+							</Card.Root>
 						</Accordion.Item>
-					{/each}
-				 
-	 
+					{/each}	 
 			</Accordion.Root> 
 		</div>
-	{/if}
-	
- 
+	{/if} 
 </Layout>
