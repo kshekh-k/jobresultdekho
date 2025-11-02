@@ -47,7 +47,7 @@
 
 	<!-- Drawer for Mobile Menu -->
 	<Panel open={isMoreOpen} close={() => (isMoreOpen = false)} side="left" title="Menu">
-		<Navbar {categories} />
+		<Navbar {categories} onNavigate={() => (isMoreOpen = false)} />
 		<div slot="footer"><SearchBox boxSize="w-full" /></div>
 	</Panel>
 </header>

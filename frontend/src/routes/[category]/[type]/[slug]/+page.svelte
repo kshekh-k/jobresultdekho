@@ -37,7 +37,7 @@
 			<div class="prose max-w-none w-full">
 				<RichTextRenderer content={data.content.short_description} />
 				<div class="hidden sm:block pb-1">
-					<table class="min-w-full border border-collapse table-auto !m-0">
+					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
 						<thead>
 							<tr class="bg-sky-800 text-white">
 								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white"
@@ -99,7 +99,7 @@
 				</div>
 
 				<div class="flex flex-col gap-5 pb-1 sm:hidden">
-					<table class="min-w-full border border-collapse table-auto !m-0">
+					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
 						<thead>
 							<tr class="bg-sky-800 text-white">
 								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white w-1/2"
@@ -138,7 +138,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="min-w-full border border-collapse table-auto !m-0">
+					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
 						<thead>
 							<tr class="bg-sky-800 text-white">
 								<th
@@ -193,7 +193,7 @@
 				 
 
 				<div class="flex flex-col mt-5">
-					<h2 class="!m-0 text-sky-800">Detailed Overview & Vacancy Details</h2>
+					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
 				</div>
 			</div>

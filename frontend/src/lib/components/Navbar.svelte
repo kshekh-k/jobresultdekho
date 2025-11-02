@@ -3,6 +3,7 @@
 	import Icon from './ui/Icon.svelte';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
+export let onNavigate: () => void = () => {};
 
 	export let categories: {
 		title: string;
@@ -40,7 +41,7 @@
 			{#if cat.title.toLowerCase() === 'home'}
 				<li>
 					<a
-						href="/"
+						href="/" on:click={onNavigate}
 						class="block p-3 lg:py-1 md:px-2 text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
 							{currentPath() === '/'
 							? 'text-white bg-white/10'
@@ -67,8 +68,8 @@
 						>
 							{#each cat.children as child, index}
 								<li>
-									<a
-										href={`/${child.slug}`}
+									<a 
+										href={`/${child.slug}`} on:click={onNavigate}
 										class="block p-3 lg:py-2 lg:px-5 text-base font-medium text-left ease-in-out duration-200 focus:outline-none
 											{isActive(child.slug)
 											? 'text-white lg:text-sky-600 lg:bg-slate-50'
@@ -89,7 +90,7 @@
 			{:else}
 				<li>
 					<a
-						href={`/${cat.slug}`}
+						href={`/${cat.slug}`} on:click={onNavigate}
 						class="block p-3 lg:py-1 md:px-2 text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
 							{isActive(cat.slug) ? 'text-white bg-white/10' : 'text-white hover:text-sky-200 hover:bg-white/10'}"
 					>
