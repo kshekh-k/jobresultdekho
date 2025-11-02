@@ -17,7 +17,7 @@
 					{#each dateEntries as [key, value]}
 						<tr class="border-b">
 							<td class="p-2">{formatKeyValue(key)}:</td>
-							<td class="p-2 font-medium {daysLeft(value) < 10 ? 'text-rose-700' : 'text-slate-600'}">{new Date(value).toLocaleDateString('en-GB').replaceAll('/', '-')}</td>
+							<td class="p-2 font-medium ">{new Date(value).toLocaleDateString('en-GB').replaceAll('/', '-')}</td>
 						</tr>
 					{/each}
 				{/if}
