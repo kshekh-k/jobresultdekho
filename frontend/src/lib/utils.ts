@@ -9,19 +9,24 @@ export function cn(...inputs: ClassValue[]) {
 export function formatDate(value: string) {
   if (!value) return 'Will be updated soon';
   const d = new Date(value);
-  if (isNaN(d.getTime())) return value;
-  
-  return d.toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  if (isNaN(d.getTime())) return "-";
+
+  return d
+    .toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+    .replace(/ /g, "-");
 }
 
 //format the key name into readable label
 export function formatKeyValue(key: string) {
-    return key
-    .replace(/_/g, ' ') // replace underscores with spaces
+  if (key.toLowerCase() === 'general_obc_ews') return 'General / OBC / EWS';
+  if (key.toLowerCase() === 'sc_st_pwd') return 'SC / ST / PWD';
+  if (key.toLowerCase() === 'female_transgender') return 'Female / Transgender';
+  return key
+    .replace(/_/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 

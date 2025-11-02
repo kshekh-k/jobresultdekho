@@ -66,11 +66,9 @@
 						<tbody class="divide-y">
 							<tr>
 								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
-								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap"
-									>{new Date(data.content.last_date)
-										.toLocaleDateString('en-GB')
-										.replaceAll('/', '-')}</td
-								>
+								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap">
+									{formatDate(data.content.last_date)}
+								</td>
 								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
 								<td
 									class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
