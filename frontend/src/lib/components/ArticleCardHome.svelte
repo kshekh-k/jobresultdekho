@@ -4,7 +4,7 @@
 	import { cn } from '$lib/utils.js';
 	import Icon from './ui/Icon.svelte';
 	import Button from './ui/button/button.svelte';
-	import { daysLeft, daysLeftLabel } from '$lib/utils';
+	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
 
 	export let title: string | undefined;
 	export let articleId: any | undefined;
@@ -111,7 +111,7 @@
 						</div>
 						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center ">
 							<Icon name={Calendar} size={16} className="md:hidden" />
-							{new Date(item.last_date).toLocaleDateString('en-GB').replaceAll('/', '-')}
+							{formatDate(item.last_date)}
 						</div>
 						{#if item.last_date}
 							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(item.last_date) < 10
