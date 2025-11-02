@@ -657,7 +657,6 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::department.department'
     >;
-    description: Schema.Attribute.Text;
     eligiblity_criterea: Schema.Attribute.Relation<
       'oneToOne',
       'api::eligiblity-criterea.eligiblity-criterea'
@@ -678,6 +677,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
+    short_description: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stage: Schema.Attribute.Enumeration<
       [
