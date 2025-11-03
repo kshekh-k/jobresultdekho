@@ -689,7 +689,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
         'answer-keys',
       ]
     > &
-      Schema.Attribute.DefaultTo<'job'>;
+      Schema.Attribute.DefaultTo<'jobs'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     total_posts: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;

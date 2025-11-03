@@ -4,7 +4,8 @@
    * Supports text formatting, headings, lists, links, and images.
    */
   export let content: any = [];
-export let className: string  | null = null
+  export let className: string  | null = null
+  
   // Helper to safely extract text from nested children
   function getText(children = []) {
     return children.map((child:any) => child.text || '').join('');
@@ -22,7 +23,7 @@ export let className: string  | null = null
     return text;
    
   }
-  console.log(content)
+  //console.log(content)
 </script>
 
 <div class="{className}">

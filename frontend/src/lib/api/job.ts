@@ -13,6 +13,10 @@ export interface Job {
   content: string;
 }
 
+export async function getHotJobs(customFetch?: typeof fetch): Promise<Job> {
+  return await apiGet<Job>(`/jobs/hot-posts`, customFetch);
+}
+
 export async function getLatestJobs(customFetch?: typeof fetch): Promise<Job> {
   return await apiGet<Job>(`/jobs/latest`, customFetch);
 }

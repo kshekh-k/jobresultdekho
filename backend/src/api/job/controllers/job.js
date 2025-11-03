@@ -7,11 +7,27 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::job.job', ({strapi}) => ({
+    async findHotPosts(ctx) {
+        try {
+            const jobs = await strapi.db.query('api::job.job').findMany({
+                where: { publishedAt: { $notNull: true } },
+                orderBy: { updatedAt: 'desc' },
+                limit: 6,
+                select: ['title', 'total_posts', 'slug']                
+            });
+
+            return jobs;
+        } catch (err) {
+            strapi.log.error("❌ Error fetching hot jobs: " + err.message);
+            ctx.throw(500, "Unable to fetch hot jobs");
+        }
+    },
+
     async findLatest(ctx) {
         try {
             const jobs = await strapi.db.query('api::job.job').findMany({
                 where: { publishedAt: { $notNull: true } },
-                orderBy: { createdAt: 'desc' },
+                orderBy: [{ last_date: 'asc' }],
                 limit: 10,
                 select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
                 populate: {
@@ -26,8 +42,8 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
 
             return jobs;
         } catch (err) {
-            strapi.log.error("❌ Error fetching jobs: " + err.message);
-            ctx.throw(500, "Unable to fetch jobs");
+            strapi.log.error("❌ Error fetching latest jobs: " + err.message);
+            ctx.throw(500, "Unable to fetch latest jobs");
         }
     },
 

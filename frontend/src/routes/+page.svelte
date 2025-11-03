@@ -3,6 +3,7 @@
 		latestAdmissions?: any[];
 		latestAdmitCards?: any[];
 		latestAnswerKeys?: any[];
+		hotJobs?: any[];
 		latestJobs?: any[];
 		latestResults?: any[];
 		latestSyllabus?: any[];
@@ -12,6 +13,7 @@
 		latestAdmissions = [],
 		latestAdmitCards = [],
 		latestAnswerKeys = [],
+		hotJobs = [],
 		latestJobs = [],
 		latestResults = [],
 		latestSyllabus = [],
@@ -26,7 +28,7 @@
 </script>
 
 <div class="space-y-5">
-	<HotPosts />
+	<HotPosts {hotJobs} />
 	<div class="max-w-screen-xl mx-auto px-3">
 		<Card.Root class="" variant={'default'}>
 			<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
