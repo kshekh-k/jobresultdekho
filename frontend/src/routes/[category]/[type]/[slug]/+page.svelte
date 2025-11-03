@@ -30,12 +30,12 @@
 
 <Layout header={false} heading={''}>
 	<Card.Root class="overflow-hidden rounded-md gap-0">
-		<Card.Header class="flex flex-col items-start justify-start gap-3 px-3 lg:px-6">
+		<Card.Header class="flex flex-col items-start justify-start px-3 gap-0 lg:px-6">
 			<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
 				{data.content.title}
 			</h1>
 			<div class="prose max-w-none w-full">
-				<RichTextRenderer content={data.content.short_description} />
+				<RichTextRenderer content={data.content.short_description} className=""  />
 				<div class="hidden sm:block pb-1">
 					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
 						<thead>
@@ -174,11 +174,9 @@
 				<div class="grid grid-cols-12 gap-5">
 					<!-- Important Dates -->
 					<ImportantDates dates={data.content.important_dates} />
-
 					<!-- Application Fee -->
 					<ApplicationFees fees={data.content.application_fee} />
-				</div>
-				 
+				</div>				 
 					<!-- Eligibility Criteria -->
 					<div class="flex flex-col mt-5">
 						<div class="bg-sky-800 py-2 px-3">
@@ -188,8 +186,6 @@
 							<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
 						</div>
 					</div>
-				 
-
 				<div class="flex flex-col mt-5">
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
