@@ -4,14 +4,14 @@
    * Supports text formatting, headings, lists, links, and images.
    */
   export let content: any = [];
-
+export let className: string  | null = null
   // Helper to safely extract text from nested children
   function getText(children = []) {
-    return children.map((child) => child.text || '').join('');
+    return children.map((child:any) => child.text || '').join('');
   }
 
   // Helper to apply inline text styles
-  function renderText(child) {
+  function renderText(child:any) {
     let text = child.text || '';
     if (child.bold) text = `<strong>${text}</strong>`;
     if (child.italic) text = `<em>${text}</em>`;
@@ -25,7 +25,7 @@
   console.log(content)
 </script>
 
-<div class="-mt-5">
+<div class="{className}">
   {#each content as block, i}
     {#if block.type === 'paragraph'}
       <p>{@html block.children.map(renderText).join('')}</p>
