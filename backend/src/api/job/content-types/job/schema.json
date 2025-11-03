@@ -78,7 +78,7 @@
     },
     "stage": {
       "type": "enumeration",
-      "default": "job",
+      "default": "jobs",
       "enum": [
         "jobs",
         "admit-cards",
