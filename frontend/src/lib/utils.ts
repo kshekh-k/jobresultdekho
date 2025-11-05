@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-	return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs));
 }
 
 //Date format in - dd MM yyyy
@@ -11,13 +11,13 @@ export function formatDate(value: string) {
   const d = new Date(value);
   if (isNaN(d.getTime())) return "-";
 
-  return d
-    .toLocaleDateString("en-IN", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-    .replace(/ /g, "-");
+
+  // return d .toLocaleDateString("en-IN", { year: "numeric", month: "numeric", day: "numeric", }) .replaceAll('/', '-')
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+  return `${day}-${month}-${year}`;
 }
 
 //format the key name into readable label
@@ -50,7 +50,7 @@ export function daysLeftLabel(dateString: string): string {
   if (days < 0) return "Expired";
   if (days === 0) return "Today";
   if (days < 30) return `${days} ${days === 1 ? 'Day' : 'Days'}`;
-  
+
   const months = Math.floor(days / 30);
   return `${months} ${months === 1 ? 'Month' : 'Months'}`;
 }
