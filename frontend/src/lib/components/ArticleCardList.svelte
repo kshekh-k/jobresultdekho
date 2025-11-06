@@ -111,7 +111,7 @@
 								target={item.target}
 								class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-2 line-clamp-2"
 							>
-								{item.title} 
+								{item.title}
 							</a>
 						</div>
 					</div>
@@ -124,14 +124,29 @@
 						<Icon name={Calendar} size={16} className="md:hidden" />
 						{formatDate(item.last_date)}
 					</div>
-					{#if item.last_date && (type === 'jobs' || type === 'admit-cards' || type === 'admissions')}
-						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 {daysLeft(item.last_date) < 10
-									? 'text-rose-700 '	: 'text-green-600 '}">
-							<Icon name={Clock} size={16} className="md:hidden" />
-							<b class="inline-flex font-semibold ">
-								{daysLeftLabel(item.last_date)}
-							</b>
-						</div>
+					{#if type === 'jobs' || type === 'admit-cards' || type === 'admissions'}
+						{#if item.last_date}
+							<div
+								class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 {daysLeft(
+									item.last_date
+								) < 10
+									? 'text-rose-700 '
+									: 'text-green-600 '}"
+							>
+								<Icon name={Clock} size={16} className="md:hidden" />
+								<b class="inline-flex font-semibold">
+									{daysLeftLabel(item.last_date)}
+								</b>
+							</div>
+						{:else}
+							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
+								<Icon name={Clock} size={16} className="md:hidden" />
+								<a
+									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" target="_blank"
+									class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500">Get Notified</a
+								>
+							</div>
+						{/if}
 					{:else}
 						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 px-2">
 							&nbsp;
