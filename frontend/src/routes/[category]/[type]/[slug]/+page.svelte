@@ -25,7 +25,7 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
-	//console.log('Job full page', data);
+	console.log('Job full page', data);
 </script>
 
 <Layout header={false} heading={''}>
@@ -47,12 +47,13 @@
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Last Date</th
 								>
-								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								{#if (data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions')}
+
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Time Left</th
 								>
-								<!-- {/if} -->
+								{/if}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Total Posts</th
@@ -67,9 +68,10 @@
 							<tr>
 								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
 								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap">
-									{formatDate(data.content.last_date)}
+									{formatDate(data.content.last_date)}  
 								</td>
-								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								{#if (data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions')}
+								{#if data.content.last_date}
 								<td
 									class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
 										data.content.last_date
@@ -78,7 +80,15 @@
 										: 'text-green-600'}"
 									>{daysLeftLabel(data.content.last_date)}
 								</td>
-								<!-- {/if} -->
+								{:else}
+								<td class="sm:px-4 p-2 text-sm border font-semibold">								 
+								<a
+									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" target="_blank"
+									class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500">Get Notified</a
+								>
+								</td>
+								{/if}
+								{/if}
 								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600">{data.content.total_posts}</td>
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
 									<Button
@@ -222,17 +232,27 @@
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell"
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell" valign="middle"
 											>{index + 1}.</td
 										>
 										<th class="sm:px-4 p-2 text-xs sm:text-sm border w-full">{link.Label}</th>
 										<td class="sm:px-4 p-2 text-xs sm:text-sm border">
+											{#if link.URL}
 											<a
 												href={link.URL}
 												target="_blank"
 												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
 												>Click Here
 											</a>
+											{:else}
+											<a
+												href='https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b'
+												target="_blank"
+												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
+												>Click Here
+											</a>
+											<p class="whitespace-nowrap !m-0 text-semibold italic">Link activate soon</p>
+											{/if}
 										</td>
 									</tr>
 								{/each}

@@ -1,7 +1,7 @@
 <script lang="ts">
 import 'remixicon/fonts/remixicon.css';
   export let links = [
-    { name: "Facebook", url: "https://facebook.com", icon: 'ri-facebook-fill', brandColor:'hover:bg-[#1877F2]'},
+    { name: "Facebook", url: "https://www.facebook.com/share/1Cd6pG828i/", icon: 'ri-facebook-fill', brandColor:'hover:bg-[#1877F2]'},
     { name: "Instagram", url: "https://www.instagram.com/job_resultdekho/", icon: 'ri-instagram-line', brandColor:'hover:bg-(image:--instagram-linear)'},
     { name: "X.com", url: "https://x.com/jobresultdekho", icon: 'ri-twitter-x-fill', brandColor:'hover:bg-[#000000]'},
     { name: "LinkedIn", url: "https://www.linkedin.com/in/job-result-dekho-90b204397", icon: 'ri-linkedin-fill', brandColor:'hover:bg-[#0A66C2]'},
