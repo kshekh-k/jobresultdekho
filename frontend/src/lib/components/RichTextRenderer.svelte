@@ -37,8 +37,12 @@
         <h2>{@html block.children.map(renderText).join('')}</h2>
       {:else if block.level === 3}
         <h3>{@html block.children.map(renderText).join('')}</h3>
-      {:else}
+      {:else if block.level === 4}
         <h4>{@html block.children.map(renderText).join('')}</h4>
+      {:else if block.level === 5}
+        <h5>{@html block.children.map(renderText).join('')}</h5>
+      {:else}
+        <h6>{@html block.children.map(renderText).join('')}</h6>
       {/if}
 
     {:else if block.type === 'list'}
