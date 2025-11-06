@@ -6,13 +6,14 @@ export interface SharedApplicationFee extends Struct.ComponentSchema {
     displayName: 'Application Fee';
   };
   attributes: {
-    female_transgender: Schema.Attribute.Integer;
-    general_obc_ews: Schema.Attribute.Integer;
+    female_transgender: Schema.Attribute.Integer &
+      Schema.Attribute.DefaultTo<0>;
+    general_obc_ews: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     offline_payment: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Through E-Challan'>;
     online_payment: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Online Fee Payment Options: Credit Card, Debit Card, and Net Banking'>;
-    sc_st_pwd: Schema.Attribute.Integer;
+    sc_st_pwd: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
   };
 }
 
