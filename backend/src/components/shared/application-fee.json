@@ -6,13 +6,16 @@
   "options": {},
   "attributes": {
     "general_obc_ews": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "female_transgender": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "sc_st_pwd": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "online_payment": {
       "type": "string",

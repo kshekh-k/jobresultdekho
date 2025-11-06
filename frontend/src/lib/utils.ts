@@ -5,13 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-//Date format in - dd MM yyyy
+//Date format in - dd-MM-yyyy
 export function formatDate(value: string) {
-  if (!value) return 'Awaiting Confirmation';
+  if (!value) return 'To Be Announced';
   const d = new Date(value);
   if (isNaN(d.getTime())) return "-";
-
-
   // return d .toLocaleDateString("en-IN", { year: "numeric", month: "numeric", day: "numeric", }) .replaceAll('/', '-')
 
   const day = String(d.getDate()).padStart(2, "0");

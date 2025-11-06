@@ -2,7 +2,14 @@
     import { formatKeyValue } from '$lib/utils';
     export let fees: Record<string, string> | null | undefined = {};
     $: safeFees = fees && typeof fees === 'object' ? fees : {};
-    $: feeEntries = Object.entries(safeFees).filter(([_, value]) => value);
+    $: feeEntries = Object.entries(safeFees);
+
+    function formatFee(value: string | null | undefined): string {
+    if (value === 0 || value == null) {
+        return "Awaiting Confirmation";
+    }
+    return `₹ ${value ?? ""}`;
+    }
 </script>
 <div class="col-span-12 md:col-span-6 flex flex-col">
 	<div class="bg-sky-800 py-2 px-3">
@@ -16,7 +23,7 @@
                         <tr class="border-b">
                             <td class="p-2 whitespace-nowrap">{formatKeyValue(key)}:</td>
                             {#if key === 'general_obc_ews' || key === 'sc_st_pwd' || key === 'female_transgender'}
-                                <td class="p-2 font-medium">₹{value}</td>
+                                <td class="p-2 font-medium">{formatFee(value)}</td>
                             {:else}
                                 <td class="p-2 font-medium">{value}</td>
                             {/if}
