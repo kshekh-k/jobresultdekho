@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 //Date format in - dd MM yyyy
 export function formatDate(value: string) {
-  if (!value) return 'Updated Soon';
+  if (!value) return 'Awaiting Confirmation';
   const d = new Date(value);
   if (isNaN(d.getTime())) return "-";
 
