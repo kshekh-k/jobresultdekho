@@ -35,7 +35,7 @@
 				{data.content.title}
 			</h1>
 			<div class="prose max-w-none w-full">
-				<RichTextRenderer content={data.content.short_description} className=""  />
+				<RichTextRenderer content={data.content.short_description} className="" />
 				<div class="hidden sm:block pb-1">
 					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
 						<thead>
@@ -47,12 +47,11 @@
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Last Date</th
 								>
-								{#if (data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions')}
-
-								<th
-									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-									>Time Left</th
-								>
+								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
+									<th
+										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
+										>Time Left</th
+									>
 								{/if}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
@@ -66,30 +65,34 @@
 						</thead>
 						<tbody class="divide-y">
 							<tr>
-								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
-								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap">
-									{formatDate(data.content.last_date)}  
+								<td class="sm:px-4 p-2 text-sm border font-semibold">{data.content.department?.title || '—'}</td>
+								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
+									{formatDate(data.content.last_date)}
 								</td>
-								{#if (data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions')}
-								{#if data.content.last_date}
-								<td
-									class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
-										data.content.last_date
-									) < 10
-										? 'text-rose-700 bg-rose-50'
-										: 'text-green-600'}"
-									>{daysLeftLabel(data.content.last_date)}
-								</td>
-								{:else}
-								<td class="sm:px-4 p-2 text-sm border font-semibold">								 
-								<a
-									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" target="_blank"
-									class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500">Get Notified</a
+								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
+									{#if data.content.last_date}
+										<td
+											class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
+												data.content.last_date
+											) < 10
+												? 'text-rose-700 bg-rose-50'
+												: 'text-green-600'}"
+											>{daysLeftLabel(data.content.last_date)}
+										</td>
+									{:else}
+										<td class="sm:px-4 p-2 text-sm border font-semibold">
+											<a
+												href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+												target="_blank"
+												class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500"
+												>Be Alert</a
+											>
+										</td>
+									{/if}
+								{/if}
+								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600"
+									>{data.content.total_posts}</td
 								>
-								</td>
-								{/if}
-								{/if}
-								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600">{data.content.total_posts}</td>
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
 									<Button
 										href={data.content.reference_url}
@@ -117,32 +120,42 @@
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
 									>Last Date</th
 								>
-								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
-								<th
-									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
-									>Time Left</th
-								>
-								<!-- {/if} -->
+								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
+									<th
+										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
+										>Time Left</th
+									>
+								{/if}
 							</tr>
 						</thead>
 						<tbody class="divide-y">
 							<tr>
-								<td class="sm:px-4 p-2 text-sm border">{data.content.department?.title || '—'}</td>
-								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap {daysLeft(data.content.last_date) < 10 ? 'text-rose-700' : 'text-slate-600'}"
-									>{new Date(data.content.last_date)
-										.toLocaleDateString('en-GB')
-										.replaceAll('/', '-')}</td
-								>
-								<!-- {#if data.content.last_date && (data.content.category === 'latest-job' || data.content.category === 'admit-cards' || data.content.category === 'admissions')} -->
+								<td class="sm:px-4 p-2 text-sm border font-semibold">{data.content.department?.title || '—'}</td>
 								<td
-									class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
-										data.content.last_date
-									) < 10
-										? 'text-rose-700 bg-rose-50'
-										: 'text-green-600'}"
-									>{daysLeftLabel(data.content.last_date)}
-								</td>
-								<!-- {/if} -->
+									class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold"
+									>{formatDate(data.content.last_date)}</td
+								>
+								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
+									{#if data.content.last_date}
+										<td
+											class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
+												data.content.last_date
+											) < 10
+												? 'text-rose-700 bg-rose-50'
+												: 'text-green-600'}"
+											>{daysLeftLabel(data.content.last_date)}
+										</td>
+									{:else}
+										<td class="sm:px-4 p-2 text-sm border font-semibold">
+											<a
+												href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+												target="_blank"
+												class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500"
+												>Be Alert</a
+											>
+										</td>
+									{/if}
+								{/if}
 							</tr>
 						</tbody>
 					</table>
@@ -161,7 +174,9 @@
 						</thead>
 						<tbody class="divide-y">
 							<tr>
-								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600">{data.content.total_posts}</td>
+								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600"
+									>{data.content.total_posts}</td
+								>
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
 									<Button
 										href={data.content.reference_url}
@@ -186,16 +201,16 @@
 					<ImportantDates dates={data.content.important_dates} />
 					<!-- Application Fee -->
 					<ApplicationFees fees={data.content.application_fee} />
-				</div>				 
-					<!-- Eligibility Criteria -->
-					<div class="flex flex-col mt-5">
-						<div class="bg-sky-800 py-2 px-3">
-							<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
-						</div>
-						<div class="border border-slate-200 !mt-0 px-3 sm:px-5">
-							<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
-						</div>
+				</div>
+				<!-- Eligibility Criteria -->
+				<div class="flex flex-col mt-5">
+					<div class="bg-sky-800 py-2 px-3">
+						<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
 					</div>
+					<div class="border border-slate-200 !mt-0 px-3 sm:px-5">
+						<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
+					</div>
+				</div>
 				<div class="flex flex-col mt-5">
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
@@ -232,26 +247,29 @@
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell" valign="middle"
-											>{index + 1}.</td
+										<td
+											class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell"
+											valign="middle">{index + 1}.</td
 										>
 										<th class="sm:px-4 p-2 text-xs sm:text-sm border w-full">{link.Label}</th>
 										<td class="sm:px-4 p-2 text-xs sm:text-sm border">
 											{#if link.URL}
-											<a
-												href={link.URL}
-												target="_blank"
-												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
-												>Click Here
-											</a>
+												<a
+													href={link.URL}
+													target="_blank"
+													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+													>Click Here
+												</a>
 											{:else}
-											<a
-												href='https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b'
-												target="_blank"
-												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
-												>Click Here
-											</a>
-											<p class="whitespace-nowrap !m-0 text-semibold italic">Link activate soon</p>
+												<a
+													href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+													target="_blank"
+													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
+													>Click Here
+												</a>
+												<p class="whitespace-nowrap !m-0 text-semibold italic">
+													Link activate soon
+												</p>
 											{/if}
 										</td>
 									</tr>

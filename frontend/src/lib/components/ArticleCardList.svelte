@@ -143,7 +143,7 @@
 								<Icon name={Clock} size={16} className="md:hidden" />
 								<a
 									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" target="_blank"
-									class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500">Get Notified</a
+									class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500">Be Alert</a
 								>
 							</div>
 						{/if}
