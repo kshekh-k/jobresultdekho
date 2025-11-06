@@ -2,7 +2,10 @@
 	import { formatDate, formatKeyValue, daysLeft } from '$lib/utils'; 
 	export let dates: Record<string, string> | null | undefined = {};
 	$: safeDates = dates && typeof dates === 'object' ? dates : {};
-	$: dateEntries = Object.entries(safeDates).filter(([_, value]) => value);
+	$: dateEntries = Object.entries(safeDates).map(([key, value]) => [
+		key,
+		value?.trim() ? value : null
+	]);
 </script>
 
 <!-- Important Dates -->
