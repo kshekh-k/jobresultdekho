@@ -5,10 +5,10 @@
     $: feeEntries = Object.entries(safeFees);
 
     function formatFee(value: string | null | undefined): string {
-    if (value === 0 || value == null) {
-        return "Awaiting Confirmation";
-    }
-    return `₹ ${value ?? ""}`;
+        if (value === 0 || value == null) {
+            return "Awaiting Confirmation";
+        }
+        return `₹ ${value ?? ""}`;
     }
 </script>
 <div class="col-span-12 md:col-span-6 flex flex-col">
