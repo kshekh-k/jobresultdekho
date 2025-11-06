@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 //Date format in - dd-MM-yyyy
 export function formatDate(value: string) {
-  if (!value) return 'To Be Announced';
+  if (!value) return 'Undisclosed';
   const d = new Date(value);
   if (isNaN(d.getTime())) return "-";
   // return d .toLocaleDateString("en-IN", { year: "numeric", month: "numeric", day: "numeric", }) .replaceAll('/', '-')

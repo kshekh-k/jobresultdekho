@@ -120,7 +120,7 @@
 							{:else}
 							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
 								<Icon name={Clock} size={16} className="md:hidden" />
-								<a href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500" target="_blank">Get Notified</a>
+								<a href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500" target="_blank">Be Alert</a>
 							</div>
 						{/if}
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
