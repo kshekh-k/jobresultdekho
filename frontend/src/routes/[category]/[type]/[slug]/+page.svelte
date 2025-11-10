@@ -27,7 +27,13 @@
 	// console.log('Job', JSON.stringify(data));
 	console.log('Job full page', data);
 </script>
-
+<svelte:head>
+	<title>{data.content.title} — JobResultDekho</title>
+	<meta
+		name="description"
+		content={data.content.short_description}
+	/>
+</svelte:head>
 <Layout header={false} heading={''}>
 	<Card.Root class="overflow-hidden rounded-md gap-0">
 		<Card.Header class="flex flex-col items-start justify-start px-3 gap-0 lg:px-6">

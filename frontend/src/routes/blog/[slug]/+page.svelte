@@ -11,7 +11,13 @@
 	let featuredImage = '/image/RRB-NTPC-Vacancy-1.png';
 	let summary = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 </script>
-
+<svelte:head>
+	<title>{title} — JobResultDekho</title>
+	<meta
+		name="description"
+		content={summary}
+	/>
+</svelte:head>
 <Layout header={false} heading={'Our Blog'}>
 	<Card.Root class="">
 		<Card.Header>
