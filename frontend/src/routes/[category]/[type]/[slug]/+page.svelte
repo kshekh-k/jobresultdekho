@@ -37,7 +37,7 @@
 <Layout header={false} heading={''}>
 	<Card.Root class="overflow-hidden rounded-md gap-0">
 		<Card.Header class="flex flex-col items-start justify-start px-3 gap-0 lg:px-6">
-			<h1 class="text-center text-2xl md:text-4xl font-bold text-rose-700">
+			<h1 class="text-center md:text-left text-2xl md:text-4xl font-bold text-sky-700">
 				{data.content.title}
 			</h1>
 			<div class="prose max-w-none w-full">
