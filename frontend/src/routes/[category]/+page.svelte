@@ -22,7 +22,13 @@
 	}];
 	
 </script>
-
+<svelte:head>
+	<title>{data.category.title} — JobResultDekho</title>
+	<meta
+		name="description"
+		content={data.category.description}
+	/>
+</svelte:head>
   <Layout heading={data.category.title}>
 		<Card.Root class="overflow-hidden rounded-md gap-5">			 
 			<Card.Content>
