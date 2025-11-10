@@ -18,7 +18,7 @@
 			{#each hotJobsWithVariants as item}
 				<Card.Root class="p-0 ease-in-out duration-200 hover:-translate-y-1 w-60 md:w-auto" variant={item.variant}>
 					<Card.Content class="p-0 flex-1 flex items-stretch">
-						<a href={'/latest-job/jobs/' + item.slug} rel="external" class="md:px-5 p-3 flex-1 flex justify-center items-center text-center font-semibold sm:text-lg lg:text-xl xl:text-2xl">
+						<a href={'/latest-job/jobs/' + item.slug} rel="external" class="md:px-5 p-3 flex-1 flex justify-center items-center text-center font-semibold sm:text-lg lg:text-xl">
 							<span class="block truncate">{item.title}</span><span class="block">{item.total_posts ?? 'N/A' } Posts</span>
 						</a>
 					</Card.Content>
