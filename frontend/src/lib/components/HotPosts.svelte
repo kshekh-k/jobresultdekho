@@ -16,9 +16,9 @@
 	<div class="overflow-x-auto max-w-full py-2 -my-2">
 		<div class="flex justify-between md:grid md:grid-cols-3 gap-4 min-w-[1024px] md:min-w-min">
 			{#each hotJobsWithVariants as item}
-				<Card.Root class="p-0 ease-in-out duration-200 hover:-translate-y-1 w-60 md:w-auto" variant={item.variant}>
+				<Card.Root class="p-0 ease-in-out duration-200 hover:-translate-y-1 w-72 md:w-auto" variant={item.variant}>
 					<Card.Content class="p-0 flex-1 flex items-stretch">
-						<a href={'/latest-job/jobs/' + item.slug} rel="external" class="md:px-6 p-3 flex-1 flex flex-col justify-center items-center text-center font-medium sm:text-lg lg:text-xl">
+						<a href={'/latest-job/jobs/' + item.slug} rel="external" class="md:px-4 p-3 flex-1 flex flex-col justify-center items-center text-center font-medium sm:text-lg lg:text-xl max-w-full">
 							<span class="block truncate max-w-full px-4">{item.title}</span><span class="block px-4 font-bold">({item.total_posts ?? 'N/A' } Posts)</span>
 						</a>
 					</Card.Content>
