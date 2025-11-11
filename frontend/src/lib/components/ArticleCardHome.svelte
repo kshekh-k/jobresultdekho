@@ -138,6 +138,11 @@
 						</div>
 					</div>
 				{/each}
+				{#if items.length >= 10}
+				<div class="">
+					<a href={catLabel}>View More</a>
+				</div>
+				{/if}
 			</Card.Content>
 			<!-- Footer -->
 			{#if viewText && items.length > 10}
