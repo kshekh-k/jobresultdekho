@@ -137,12 +137,12 @@
 							</Button>
 						</div>
 					</div>
-				{/each}
+				{/each}			 
 			</Card.Content>
 			<!-- Footer -->
 			{#if viewText && items.length > 10}
-				<Card.Footer class="flex !p-3 border-t justify-end">
-					<Button href={catLabel} variant="success">{viewText}</Button>
+				<Card.Footer class="flex !p-3 border-t justify-center">
+					<Button href={catLabel} variant="dark" class="!px-5">{viewText}</Button>
 				</Card.Footer>
 			{/if}
 		{/if}
