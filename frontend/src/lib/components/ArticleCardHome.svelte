@@ -24,7 +24,9 @@
 							? 'Match'
 							: catLabel === 'syllabus'
 								? 'Check'
-								: undefined;
+								: catLabel === 'admission'
+									? 'Apply'
+									: undefined;
 	export let type: string | undefined;
 	export let items: {
 		id?: number;
@@ -76,52 +78,70 @@
 					class="hidden md:flex flex-wrap gap-2 px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800"
 				>
 					{#each headers as header}
-					<div class="flex gap-2 flex-1">
-						<div class="shrink-0 md:min-w-6">{header.id}</div>
-						<div class="flex-1">{header.label}</div>						
-					</div>
+						<div class="flex gap-2 flex-1">
+							<div class="shrink-0 md:min-w-6">{header.id}</div>
+							<div class="flex-1">{header.label}</div>
+						</div>
 						<div class="w-20 shrink-0">{header.department}</div>
-						<div class="w-24 shrink-0">{header.date}</div>					 
-						<div class="w-20 shrink-0">{header.timeLeft}</div>					 
+						{#if type !== 'syllabus'}
+							<div class="w-24 shrink-0">{header.date}</div>
+						{/if}
+						{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
+							<div class="w-20 shrink-0">{header.timeLeft}</div>
+						{/if}
 						<div class="w-full md:w-48 shrink-0 text-right">{header.action}</div>
 					{/each}
 				</div>
 				{#each items.slice(0, 10) as item, index}
 					<div
-						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center  font-medium text-slate-600"
+						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center font-medium text-slate-600"
 					>
-					<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
-						<div class="shrink-0 md:min-w-6">{index+1}.</div>
-						
-						<div class="flex-1">
-							<a
-								href="{catLabel}/{type}/{item.slug}"
-								target={item.target}
-								class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1.5 line-clamp-2 "
-							>
-								{item.title} 
-							</a>
-						</div>
-					</div>
-					<div class="w-28 md:w-20 shrink-0 order-2 flex gap-1 items-center ">
-							<Icon name={Landmark} size={16} className="md:hidden" />
-							{item.department?.title || '—'}
-						</div>
-						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center ">
-							<Icon name={Calendar} size={16} className="md:hidden" />
-							{formatDate(item.last_date)}
-						</div>
-						{#if item.last_date}
-							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(item.last_date) < 10
-										? 'text-rose-700' : 'text-green-600'}">
-								<Icon name={Clock} size={16} className="md:hidden" />
-								<b class="inline-flex py-1 font-semibold ">{daysLeftLabel(item.last_date)}</b>
+						<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
+							<div class="shrink-0 md:min-w-6">{index + 1}.</div>
+
+							<div class="flex-1">
+								<a
+									href="{catLabel}/{type}/{item.slug}"
+									target={item.target}
+									class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1.5 line-clamp-2"
+								>
+									{item.title}
+								</a>
 							</div>
+						</div>
+						<div class="w-28 md:w-20 shrink-0 order-2 flex gap-1 items-center">
+							<Icon name={Landmark} size={14} className="md:hidden" />
+							<span class="max-w-full truncate text-sm">{item.department?.title || '—'}</span>
+						</div>
+						{#if type !== 'syllabus'}
+							<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
+								<Icon name={Calendar} size={14} className="md:hidden" />
+								<span class="text-sm">{formatDate(item.last_date)}</span>
+							</div>
+						{/if}
+
+						{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
+							{#if item.last_date}
+								<div
+									class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(
+										item.last_date
+									) < 10
+										? 'text-rose-700'
+										: 'text-green-600'}"
+								>
+									<Icon name={Clock} size={14} className="md:hidden" />
+									<b class="inline-flex font-semibold text-sm">{daysLeftLabel(item.last_date)}</b>
+								</div>
 							{:else}
-							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
-								<Icon name={Clock} size={16} className="md:hidden" />
-								<a href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500" target="_blank">Be Alert</a>
-							</div>
+								<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
+									<Icon name={Clock} size={14} className="md:hidden" />
+									<a
+										href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+										class="inline-flex font-semibold no-underline text-indigo-500 hover:text-rose-500 text-sm"
+										target="_blank">Be Alert</a
+									>
+								</div>
+							{/if}
 						{/if}
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
@@ -137,14 +157,12 @@
 							</Button>
 						</div>
 					</div>
-				{/each}			 
+				{/each}
 			</Card.Content>
 			<!-- Footer -->
-			{#if viewText && items.length > 10}
-				<Card.Footer class="flex !p-3 border-t justify-center">
-					<Button href={catLabel} variant="dark" class="!px-5">{viewText}</Button>
-				</Card.Footer>
-			{/if}
+			<Card.Footer class="flex !p-3 border-t justify-center">
+				<Button href={catLabel} variant="dark" class="!px-5">{viewText}</Button>
+			</Card.Footer>
 		{/if}
 	</Card.Root>
 </div>

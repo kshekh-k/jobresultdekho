@@ -16,7 +16,7 @@
 
 	<!-- Top Section -->
 	<div class="max-w-screen-xl mx-auto px-3">
-		<div class="flex items-center justify-between py-3">
+		<div class="flex items-center justify-between py-1 md:py-3">
 			<!-- Logo -->
 			<div class="xl:text-xl font-bold text-blue-600">
 				<a href="/">

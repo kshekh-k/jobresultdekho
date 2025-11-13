@@ -4,7 +4,7 @@
 	export let bgColor: string | undefined = "bg-sky-800";
 	export let textColor: string | undefined = "text-white";
 	export let rounded: string | undefined = "rounded-2xl";
-	export let paddingY: string | undefined = "py-10";
+	export let paddingY: string | undefined = "py-3 md:py-5 xl:py-10";
 	export let maxWidth: string | undefined = "max-w-6xl";
 	export let align: string | undefined = "text-center";
 	export let className: string | undefined = "";

@@ -30,11 +30,13 @@
 	/>
 </svelte:head>
   <Layout heading={data.category.title}>
+	{#if data.category.description}
 		<Card.Root class="overflow-hidden rounded-md gap-5">			 
 			<Card.Content>
 				<p class="text-slate-600">{data.category.description}</p>
 			</Card.Content>
 		</Card.Root>
+		{/if}
     	{#if data.category.jobs.length}
 			<ArticleCardList
 				type="jobs"
