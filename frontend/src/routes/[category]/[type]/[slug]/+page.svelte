@@ -25,14 +25,34 @@
 								? 'Check Now'
 								: undefined;
 	// console.log('Job', JSON.stringify(data));
+
+	function extractText(node: any): string {
+		if (!node) return '';
+
+		if (typeof node === 'string') return node;
+
+		if (Array.isArray(node)) return node.map(extractText).join(' ');
+
+		if (node.text) return node.text;
+
+		if (node.children) return extractText(node.children);
+
+		return '';
+	}
+
+	const metaDescription = extractText(data.content.short_description);
+
 	console.log('Job full page', data);
+	console.log('description', metaDescription);
 </script>
+
 <svelte:head>
 	<title>{data.content.title} — JobResultDekho</title>
-	<meta
-		name="description"
-		content={data.content.short_description}
-	/>
+	<meta name="description" content={metaDescription} />
+	<meta name="keywords" content={metaDescription} />
+	<meta name="author" content="JobResultDekho.com" />
+	<meta property="og:title" content={data.content.title} />
+	<meta property="og:description" content={metaDescription} />
 </svelte:head>
 <Layout header={false} heading={''}>
 	<Card.Root class="overflow-hidden rounded-md gap-0">
@@ -49,11 +69,13 @@
 								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white"
 									>Department</th
 								>
+								{#if data.type !== 'syllabus'}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Last Date</th
 								>
-								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
+								{/if}
+								{#if data.type === 'jobs' || data.type === 'admit-card' || data.type === 'admission'}
 									<th
 										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 										>Time Left</th
@@ -71,11 +93,15 @@
 						</thead>
 						<tbody class="divide-y">
 							<tr>
-								<td class="sm:px-4 p-2 text-sm border font-semibold">{data.content.department?.title || '—'}</td>
+								<td class="sm:px-4 p-2 text-sm border font-semibold"
+									>{data.content.department?.title || '—'}</td
+								>
+								{#if data.type !== 'syllabus'}
 								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
 									{formatDate(data.content.last_date)}
 								</td>
-								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
+								{/if}
+								{#if data.type === 'jobs' || data.type === 'admit-card' || data.type === 'admission'}
 									{#if data.content.last_date}
 										<td
 											class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
@@ -122,10 +148,12 @@
 								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white w-1/2"
 									>Department</th
 								>
+								{#if data.type !== 'syllabus'}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
 									>Last Date</th
 								>
+								{/if}
 								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
 									<th
 										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
@@ -136,11 +164,14 @@
 						</thead>
 						<tbody class="divide-y">
 							<tr>
-								<td class="sm:px-4 p-2 text-sm border font-semibold">{data.content.department?.title || '—'}</td>
-								<td
-									class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold"
+								<td class="sm:px-4 p-2 text-sm border font-semibold"
+									>{data.content.department?.title || '—'}</td
+								>
+								{#if data.type !== 'syllabus'}
+								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold"
 									>{formatDate(data.content.last_date)}</td
 								>
+								{/if}
 								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
 									{#if data.content.last_date}
 										<td

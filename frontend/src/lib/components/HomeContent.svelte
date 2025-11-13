@@ -139,7 +139,7 @@
 			{#each filteredParents as parent}
 				<Button onclick={() => handleClick(parent.slug)} 
 					variant="light"			
-					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active == parent.slug ? '!bg-emerald-500 text-white' : ''}"
+					class="flex-1 !px-2 md:!px-4 min-w-24 sm:min-w-32 rounded-full {active === parent.slug ? '!bg-emerald-500 text-white' : ''}"
 					>{parent.title}</Button
 				>
 			{/each}
@@ -159,7 +159,7 @@
 				headers={jobHeader}
 				title="Latest Jobs"
 				items={latestJobs}
-				viewText="See More"
+				viewText="View All"
 				catLabel={'latest-job'}
 			/>
 			<ArticleCard
@@ -171,7 +171,7 @@
 				headers={admitCardHeader}
 				title="Admit Cards"
 				items={latestAdmitCards}
-				viewText="See More"
+				viewText="View All"
 				catLabel={'admit-card'}			 
 			/>
 			<ArticleCard
@@ -183,7 +183,7 @@
 				headers={resultHeader}
 				title="Results"
 				items={latestResults}
-				viewText="See More"
+				viewText="View All"
 				catLabel={'result'}
 			/>			
 			<Card.Root class="" variant={'default'}>
@@ -198,7 +198,7 @@
 				headers={answerKeyHeader}
 				title="Answer Key"
 				items={latestAnswerKeys}
-				viewText="See More"
+				viewText="View All"
 				catLabel={'answer-key'}
 			/>
 			<ArticleCard
@@ -210,7 +210,7 @@
 				headers={syllabusHeader}
 				title="Syllabus"
 				items={latestSyllabus}
-				viewText="See More"
+				viewText="View All"
 				catLabel={'syllabus'}
 			/>
 			<ArticleCard
@@ -222,7 +222,7 @@
 				headers={admissionHeader}
 				title="Admissions"
 				items={latestAdmissions}
-				viewText="See More"
+				viewText="View All"
 				catLabel={'admissions'}
 			/>
 		</div>

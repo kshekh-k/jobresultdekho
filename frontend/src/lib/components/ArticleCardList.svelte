@@ -24,6 +24,8 @@
 							? 'Match'
 							: catLabel === 'syllabus'
 								? 'Check'
+							: catLabel === 'addmission'
+								? 'Apply'
 								: undefined;
 
 	export let type: string | undefined;
@@ -87,11 +89,11 @@
 						<div class="flex-1">{header.label}</div>
 					</div>
 					<div class="w-24 shrink-0">{header.department}</div>
-					<div class="w-24 shrink-0">{header.date}</div>
-					{#if header.timeLeft && (type === 'jobs' || type === 'admit-cards' || type === 'admissions')}
+					{#if type !== 'syllabus'}
+						<div class="w-24 shrink-0">{header.date}</div>
+					{/if}
+					{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
 						<div class="w-20 shrink-0">{header.timeLeft}</div>
-					{:else}
-						<div class="w-20 shrink-0">&nbsp;</div>
 					{/if}
 					<div class="md:w-48 shrink-0 text-right">{header.action}</div>
 				{/each}
@@ -116,41 +118,40 @@
 						</div>
 					</div>
 					<div class="w-28 md:w-24 shrink-0 order-2 flex gap-1 items-center">
-						<Icon name={Landmark} size={16} className="md:hidden" />
-						{item.department?.title || '—'}
+						<Icon name={Landmark} size={14} className="md:hidden" />
+						<span class="text-sm">{item.department?.title || '—'}</span>
 					</div>
-
-					<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
-						<Icon name={Calendar} size={16} className="md:hidden" />
-						{formatDate(item.last_date)}
-					</div>
-					{#if type === 'jobs' || type === 'admit-cards' || type === 'admissions'}
+					{#if type !== 'syllabus'}
+						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
+							<Icon name={Calendar} size={14} className="md:hidden" />
+							<span class="text-sm">{formatDate(item.last_date)}</span>
+						</div>
+					{/if}
+					{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
 						{#if item.last_date}
 							<div
-								class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 {daysLeft(
+								class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(
 									item.last_date
 								) < 10
 									? 'text-rose-700 '
 									: 'text-green-600 '}"
 							>
-								<Icon name={Clock} size={16} className="md:hidden" />
-								<b class="inline-flex font-semibold">
+								<Icon name={Clock} size={14} className="md:hidden" />
+								<b class="inline-flex font-semibold text-sm">
 									{daysLeftLabel(item.last_date)}
 								</b>
 							</div>
 						{:else}
 							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
-								<Icon name={Clock} size={16} className="md:hidden" />
+								<Icon name={Clock} size={14} className="md:hidden" />
 								<a
-									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b" target="_blank"
-									class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500">Be Alert</a
+									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+									target="_blank"
+									class="inline-flex font-semibold no-underline text-indigo-500 hover:text-rose-500 text-sm"
+									>Be Alert</a
 								>
 							</div>
 						{/if}
-					{:else}
-						<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center py-1 px-2">
-							&nbsp;
-						</div>
 					{/if}
 					<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 						<Button
