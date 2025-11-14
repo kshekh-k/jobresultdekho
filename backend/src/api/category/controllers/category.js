@@ -42,69 +42,45 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
   
   async findOne(ctx) {
     const { slug } = ctx.params;
-    const category = await strapi.db.query('api::category.category').findOne({
+
+    // 1. Fetch category basic info
+    const category = await strapi.db.query("api::category.category").findOne({
       where: { slug },
-      select: ['id','title','slug','description'],
+      select: ["id", "title", "slug", "description"],
       populate: {
-        parent: {
-          select: ['id','title','slug','description']
-        },
-        children: {
-          select: ['id','title','slug','description']
-        },
-        jobs: {
-          select: ['id','title','slug','last_date'],
-          populate: {
-            department: {
-              select: ['title', 'slug'],
-            },
-          },
-        },
-        admit_cards: {
-          select: ['id','title','slug','last_date'],
-          populate: {
-            department: {
-              select: ['title', 'slug'],
-            },
-          },
-        },
-        results: {
-          select: ['id','title','slug','last_date'],
-          populate: {
-            department: {
-              select: ['title', 'slug'],
-            },
-          },
-        },
-        syllabus: {
-          select: ['id','title','slug','last_date'],
-          populate: {
-            department: {
-              select: ['title', 'slug'],
-            },
-          },
-        },
-        admissions: {
-          select: ['id','title','slug','last_date'],
-          populate: {
-            department: {
-              select: ['title', 'slug'],
-            },
-          },
-        },
-        answer_keys: {
-          select: ['id','title','slug','last_date'],
-          populate: {
-            department: {
-              select: ['title', 'slug'],
-            },
-          },
-        }
-      }
+        parent: { select: ["id", "title", "slug"] },
+        children: { select: ["id", "title", "slug"] },
+      },
     });
 
-    if (!category) return ctx.notFound('Category not found');
-    return category;
+    if (!category) return ctx.notFound("Category not found");
+    const categoryId = category.id;
+
+    // 2. Helper for each listing type
+    const fetchStageRecords = async (stage) => {
+      return await strapi.db.query("api::job.job").findMany({
+        where: {
+          stage,
+          category: categoryId,
+        },
+        orderBy: [{ last_date: "asc" }],
+        select: ["id", "title", "slug", "last_date", "stage"],
+        populate: {
+          department: { select: ["title", "slug"] },
+        },
+      });
+    };
+
+    // 3. Return NEW immutable object (important!)
+    return {
+      ...category,
+      jobs:        await fetchStageRecords("jobs"),
+      results:     await fetchStageRecords("results"),
+      admit_cards: await fetchStageRecords("admit-cards"),
+      answer_keys: await fetchStageRecords("answer-keys"),
+      syllabus:    await fetchStageRecords("syllabus"),
+      admissions:  await fetchStageRecords("admissions"),
+    };
   },
 
 }));
