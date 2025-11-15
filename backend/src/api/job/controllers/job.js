@@ -5,7 +5,7 @@
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
-const currentDate = new Date().toISOString().split("T")[0]; 
+const findLatestByStage = require("../../../utils/findLatestByStage");
 
 module.exports = createCoreController('api::job.job', ({strapi}) => ({
     
@@ -27,27 +27,8 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
 
     async findLatest(ctx) {
         try {
-            const jobs = await strapi.db.query('api::job.job').findMany({
-                where: {
-                    publishedAt: { $notNull: true },
-                    $or: [
-                        { last_date: { $gte: currentDate } },
-                        { last_date: { $null: true } }
-                    ]
-                },
-                orderBy: [{ last_date: 'asc' }],
-                limit: 10,
-                select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
-                populate: {
-                    department: {
-                        select: ['title', 'slug']
-                    },
-                    category: {
-                        select: ['title', 'slug'],
-                    },
-                },
-            });
-
+            const stage = ctx.params.stage || "Job";
+            const jobs = await findLatestByStage(stage);
             return jobs;
         } catch (err) {
             strapi.log.error("❌ Error fetching latest jobs: " + err.message);

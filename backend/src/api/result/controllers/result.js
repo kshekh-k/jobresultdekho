@@ -5,29 +5,17 @@
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
+const findLatestByStage = require("../../../utils/findLatestByStage");
 
 module.exports = createCoreController('api::result.result', ({strapi}) => ({
     async findLatest(ctx) {
         try {
-            const results = await strapi.db.query('api::result.result').findMany({
-                where: { publishedAt: { $notNull: true } },
-                orderBy: { createdAt: 'desc' },
-                limit: 10,
-                select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
-                populate: {
-                    department: {
-                        select: ['title', 'slug']
-                    },
-                    category: {
-                        select: ['title', 'slug'],
-                    },
-                },
-            });
-
+            const stage = ctx.params.stage || "Result";
+            const results = await findLatestByStage(stage);
             return results;
         } catch (err) {
-            strapi.log.error("❌ Error fetching result: " + err.message);
-            ctx.throw(500, "Unable to fetch result");
+            strapi.log.error("❌ Error fetching results: " + err.message);
+            ctx.throw(500, "Unable to fetch results");
         }
     },
 

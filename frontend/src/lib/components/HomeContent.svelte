@@ -164,7 +164,7 @@
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='admit-card'
+				type='admit-cards'
 				open={open==='admit-card'}
 				articleId="admit-card"
 				headerColor="bg-indigo-500"
@@ -191,7 +191,7 @@
 			</Card.Root>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='answer-key'
+				type='answer-keys'
 				open={open==='answer-key'}
 				articleId="answer-key"
 				headerColor="bg-pink-500"
@@ -215,7 +215,7 @@
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='admission'
+				type='admissions'
 				open={open==='admission'}
 				articleId="admission"
 				headerColor="bg-red-800"
