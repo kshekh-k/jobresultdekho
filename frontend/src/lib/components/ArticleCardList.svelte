@@ -119,7 +119,7 @@
 					</div>
 					<div class="w-28 md:w-24 shrink-0 order-2 flex gap-1 items-center">
 						<Icon name={Landmark} size={14} className="md:hidden" />
-						<span class="text-sm">{item.department?.title || '—'}</span>
+						<span class="max-w-full truncate text-sm">{item.department?.title || '—'}</span>
 					</div>
 					{#if type !== 'syllabus'}
 						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
