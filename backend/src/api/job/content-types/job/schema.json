@@ -4,7 +4,7 @@
   "info": {
     "singularName": "job",
     "pluralName": "jobs",
-    "displayName": "Job"
+    "displayName": "Post"
   },
   "options": {
     "draftAndPublish": true
@@ -78,14 +78,14 @@
     },
     "stage": {
       "type": "enumeration",
-      "default": "jobs",
+      "default": "Job",
       "enum": [
-        "jobs",
-        "admit-cards",
-        "results",
-        "admissions",
-        "syllabus",
-        "answer-keys"
+        "Job",
+        "Admit Card",
+        "Result",
+        "Syllabus",
+        "Answer Key",
+        "Admission"
       ]
     }
   }

@@ -30,6 +30,7 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
             const jobs = await strapi.db.query('api::job.job').findMany({
                 where: {
                     publishedAt: { $notNull: true },
+                    stage: 'Job',
                     $or: [
                         { last_date: { $gte: currentDate } },
                         { last_date: { $null: true } }
@@ -41,9 +42,6 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                 populate: {
                     department: {
                         select: ['title', 'slug']
-                    },
-                    category: {
-                        select: ['title', 'slug'],
                     },
                 },
             });

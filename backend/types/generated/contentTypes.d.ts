@@ -636,7 +636,7 @@ export interface ApiJobDisclaimerJobDisclaimer
 export interface ApiJobJob extends Struct.CollectionTypeSchema {
   collectionName: 'jobs';
   info: {
-    displayName: 'Job';
+    displayName: 'Post';
     pluralName: 'jobs';
     singularName: 'job';
   };
@@ -680,16 +680,9 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     short_description: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stage: Schema.Attribute.Enumeration<
-      [
-        'jobs',
-        'admit-cards',
-        'results',
-        'admissions',
-        'syllabus',
-        'answer-keys',
-      ]
+      ['Job', 'Admit Card', 'Result', 'Syllabus', 'Answer Key', 'Admission']
     > &
-      Schema.Attribute.DefaultTo<'jobs'>;
+      Schema.Attribute.DefaultTo<'Job'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     total_posts: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
