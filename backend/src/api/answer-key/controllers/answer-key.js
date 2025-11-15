@@ -5,25 +5,13 @@
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
+const findLatestByStage = require("../../../utils/findLatestByStage");
 
 module.exports = createCoreController('api::answer-key.answer-key', ({strapi}) => ({
     async findLatest(ctx) {
         try {
-            const answerKeys = await strapi.db.query('api::answer-key.answer-key').findMany({
-                where: { publishedAt: { $notNull: true } },
-                orderBy: { createdAt: 'desc' },
-                limit: 10,
-                select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
-                populate: {
-                    department: {
-                        select: ['title', 'slug']
-                    },
-                    category: {
-                        select: ['title', 'slug'],
-                    },
-                },
-            });
-
+            const stage = ctx.params.stage || "Answer Key";
+            const answerKeys = await findLatestByStage(stage);
             return answerKeys;
         } catch (err) {
             strapi.log.error("❌ Error fetching answer keys: " + err.message);
