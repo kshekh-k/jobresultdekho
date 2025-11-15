@@ -29,7 +29,7 @@
 	];
 </script>
 <svelte:head>
-	<title>Blog — JobResultDekho</title>
+	<title>Blog | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content="Blog JobResultDekho.com for support, queries, and feedback."

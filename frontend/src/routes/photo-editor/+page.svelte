@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Photo Editir — JobResultDekho</title>
+	<title>Photo Editir | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content="Photo Editor JobResultDekho.com for support, queries, and feedback."

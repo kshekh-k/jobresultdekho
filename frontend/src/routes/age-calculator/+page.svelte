@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Age Calculator — JobResultDekho</title>
+	<title>Age Calculator | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content="Age Calculator for JobResultDekho.com — jobs, results, admit cards and study material for Indian students."

@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>FAQs — JobResultDekho</title>
+	<title>FAQs | JobResultDekho.com</title>
 	<meta name="description" content="FAQs JobResultDekho.com for support, queries, and feedback." />
 </svelte:head>
 

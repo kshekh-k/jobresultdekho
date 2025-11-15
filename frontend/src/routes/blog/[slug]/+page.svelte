@@ -12,7 +12,7 @@
 	let summary = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 </script>
 <svelte:head>
-	<title>{title} — JobResultDekho</title>
+	<title>{title} | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content={summary}
