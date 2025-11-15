@@ -5,29 +5,17 @@
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
+const findLatestByStage = require("../../../utils/findLatestByStage");
 
 module.exports = createCoreController('api::admit-card.admit-card', ({strapi}) => ({
     async findLatest(ctx) {
         try {
-            const admitCards = await strapi.db.query('api::admit-card.admit-card').findMany({
-                where: { publishedAt: { $notNull: true } },
-                orderBy: { createdAt: 'desc' },
-                limit: 10,
-                select: ['id', 'title', 'last_date', 'reference_url', 'slug'],
-                populate: {
-                    department: {
-                        select: ['title', 'slug']
-                    },
-                    category: {
-                        select: ['title', 'slug'],
-                    },
-                },
-            });
-
+            const stage = ctx.params.stage || "Admit Card";
+            const admitCards = await findLatestByStage(stage);
             return admitCards;
         } catch (err) {
-            strapi.log.error("❌ Error fetching admissions: " + err.message);
-            ctx.throw(500, "Unable to fetch admissions");
+            strapi.log.error("❌ Error fetching admit cards: " + err.message);
+            ctx.throw(500, "Unable to fetch admit cards");
         }
     },
 
