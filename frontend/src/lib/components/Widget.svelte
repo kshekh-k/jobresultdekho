@@ -32,7 +32,7 @@
 				{#each menus as menu}
 					<li>
 						<a
-							href={menu.slug || '/#'}
+							href={menu.slug === 'home' ? '/' : '/' + menu.slug}
 							class="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition"
 						>
 							{#if menu.icon}
