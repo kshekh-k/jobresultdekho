@@ -40,7 +40,7 @@ export async function getContentBySlug(
     case "admissions":
         return await getAdmissionBySlug(slug, fetchFn);
     case "answer-keys":
-        return await getAnswerKeyBySlug(slug, fetchFn);
+        return await getJobBySlug(slug, fetchFn);
     default:
       throw new Error(`Unknown content type: ${type}`);
   }

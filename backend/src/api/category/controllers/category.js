@@ -61,7 +61,8 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
       return await strapi.db.query("api::job.job").findMany({
         where: {
           stage,
-          category: categoryId,
+          category: { id: categoryId },
+          publishedAt: { $notNull: true },
         },
         orderBy: [{ last_date: "asc" }],
         select: ["id", "title", "slug", "last_date", "stage"],
@@ -74,13 +75,14 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     // 3. Return NEW immutable object (important!)
     return {
       ...category,
-      jobs:        await fetchStageRecords("jobs"),
-      results:     await fetchStageRecords("results"),
-      admit_cards: await fetchStageRecords("admit-cards"),
-      answer_keys: await fetchStageRecords("answer-keys"),
-      syllabus:    await fetchStageRecords("syllabus"),
-      admissions:  await fetchStageRecords("admissions"),
+      jobs:        await fetchStageRecords("Job"),      
+      admit_cards: await fetchStageRecords("Admit Card"),
+      results:     await fetchStageRecords("Result"),
+      admissions:  await fetchStageRecords("Admission"),
+      syllabus:    await fetchStageRecords("Syllabus"),
+      answer_keys: await fetchStageRecords("Answer Key"),
     };
   },
+
 
 }));
