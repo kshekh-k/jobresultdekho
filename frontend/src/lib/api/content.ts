@@ -32,9 +32,9 @@ export async function getContentBySlug(
     case "jobs":
       return await getJobBySlug(slug, fetchFn);
     case "admit-cards":
-      return await getAdmitCardBySlug(slug, fetchFn);
+      return await getJobBySlug(slug, fetchFn);
     case "results":
-      return await getResultBySlug(slug, fetchFn);
+      return await getJobBySlug(slug, fetchFn);
     case "syllabus":
         return await getSyllabusBySlug(slug, fetchFn);
     case "admissions":

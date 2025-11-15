@@ -3,7 +3,7 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	export let data: { category: any };
-
+	
 	// Job, Admit Card & Admission Header
 	const commanHeader = [{
 		id: 'No.',	department: 'Dept', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
