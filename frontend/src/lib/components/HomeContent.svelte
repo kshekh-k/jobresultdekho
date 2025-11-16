@@ -201,18 +201,6 @@
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='syllabus'
-				open={open}
-				articleId="syllabus"
-				headerColor="bg-teal-500"
-				headers={syllabusHeader}
-				title="Syllabus"
-				items={latestSyllabus}
-				viewText="View All"
-				catLabel={'syllabus'}
-			/>
-			<ArticleCard
-				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admissions'
 				open={open}
 				articleId="admission"
@@ -222,6 +210,18 @@
 				items={latestAdmissions}
 				viewText="View All"
 				catLabel={'admissions'}
+			/>
+			<ArticleCard
+				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='syllabus'
+				open={open}
+				articleId="syllabus"
+				headerColor="bg-teal-500"
+				headers={syllabusHeader}
+				title="Syllabus"
+				items={latestSyllabus}
+				viewText="View All"
+				catLabel={'syllabus'}
 			/>
 		</div>
 		<Sidebar />		
