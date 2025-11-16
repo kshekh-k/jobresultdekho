@@ -25,8 +25,12 @@
 	import HomeContent from '$lib/components/HomeContent.svelte';
 	import Stats from '$lib/components/Stats.svelte';	
 	import Desclaimer from '$lib/components/Desclaimer.svelte';
+ 
 </script>
-
+<svelte:head>
+  <title>Welcome to JobResultDekho.com</title>
+  <meta name="description" content="Welecom to JobResultDekho, explore for jobs, results, admit cards and study material for Indian students." />
+</svelte:head>
 <div class="space-y-5">
 	<HotPosts {hotJobs} />
 	<div class="max-w-screen-xl mx-auto px-3">

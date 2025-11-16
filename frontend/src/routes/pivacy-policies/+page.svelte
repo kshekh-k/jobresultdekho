@@ -28,7 +28,7 @@
 </script>
 
 <svelte:head>
-  <title>Privacy Policy — JobResultDekho</title>
+  <title>Privacy Policy | JobResultDekho.com</title>
   <meta name="description" content="Privacy Policy for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
   <Layout heading={'Privacy Policy'}>	

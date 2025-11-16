@@ -49,38 +49,25 @@
 </script>
 
 <div class="text-slate-900 text-sm font-medium bg-white py-1">
-	<div class="max-w-screen-xl mx-auto px-3 py-1 after:table after:clear-both">
-		<span
-			class="font-semibold text-white bg-red-500 rounded py-2 px-1 sm:p-3 text-sm leading-1 hidden sm:block shrink-0 sm:float-left"
-			>High Alerts</span
+	<div class="max-w-screen-xl mx-auto px-3 py-1 ">
+<div class="flex gap-2 items-center">
+		<span class="font-semibold text-white bg-red-500 rounded py-2 px-1 sm:p-3 text-sm leading-1 shrink-0"
+			><span class="sm:hidden block">H/A</span><span class="hidden sm:block">High Alerts</span></span
 		>
-		<div class="sm:float-left sm:w-[calc(100%-100px)] sm:pt-1 sm:pl-2">
+		<div class="flex-1 max-w-[calc(100%-41px)] sm:max-w-[calc(100%-104px)]">
 			<div class="swiper mySwiper w-full">
 				<div class="swiper-wrapper">
 					{#each alerts as cat}
 						<div class="swiper-slide">
 							<div class="flex justify-center">
-								<a href="/" class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/20 rounded-sm"
-									>{cat}</a
-								>
+								<a href="/" class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/10 rounded-sm truncate text-center">{cat}</a>
 							</div>
 						</div>
 					{/each}
 				</div>
 			</div>
-
-			<!-- <Carousel.Root
-			class="max-w-full"
-			plugins={[plugin]}
-			onmouseenter={plugin.stop}
-			onmouseleave={plugin.reset}
-		>
-			<Carousel.Content class="flex-1 max-w-full">
-				{#each alerts as cat}
-					<Carousel.Item class="w-full flex justify-center"><a href="/" class="py-1 px-3 ease-in-out duration-200 hover:bg-white/20 rounded-sm">{cat}</a></Carousel.Item>
-				{/each}
-			</Carousel.Content>
-		</Carousel.Root> -->
+ 
 		</div>
+	</div>
 	</div>
 </div>

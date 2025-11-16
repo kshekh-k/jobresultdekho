@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>About Us — JobResultDekho</title>
+	<title>About Us | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content="About Us JobResultDekho.com for support, queries, and feedback."

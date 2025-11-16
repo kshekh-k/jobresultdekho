@@ -23,7 +23,7 @@
 	
 </script>
 <svelte:head>
-	<title>{data.category.title} — JobResultDekho</title>
+	<title>{data.category.title} | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content={data.category.description}

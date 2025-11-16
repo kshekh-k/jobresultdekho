@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact Us — JobResultDekho</title>
+	<title>Contact Us | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content="Contact JobResultDekho.com for support, queries, and feedback."

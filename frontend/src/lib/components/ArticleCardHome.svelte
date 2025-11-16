@@ -62,13 +62,17 @@
 		<!-- Header -->
 		<Card.Header
 			class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 {headerColor}"
-			onclick={toggle}
-			role="button"
 		>
 			<h3 class="text-lg font-semibold text-white">{title}</h3>
-			<span class="p-1 rounded-sm hover:bg-white/20 focus:outline-none text-white">
-				<Icon name={ChevronDown} className={open ? 'rotate-180' : 'rotate-0'} size={20} />
-			</span>
+			<div class="flex justify-between items-center gap-1">
+				<a href={catLabel} class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200">{viewText}</a>
+				<button
+					onclick={toggle}
+					class="p-1 rounded-sm  hover:bg-white/20 focus:outline-none text-white cursor-pointer"
+				>
+					<Icon name={ChevronDown} className={open ? 'rotate-180' : 'rotate-0'} size={20} />
+				</button>
+			</div>
 		</Card.Header>
 
 		<!-- Collapsible Content -->
@@ -159,10 +163,6 @@
 					</div>
 				{/each}
 			</Card.Content>
-			<!-- Footer -->
-			<Card.Footer class="flex !p-3 border-t justify-center">
-				<Button href={catLabel} variant="dark" class="!px-5">{viewText}</Button>
-			</Card.Footer>
 		{/if}
 	</Card.Root>
 </div>

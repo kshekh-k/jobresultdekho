@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-  <title>Terms & Conditions — JobResultDekho</title>
+  <title>Terms & Conditions | JobResultDekho.com</title>
   <meta name="description" content="Terms and Conditions for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
 <InnerHero heading="Terms &amp; Conditions" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>

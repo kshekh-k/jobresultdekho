@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Disclaimer — JobResultDekho</title>
+	<title>Disclaimer | JobResultDekho.com</title>
 	<meta
 		name="description"
 		content="Disclaimer for JobResultDekho.com — jobs, results, admit cards and study material for Indian students."
