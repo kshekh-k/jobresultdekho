@@ -87,6 +87,11 @@
         "Answer Key",
         "Admission"
       ]
+    },
+    "SEO": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     }
   }
 }

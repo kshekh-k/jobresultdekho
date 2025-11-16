@@ -52,6 +52,11 @@
       "type": "component",
       "component": "shared.faq",
       "repeatable": true
+    },
+    "SEO": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     }
   }
 }
