@@ -405,6 +405,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -533,6 +534,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     parent: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     publishedAt: Schema.Attribute.DateTime;
     results: Schema.Attribute.Relation<'oneToMany', 'api::result.result'>;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     syllabus: Schema.Attribute.Relation<'oneToMany', 'api::syllabus.syllabus'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -677,6 +679,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
     short_description: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stage: Schema.Attribute.Enumeration<
@@ -763,6 +766,7 @@ export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

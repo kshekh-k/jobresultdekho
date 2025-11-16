@@ -74,6 +74,11 @@
       "relation": "oneToMany",
       "target": "api::category.category",
       "mappedBy": "parent"
+    },
+    "SEO": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     }
   }
 }
