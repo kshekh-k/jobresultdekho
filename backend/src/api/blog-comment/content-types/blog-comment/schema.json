@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_comments",
+  "info": {
+    "singularName": "blog-comment",
+    "pluralName": "blog-comments",
+    "displayName": "Blog Comment",
+    "description": "Guest comments for blog posts"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "comment": {
+      "type": "text",
+      "required": true
+    },
+    "is_approved": {
+      "type": "boolean",
+      "default": false
+    },
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog.blog",
+      "inversedBy": "comments"
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog-comment.blog-comment",
+      "inversedBy": "replies"
+    },
+    "replies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-comment.blog-comment",
+      "mappedBy": "parent"
+    }
+  }
+}

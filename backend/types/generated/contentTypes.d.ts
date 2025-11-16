@@ -494,6 +494,83 @@ export interface ApiAnswerKeyAnswerKey extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlogCommentBlogComment extends Struct.CollectionTypeSchema {
+  collectionName: 'blog_comments';
+  info: {
+    description: 'Guest comments for blog posts';
+    displayName: 'Blog Comment';
+    pluralName: 'blog-comments';
+    singularName: 'blog-comment';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    comment: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    is_approved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-comment.blog-comment'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    parent: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::blog-comment.blog-comment'
+    >;
+    post: Schema.Attribute.Relation<'manyToOne', 'api::blog.blog'>;
+    publishedAt: Schema.Attribute.DateTime;
+    replies: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-comment.blog-comment'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    description: 'Blog posts';
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    comments: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-comment.blog-comment'
+    >;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    cover_image: Schema.Attribute.Media;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
+    short_description: Schema.Attribute.Text;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -1287,6 +1364,8 @@ declare module '@strapi/strapi' {
       'api::admission.admission': ApiAdmissionAdmission;
       'api::admit-card.admit-card': ApiAdmitCardAdmitCard;
       'api::answer-key.answer-key': ApiAnswerKeyAnswerKey;
+      'api::blog-comment.blog-comment': ApiBlogCommentBlogComment;
+      'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
       'api::department.department': ApiDepartmentDepartment;
       'api::eligiblity-criterea.eligiblity-criterea': ApiEligiblityCritereaEligiblityCriterea;
