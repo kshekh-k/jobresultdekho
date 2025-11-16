@@ -9,7 +9,7 @@
 </script>
 <div class="flex flex-col min-h-screen">	
 	<Header categories={data.categories}/>	
-	<main class="flex-1 py-5 lg:py-10">			
+	<main class="flex-1 py-5 ">			
 		<slot />
 	</main>
 	<Footer categories={data.categories} />

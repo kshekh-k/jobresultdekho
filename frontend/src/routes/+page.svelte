@@ -25,6 +25,7 @@
 	import HomeContent from '$lib/components/HomeContent.svelte';
 	import Stats from '$lib/components/Stats.svelte';	
 	import Desclaimer from '$lib/components/Desclaimer.svelte';
+ 
 </script>
 <svelte:head>
   <title>Welcome to JobResultDekho.com</title>
