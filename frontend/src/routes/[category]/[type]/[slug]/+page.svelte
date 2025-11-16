@@ -72,7 +72,7 @@
 								{#if data.type !== 'syllabus'}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-									>Last Date</th
+									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-card' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'result' ? 'Result Date' : 'Last Date' }</th
 								>
 								{/if}
 								{#if data.type === 'jobs' || data.type === 'admit-card' || data.type === 'admission'}
@@ -151,7 +151,7 @@
 								{#if data.type !== 'syllabus'}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
-									>Last Date</th
+									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-card' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'result' ? 'Result Date' : 'Last Date' }</th
 								>
 								{/if}
 								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
