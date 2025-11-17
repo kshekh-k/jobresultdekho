@@ -37,13 +37,13 @@
 
 	// Sticky nav state
   	let isFixed = false;
-	let open: string | null =null;
+	let open: boolean | null =null;
 	let articleId = '';
   	let navEl: HTMLElement | null = null;
  	let active: string | null = null;
 
   	onMount(() => {
-		open = 'latest-job';
+		open = true;
         if (!navEl) return;
     	const offsetTop = navEl.offsetTop;
 
@@ -61,12 +61,10 @@
 	
 	// Smooth scroll to section and open it
 	function handleClick(id: string) {
-		// const articleId = document.getElementById(id.replace("#", ""));
 		const section = id.replace('#',"");
 		open = section;
 		scrollToSection(id);
 		active = id;
-		// alert(open)
 	}
 	
 	// Smooth scroll to section
@@ -152,7 +150,7 @@
 		<div class="lg:col-span-8 xl:col-span-9 space-y-4 ">
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-20" : "pt-0"}
-				open={open==='latest-job'}
+				open={open}
 				articleId={'latest-job'}
 				type='jobs'
 				headerColor="bg-sky-500"
@@ -165,7 +163,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admit-cards'
-				open={open==='admit-card'}
+				open={open}
 				articleId="admit-card"
 				headerColor="bg-indigo-500"
 				headers={admitCardHeader}
@@ -177,7 +175,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='results'
-				open={open==='result'}
+				open={open}
 				articleId={'result'}
 				headerColor="bg-emerald-500"
 				headers={resultHeader}
@@ -192,7 +190,7 @@
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='answer-keys'
-				open={open==='answer-key'}
+				open={open}
 				articleId="answer-key"
 				headerColor="bg-pink-500"
 				headers={answerKeyHeader}
@@ -203,20 +201,8 @@
 			/>
 			<ArticleCard
 				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
-				type='syllabus'
-				open={open==='syllabus'}
-				articleId="syllabus"
-				headerColor="bg-teal-500"
-				headers={syllabusHeader}
-				title="Syllabus"
-				items={latestSyllabus}
-				viewText="View All"
-				catLabel={'syllabus'}
-			/>
-			<ArticleCard
-				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
 				type='admissions'
-				open={open==='admission'}
+				open={open}
 				articleId="admission"
 				headerColor="bg-red-800"
 				headers={admissionHeader}
@@ -224,6 +210,18 @@
 				items={latestAdmissions}
 				viewText="View All"
 				catLabel={'admissions'}
+			/>
+			<ArticleCard
+				articleWrap={isFixed ? "md:pt-5" : "pt-0"}
+				type='syllabus'
+				open={open}
+				articleId="syllabus"
+				headerColor="bg-teal-500"
+				headers={syllabusHeader}
+				title="Syllabus"
+				items={latestSyllabus}
+				viewText="View All"
+				catLabel={'syllabus'}
 			/>
 		</div>
 		<Sidebar />		
