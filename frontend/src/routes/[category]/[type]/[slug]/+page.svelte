@@ -13,7 +13,7 @@
 	export let buttonLabel: string | undefined =
 		data.type === 'jobs'
 			? 'Apply Now'
-			: data.type === 'result'
+			: data.type === 'results'
 				? 'View Now'
 				: data.type === 'admit-cards'
 					? 'Download Now'
@@ -42,7 +42,7 @@
 
 	const metaDescription = extractText(data.content.short_description);
 
-	console.log('Job full page', data);
+	console.log('Job full page', data.type);
 	console.log('description', metaDescription);
 </script>
 
@@ -72,10 +72,10 @@
 								{#if data.type !== 'syllabus'}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-card' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'result' ? 'Result Date' : 'Last Date' }</th
+									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-cards' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'results' ? 'Result Date' : 'Last Date' }</th
 								>
 								{/if}
-								{#if data.type === 'jobs' || data.type === 'admit-card' || data.type === 'admission'}
+								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
 									<th
 										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 										>Time Left</th
@@ -101,7 +101,7 @@
 									{formatDate(data.content.last_date)}
 								</td>
 								{/if}
-								{#if data.type === 'jobs' || data.type === 'admit-card' || data.type === 'admission'}
+								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
 									{#if data.content.last_date}
 										<td
 											class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
@@ -151,7 +151,7 @@
 								{#if data.type !== 'syllabus'}
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
-									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-card' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'result' ? 'Result Date' : 'Last Date' }</th
+									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-cards' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'result' ? 'Result Date' : 'Last Date' }</th
 								>
 								{/if}
 								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
