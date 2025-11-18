@@ -37,7 +37,7 @@
 
 	// Sticky nav state
   	let isFixed = false;
-	let open: boolean | null =null;
+	let open: boolean | null = true;
 	let articleId = '';
   	let navEl: HTMLElement | null = null;
  	let active: string | null = null;
