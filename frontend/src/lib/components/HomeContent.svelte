@@ -37,7 +37,7 @@
 
 	// Sticky nav state
   	let isFixed = false;
-	let open: boolean | null =null;
+	let open: boolean | undefined = true;
 	let articleId = '';
   	let navEl: HTMLElement | null = null;
  	let active: string | null = null;
@@ -62,7 +62,7 @@
 	// Smooth scroll to section and open it
 	function handleClick(id: string) {
 		const section = id.replace('#',"");
-		open = section;
+		// open = section;
 		scrollToSection(id);
 		active = id;
 	}
