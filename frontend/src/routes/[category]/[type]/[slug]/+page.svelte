@@ -8,6 +8,7 @@
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
+	import ShareButtons from '$lib/components/ShareButtons.svelte';
 
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
@@ -24,35 +25,80 @@
 							: data.type === 'syllabus'
 								? 'Check Now'
 								: undefined;
+
 	// console.log('Job', JSON.stringify(data));
 
-	function extractText(node: any): string {
-		if (!node) return '';
-
-		if (typeof node === 'string') return node;
-
-		if (Array.isArray(node)) return node.map(extractText).join(' ');
-
-		if (node.text) return node.text;
-
-		if (node.children) return extractText(node.children);
-
-		return '';
-	}
-
-	const metaDescription = extractText(data.content.short_description);
-
-	console.log('Job full page', data.type);
-	console.log('description', metaDescription);
+ 
+let seo_title = 'SEO title for this job';
+let seo_tags = 'Keyword-1, Keyword-2, Keyword-3';
+let seo_description = 'SEO Description added here';
+let seo_defulat_img = 'image/jobresultdekho-og-image.png';
+ console.log('Job full page', data.type); 
 </script>
 
 <svelte:head>
 	<title>{data.content.title} | JobResultDekho.com</title>
-	<meta name="description" content={metaDescription} />
-	<meta name="keywords" content={metaDescription} />
+	<meta name="description" content={seo_title} />
+	<meta name="keywords" content={seo_tags} />
 	<meta name="author" content="JobResultDekho.com" />
-	<meta property="og:title" content={data.content.title} />
-	<meta property="og:description" content={metaDescription} />
+	<meta property="og:title" content={seo_title} />
+	<meta property="og:description" content={seo_description} />
+	<meta name="robots" content="index, follow" />
+	<meta name="language" content="en" />
+	<meta name="classification" content="Job Updates, Results, Admit Cards, Govt Jobs" />
+
+	<!-- Canonical URL -->
+  <link rel="canonical" href={'page url goes here'}>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={seo_title} />
+  <meta property="og:description" content={seo_description} />
+  <meta property="og:url" content={'page url goes here'} />
+  <meta property="og:site_name" content="JobResultDekho.com" />
+  <meta property="og:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
+  <meta property="og:image:alt" content={seo_title} />
+
+   <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={seo_title} />
+  <meta name="twitter:description" content={seo_description} />
+  <meta name="twitter:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
+  <meta name="twitter:site" content="@JobResultDekho" />
+
+  <!-- Apple / Android PWA -->
+  <meta name="apple-mobile-web-app-title" content="JobResultDekho" />
+  <meta name="application-name" content="JobResultDekho" />
+  <meta name="theme-color" content="#0c4a6e" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+
+    <!-- Article Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{seo_title}",
+      "description": "{seo_description}",
+      "url": "{page url goes here}",
+      "image": "https://jobresultdekho.com/{seo_defulat_img}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "JobResultDekho.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "/image/jobresultdekho-logo-white.svg"
+        }
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "JobResultDekho.com"
+      },
+      "datePublished": "{data.content.createdAt}",
+      "dateModified": "{data.content.updatedAt}"
+    }
+  </script>
+
 </svelte:head>
 <Layout header={false} heading={''}>
 	<Card.Root class="overflow-hidden rounded-md gap-0">
@@ -70,17 +116,20 @@
 									>Department</th
 								>
 								{#if data.type !== 'syllabus'}
-								<th
-									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-cards' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'results' ? 'Result Date' : 'Last Date' }</th
-								>
-								{/if}
-								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
 									<th
 										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
-										>Time Left</th
+										>{data.type === 'jobs'
+											? 'Last Date'
+											: data.type === 'admit-cards'
+												? 'Exam Date'
+												: data.type === 'answer-key'
+													? 'Release Date'
+													: data.type === 'results'
+														? 'Result Date'
+														: 'Last Date'}</th
 									>
 								{/if}
+
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Total Posts</th
@@ -97,31 +146,11 @@
 									>{data.content.department?.title || '—'}</td
 								>
 								{#if data.type !== 'syllabus'}
-								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
-									{formatDate(data.content.last_date)}
-								</td>
+									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
+										{formatDate(data.content.last_date)}
+									</td>
 								{/if}
-								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
-									{#if data.content.last_date}
-										<td
-											class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
-												data.content.last_date
-											) < 10
-												? 'text-rose-700 bg-rose-50'
-												: 'text-green-600'}"
-											>{daysLeftLabel(data.content.last_date)}
-										</td>
-									{:else}
-										<td class="sm:px-4 p-2 text-sm border font-semibold">
-											<a
-												href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
-												target="_blank"
-												class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500"
-												>Be Alert</a
-											>
-										</td>
-									{/if}
-								{/if}
+
 								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600"
 									>{data.content.total_posts}</td
 								>
@@ -149,15 +178,17 @@
 									>Department</th
 								>
 								{#if data.type !== 'syllabus'}
-								<th
-									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
-									>{data.type === 'jobs' ? 'Last Date' : data.type === 'admit-cards' ? 'Exam Date' : data.type === 'answer-key' ? 'Release Date': data.type === 'result' ? 'Result Date' : 'Last Date' }</th
-								>
-								{/if}
-								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
 									<th
 										class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white w-1/2"
-										>Time Left</th
+										>{data.type === 'jobs'
+											? 'Last Date'
+											: data.type === 'admit-cards'
+												? 'Exam Date'
+												: data.type === 'answer-key'
+													? 'Release Date'
+													: data.type === 'result'
+														? 'Result Date'
+														: 'Last Date'}</th
 									>
 								{/if}
 							</tr>
@@ -168,30 +199,9 @@
 									>{data.content.department?.title || '—'}</td
 								>
 								{#if data.type !== 'syllabus'}
-								<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold"
-									>{formatDate(data.content.last_date)}</td
-								>
-								{/if}
-								{#if data.type === 'jobs' || data.type === 'admit-cards' || data.type === 'admissions'}
-									{#if data.content.last_date}
-										<td
-											class="sm:px-4 p-2 text-sm border font-semibold {daysLeft(
-												data.content.last_date
-											) < 10
-												? 'text-rose-700 bg-rose-50'
-												: 'text-green-600'}"
-											>{daysLeftLabel(data.content.last_date)}
-										</td>
-									{:else}
-										<td class="sm:px-4 p-2 text-sm border font-semibold">
-											<a
-												href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
-												target="_blank"
-												class="inline-flex py-1 font-semibold no-underline text-indigo-500 hover:text-rose-500"
-												>Be Alert</a
-											>
-										</td>
-									{/if}
+									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold"
+										>{formatDate(data.content.last_date)}</td
+									>
 								{/if}
 							</tr>
 						</tbody>
@@ -251,6 +261,24 @@
 				<div class="flex flex-col mt-5">
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
+					<!-- This is job banner -->
+					<div class="flex justify-center items-center">
+						<img src="/image/RRB-NTPC-Vacancy-1.png" alt="" class="object-cover !mt-0" />
+					</div>
+					<div class="flex flex-col gap-2">
+						<h3 class="!my-0">NOTE:</h3>
+						<p class="italic !my-0">
+							छात्रों को सलाह दी जाती है कि फॉर्म भरने से पहले आधिकारिक सूचना में दी गई सभी शर्तों
+							(अंतिम तिथि, आयु सीमा, योग्यता आदि) की जांच अवश्य कर लें। सभी बिंदु पढ़ने के बाद ही
+							आवेदन करें।
+						</p>
+						<p class="italic !my-0">
+							Students are advised to carefully review all the details mentioned in the official
+							notification (such as the last date, age limit, qualifications, etc.) before filling
+							out the form. Please submit your application only after thoroughly reading all the
+							points.
+						</p>
+					</div>
 				</div>
 			</div>
 		</Card.Content>
@@ -352,7 +380,7 @@
 			<RichTextRenderer content={data.content.job_disclaimer?.content} />
 		</Card.Content>
 	</Card.Root>
-	<div class="flex justify-center py-5">
+	<div class="flex justify-center pt-5">
 		<Button
 			href={data.content.reference_url}
 			variant="success"
@@ -361,4 +389,9 @@
 			size="xl">{buttonLabel}</Button
 		>
 	</div>
+
+	<ShareButtons
+		url={`https://jobresultdekho.com/${data.content.category}/${data.type}/${data.content.slug}`}
+		title={data.content.title}
+	/>
 </Layout>

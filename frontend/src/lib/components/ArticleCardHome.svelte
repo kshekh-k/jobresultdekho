@@ -90,9 +90,7 @@
 						{#if type !== 'syllabus'}
 							<div class="w-24 shrink-0">{header.date}</div>
 						{/if}
-						{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
-							<div class="w-20 shrink-0">{header.timeLeft}</div>
-						{/if}
+					 
 						<div class="w-full md:w-48 shrink-0 text-right">{header.action}</div>
 					{/each}
 				</div>
@@ -124,29 +122,7 @@
 							</div>
 						{/if}
 
-						{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
-							{#if item.last_date}
-								<div
-									class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(
-										item.last_date
-									) < 10
-										? 'text-rose-700'
-										: 'text-green-600'}"
-								>
-									<Icon name={Clock} size={14} className="md:hidden" />
-									<b class="inline-flex font-semibold text-sm">{daysLeftLabel(item.last_date)}</b>
-								</div>
-							{:else}
-								<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
-									<Icon name={Clock} size={14} className="md:hidden" />
-									<a
-										href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
-										class="inline-flex font-semibold no-underline text-indigo-500 hover:text-rose-500 text-sm"
-										target="_blank">Be Alert</a
-									>
-								</div>
-							{/if}
-						{/if}
+						 
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
 								href="{catLabel}/{type}/{item.slug}"
