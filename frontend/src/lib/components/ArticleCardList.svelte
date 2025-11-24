@@ -71,11 +71,11 @@
 
 <Card.Root class="overflow-hidden p-0 rounded-md gap-0">
 	<!-- Header -->
-	<Card.Header
+	<!-- <Card.Header
 		class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 {headerColor}"
 	>
 		<h3 class="text-lg font-semibold text-white">{title}</h3>
-	</Card.Header>
+	</Card.Header> -->
 
 	<!-- Collapsible Content -->
 	{#if open}
@@ -91,10 +91,7 @@
 					<div class="w-24 shrink-0">{header.department}</div>
 					{#if type !== 'syllabus'}
 						<div class="w-24 shrink-0">{header.date}</div>
-					{/if}
-					{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
-						<div class="w-20 shrink-0">{header.timeLeft}</div>
-					{/if}
+					{/if}					 
 					<div class="md:w-48 shrink-0 text-right">{header.action}</div>
 				{/each}
 			</div>
@@ -127,32 +124,7 @@
 							<span class="text-sm">{formatDate(item.last_date)}</span>
 						</div>
 					{/if}
-					{#if type === 'jobs' || type === 'admit-card' || type === 'admission'}
-						{#if item.last_date}
-							<div
-								class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center {daysLeft(
-									item.last_date
-								) < 10
-									? 'text-rose-700 '
-									: 'text-green-600 '}"
-							>
-								<Icon name={Clock} size={14} className="md:hidden" />
-								<b class="inline-flex font-semibold text-sm">
-									{daysLeftLabel(item.last_date)}
-								</b>
-							</div>
-						{:else}
-							<div class="md:w-20 shrink-0 order-4 md:order-5 flex gap-1 items-center">
-								<Icon name={Clock} size={14} className="md:hidden" />
-								<a
-									href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
-									target="_blank"
-									class="inline-flex font-semibold no-underline text-indigo-500 hover:text-rose-500 text-sm"
-									>Be Alert</a
-								>
-							</div>
-						{/if}
-					{/if}
+					 
 					<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 						<Button
 							href="{catLabel}/{type}/{item.slug}"
@@ -162,9 +134,9 @@
 						>
 							Detail
 						</Button>
-						<Button href={item.reference_url} target="_blank" variant="success" size="sm">
-							{buttonLabel}
-						</Button>
+						<Button href="{item.reference_url}" target="_blank" variant="success" size="sm">
+								{buttonLabel} 
+						</Button>					 
 					</div>
 				</div>
 			{/each}

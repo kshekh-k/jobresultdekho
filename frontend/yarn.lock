@@ -2247,11 +2247,6 @@ regenerator-runtime@^0.13.7:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
-remixicon@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/remixicon/-/remixicon-4.6.0.tgz#f2adafd18aaa983d61f8c9f7274fa17706da4ddc"
-  integrity sha512-bKM5odjqE1yzVxEZGJE7F79WHhNrJFIKHXR+GG+P1IWXn8AnJZhl8SbIRDJsNAvIqx4VPkNwjuHfc42tutMDpQ==
-
 resolve-from@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
@@ -2462,6 +2457,11 @@ svelte-preprocess@^6.0.0:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-6.0.3.tgz#fdc1f9dc41b6f22bf8b1f059e9f21eaaae181eeb"
   integrity sha512-PLG2k05qHdhmRG7zR/dyo5qKvakhm8IJ+hD2eFRQmMLHp7X3eJnjeupUtvuRpbNiF31RjVw45W+abDwHEmP5OA==
+
+svelte-remixicon@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/svelte-remixicon/-/svelte-remixicon-2.8.0.tgz#64a4560f7c4d333a83c2f6ad6120878c0c690e18"
+  integrity sha512-QfnObwZukDxTMbReTDyAuMNAKTGz/J5j2Hqh0d6dtnDG3IddU/SaCe67mZ4nBwtye/lqqE4hlF2cRwIn8MH6Iw==
 
 svelte-toolbelt@^0.10.4:
   version "0.10.5"
