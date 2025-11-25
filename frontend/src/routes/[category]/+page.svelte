@@ -2,14 +2,22 @@
 	import ArticleCardList from '$lib/components/ArticleCardList.svelte';
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
-	export let data: { category: any };
 
-	// Job, Admit Card & Admission Header
+	export let data: { category: any };
+const headingColor = [
+	"--color-sky-900",
+	"--color-emerald-900",
+	"--color-amber-900",	
+	"--color-indigo-900",
+	"--color-rose-900",
+	"--color-yellow-900",
+];
+	// Header configs
 	const commanHeader = [{
 		id: 'No.',	department: 'Dept', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
 	}];
-  	
- 	const resultHeader = [{
+  
+	const resultHeader = [{
 		id: 'No.', department: 'Dept', label: 'Title', date: 'Result Date', action: 'Action'
 	}];
 
@@ -17,89 +25,85 @@
 		id: 'No.', department: 'Dept', label: 'Title', date: 'Release Date', action: 'Action'
 	}];
 
-	const syllabusHeader = [{ 
+	const syllabusHeader = [{
 		id: 'No.', department: 'Dept', label: 'Title', date: 'Exam Date', action: 'Action'
 	}];
-	
+
+	// ---------------------------------------------
+	// 🔥 Dynamic Sections List (Single Loop Source)
+	// ---------------------------------------------
+	const sections = [
+		{
+			key: "jobs",
+			type: "jobs",
+			headers: commanHeader,
+		 
+		},
+		{
+			key: "results",
+			type: "results",
+			headers: resultHeader,
+			color: "bg-indigo-500"
+		},
+		{
+			key: "admit_cards",
+			type: "admit-cards",
+			headers: commanHeader,
+		 
+		},
+		{
+			key: "answer_keys",
+			type: "answer-keys",
+			headers: answerKeyHeader,
+			 
+		},
+		{
+			key: "syllabus",
+			type: "syllabus",
+			headers: syllabusHeader,
+			 
+		},
+		{
+			key: "admissions",
+			type: "admissions",
+			headers: commanHeader,
+			 
+		}
+	].map((sec, index) => ({
+	...sec,
+	color: headingColor[index], // auto assign color
+}));
 </script>
+
 <svelte:head>
 	<title>{data.category.title} | JobResultDekho.com</title>
-	<meta
-		name="description"
-		content={data.category.description}
-	/>
+	<meta name="description" content={data.category.description} />
 </svelte:head>
-  <Layout heading={data.category.title}>
+
+<Layout heading={data.category.title} headerBgColor="{data.category.title === 'Latest Job' ? 'bg-sky-900' : data.category.title === 'Admit Card' ? 'bg-emerald-900' : data.category.title === 'Result' ? 'bg-amber-900' : data.category.title === 'Syllabus' ? 'bg-indigo-900' : data.category.title === 'Answer Key' ? 'bg-rose-900' : data.category.title === 'Admissions' ? 'bg-yellow-900' : 'bg-neutral-900' }">
+	
 	{#if data.category.description}
-		<Card.Root class="overflow-hidden rounded-md gap-5">			 
+		<Card.Root class="overflow-hidden rounded-md gap-5 ">
 			<Card.Content>
 				<p class="text-slate-600">{data.category.description}</p>
 			</Card.Content>
 		</Card.Root>
-		{/if}
-    	{#if data.category.jobs.length}
-			<ArticleCardList
-				type="jobs"
-				headerColor="bg-sky-500"
-				headers={commanHeader}
-				title={data.category.title}
-				items={data.category.jobs}
-				catLabel={data.category.slug}		 
-			/>	 
-		{/if}
+	{/if}
 
-		{#if data.category.results.length}	 
+	<!-- ============================================
+	     🔥 Single Loop → Auto Render All Sections 
+	     ============================================ -->
+	{#each sections as sec}
+		{#if data.category[sec.key]?.length}
 			<ArticleCardList
-				type="results"
-				headerColor="bg-sky-500"
-				headers={resultHeader}
+				type={sec.type}
+				headerColor={sec.color}
+				headers={sec.headers}
 				title={data.category.title}
-				items={data.category.results}
-				catLabel={data.category.slug}		 
-			/>	 
+				items={data.category[sec.key]}
+				catLabel={data.category.slug}
+			/>
 		{/if}
+	{/each}
 
-		{#if data.category.admit_cards.length}	 
-			<ArticleCardList
-				type="admit-cards"
-				headerColor="bg-sky-500"
-				headers={commanHeader}
-				title={data.category.title}
-				items={data.category.admit_cards}
-				catLabel={data.category.slug}		 
-			/>	 
-		{/if}		
-
-		{#if data.category.answer_keys.length}	 
-			<ArticleCardList
-				type="answer-keys"
-				headerColor="bg-sky-500"
-				headers={answerKeyHeader}
-				title={data.category.title}
-				items={data.category.answer_keys}
-				catLabel={data.category.slug}		 
-			/>	 
-		{/if}
-
-		{#if data.category.syllabus.length}	 
-			<ArticleCardList
-				type="syllabus"
-				headerColor="bg-sky-500"
-				headers={syllabusHeader}
-				title={data.category.title}
-				items={data.category.syllabus}
-				catLabel={data.category.slug}		 
-			/>	 
-		{/if}
-
-		{#if data.category.admissions.length}	 
-			<ArticleCardList
-				type="admissions"
-				headerColor="bg-sky-500"
-				headers={commanHeader}
-				title={data.category.title}
-				items={data.category.admissions}
-				catLabel={data.category.slug}		 
-			/>	 
-		{/if}
- </Layout>
+</Layout>

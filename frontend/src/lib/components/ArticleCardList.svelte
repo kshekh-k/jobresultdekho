@@ -34,8 +34,7 @@
 		department?: any;
 		slug?: string;
 		title?: string;
-		last_date?: any;
-		timeLeft?: string;
+		last_date?: any; 
 		target?: string;
 		reference_url?: string;
 	}[] = [];
@@ -44,8 +43,7 @@
 		id?: string;
 		department?: string;
 		label?: string;
-		date?: string;
-		timeLeft?: string;
+		date?: string; 
 		action?: string;
 	}[] = [];
 
@@ -69,10 +67,10 @@
 	}
 </script>
 
-<Card.Root class="overflow-hidden p-0 rounded-md gap-0">
+<Card.Root class="overflow-hidden p-0 rounded-md gap-0" style="--headerColor:var({headerColor})">
 	<!-- Header -->
 	<!-- <Card.Header
-		class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 {headerColor}"
+		class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 bg-(color:--headerColor)"
 	>
 		<h3 class="text-lg font-semibold text-white">{title}</h3>
 	</Card.Header> -->
@@ -81,7 +79,7 @@
 	{#if open}
 		<Card.Content class="p-0 divide-y">
 			<div
-				class="hidden md:flex flex-wrap gap-2 px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800"
+				class="hidden md:flex flex-wrap gap-2 px-4 bg-(color:--headerColor) text-sm font-medium py-2 text-white"
 			>
 				{#each headers as header}
 					<div class="flex gap-2 flex-1">
@@ -108,7 +106,7 @@
 							<a
 								href="{catLabel}/{type}/{item.slug}"
 								target={item.target}
-								class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-2 line-clamp-2"
+								class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-2 line-clamp-2"
 							>
 								{item.title}
 							</a>
@@ -134,7 +132,7 @@
 						>
 							Detail
 						</Button>
-						<Button href="{item.reference_url}" target="_blank" variant="success" size="sm">
+						<Button href="{item.reference_url}" target="_blank" size="sm" class="bg-(color:--headerColor)">
 								{buttonLabel} 
 						</Button>					 
 					</div>
