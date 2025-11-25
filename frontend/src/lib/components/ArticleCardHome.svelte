@@ -77,19 +77,19 @@
 		{#if open}
 			<Card.Content class="p-0 divide-y">
 				<div
-					class="hidden md:flex flex-wrap gap-2 px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800"
+					class="flex flex-wrap gap-2 justify-between px-2 sm:px-4 bg-slate-100 text-sm font-medium py-2 text-slate-800"
 				>
 					{#each headers as header}
-						<div class="flex gap-2 flex-1">
+						<div class="hidden md:flex gap-2 flex-1">
 							<div class="shrink-0 md:min-w-6">{header.id}</div>
 							<div class="flex-1">{header.label}</div>
 						</div>
-						<div class="w-20 shrink-0">{header.department}</div>
+						<div class="md:w-20 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Landmark} size={14}  /> </span>{header.department}</span></div>
 						{#if type !== 'syllabus'}
-							<div class="w-24 shrink-0">{header.date}</div>
+							<div class="md:w-24 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Calendar} size={14}  /> </span>{header.date}</span></div>
 						{/if}
 					 
-						<div class="w-full md:w-48 shrink-0 text-right">{header.action}</div>
+						<div class="w-full md:w-48 shrink-0 text-right hidden md:flex">{header.action}</div>
 					{/each}
 				</div>
 				{#each items.slice(0, 10) as item, index}
