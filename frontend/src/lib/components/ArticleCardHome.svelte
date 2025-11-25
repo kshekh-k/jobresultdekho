@@ -8,8 +8,8 @@
 
 	export let title: string | undefined;
 	export let articleId: any | undefined;
-	export let articleWrap: string | undefined;
-	export let headerColor: string = 'bg-sky-500';
+	export let articleWrap: string | undefined; 
+	export let headerColor: string = '--color-neutral-900';
 	export let catLabel: string = '/latest-job';
 	export let buttonLabel: string | undefined =
 		catLabel === 'latest-job'
@@ -34,8 +34,7 @@
 		category?: any;
 		slug?: string;
 		title?: string;
-		last_date?: any;
-		timeLeft?: string;
+		last_date?: any; 
 		target?: string;
 		reference_url?: string;
 	}[] = [];
@@ -44,8 +43,7 @@
 		id?: string;
 		department?: string;
 		label?: string;
-		date?: string;
-		timeLeft?: string;
+		date?: string; 
 		action?: string;
 	}[] = [];
 
@@ -57,11 +55,11 @@
 	};
 </script>
 
-<div id={articleId} class={articleWrap}>
+<div id={articleId} class={articleWrap} style="--headerColor:var({headerColor})">
 	<Card.Root class="overflow-hidden p-0 rounded-md gap-0">
 		<!-- Header -->
 		<Card.Header
-			class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 {headerColor}"
+			class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 bg-(color:--headerColor)"
 		>
 			<h3 class="text-lg font-semibold text-white">{title}</h3>
 			<div class="flex justify-between items-center gap-1">
@@ -105,7 +103,7 @@
 								<a
 									href="{catLabel}/{type}/{item.slug}"
 									target={item.target}
-									class="hover:text-sky-700 text-sky-600 font-medium transition-colors flex-1 hover:underline md:py-1.5 line-clamp-2"
+									class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-1.5 line-clamp-2"
 								>
 									{item.title}
 								</a>
@@ -132,7 +130,7 @@
 							>
 								View Detail
 							</Button>
-							<Button href={item.reference_url} target="_blank" variant="success" size="sm">
+							<Button href={item.reference_url} target="_blank" size="sm" class="bg-(color:--headerColor)">
 								{buttonLabel}
 							</Button>
 						</div>

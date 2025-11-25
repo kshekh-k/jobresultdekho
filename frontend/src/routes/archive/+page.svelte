@@ -20,26 +20,18 @@
 		categoryTree = [],
 	} = data;
 
-	import * as Card from '$lib/components/ui/card/index.js';
-	import HotPosts from '$lib/components/HotPosts.svelte';
-	import HomeContent from '$lib/components/HomeContent.svelte';
-	import Stats from '$lib/components/Stats.svelte';	
-	import Desclaimer from '$lib/components/Desclaimer.svelte';
+	 
+ 
+	import ArchiveWatintingContent from '$lib/components/ArchiveWatintingContent.svelte';
+ 
+ 
  
 </script>
 <svelte:head>
-  <title>Welcome to JobResultDekho.com</title>
+  <title>Archive | JobResultDekho.com</title>
   <meta name="description" content="Welecom to JobResultDekho, explore for jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
-<div class="space-y-5">
-	<HotPosts {hotJobs} />
-	<div class="max-w-screen-xl mx-auto px-3">
-		<Card.Root class="" variant={'default'}>
-			<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
-		</Card.Root>
-	</div>
-	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
-	<Stats />
-	<Desclaimer />
-</div>
+ <ArchiveWatintingContent heading="Archive" headerBgColor="bg-sky-900" {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
+ 
+ 
  
