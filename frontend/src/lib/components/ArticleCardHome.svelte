@@ -89,7 +89,7 @@
 							<div class="md:w-24 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Calendar} size={14}  /> </span>{header.date}</span></div>
 						{/if}
 					 
-						<div class="w-full md:w-48 shrink-0 text-right hidden md:flex">{header.action}</div>
+						<div class="w-full md:w-48 shrink-0 text-right hidden md:flex justify-end">{header.action}</div>
 					{/each}
 				</div>
 				{#each items.slice(0, 10) as item, index}

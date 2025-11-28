@@ -7,6 +7,7 @@
 	import 'swiper/css';
 	import 'swiper/css/navigation';
 	import 'swiper/css/pagination';
+	import { SITE_URL } from '$lib/utils';
 
 	// Example alerts (you can fetch from API later)
 	const alerts = [
@@ -60,7 +61,7 @@
 					{#each alerts as cat}
 						<div class="swiper-slide">
 							<div class="flex justify-center">
-								<a href="/" class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/10 rounded-sm truncate text-center">{cat}</a>
+								<a href="{SITE_URL}" class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/10 rounded-sm truncate text-center">{cat}</a>
 							</div>
 						</div>
 					{/each}

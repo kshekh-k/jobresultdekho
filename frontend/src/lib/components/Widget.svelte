@@ -1,11 +1,12 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card/index.js';
+	import { SITE_URL } from '$lib/utils';
 	import Icon from './ui/Icon.svelte';
 	import { ChevronDown } from 'lucide-svelte';
 
 	export let title: string = 'Widget Title';
 	export let headerColor: string = 'bg-sky-500';
-	export let menus: { title: string; slug?: string; icon?: any }[] = [];
+	export let menus: { title: string; slug?: string; icon?: any, target?:string }[] = [];
 
 	let open = true;
 	const toggle = () => {
@@ -32,7 +33,7 @@
 				{#each menus as menu}
 					<li>
 						<a
-							href={menu.slug === 'home' ? '/' : '/' + menu.slug}
+							href={menu.slug === 'home' ? `${SITE_URL}` : menu.slug} target={menu.target}
 							class="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition"
 						>
 							{#if menu.icon}

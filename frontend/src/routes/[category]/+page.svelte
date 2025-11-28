@@ -4,14 +4,15 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 
 	export let data: { category: any };
+ 
 const headingColor = [
-	"--color-sky-900",
-	"--color-emerald-900",
-	"--color-amber-900",	
-	"--color-indigo-900",
-	"--color-rose-900",
-	"--color-yellow-900",
-];
+		'--color-sky-900',
+		'--color-emerald-900',
+		'--color-amber-900',
+		'--color-indigo-900',
+		'--color-rose-900',
+		'--color-yellow-900'
+	];
 	// Header configs
 	const commanHeader = [{
 		id: 'No.',	department: 'Dept', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
@@ -37,42 +38,48 @@ const headingColor = [
 			key: "jobs",
 			type: "jobs",
 			headers: commanHeader,
+			color:headingColor[0]
+		 
+		},
+		{
+			key: "admit_cards",
+			type: "admit-cards",
+			headers: commanHeader,
+			color:headingColor[1]
 		 
 		},
 		{
 			key: "results",
 			type: "results",
 			headers: resultHeader,
-			color: "bg-indigo-500"
-		},
-		{
-			key: "admit_cards",
-			type: "admit-cards",
-			headers: commanHeader,
-		 
-		},
+			color:headingColor[2]
+		},		
 		{
 			key: "answer_keys",
 			type: "answer-keys",
 			headers: answerKeyHeader,
+			color:headingColor[3]
 			 
 		},
 		{
 			key: "syllabus",
 			type: "syllabus",
 			headers: syllabusHeader,
+			color:headingColor[4]
 			 
 		},
 		{
 			key: "admissions",
 			type: "admissions",
 			headers: commanHeader,
+			color:headingColor[5]
 			 
 		}
-	].map((sec, index) => ({
-	...sec,
-	color: headingColor[index], // auto assign color
-}));
+	]
+// 	.map((sec, index) => ({
+// 	...sec,
+// 	color: headingColor[index], // auto assign color
+// }));
 </script>
 
 <svelte:head>
@@ -80,7 +87,11 @@ const headingColor = [
 	<meta name="description" content={data.category.description} />
 </svelte:head>
 
-<Layout heading={data.category.title} headerBgColor="{data.category.title === 'Latest Job' ? 'bg-sky-900' : data.category.title === 'Admit Card' ? 'bg-emerald-900' : data.category.title === 'Result' ? 'bg-amber-900' : data.category.title === 'Syllabus' ? 'bg-indigo-900' : data.category.title === 'Answer Key' ? 'bg-rose-900' : data.category.title === 'Admissions' ? 'bg-yellow-900' : 'bg-neutral-900' }">
+ 
+
+
+
+<Layout heading={data.category.title} headerBgColor="{data.category.title === 'Latest Job' ? 'bg-sky-900' : data.category.title === 'Admit Card' ? 'bg-emerald-900' : data.category.title === 'Result' ? 'bg-amber-900' : data.category.title === 'Answer Key' ? 'bg-indigo-900' : data.category.title === 'Syllabus' ? 'bg-rose-900' : data.category.title === 'Admissions' ? 'bg-yellow-900' : 'bg-neutral-900' }">
 	
 	{#if data.category.description}
 		<Card.Root class="overflow-hidden rounded-md gap-5 ">

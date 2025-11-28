@@ -18,14 +18,14 @@
 	let activeTab: string = "job";
 
 	// Colors
-	const headingColor = [
+const headingColor = [
 		'--color-sky-900',
 		'--color-emerald-900',
 		'--color-amber-900',
 		'--color-indigo-900',
 		'--color-rose-900',
 		'--color-yellow-900'
-	];
+];
 	// Header configs
 	const commanHeader = [{
 		id: 'No.',	department: 'Dept', label: 'Title', date: 'Last Date',  action: 'Action'
