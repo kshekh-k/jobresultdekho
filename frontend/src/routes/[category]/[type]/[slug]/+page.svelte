@@ -3,7 +3,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
+	import { daysLeft, daysLeftLabel, formatDate, SITE_URL } from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
@@ -288,8 +288,10 @@ let seo_defulat_img = 'image/jobresultdekho-og-image.png';
 		<Card.Content class="px-3 lg:px-6">
 			<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5">
 				<!-- Ad Places -->
-				<div class="flex justify-center items-center rounded-sm bg-gray-100 p-5 col-span-5">
-					Ad Place here
+				<div class="flex justify-center items-center rounded-sm bg-gray-100 col-span-5">
+					<a href="{SITE_URL}/contact" class="block rounded-sm overflow-hidden">								 
+								<img src="/image/JobResultdekho-square.png" alt="Job Result Dekho" class="object-cover block " />
+							</a>
 				</div>
 				{#if data.content.important_links}
 					<div class="prose max-w-none bg-indigo-50 rounded-sm p-3 col-span-7">
@@ -391,7 +393,7 @@ let seo_defulat_img = 'image/jobresultdekho-og-image.png';
 	</div>
 
 	<ShareButtons
-		url={`https://jobresultdekho.com/${data.content.category}/${data.type}/${data.content.slug}`}
+		url={`${SITE_URL}/${data.content.category}/${data.type}/${data.content.slug}`}
 		title={data.content.title}
 	/>
 </Layout>

@@ -25,6 +25,7 @@
 	import HomeContent from '$lib/components/HomeContent.svelte';
 	import Stats from '$lib/components/Stats.svelte';	
 	import Desclaimer from '$lib/components/Desclaimer.svelte';
+	import { SITE_URL } from '$lib/utils';
  
 </script>
 <svelte:head>
@@ -37,9 +38,14 @@
 <div class="space-y-5">
 	<HotPosts {hotJobs} />
 	<div class="max-w-screen-xl mx-auto px-3">
-		<Card.Root class="" variant={'default'}>
-			<Card.Content class="flex-1 flex items-stretch text-center">Ad Place here</Card.Content>
-		</Card.Root>
+		<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
+						<Card.Content class="flex items-center justify-center text-center p-1!  ">
+							<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden">
+								<img src="/image/JobResultDekho-Banner-horizontal.png" alt="Job Result Dekho" class="object-cover sm:block hidden" />
+								<img src="/image/JobResultDekho-Banner-mobile.png" alt="Job Result Dekho" class="object-cover block sm:hidden" />
+							</a>
+						</Card.Content>
+			</Card.Root>
 	</div>
 	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
 	<Stats />

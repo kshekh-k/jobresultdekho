@@ -2,6 +2,7 @@
 <script lang="ts">
 	import InnerHero from '$lib/components/InnerHero.svelte';
 	import Layout from '$lib/components/Layout.svelte';
+	import { SITE_URL } from '$lib/utils';
   import { onMount } from 'svelte';
 
   let showCookieBanner = false;
@@ -77,7 +78,7 @@
 
       <section class="bg-white p-5 rounded-xl shadow-md">
         <h2 class="text-xl font-medium mb-3">8. Privacy</h2>
-        <p class="text-slate-700 leading-relaxed">Your use of the website is also governed by our <a href="/privacy" class="text-sky-800 hover:underline">Privacy Policy</a>.</p>
+        <p class="text-slate-700 leading-relaxed">Your use of the website is also governed by our <a href="{SITE_URL}/privacy" class="text-sky-800 hover:underline">Privacy Policy</a>.</p>
       </section>
 
       <section class="bg-white p-5 rounded-xl shadow-md">

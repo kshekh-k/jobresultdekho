@@ -3,6 +3,7 @@
 	import Icon from './ui/Icon.svelte';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
+	import { SITE_URL } from '$lib/utils';
 	
 	export let categories: {
 		title: string;
@@ -35,7 +36,7 @@
 			{#if cat.title.toLowerCase() === 'home'}
 				<li>
 					<a
-						href="/"
+						href="{SITE_URL}"
 						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center {currentPath() ===
 						'/'
 							? 'text-white'

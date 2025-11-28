@@ -5,14 +5,15 @@
 	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
     import * as Card from '$lib/components/ui/card/index.js';
 	import Widget from './Widget.svelte';
+	import { SITE_URL } from '$lib/utils';
 
 	let userMenus = [
-        { title: "Name & DOB on photo", slug: "/photo-editor", icon: CalendarRange },
-        { title: "Image to PDF Converter", slug: "/image-to-pdf", icon: FileText },
-        { title: "Age Calculator", slug: "/age-calculator", icon: Calculator },
-        // { title: "Photo Signature", slug: "#", icon: Signature }, 
-        { title: "MPPEB Template", slug: "#", icon: NotepadTextDashed },
-        { title: "Typing Test", slug: "#", icon: TypeOutline },
+        { title: "Name & DOB on photo", slug: `${SITE_URL}/photo-editor`, icon: CalendarRange },
+        { title: "Image to PDF Converter", slug:  `${SITE_URL}/image-to-pdf`, icon: FileText },
+        { title: "Age Calculator", slug:  `${SITE_URL}/age-calculator`, icon: Calculator },
+        // { title: "Photo Signature", slug:  `${SITE_URL}/`, icon: Signature }, 
+        { title: "Case Converter", slug: "https://techmind.click", icon: NotepadTextDashed, target:'_blank' },
+        { title: "Typing Test", slug:  `${SITE_URL}/#`, icon: TypeOutline },
     ];    
     
     // Parent & children category

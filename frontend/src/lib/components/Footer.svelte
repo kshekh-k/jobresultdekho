@@ -1,4 +1,5 @@
 <script lang="ts"> 
+	import { SITE_URL } from "$lib/utils";
 	import NavbarFooter from "./NavbarFooter.svelte";
 	import SocialMedia from "./SocialMedia.svelte";
 
@@ -11,7 +12,7 @@
 <footer class="bg-slate-900 ">
   <div class="max-w-screen-xl mx-auto px-4 divide-y divide-white/10">
     <div class="py-4 flex flex-wrap items-center justify-between gap-2 flex-col md:flex-row">
-      <h4 class="xl:text-xl font-bold text-white"><a href="/"><img src="/image/jobresultdekho-logo-white.svg" alt="Job Result Dekho logo" class="h-10" /></a></h4>
+      <h4 class="xl:text-xl font-bold text-white"><a href="{SITE_URL}"><img src="/image/jobresultdekho-logo-white.svg" alt="Job Result Dekho logo" class="h-10" /></a></h4>
       <NavbarFooter categories={categories} />
       <SocialMedia />
     </div>
