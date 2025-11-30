@@ -65,7 +65,7 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
           publishedAt: { $notNull: true },
         },
         orderBy: [{ last_date: "asc" }],
-        select: ["id", "title", "slug", "last_date", "stage"],
+        select: ["id", "title", "slug", "last_date", "reference_url", "stage"],
         populate: {
           department: { select: ["title", "slug"] },
         },

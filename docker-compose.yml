@@ -50,7 +50,6 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - "${STRAPI_PORT}:1337"
-    # ✅ Removed backend:/app volume to preserve admin build
     volumes:
       - ./uploads:/app/public/uploads
     depends_on:
