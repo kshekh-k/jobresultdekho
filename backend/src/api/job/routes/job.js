@@ -8,6 +8,12 @@ module.exports = {
     },
     {
       method: 'GET',
+      path: '/jobs/high-alert',
+      handler: 'job.findHighAlertPosts',
+      config: { auth: false }
+    },
+    {
+      method: 'GET',
       path: '/jobs/latest',
       handler: 'job.findLatest',
       config: { auth: false }

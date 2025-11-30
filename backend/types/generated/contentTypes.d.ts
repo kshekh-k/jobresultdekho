@@ -741,6 +741,8 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::eligiblity-criterea.eligiblity-criterea'
     >;
     FAQs: Schema.Attribute.Component<'shared.faq', true>;
+    high_alert: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hot_post: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     important_dates: Schema.Attribute.Component<
       'shared.important-dates',
       false

@@ -12,7 +12,10 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
     async findHotPosts(ctx) {
         try {
             const jobs = await strapi.db.query('api::job.job').findMany({
-                where: { publishedAt: { $notNull: true } },
+                where: { 
+                    publishedAt: { $notNull: true },
+                    hot_post: true,
+                },
                 orderBy: { updatedAt: 'desc' },
                 limit: 6,
                 select: ['title', 'total_posts', 'slug']                
@@ -20,8 +23,27 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
 
             return jobs;
         } catch (err) {
-            strapi.log.error("❌ Error fetching hot jobs: " + err.message);
-            ctx.throw(500, "Unable to fetch hot jobs");
+            strapi.log.error("❌ Error fetching hot posts: " + err.message);
+            ctx.throw(500, "Unable to fetch hot posts");
+        }
+    },
+
+    async findHighAlertPosts(ctx) {
+        try {
+            const jobs = await strapi.db.query('api::job.job').findMany({
+                where: { 
+                    publishedAt: { $notNull: true },
+                    high_alert: true,
+                },
+                orderBy: { updatedAt: 'desc' },
+                limit: 6,
+                select: ['title', 'total_posts', 'slug']                
+            });
+
+            return jobs;
+        } catch (err) {
+            strapi.log.error("❌ Error fetching high alert posts: " + err.message);
+            ctx.throw(500, "Unable to fetch high alert posts");
         }
     },
 

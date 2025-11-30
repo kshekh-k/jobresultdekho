@@ -3,7 +3,8 @@
 		latestAdmissions?: any[];
 		latestAdmitCards?: any[];
 		latestAnswerKeys?: any[];
-		hotJobs?: any[];
+		hotPosts?: any[];
+		highAlertPosts?: any[];
 		latestJobs?: any[];
 		latestResults?: any[];
 		latestSyllabus?: any[];
@@ -13,7 +14,8 @@
 		latestAdmissions = [],
 		latestAdmitCards = [],
 		latestAnswerKeys = [],
-		hotJobs = [],
+		hotPosts = [],
+		highAlertPosts = [],
 		latestJobs = [],
 		latestResults = [],
 		latestSyllabus = [],
@@ -36,16 +38,16 @@
   <link rel="icon" href="/favicon/favicon-16x16.png" sizes="16x16" type="image/png" />
 </svelte:head>
 <div class="space-y-5">
-	<HotPosts {hotJobs} />
+	<HotPosts {hotPosts} />
 	<div class="max-w-screen-xl mx-auto px-3">
 		<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
-						<Card.Content class="flex items-center justify-center text-center p-1!  ">
-							<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden">
-								<img src="/image/JobResultDekho-Banner-horizontal.png" alt="Job Result Dekho" class="object-cover sm:block hidden" />
-								<img src="/image/JobResultDekho-Banner-mobile.png" alt="Job Result Dekho" class="object-cover block sm:hidden" />
-							</a>
-						</Card.Content>
-			</Card.Root>
+			<Card.Content class="flex items-center justify-center text-center p-1!  ">
+				<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden">
+					<img src="/image/JobResultDekho-Banner-horizontal.png" alt="Job Result Dekho" class="object-cover sm:block hidden" />
+					<img src="/image/JobResultDekho-Banner-mobile.png" alt="Job Result Dekho" class="object-cover block sm:hidden" />
+				</a>
+			</Card.Content>
+		</Card.Root>
 	</div>
 	<HomeContent {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
 	<Stats />

@@ -3,7 +3,8 @@
 		latestAdmissions?: any[];
 		latestAdmitCards?: any[];
 		latestAnswerKeys?: any[];
-		hotJobs?: any[];
+		hotPosts?: any[];
+		highAlertPosts?: any[];
 		latestJobs?: any[];
 		latestResults?: any[];
 		latestSyllabus?: any[];
@@ -13,25 +14,21 @@
 		latestAdmissions = [],
 		latestAdmitCards = [],
 		latestAnswerKeys = [],
-		hotJobs = [],
+		hotPosts = [],
+		highAlertPosts = [],
 		latestJobs = [],
 		latestResults = [],
 		latestSyllabus = [],
 		categoryTree = [],
-	} = data;
-
-	 
+	} = data;	 
  
-	import ArchiveWatintingContent from '$lib/components/ArchiveWatintingContent.svelte';
- 
- 
- 
+	import ArchiveWatintingContent from '$lib/components/ArchiveWatintingContent.svelte'; 
 </script>
 <svelte:head>
   <title>Archive | JobResultDekho.com</title>
   <meta name="description" content="Welecom to JobResultDekho, explore for jobs, results, admit cards and study material for Indian students." />
 </svelte:head>
- <ArchiveWatintingContent heading="Archive" headerBgColor="bg-sky-900" {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
+<ArchiveWatintingContent heading="Archive" headerBgColor="bg-sky-900" {latestAdmissions} {latestAdmitCards} {latestAnswerKeys} {latestJobs} {latestResults} {latestSyllabus} {categoryTree} />
  
  
  
