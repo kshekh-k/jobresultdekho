@@ -92,6 +92,14 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "high_alert": {
+      "type": "boolean",
+      "default": false
+    },
+    "hot_post": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

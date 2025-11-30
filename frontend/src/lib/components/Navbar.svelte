@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ChevronDown } from 'lucide-svelte';
 	import Icon from './ui/Icon.svelte';
-
 	import { SITE_URL } from '$lib/utils';
 	import { page } from '$app/stores';
 
@@ -41,9 +40,7 @@ const closeMenu = () => {
 	const isActive = (slug: string) => {
 		const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
 		return currentPath === normalizedSlug;
-	};
-
-	 
+	};	 
 </script>
 
 <!-- ========================= -->

@@ -7,13 +7,14 @@
 	import Panel from '$lib/components/ui/Panel.svelte';
 	import { SITE_URL } from '$lib/utils';
 	export let categories: any[] = [];
+	export let highAlertPosts: any[] = [];
 
 	let isMoreOpen = false;
 </script>
 
 <header class="w-full bg-sky-800">
 	<!-- 🔴 High Alerts Row -->
-	<Annoucment />
+	<Annoucment highAlertPosts={highAlertPosts} />
 
 	<!-- Top Section -->
 	<div class="max-w-screen-xl mx-auto px-3">
