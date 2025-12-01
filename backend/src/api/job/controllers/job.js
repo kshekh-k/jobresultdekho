@@ -36,7 +36,7 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                     high_alert: true,
                 },
                 orderBy: { updatedAt: 'desc' },
-                limit: 6,
+                limit: 20,
                 select: ['title', 'total_posts', 'slug']                
             });
 
@@ -65,7 +65,7 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
             where: { slug },
             select: [
                 'title','slug','short_description','content','last_date',
-                'reference_url', 'total_posts', 'stage'
+                'reference_url','total_posts','stage',
             ],
             populate: {
                 category: {
@@ -74,6 +74,7 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                 department: {
                     select: ['title', 'slug']
                 },
+                banner_image: true,
                 important_dates: {
                     select: [
                         'vacancy_notification_date', 'apply_online_start_date', 'apply_online_end_date',
@@ -99,6 +100,9 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                 },
                 FAQs: {
                     select: ['question', 'answer']
+                },
+                SEO: {
+                    select: ['title', 'tags', 'description']
                 }
             }
         });

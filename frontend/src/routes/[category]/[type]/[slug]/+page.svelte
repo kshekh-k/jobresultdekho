@@ -3,12 +3,18 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { daysLeft, daysLeftLabel, formatDate, SITE_URL } from '$lib/utils';
+	import { daysLeft, daysLeftLabel, formatDate, getMediaUrl ,SITE_URL } from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
+	import { page } from '$app/stores';
+	
+	$: currentUrl = $page.url.href;
+	$: {
+		console.log("URL:", currentUrl);
+	}
 
 	export let data: { content: any; type: string };
 	export let buttonLabel: string | undefined =
@@ -26,60 +32,55 @@
 								? 'Check Now'
 								: undefined;
 
-	// console.log('Job', JSON.stringify(data));
+	//console.log('Job', data.content.banner_image.url);
+	//console.log('Media URL', getMediaUrl(data.content.banner_image.url));
+	let seo_defulat_img = 'image/jobresultdekho-og-image.png';
 
- 
-let seo_title = 'SEO title for this job';
-let seo_tags = 'Keyword-1, Keyword-2, Keyword-3';
-let seo_description = 'SEO Description added here';
-let seo_defulat_img = 'image/jobresultdekho-og-image.png';
- console.log('Job full page', data.type); 
 </script>
 
 <svelte:head>
 	<title>{data.content.title} | JobResultDekho.com</title>
-	<meta name="description" content={seo_title} />
-	<meta name="keywords" content={seo_tags} />
+	<meta name="description" content={data.content.SEO.title} />
+	<meta name="keywords" content={data.content.SEO.tags} />
 	<meta name="author" content="JobResultDekho.com" />
-	<meta property="og:title" content={seo_title} />
-	<meta property="og:description" content={seo_description} />
+	<meta property="og:title" content={data.content.SEO.title} />
+	<meta property="og:description" content={data.content.SEO.description} />
 	<meta name="robots" content="index, follow" />
 	<meta name="language" content="en" />
 	<meta name="classification" content="Job Updates, Results, Admit Cards, Govt Jobs" />
 
 	<!-- Canonical URL -->
-  <link rel="canonical" href={'page url goes here'}>
+	<link rel="canonical" href={'page url goes here'}>
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content={seo_title} />
-  <meta property="og:description" content={seo_description} />
-  <meta property="og:url" content={'page url goes here'} />
-  <meta property="og:site_name" content="JobResultDekho.com" />
-  <meta property="og:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
-  <meta property="og:image:alt" content={seo_title} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content={data.content.SEO.title} />
+	<meta property="og:description" content={data.content.SEO.description} />
+	<meta property="og:url" content={'page url goes here'} />
+	<meta property="og:site_name" content="JobResultDekho.com" />
+	<meta property="og:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
+	<meta property="og:image:alt" content={data.content.SEO.title} />
 
-   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={seo_title} />
-  <meta name="twitter:description" content={seo_description} />
-  <meta name="twitter:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
-  <meta name="twitter:site" content="@JobResultDekho" />
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.content.SEO.title} />
+	<meta name="twitter:description" content={data.content.SEO.description} />
+	<meta name="twitter:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
+	<meta name="twitter:site" content="@JobResultDekho" />
 
-  <!-- Apple / Android PWA -->
-  <meta name="apple-mobile-web-app-title" content="JobResultDekho" />
-  <meta name="application-name" content="JobResultDekho" />
-  <meta name="theme-color" content="#0c4a6e" />
-  <meta name="mobile-web-app-capable" content="yes" />
-
+	<!-- Apple / Android PWA -->
+	<meta name="apple-mobile-web-app-title" content="JobResultDekho" />
+	<meta name="application-name" content="JobResultDekho" />
+	<meta name="theme-color" content="#0c4a6e" />
+	<meta name="mobile-web-app-capable" content="yes" />
 
     <!-- Article Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
+  	<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "{seo_title}",
-      "description": "{seo_description}",
+      "headline": "{data.content.SEO.title}",
+      "description": "{data.content.SEO.description}",
       "url": "{page url goes here}",
       "image": "https://jobresultdekho.com/{seo_defulat_img}",
       "publisher": {
@@ -97,7 +98,7 @@ let seo_defulat_img = 'image/jobresultdekho-og-image.png';
       "datePublished": "{data.content.createdAt}",
       "dateModified": "{data.content.updatedAt}"
     }
-  </script>
+  	</script>
 
 </svelte:head>
 <Layout header={false} heading={''}>
@@ -263,7 +264,7 @@ let seo_defulat_img = 'image/jobresultdekho-og-image.png';
 					<RichTextRenderer content={data.content?.content} />
 					<!-- This is job banner -->
 					<div class="flex justify-center items-center">
-						<img src="/image/RRB-NTPC-Vacancy-1.png" alt="" class="object-cover !mt-0" />
+						<img src="{getMediaUrl(data.content.banner_image.url)}" alt="" class="object-cover !mt-0" />
 					</div>
 					<div class="flex flex-col gap-2">
 						<h3 class="!my-0">NOTE:</h3>
@@ -290,8 +291,8 @@ let seo_defulat_img = 'image/jobresultdekho-og-image.png';
 				<!-- Ad Places -->
 				<div class="flex justify-center items-center rounded-sm bg-gray-100 col-span-5">
 					<a href="{SITE_URL}/contact" class="block rounded-sm overflow-hidden">								 
-								<img src="/image/JobResultdekho-square.png" alt="Job Result Dekho" class="object-cover block " />
-							</a>
+						<img src="/image/JobResultdekho-square.png" alt="Job Result Dekho" class="object-cover block " />
+					</a>
 				</div>
 				{#if data.content.important_links}
 					<div class="prose max-w-none bg-indigo-50 rounded-sm p-3 col-span-7">
@@ -392,8 +393,5 @@ let seo_defulat_img = 'image/jobresultdekho-og-image.png';
 		>
 	</div>
 
-	<ShareButtons
-		url={`${SITE_URL}/${data.content.category}/${data.type}/${data.content.slug}`}
-		title={data.content.title}
-	/>
+	<ShareButtons url={currentUrl} title={data.content.title} />
 </Layout>

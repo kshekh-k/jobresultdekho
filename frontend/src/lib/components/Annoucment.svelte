@@ -8,7 +8,7 @@
 	import 'swiper/css/navigation';
 	import 'swiper/css/pagination';
 	import { SITE_URL } from '$lib/utils';
-	const icons = ["🔥", "📢", "⚡"];
+	const icons = ["🔥", "📢", "⚡", "✨", "📈","⭐","🆕","🔔","⏱","🗓"];
 
 	// Example alerts (you can fetch from API later)
 	export let highAlertPosts: any[] = [];

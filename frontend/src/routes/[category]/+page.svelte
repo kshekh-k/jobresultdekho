@@ -5,7 +5,7 @@
 
 	export let data: { category: any };
  
-const headingColor = [
+	const headingColor = [
 		'--color-sky-900',
 		'--color-emerald-900',
 		'--color-amber-900',
@@ -34,48 +34,47 @@ const headingColor = [
 	// 🔥 Dynamic Sections List (Single Loop Source)
 	// ---------------------------------------------
 	const sections = [
-		{
-			key: "jobs",
-			type: "jobs",
-			headers: commanHeader,
-			color:headingColor[0]
-		 
-		},
-		{
-			key: "admit_cards",
-			type: "admit-cards",
-			headers: commanHeader,
-			color:headingColor[1]
-		 
-		},
-		{
-			key: "results",
-			type: "results",
-			headers: resultHeader,
-			color:headingColor[2]
-		},		
-		{
-			key: "answer_keys",
-			type: "answer-keys",
-			headers: answerKeyHeader,
-			color:headingColor[3]
-			 
-		},
-		{
-			key: "syllabus",
-			type: "syllabus",
-			headers: syllabusHeader,
-			color:headingColor[4]
-			 
-		},
-		{
-			key: "admissions",
-			type: "admissions",
-			headers: commanHeader,
-			color:headingColor[5]
-			 
-		}
-	]
+	{
+		key: "jobs",
+		type: "jobs",
+		headers: commanHeader,
+		color:headingColor[0]
+		
+	},
+	{
+		key: "admit_cards",
+		type: "admit-cards",
+		headers: commanHeader,
+		color:headingColor[1]
+		
+	},
+	{
+		key: "results",
+		type: "results",
+		headers: resultHeader,
+		color:headingColor[2]
+	},		
+	{
+		key: "answer_keys",
+		type: "answer-keys",
+		headers: answerKeyHeader,
+		color:headingColor[3]
+			
+	},
+	{
+		key: "syllabus",
+		type: "syllabus",
+		headers: syllabusHeader,
+		color:headingColor[4]
+			
+	},
+	{
+		key: "admissions",
+		type: "admissions",
+		headers: commanHeader,
+		color:headingColor[5]
+			
+	}]
 // 	.map((sec, index) => ({
 // 	...sec,
 // 	color: headingColor[index], // auto assign color
@@ -86,10 +85,6 @@ const headingColor = [
 	<title>{data.category.title} | JobResultDekho.com</title>
 	<meta name="description" content={data.category.description} />
 </svelte:head>
-
- 
-
-
 
 <Layout heading={data.category.title} headerBgColor="{data.category.title === 'Latest Job' ? 'bg-sky-900' : data.category.title === 'Admit Card' ? 'bg-emerald-900' : data.category.title === 'Result' ? 'bg-amber-900' : data.category.title === 'Answer Key' ? 'bg-indigo-900' : data.category.title === 'Syllabus' ? 'bg-rose-900' : data.category.title === 'Admissions' ? 'bg-yellow-900' : 'bg-neutral-900' }">
 	

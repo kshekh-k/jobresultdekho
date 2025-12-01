@@ -727,6 +727,9 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'shared.application-fee',
       false
     >;
+    banner_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
@@ -762,7 +765,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     short_description: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stage: Schema.Attribute.Enumeration<
-      ['Job', 'Admit Card', 'Result', 'Syllabus', 'Answer Key', 'Admission']
+      ['Job', 'Admit Card', 'Result', 'Answer Key']
     > &
       Schema.Attribute.DefaultTo<'Job'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
