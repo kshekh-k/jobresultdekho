@@ -266,20 +266,6 @@
 					<div class="flex justify-center items-center">
 						<img src="{getMediaUrl(data.content.banner_image?.url)}" alt="" class="object-cover !mt-0" />
 					</div>
-					<div class="flex flex-col gap-2">
-						<h3 class="!my-0">NOTE:</h3>
-						<p class="italic !my-0">
-							छात्रों को सलाह दी जाती है कि फॉर्म भरने से पहले आधिकारिक सूचना में दी गई सभी शर्तों
-							(अंतिम तिथि, आयु सीमा, योग्यता आदि) की जांच अवश्य कर लें। सभी बिंदु पढ़ने के बाद ही
-							आवेदन करें।
-						</p>
-						<p class="italic !my-0">
-							Students are advised to carefully review all the details mentioned in the official
-							notification (such as the last date, age limit, qualifications, etc.) before filling
-							out the form. Please submit your application only after thoroughly reading all the
-							points.
-						</p>
-					</div>
 				</div>
 			</div>
 		</Card.Content>
