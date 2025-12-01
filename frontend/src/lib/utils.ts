@@ -1,6 +1,10 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+export const SITE_URL = import.meta.env.VITE_SITE_URL;
+export const API_URL = import.meta.env.VITE_API_URL;
+export const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -53,7 +57,22 @@ export function daysLeftLabel(dateString: string): string {
   return `${months} ${months === 1 ? 'Month' : 'Months'}`;
 }
 
+export function getSiteUrl(): string {
+  return SITE_URL;
+}
 
+export function getApiUrl(): string {
+  return API_URL;
+}
+
+export function getMediaUrl(path: string): string {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  } else {
+    return `${STRAPI_URL}${path}`;
+  }
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type WithoutChild<T> = T extends { child?: any } ? Omit<T, "child"> : T;
@@ -62,4 +81,4 @@ export type WithoutChild<T> = T extends { child?: any } ? Omit<T, "child"> : T;
 export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, "children"> : T;
 export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
-export const SITE_URL = import.meta.env.VITE_SITE_URL;
+

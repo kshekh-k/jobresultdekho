@@ -83,9 +83,7 @@
         "Job",
         "Admit Card",
         "Result",
-        "Syllabus",
-        "Answer Key",
-        "Admission"
+        "Answer Key"
       ]
     },
     "SEO": {
@@ -100,6 +98,16 @@
     "hot_post": {
       "type": "boolean",
       "default": false
+    },
+    "banner_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
