@@ -40,11 +40,11 @@
 
 <svelte:head>
 	<title>{data.content.title} | JobResultDekho.com</title>
-	<meta name="description" content={data.content.SEO.title} />
-	<meta name="keywords" content={data.content.SEO.tags} />
+	<meta name="description" content={data.content.SEO?.title} />
+	<meta name="keywords" content={data.content.SEO?.tags} />
 	<meta name="author" content="JobResultDekho.com" />
-	<meta property="og:title" content={data.content.SEO.title} />
-	<meta property="og:description" content={data.content.SEO.description} />
+	<meta property="og:title" content={data.content.SEO?.title} />
+	<meta property="og:description" content={data.content.SEO?.description} />
 	<meta name="robots" content="index, follow" />
 	<meta name="language" content="en" />
 	<meta name="classification" content="Job Updates, Results, Admit Cards, Govt Jobs" />
@@ -54,17 +54,17 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content={data.content.SEO.title} />
-	<meta property="og:description" content={data.content.SEO.description} />
+	<meta property="og:title" content={data.content.SEO?.title} />
+	<meta property="og:description" content={data.content.SEO?.description} />
 	<meta property="og:url" content={'page url goes here'} />
 	<meta property="og:site_name" content="JobResultDekho.com" />
 	<meta property="og:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
-	<meta property="og:image:alt" content={data.content.SEO.title} />
+	<meta property="og:image:alt" content={data.content.SEO?.title} />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={data.content.SEO.title} />
-	<meta name="twitter:description" content={data.content.SEO.description} />
+	<meta name="twitter:title" content={data.content.SEO?.title} />
+	<meta name="twitter:description" content={data.content.SEO?.description} />
 	<meta name="twitter:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
 	<meta name="twitter:site" content="@JobResultDekho" />
 
@@ -79,8 +79,8 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "{data.content.SEO.title}",
-      "description": "{data.content.SEO.description}",
+      "headline": "{data.content.SEO?.title}",
+      "description": "{data.content.SEO?.description}",
       "url": "{page url goes here}",
       "image": "https://jobresultdekho.com/{seo_defulat_img}",
       "publisher": {
@@ -264,7 +264,7 @@
 					<RichTextRenderer content={data.content?.content} />
 					<!-- This is job banner -->
 					<div class="flex justify-center items-center">
-						<img src="{getMediaUrl(data.content.banner_image.url)}" alt="" class="object-cover !mt-0" />
+						<img src="{getMediaUrl(data.content.banner_image?.url)}" alt="" class="object-cover !mt-0" />
 					</div>
 					<div class="flex flex-col gap-2">
 						<h3 class="!my-0">NOTE:</h3>
