@@ -40,7 +40,7 @@
       // ✅ call centralized API
       const data = await createContact({ ...payload, recaptchaToken: token });
       alert('Thanks! Your inquiry has been submitted.');
-      //firstName = lastName = email = phone = message = '';
+      firstName = lastName = email = phone = message = '';
     } catch (error) {
       alert(String(error));
     }

@@ -30,6 +30,7 @@ module.exports = () => ({
       data: {
         ...data,
         recaptcha_score: recaptchaScore,
+        publishedAt: null,
       },
     });
   },
