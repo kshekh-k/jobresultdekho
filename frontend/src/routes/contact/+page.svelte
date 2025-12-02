@@ -1,33 +1,52 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import { Button } from '$lib/components/ui/button';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import { Textarea } from '$lib/components/ui/textarea';
-	import { Mail, Phone, MapPin } from 'lucide-svelte';
-	import Icon from '$lib/components/ui/Icon.svelte';
-	import SocialMedia from '$lib/components/SocialMedia.svelte';
-	import InnerHero from '$lib/components/InnerHero.svelte';
-	import Layout from '$lib/components/Layout.svelte';
+  import { createEventDispatcher } from 'svelte';
+  import { Button } from '$lib/components/ui/button';
+  import Input from '$lib/components/ui/input/input.svelte';
+  import { Textarea } from '$lib/components/ui/textarea';
+  import { Mail, Phone, MapPin } from 'lucide-svelte';
+  import Icon from '$lib/components/ui/Icon.svelte';
+  import SocialMedia from '$lib/components/SocialMedia.svelte';
+  import InnerHero from '$lib/components/InnerHero.svelte';
+  import Layout from '$lib/components/Layout.svelte';
 
-	const dispatch = createEventDispatcher();
+  // ✅ import centralized API function
+  import { createContact } from '$lib/api/contact';
 
-	let firstName = '';
-	let lastName = '';
-	let email = '';
-	let phone = '';
-	let message = '';
+  const dispatch = createEventDispatcher();
 
-	function handleSubmit(e: Event) {
-		e.preventDefault();
-		console.log({ firstName, lastName, email, message });
-		dispatch('submit', { firstName, lastName, email, message });
-		alert('Thank you for contacting us! We will get back to you soon.');
-		firstName = '';
-		lastName = '';
-		email = '';
-		message = '';
-	}
+  let firstName = '';
+  let lastName = '';
+  let email = '';
+  let phone = '';
+  let message = '';
+
+  async function handleSubmit(e: Event) {
+    e.preventDefault();
+
+    const payload = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      phone,
+      message,
+    };
+
+    try {
+      // ✅ reCAPTCHA integration
+      const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+      await new Promise<void>((resolve) => grecaptcha.ready(() => resolve()));
+      const token = await grecaptcha.execute(siteKey, { action: 'contact' });
+
+      // ✅ call centralized API
+      const data = await createContact({ ...payload, recaptchaToken: token });
+      alert('Thanks! Your inquiry has been submitted.');
+      //firstName = lastName = email = phone = message = '';
+    } catch (error) {
+      alert(String(error));
+    }
+  }
 </script>
+
 
 <svelte:head>
 	<title>Contact Us | JobResultDekho.com</title>
