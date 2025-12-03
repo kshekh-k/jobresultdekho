@@ -29,6 +29,10 @@ module.exports = createCoreService('api::job.job', ({ strapi }) => ({
         sort: { createdAt: 'desc' },
         start,
         limit: safePageSize,
+        fields: ['title', 'slug', 'last_date', 'reference_url'],
+        populate: {
+          department: { fields: ['title'] }
+        },
       }),
       strapi.entityService.count('api::job.job', { filters }),
     ]);

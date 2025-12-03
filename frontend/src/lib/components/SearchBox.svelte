@@ -1,6 +1,5 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import Button from './ui/button/button.svelte';
   import Input from './ui/input/input.svelte';
   import Icon from './ui/Icon.svelte';
   import { Search } from 'lucide-svelte';
@@ -18,19 +17,20 @@
   }
 </script>
 
-<form on:submit={handleSearch} class="relative flex items-center">
+<form on:submit={handleSearch} class="relative w-full">
+  <!-- Input with right padding for icon -->
   <Input
     type="search"
     bind:value
     placeholder={placeholder}
-    class={`bg-white border border-gray-300 rounded-sm focus:ring-0 flex-1 ${boxSize}`}
+    class={`bg-white border border-gray-300 rounded-sm focus:ring-0 w-full pr-8 ${boxSize}`}
   />
 
-  <Button
+  <!-- Icon inside input -->
+  <button
     type="submit"
-    variant="ghost"
-    class="ml-2 text-sky-800 hover:text-sky-900"
+    class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-sky-800"
   >
     <Icon name={Search} size={16} />
-  </Button>
+  </button>
 </form>

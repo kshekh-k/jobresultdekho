@@ -2,12 +2,13 @@
   import ArticleCardList from '$lib/components/ArticleCardList.svelte';
   import Layout from '$lib/components/Layout.svelte';
   import * as Card from '$lib/components/ui/card/index.js';
+  import SearchBox from '$lib/components/SearchBox.svelte';
 
   export let data: { category: any };
 
   // Header config for search
   const searchHeader = [{
-    id: 'No.',	department: 'Dept', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
+    id: 'No.',	department: 'Department', label: 'Title', date: 'Last Date', timeLeft: 'Time Left', action: 'Action'
   }];
 
   // Section config (only search here, but same pattern as categories)
@@ -16,7 +17,7 @@
       key: "search",
       type: "jobs",
       headers: searchHeader,
-      color: "bg-blue-900"
+      color: "--color-blue-900"
     }
   ];
 </script>
@@ -30,12 +31,13 @@
   {#if data.category.description}
     <Card.Root class="overflow-hidden rounded-md gap-5">
       <Card.Content>
-        <p class="text-slate-600">{data.category.description}</p>
+	  	<SearchBox placeholder="Search Jobs, Admit Card, Answer key & Results..." boxSize="w-full" />
+        <p class="text-slate-600 mt-5 font-semibold">{data.category.description}</p>
       </Card.Content>
     </Card.Root>
   {/if}
 
-  <!-- 🔥 Auto Render Search Section -->
+  <!-- Auto Render Search Section -->
   {#each sections as sec}
     {#if data.category[sec.key]?.length}
       <ArticleCardList

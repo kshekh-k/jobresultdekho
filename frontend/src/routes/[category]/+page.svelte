@@ -11,7 +11,7 @@
 		'--color-amber-900',
 		'--color-indigo-900',
 		'--color-rose-900',
-		'--color-yellow-900'
+		'--color-yellow-900',
 	];
 	// Header configs
 	const commanHeader = [{
