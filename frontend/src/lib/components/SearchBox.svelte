@@ -9,7 +9,8 @@
   export let value = '';
   export let boxSize = '';
 
-  function handleSearch() {
+  function handleSearch(e?: Event) {
+    e?.preventDefault();
     const q = value.trim();
     if (q) {
       goto(`/search?q=${encodeURIComponent(q)}`);
@@ -17,20 +18,19 @@
   }
 </script>
 
-<div class="relative">
+<form on:submit={handleSearch} class="relative flex items-center">
   <Input
     type="search"
     bind:value
     placeholder={placeholder}
-    on:keydown={(e) => e.key === 'Enter' && handleSearch()}
-    class={`bg-white border-none shadow-none pr-6 rounded-sm focus:ring-0 ${boxSize}`}
+    class={`bg-white border border-gray-300 rounded-sm focus:ring-0 flex-1 ${boxSize}`}
   />
 
   <Button
+    type="submit"
     variant="ghost"
-    on:click={handleSearch}
-    class="border-none hover:bg-transparent hover:text-sky-800 absolute top-0 right-0 cursor-pointer"
+    class="ml-2 text-sky-800 hover:text-sky-900"
   >
     <Icon name={Search} size={16} />
   </Button>
-</div>
+</form>

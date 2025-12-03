@@ -7,18 +7,35 @@ export const load: PageLoad = async ({ fetch, url }) => {
   const page = Number(url.searchParams.get("page") ?? 1);
 
   if (!q) {
-    return { q, jobs: [], meta: {} };
+    return {
+      category: {
+        title: "Search Results",
+        description: "Type a keyword above and hit Search.",
+        slug: "latest-job",
+        search: []
+      }
+    };
   }
 
   try {
     const json = await searchJobs({ q, page }, fetch);
     return {
-      q,
-      jobs: json.data ?? [],
-      meta: json.meta ?? {},
+      category: {
+        title: "Search Results",
+        description: `Showing results for "${q}"`,
+        slug: "latest-job",
+        search: json.data ?? []
+      }
     };
   } catch (err) {
     console.error("Search error", err);
-    return { q, jobs: [], meta: {} };
+    return {
+      category: {
+        title: "Search Results",
+        description: `No results found for "${q}"`,
+        slug: "latest-job",
+        search: []
+      }
+    };
   }
 };
