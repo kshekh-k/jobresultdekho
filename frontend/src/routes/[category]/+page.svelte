@@ -11,7 +11,7 @@
 		'--color-amber-900',
 		'--color-indigo-900',
 		'--color-rose-900',
-		'--color-yellow-900'
+		'--color-yellow-900',
 	];
 	// Header configs
 	const commanHeader = [{
@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.category.title} | JobResultDekho.com</title>
+	<title>{data.category.title} | JobResultDekho.com {data.category.slug}</title>
 	<meta name="description" content={data.category.description} />
 </svelte:head>
 

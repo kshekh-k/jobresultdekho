@@ -32,6 +32,8 @@
 		type="file"
 		bind:files
 		bind:value
+		on:keydown
+		on:input
 		{...restProps}
 	/>
 {:else}
@@ -46,6 +48,8 @@
 		)}
 		{type}
 		bind:value
+		on:keydown
+    	on:input  
 		{...restProps}
 	/>
 {/if}

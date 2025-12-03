@@ -1,36 +1,36 @@
 <script lang="ts">
-	import Button from './ui/button/button.svelte';
-	import Input from './ui/input/input.svelte'
-	import Icon from './ui/Icon.svelte';
-	import { Search } from 'lucide-svelte';
+  import { goto } from '$app/navigation';
+  import Input from './ui/input/input.svelte';
+  import Icon from './ui/Icon.svelte';
+  import { Search } from 'lucide-svelte';
 
-	// Props
-	export let placeholder: string = 'Search...';
-	export let value: string = '';
-	export let boxSize: string = '';
-	export let onSearch: (query: string) => void = () => {};
+  export let placeholder = 'Search...';
+  export let value = '';
+  export let boxSize = '';
 
-	// Handle search event
-	function handleSearch() {
-		onSearch(value.trim());
-	}
+  function handleSearch(e?: Event) {
+    e?.preventDefault();
+    const q = value.trim();
+    if (q) {
+      goto(`/search?q=${encodeURIComponent(q)}`);
+    }
+  }
 </script>
 
-<div class="relative">
-	<Input
-		type="search"
-		bind:value
-		placeholder={placeholder}
-		on:keydown={(e) => e.key === 'Enter' && handleSearch()}
-		class={`bg-white border-none shadow-none pr-6 rounded-sm focus:ring-0 
-			${boxSize}`}
-	/>
+<form on:submit={handleSearch} class="relative w-full">
+  <!-- Input with right padding for icon -->
+  <Input
+    type="search"
+    bind:value
+    placeholder={placeholder}
+    class={`bg-white border border-gray-300 rounded-sm focus:ring-0 w-full pr-8 ${boxSize}`}
+  />
 
-	<Button
-		variant="ghost"
-		on:click={handleSearch}
-		class="border-none hover:bg-transparent hover:text-sky-800 absolute top-0 right-0 cursor-pointer"
-	>
-		<Icon name={Search} size={16} />
-	</Button>
-</div>
+  <!-- Icon inside input -->
+  <button
+    type="submit"
+    class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-sky-800"
+  >
+    <Icon name={Search} size={16} />
+  </button>
+</form>

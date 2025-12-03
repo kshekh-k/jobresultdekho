@@ -29,5 +29,26 @@ export async function getJobBySlug(slug: string, customFetch?: typeof fetch): Pr
   return await apiGet<Job>(`/jobs/${slug}`, customFetch);
 }
 
+export async function searchJobs(
+  params: { q?: string; page?: number; pageSize?: number },
+  customFetch?: typeof fetch
+): Promise<{ data: Job[]; meta: any }> {
+  const { q = "", page = 1, pageSize = 20 } = params;
+  if (!q) return { data: [], meta: {} };
+
+  const query = new URLSearchParams();
+  query.set("q", q);
+  query.set("page", String(page));
+  query.set("pageSize", String(pageSize));
+
+  // ✅ Call your custom backend route
+  return await apiGet<{ data: Job[]; meta: any }>(
+    `/jobs/search?${query.toString()}`,
+    customFetch
+  );
+}
+
+
+
 
 

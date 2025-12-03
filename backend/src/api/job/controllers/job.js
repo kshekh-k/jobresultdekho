@@ -8,6 +8,15 @@ const { createCoreController } = require('@strapi/strapi').factories;
 const findLatestByStage = require("../../../utils/findLatestByStage");
 
 module.exports = createCoreController('api::job.job', ({strapi}) => ({
+
+    async search(ctx) {
+        const query = ctx.request.query;
+        const results = await strapi.service('api::job.job').searchJobs(query);
+        ctx.body = {
+            data: results,
+            meta: { pagination: { total: results.length } },
+        };
+    },
     
     async findHotPosts(ctx) {
         try {
