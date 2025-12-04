@@ -5,6 +5,7 @@
     import { setContext } from 'svelte';
     import Header from '$lib/components/Header.svelte';
     import Footer from '$lib/components/Footer.svelte';
+    import CookieConsent from '$lib/components/CookieConsent.svelte';
 
     export let data: { categories: any[]; highAlertPosts: any[] };
     setContext('categoryTree', data.categories);
@@ -29,5 +30,6 @@
     <main class="flex-1 py-5">
         <slot />
     </main>
+    <CookieConsent />
     <Footer categories={data.categories} />
 </div>
