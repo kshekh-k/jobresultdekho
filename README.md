@@ -133,7 +133,23 @@ The backend is built with Strapi 5. To develop the backend:
    cd frontend
    yarn dev --host 0.0.0.0 --port 5173
    ```
+### Database dump
 
+1. Project dump on Server
+   
+  docker exec -t xyresult-postgres-1 \
+  pg_dump -U xyresults_user -d xyresults \
+  -F c -f /tmp/db.dump
+  
+2. Download locally
+   scp root@148.135.137.104:JobResultDekho/db.dump ./db.dump
+
+3. Donload PostgreSQL
+   https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+4. Import local ststem
+   pg_restore --clean --if-exists -h postgres -U xyresults-postgres-1 -d xyresults db.dump
+   
 ## Category Content Type
 
 The Strapi backend includes a Category content type with the following fields:
