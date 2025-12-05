@@ -18,15 +18,13 @@
 				? 'View'
 				: catLabel === 'admit-card'
 					? 'Download'
-					: catLabel === 'admission'
+					: catLabel === 'admissions'
 						? 'View'
 						: catLabel === 'answer-key'
 							? 'Match'
 							: catLabel === 'syllabus'
 								? 'Check'
-								: catLabel === 'admission'
-									? 'Apply'
-									: undefined;
+								: undefined;
 	export let type: string | undefined;
 	export let items: {
 		id?: number;
