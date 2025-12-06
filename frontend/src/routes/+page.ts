@@ -33,3 +33,4 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
 		categoryTree
 	};
 }
+

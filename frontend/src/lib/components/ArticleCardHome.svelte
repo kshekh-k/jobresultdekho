@@ -10,21 +10,30 @@
 	export let articleId: any | undefined;
 	export let articleWrap: string | undefined; 
 	export let headerColor: string = '--color-neutral-900';
-	export let catLabel: string = '/latest-job';
+	export let slug: string = '/latest-job';
+
+	let job = slug === 'latest-job';
+	let admitcard = slug === 'admit-card';
+	let result = slug === 'result';
+	let answerkey = slug === 'answer-key';
+	let syllabus = slug === 'syllabus';
+	let admission = slug === 'admission';
+
 	export let buttonLabel: string | undefined =
-		catLabel === 'latest-job'
+		job
 			? 'Apply'
-			: catLabel === 'result'
+			: result
 				? 'View'
-				: catLabel === 'admit-card'
+				: admitcard
 					? 'Download'
-					: catLabel === 'admissions'
+					: admission
 						? 'View'
-						: catLabel === 'answer-key'
+						: answerkey
 							? 'Match'
-							: catLabel === 'syllabus'
-								? 'Check'
-								: undefined;
+							: syllabus
+								? 'Check'							  
+								: 'View';
+
 	export let type: string | undefined;
 	export let items: {
 		id?: number;
@@ -61,7 +70,7 @@
 		>
 			<h3 class="text-lg font-semibold text-white">{title}</h3>
 			<div class="flex justify-between items-center gap-1">
-				<a href={catLabel} class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200">{viewText}</a>
+				<a href={slug} class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200">{viewText}</a>
 				<button
 					onclick={toggle}
 					class="p-1 rounded-sm  hover:bg-white/20 focus:outline-none text-white cursor-pointer"
@@ -99,7 +108,7 @@
 
 							<div class="flex-1">
 								<a
-									href="{catLabel}/{type}/{item.slug}"
+									href="{slug}/{type}/{item.slug}"
 									target={item.target}
 									class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-1.5 line-clamp-2"
 								>
@@ -121,7 +130,7 @@
 						 
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
-								href="{catLabel}/{type}/{item.slug}"
+								href="{slug}/{type}/{item.slug}"
 								target={item.target}
 								variant="light"
 								size="sm"

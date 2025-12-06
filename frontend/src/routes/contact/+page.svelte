@@ -11,7 +11,7 @@
 
   // ✅ import centralized API function
   import { createContact } from '$lib/api/contact';
-
+import { SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO } from '$lib/utils';
   const dispatch = createEventDispatcher();
 
   let firstName = '';
@@ -49,11 +49,54 @@
 
 
 <svelte:head>
-	<title>Contact Us | JobResultDekho.com</title>
+	<title>Contact Us | {SITE_NAME}</title>
 	<meta
 		name="description"
-		content="Contact JobResultDekho.com for support, queries, and feedback."
+		content="Contact {SITE_NAME} for support, partnership, advertisement, or feedback regarding the website."
 	/>
+	<meta
+	name="keywords"
+	content="contact {SITE_NAME}, {SITE_NAME} contact, contact sarkari result website, sarkari naukri contact, govt jobs website support, job portal contact, contact for advertisement, job website advertising, government jobs website contact, sarkari result support, job alerts website contact, {SITE_NAME} feedback, {SITE_NAME} partnership"
+/>
+
+	<meta property="og:site_name" content={SITE_NAME} />
+	<link rel="canonical" href={`${SITE_URL}/contact`} />
+
+	<meta property="og:title" content="Contact Us | {SITE_NAME}" />
+	<meta property="og:description" content="Contact {SITE_NAME} for support, partnership, advertisement, or feedback regarding the website." />
+	<meta property="og:url" content='{SITE_URL}/contact' />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:type" content="website" />
+
+<!-- Schema.org JSON-LD (SEO Boost) -->
+	{@html `
+<script type="application/ld+json">
+${JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": `Contact Us | ${SITE_NAME}`,
+	"headline": `Contact Us | ${SITE_NAME}`,
+	"url": SITE_URL,
+	"image": OG_IMAGE,
+	"description": `Contact ${SITE_NAME} for support, partnership, advertisement, or feedback regarding the website.`,
+	"author": {
+			"@type": "Organization",
+			"name": SITE_NAME,
+			"logo": {
+				"@type": "ImageObject",
+				"url": SITE_LOGO
+			}
+		},
+	"potentialAction": {
+		"@type": "SearchAction",
+		"target": `${SITE_URL}/search?q={query}`,
+		"query-input": "required name=query"
+	},
+ 
+})}
+</script>
+`}
+
 </svelte:head>
  
 <!-- Content Section -->

@@ -3,7 +3,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { daysLeft, daysLeftLabel, formatDate, getMediaUrl ,SITE_URL } from '$lib/utils';
+	import { formatDate, getMediaUrl, SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO} from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
@@ -15,90 +15,108 @@
 	$: {
 		console.log("URL:", currentUrl);
 	}
+export let data: { content: any; type: string };
+let job = data.type === 'latest-job';
+	let admitcard = data.type === 'admit-card';
+	let result = data.type === 'result';
+	let answerkey = data.type === 'answer-key';
+	let syllabus = data.type === 'syllabus';
+	let admission = data.type === 'admission';
 
-	export let data: { content: any; type: string };
+	
 	export let buttonLabel: string | undefined =
-		data.type === 'jobs'
+		job
 			? 'Apply Now'
-			: data.type === 'results'
+			: result 
 				? 'View Now'
-				: data.type === 'admit-cards'
+				: admitcard 
 					? 'Download Now'
-					: data.type === 'admissions'
+					: admission 
 						? 'View Now'
-						: data.type === 'answer-key'
+						: answerkey 
 							? 'Match Now'
-							: data.type === 'syllabus'
+							: syllabus
 								? 'Check Now'
 								: undefined;
 
 	//console.log('Job', data.content.banner_image.url);
 	//console.log('Media URL', getMediaUrl(data.content.banner_image.url));
-	let seo_defulat_img = 'image/jobresultdekho-og-image.png';
+let fullYear = new Date().getFullYear();
+
+const pageTitle = data.content.SEO?.title || data.content.title;
+	const pageDesc =
+		data.content.SEO?.description ||
+		data.content.short_description?.slice(0, 160) ||
+		`Get complete details for ${data.content.title}`;
+
+
+	console.log('Descrip ' + data.content.SEO?.title)
 
 </script>
 
 <svelte:head>
-	<title>{data.content.title} | JobResultDekho.com</title>
-	<meta name="description" content={data.content.SEO?.title} />
-	<meta name="keywords" content={data.content.SEO?.tags} />
-	<meta name="author" content="JobResultDekho.com" />
-	<meta property="og:title" content={data.content.SEO?.title} />
-	<meta property="og:description" content={data.content.SEO?.description} />
+	<title>{data.content.title} - {SITE_NAME}</title>
+	<!-- META DESCRIPTION -->
+	<meta name="description" content={pageDesc} />
+
+	<!-- META KEYWORDS -->
+	<meta name="keywords" content={data.content.SEO?.tags || "govt jobs, sarkari result, admit card"} />
+
+	<meta name="author" content={SITE_NAME} />
 	<meta name="robots" content="index, follow" />
 	<meta name="language" content="en" />
-	<meta name="classification" content="Job Updates, Results, Admit Cards, Govt Jobs" />
 
-	<!-- Canonical URL -->
-	<link rel="canonical" href={'page url goes here'}>
+	<!-- CANONICAL -->
+	<link rel="canonical" href={currentUrl} />
 
-	<!-- Open Graph / Facebook -->
+	<!-- OG META -->
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content={data.content.SEO?.title} />
-	<meta property="og:description" content={data.content.SEO?.description} />
-	<meta property="og:url" content={'page url goes here'} />
-	<meta property="og:site_name" content="JobResultDekho.com" />
-	<meta property="og:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
-	<meta property="og:image:alt" content={data.content.SEO?.title} />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDesc} />
+	<meta property="og:url" content={currentUrl} />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:site_name" content={SITE_NAME} />
 
-	<!-- Twitter Card -->
+	<!-- TWITTER -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={data.content.SEO?.title} />
-	<meta name="twitter:description" content={data.content.SEO?.description} />
-	<meta name="twitter:image" content="https://jobresultdekho.com/{seo_defulat_img}" />
-	<meta name="twitter:site" content="@JobResultDekho" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDesc} />
+	<meta name="twitter:image" content={OG_IMAGE} />
 
-	<!-- Apple / Android PWA -->
-	<meta name="apple-mobile-web-app-title" content="JobResultDekho" />
-	<meta name="application-name" content="JobResultDekho" />
+	<!-- PWA -->
+	<meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+	<meta name="application-name" content={SITE_NAME} />
 	<meta name="theme-color" content="#0c4a6e" />
 	<meta name="mobile-web-app-capable" content="yes" />
 
-    <!-- Article Structured Data (JSON-LD) -->
-  	<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "{data.content.SEO?.title}",
-      "description": "{data.content.SEO?.description}",
-      "url": "{page url goes here}",
-      "image": "https://jobresultdekho.com/{seo_defulat_img}",
-      "publisher": {
-        "@type": "Organization",
-        "name": "JobResultDekho.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "/image/jobresultdekho-logo-white.svg"
-        }
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "JobResultDekho.com"
-      },
-      "datePublished": "{data.content.createdAt}",
-      "dateModified": "{data.content.updatedAt}"
-    }
-  	</script>
+	<!-- JSON-LD ARTICLE SCHEMA (RAW INJECTION) -->
+	{@html `
+	<script type="application/ld+json">
+	${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": pageTitle,
+		"description": pageDesc,
+		"url": currentUrl,
+		"image": OG_IMAGE,
+		"publisher": {
+			"@type": "Organization",
+			"name": SITE_NAME,
+			"logo": {
+				"@type": "ImageObject",
+				"url": SITE_LOGO
+			}
+		},
+		"author": {
+			"@type": "Organization",
+			"name": SITE_NAME
+		},
+		"datePublished": data.content.createdAt,
+		"dateModified": data.content.updatedAt
+	})}
+	</script>
+	`}
+   
 
 </svelte:head>
 <Layout header={false} heading={''}>
