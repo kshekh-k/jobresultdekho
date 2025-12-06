@@ -5,7 +5,7 @@ module.exports = {
     return await strapi.db.query("api::blog.blog").findMany({
       where: { publishedAt: { $notNull: true } },
       orderBy: [{ publishedAt: "desc" }],
-      select: ["id", "title", "slug", "excerpt", "publishedAt"],
+      select: ["id", "title", "slug", "short_description", "publishedAt"],
       populate: {
         cover_image: true,
         category: true,
@@ -18,7 +18,7 @@ module.exports = {
       where: { publishedAt: { $notNull: true } },
       orderBy: [{ publishedAt: "desc" }],
       limit,
-      select: ["id", "title", "slug", "excerpt", "publishedAt"],
+      select: ["id", "title", "slug", "publishedAt"],
       populate: {
         cover_image: true,
         category: true,

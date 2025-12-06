@@ -15,14 +15,15 @@
 	$: {
 		console.log("URL:", currentUrl);
 	}
-export let data: { content: any; type: string };
-let job = data.type === 'latest-job';
+
+	export let data: { content: any; type: string };
+	
+	let job = data.type === 'latest-job';
 	let admitcard = data.type === 'admit-card';
 	let result = data.type === 'result';
 	let answerkey = data.type === 'answer-key';
 	let syllabus = data.type === 'syllabus';
 	let admission = data.type === 'admission';
-
 	
 	export let buttonLabel: string | undefined =
 		job
@@ -41,14 +42,13 @@ let job = data.type === 'latest-job';
 
 	//console.log('Job', data.content.banner_image.url);
 	//console.log('Media URL', getMediaUrl(data.content.banner_image.url));
-let fullYear = new Date().getFullYear();
+	let fullYear = new Date().getFullYear();
 
-const pageTitle = data.content.SEO?.title || data.content.title;
+	const pageTitle = data.content.SEO?.title || data.content.title;
 	const pageDesc =
 		data.content.SEO?.description ||
 		data.content.short_description?.slice(0, 160) ||
 		`Get complete details for ${data.content.title}`;
-
 
 	console.log('Descrip ' + data.content.SEO?.title)
 
