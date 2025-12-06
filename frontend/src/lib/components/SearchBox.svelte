@@ -23,13 +23,13 @@
     type="search"
     bind:value
     placeholder={placeholder}
-    class={`bg-white border border-gray-300 rounded-sm focus:ring-0 w-full pr-8 ${boxSize}`}
+    class={`bg-white border border-transparent rounded-sm focus:ring-0 w-full pr-8 ${boxSize}`}
   />
 
   <!-- Icon inside input -->
   <button
     type="submit"
-    class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-sky-800"
+    class="absolute right-2 inset-y-0 flex justify-center items-center text-neutral-500 hover:text-sky-800"
   >
     <Icon name={Search} size={16} />
   </button>

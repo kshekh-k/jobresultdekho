@@ -14,7 +14,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { onMount, onDestroy } from 'svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
-	import { SITE_URL } from '$lib/utils';
+	import { SITE_NAME, SITE_URL } from '$lib/utils';
 
 	// Parent categories
 	const parents: { title: string; slug: string }[] = [];
@@ -202,9 +202,9 @@
 				{#if i === 2}
 					<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
 						<Card.Content class="flex items-center justify-center text-center p-1!  ">
-							<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden">
-								<img src="/image/JobResultDekho-Banner-horizontal.png" alt="Job Result Dekho" class="object-cover sm:block hidden" />
-								<img src="/image/JobResultDekho-Banner-mobile.png" alt="Job Result Dekho" class="object-cover block sm:hidden" />
+							<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden" title={SITE_NAME}>
+								<img src="/image/JobResultDekho-Banner-horizontal.png" alt={SITE_NAME} title={SITE_NAME} class="object-cover sm:block hidden" />
+								<img src="/image/JobResultDekho-Banner-mobile.png" alt={SITE_NAME} title={SITE_NAME} class="object-cover block sm:hidden" />
 							</a>
 						</Card.Content>
 					</Card.Root>

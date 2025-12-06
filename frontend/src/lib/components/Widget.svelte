@@ -33,7 +33,7 @@
 				{#each menus as menu}
 					<li>
 						<a
-							href={menu.slug === 'home' ? `${SITE_URL}` : menu.slug} target={menu.target}
+							href={menu.slug === 'home' ? `${SITE_URL}` : menu.slug} title={menu.title} target={menu.target} rel={menu.target === '_blank' ? 'nofollow noopener noreferrer external' : 'internal' }
 							class="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition"
 						>
 							{#if menu.icon}

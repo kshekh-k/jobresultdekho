@@ -55,7 +55,7 @@
 						{#each highAlertPosts as post, i}
 							<div class="swiper-slide">
 								<div class="flex justify-center">
-									<a href="{SITE_URL + '/latest-job/jobs/' + post.slug}" class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/10 rounded-sm truncate text-center">
+									<a href="{SITE_URL + '/latest-job/jobs/' + post.slug}" title={post.title} class="py-1 px-3 ease-in-out duration-200 hover:bg-slate-900/10 rounded-sm truncate text-center">
 										<span class="items-center">{icons[i % icons.length]} {post.title}</span>
 									</a>
 								</div>

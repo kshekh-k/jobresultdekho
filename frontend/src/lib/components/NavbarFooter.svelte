@@ -1,73 +1,76 @@
 <script lang="ts">
 	import { ChevronDown } from 'lucide-svelte';
 	import Icon from './ui/Icon.svelte';
-	import { page } from '$app/stores';
-	import { get } from 'svelte/store';
 	import { SITE_URL } from '$lib/utils';
-	
-	export let categories: {
-		title: string;
-		slug: string;
-		children?: { title: string; slug: string }[];
-	}[] = [];
+	import { page } from '$app/stores';
 
-	let openMenu: string | null = null;
+	// ✅ Svelte 5 props
+	const {
+		onNavigate = () => {},
+		categories = []
+	} = $props<{
+		onNavigate?: () => void;
+		categories?: {
+			title: string;
+			slug: string;
+			children?: { title: string; slug: string }[];
+		}[];
+	}>();
 
-	const toggleMenu = (key: string) => {
-		openMenu = openMenu === key ? null : key;
-	};
+ 	// ------------------------------
+	// Pathname detection
+	// ------------------------------
+	const currentPath = $derived($page.url.pathname);
 
-	const closeMenu = () => {
-		openMenu = null;
-	};
-	// get current pathname
-	const currentPath = () => get(page).url.pathname;
-	// Check if category or child is active
-	const isActive = (slug: string) => currentPath() === `/${slug}`;
-	const isChildActive = (children: { slug: string }[]) =>
-		children.some((child) => isActive(child.slug));
+	// Check if single link active
+	const isActive = (slug: string) => {
+		const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
+		return currentPath === normalizedSlug;
+	};	 
 </script>
 
+<!-- ========================= -->
+<!--       NAVIGATION MENU     -->
+<!-- ========================= -->
 <nav class="flex-1 flex justify-center">
 	<ul
-		class="flex flex-wrap lg:items-center justify-center gap-2 lg:gap-4 flex-1"
+		class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center lg:gap-2 xl:gap-5 flex-1 divide-y divide-white/10 lg:divide-y-0"
 	>
 		{#each categories as cat}
+			<!-- HOME -->
 			{#if cat.title.toLowerCase() === 'home'}
 				<li>
 					<a
-						href="{SITE_URL}"
-						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center {currentPath() ===
-						'/'
-							? 'text-white'
-							: 'hover:text-white text-white/60'}">{cat.title}</a
-					>
-				</li>
-			{:else if cat.children?.length}				 
-				{#each cat.children as child}
-					<!--li class="relative">
-						<a
-							href={`/${child.slug}`}
-							class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center {isActive(
-								child.slug
-							)
+						href={SITE_URL} 
+						title={cat.title}
+						onclick={onNavigate}
+						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center
+							{currentPath === '/' 
 								? 'text-white'
-								: 'hover:text-white text-white/60'}"
-						>
-							{child.title}
-						</a>
-					</li-->
-				{/each}
+							: 'hover:text-white text-white/60'}"
+					>
+						{cat.title}
+					</a>
+				</li>
+
+		 {:else if cat.children?.length}
+			 <li class="hidden">{cat.title}</li>
+         
+
+			<!-- NORMAL LINK -->
 			{:else}
 				<li>
 					<a
 						href={`/${cat.slug}`}
-						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center {isActive(
-							cat.slug
-						)
-							? 'text-white'
-							: 'hover:text-white text-white/60'}">{cat.title}</a
+						title={cat.title}
+						onclick={onNavigate}
+						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center
+							{isActive(cat.slug)
+								? 'text-white'
+							: 'hover:text-white text-white/60'}"
 					>
+						{cat.title}
+					</a>
 				</li>
 			{/if}
 		{/each}

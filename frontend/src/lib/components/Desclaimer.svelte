@@ -11,7 +11,7 @@
 				This website is not associated with official websites. All information provided is for
 				general informational purposes only.
 			</p>
-            <Button href="{SITE_URL}/contact" variant="white" size="lg">CONTACT US FOR MORE</Button>
+            <Button href="{SITE_URL}/contact" variant="white" size="lg" title="CONTACT US FOR MORE">CONTACT US FOR MORE</Button>
 		</div>
 	</div>
 	</div>

@@ -44,6 +44,22 @@
 </script>
 
 <aside class={className}>
+	<Card.Root class="bg-slate-300 p-0!" variant={'default'}>
+		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">
+			<div class="overflow-hidden rounded-xl">
+				<a
+					href="{SITE_URL}/contact" title="Job Result Dekho"
+					class="rounded-md! sm:rounded-xl! overflow-hidden block "
+				>
+					<img
+						src="/image/JobResultDekho-Banner-mobile.png"
+						alt="Job Result Dekho" title="Job Result Dekho"
+						class="object-cover"
+					/></a
+				>				 
+			</div>
+		</Card.Content>
+	</Card.Root>
 	<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
 	<Card.Root class="bg-slate-300 p-0!" variant={'default'}>
 		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">

@@ -3,55 +3,54 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
-	import { formatDate, getMediaUrl, SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO} from '$lib/utils';
+	import {
+		formatDate,
+		getMediaUrl,
+		SITE_URL,
+		SITE_NAME,
+		OG_IMAGE,
+		SITE_LOGO,
+		richTextToPlainText,
+		extractTextFromRichText
+	} from '$lib/utils';
 	import Layout from '$lib/components/Layout.svelte';
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
 	import { page } from '$app/stores';
-	
+
 	$: currentUrl = $page.url.href;
-	$: {
-		console.log("URL:", currentUrl);
-	}
-export let data: { content: any; type: string };
-let job = data.type === 'latest-job';
-	let admitcard = data.type === 'admit-card';
-	let result = data.type === 'result';
-	let answerkey = data.type === 'answer-key';
+
+	export let data: { content: any; type: string };
+	let job = data.type === 'jobs';
+	let admitcard = data.type === 'admit-cards';
+	let result = data.type === 'results';
+	let answerkey = data.type === 'answer-keys';
 	let syllabus = data.type === 'syllabus';
-	let admission = data.type === 'admission';
+	let admission = data.type === 'admissions';
 
-	
-	export let buttonLabel: string | undefined =
-		job
-			? 'Apply Now'
-			: result 
-				? 'View Now'
-				: admitcard 
-					? 'Download Now'
-					: admission 
-						? 'View Now'
-						: answerkey 
-							? 'Match Now'
-							: syllabus
-								? 'Check Now'
-								: undefined;
-
-	//console.log('Job', data.content.banner_image.url);
-	//console.log('Media URL', getMediaUrl(data.content.banner_image.url));
-let fullYear = new Date().getFullYear();
-
-const pageTitle = data.content.SEO?.title || data.content.title;
-	const pageDesc =
-		data.content.SEO?.description ||
-		data.content.short_description?.slice(0, 160) ||
-		`Get complete details for ${data.content.title}`;
-
-
-	console.log('Descrip ' + data.content.SEO?.title)
-
+	export let buttonLabel: string | undefined = job
+		? 'Apply Now'
+		: result
+			? 'View Now'
+			: admitcard
+				? 'Download Now'
+				: admission
+					? 'View Now'
+					: answerkey
+						? 'Match Now'
+						: syllabus
+							? 'Check Now'
+							: 'View Now';
+	let metaShorDescipt = Array.isArray(data.content.short_description)
+		? richTextToPlainText(data.content.short_description, 160)
+		: extractTextFromRichText(data.content.short_description, 160);
+	const pageTitle = data.content.SEO?.title ? data.content.SEO?.title : data.content.title;
+	const pageDesc = data.content.SEO?.description
+		? data.content.SEO?.description
+		: `${metaShorDescipt} 
+		 Get complete details for ${data.content.title}`;
 </script>
 
 <svelte:head>
@@ -60,7 +59,12 @@ const pageTitle = data.content.SEO?.title || data.content.title;
 	<meta name="description" content={pageDesc} />
 
 	<!-- META KEYWORDS -->
-	<meta name="keywords" content={data.content.SEO?.tags || "govt jobs, sarkari result, admit card"} />
+	<meta
+		name="keywords"
+		content={data.content.SEO?.tags
+			? data.content.SEO?.tags
+			: 'govt jobs, sarkari result, admit card'}
+	/>
 
 	<meta name="author" content={SITE_NAME} />
 	<meta name="robots" content="index, follow" />
@@ -93,31 +97,42 @@ const pageTitle = data.content.SEO?.title || data.content.title;
 	{@html `
 	<script type="application/ld+json">
 	${JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "Article",
-		"headline": pageTitle,
-		"description": pageDesc,
-		"url": currentUrl,
-		"image": OG_IMAGE,
-		"publisher": {
-			"@type": "Organization",
-			"name": SITE_NAME,
-			"logo": {
-				"@type": "ImageObject",
-				"url": SITE_LOGO
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		'@id': `${currentUrl}#webpage`,
+		headline: pageTitle,
+		description: pageDesc,
+		url: currentUrl,
+		image: OG_IMAGE,
+		publisher: {
+			'@type': 'Organization',
+			name: SITE_NAME,
+			logo: {
+				'@type': 'ImageObject',
+				url: SITE_LOGO
 			}
 		},
-		"author": {
-			"@type": "Organization",
-			"name": SITE_NAME
+		author: {
+			'@type': 'Organization',
+			name: SITE_NAME
 		},
-		"datePublished": data.content.createdAt,
-		"dateModified": data.content.updatedAt
+		isPartOf: {
+			'@type': 'WebSite',
+			'@id': `${SITE_URL}/#website`,
+			name: SITE_NAME,
+			url: SITE_URL
+		},
+		inLanguage: 'en-IN',
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: `${SITE_URL}/search?q={search_term_string}`,
+			'query-input': 'required name=search_term_string'
+		},
+		datePublished: data.content.createdAt,
+		dateModified: data.content.updatedAt
 	})}
 	</script>
 	`}
-   
-
 </svelte:head>
 <Layout header={false} heading={''}>
 	<Card.Root class="overflow-hidden rounded-md gap-0">
@@ -282,7 +297,11 @@ const pageTitle = data.content.SEO?.title || data.content.title;
 					<RichTextRenderer content={data.content?.content} />
 					<!-- This is job banner -->
 					<div class="flex justify-center items-center">
-						<img src="{getMediaUrl(data.content.banner_image?.url)}" alt="" class="object-cover !mt-0" />
+						<img
+							src={getMediaUrl(data.content.banner_image?.url)}
+							alt=""
+							class="object-cover !mt-0"
+						/>
 					</div>
 				</div>
 			</div>
@@ -294,8 +313,12 @@ const pageTitle = data.content.SEO?.title || data.content.title;
 			<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5">
 				<!-- Ad Places -->
 				<div class="flex justify-center items-center rounded-sm bg-gray-100 col-span-5">
-					<a href="{SITE_URL}/contact" class="block rounded-sm overflow-hidden">								 
-						<img src="/image/JobResultdekho-square.png" alt="Job Result Dekho" class="object-cover block " />
+					<a href="{SITE_URL}/contact" class="block rounded-sm overflow-hidden">
+						<img
+							src="/image/JobResultdekho-square.png"
+							alt="Job Result Dekho"
+							class="object-cover block"
+						/>
 					</a>
 				</div>
 				{#if data.content.important_links}
