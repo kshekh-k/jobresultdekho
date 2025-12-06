@@ -569,7 +569,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       'api::blog-comment.blog-comment'
     >;
     content: Schema.Attribute.RichText & Schema.Attribute.Required;
-    cover_image: Schema.Attribute.Media;
+    cover_image: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
