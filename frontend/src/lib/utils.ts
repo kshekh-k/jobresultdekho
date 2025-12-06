@@ -7,6 +7,86 @@ export const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 export const SITE_NAME = "Job Result Dekho .Com";
 export const SITE_LOGO = `${SITE_URL}/image/jobresultdekho-logo-white.svg`
 export const OG_IMAGE = `${SITE_URL}/image/og-image.jpg`
+
+export function stripHtmlForSEO(html: string = '', limit = 160): string {
+	if (!html) return '';
+
+	const text = html
+		.replace(/<style[^>]*>.*?<\/style>/gi, '') // remove style tags
+		.replace(/<script[^>]*>.*?<\/script>/gi, '') // remove script tags
+		.replace(/<\/?[^>]+>/gi, '') // remove all HTML tags
+		.replace(/&nbsp;/g, ' ') // decode common entities
+		.replace(/&amp;/g, '&')
+		.replace(/&quot;/g, '"')
+		.replace(/&#39;/g, "'")
+		.replace(/\s+/g, ' ') // normalize spaces
+		.trim();
+ 
+	return text.length > limit ? text.slice(0, limit) + '…' : text;
+}
+
+
+
+/**
+ * Limit text length safely (SEO friendly)
+ */
+export function limitText(text: string, limit = 160): string {
+  if (!text) return "";
+  return text.length > limit
+    ? text.slice(0, limit).trim()
+    : text.trim();
+}
+
+/**
+ * Convert simple rich-text array (blocks → children → text)
+ */
+export function richTextToPlainText(
+  content: any[] = [],
+  limit?: number
+): string {
+  if (!Array.isArray(content)) return "";
+
+  const text = content
+    .map(block =>
+      block?.children
+        ?.map((child: any) => child?.text || "")
+        .join("") || ""
+    )
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return limit ? limitText(text, limit) : text;
+}
+
+/**
+ * Recursively extract plain text from nested rich-text JSON
+ */
+export function extractTextFromRichText(
+  node: any,
+  limit?: number
+): string {
+  if (!node) return "";
+
+  let text = "";
+
+  if (typeof node === "string") {
+    text = node;
+  } else if (Array.isArray(node)) {
+    text = node.map(extractTextFromRichText).join(" ");
+  } else if (typeof node === "object") {
+    if (node.text) text = node.text;
+    else if (node.children) text = extractTextFromRichText(node.children);
+  }
+
+  text = text.replace(/\s+/g, " ").trim();
+
+  return limit ? limitText(text, limit) : text;
+}
+
+
+
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

@@ -2,7 +2,7 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
-	import { formatDate, getMediaUrl } from '$lib/utils';
+	import { formatDate, getMediaUrl, OG_IMAGE, SITE_LOGO, SITE_NAME, SITE_URL } from '$lib/utils';
 	import { ArrowRight, Calendar, User } from 'lucide-svelte';
 
 	export let data;
@@ -10,11 +10,65 @@
 	
 </script>
 <svelte:head>
-	<title>Blog | JobResultDekho.com</title>
+	 
+
+<title>Blog - {SITE_NAME}</title>
+ 
 	<meta
 		name="description"
-		content="Blog JobResultDekho.com for support, queries, and feedback."
+		content="Explore the {SITE_NAME} blog for daily government job updates, recruitment news, exam alerts, results, admit cards, and career guidance trusted by job seekers across India."
 	/>
+<meta name="keywords" content="government jobs, sarkari naukri, latest government job updates, job result dekho, recruitment notifications, SSC jobs, UPSC jobs, railway jobs, exam results, admit card updates">
+	<meta property="og:site_name" content={SITE_NAME} />
+	<link rel="canonical" href={`${SITE_URL}/blog`} />
+
+	<meta property="og:title" content="Blog - {SITE_NAME}" />
+	<meta
+		property="og:description"
+		content="Explore the {SITE_NAME} blog for daily government job updates, recruitment news, exam alerts, results, admit cards, and career guidance trusted by job seekers across India."
+	/>
+	<meta property="og:url" content="{SITE_URL}/blog" />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:type" content="website" />
+
+	<!-- Schema.org JSON-LD (SEO Boost) -->
+	{@html `
+<script type="application/ld+json">
+${JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	'@id': `${SITE_URL}/blog#WebPage`,
+	name: `Blog - ${SITE_NAME}`,
+	headline: `Blog - ${SITE_NAME}`,
+	url: `${SITE_URL}/contact`,
+	image: OG_IMAGE,
+	description: `Explore the ${SITE_NAME} blog for daily government job updates, recruitment news, exam alerts, results, admit cards, and career guidance trusted by job seekers across India.`,
+	isPartOf: {
+		'@type': 'WebSite',
+		'@id': `${SITE_URL}/#website`,
+		inLanguage: 'en-IN',
+		name: SITE_NAME,
+		url: SITE_NAME
+	},
+	author: {
+		'@type': 'Organization',
+		name: SITE_NAME,
+		logo: {
+			'@type': 'ImageObject',
+			url: SITE_LOGO
+		}
+	},
+	potentialAction: {
+		'@type': 'SearchAction',
+		target: `${SITE_URL}/search?q={search_term_string}`,
+		'query-input': 'required name=search_term_string'
+	}
+})}
+</script>
+`}
+
+
+
 </svelte:head>
 <Layout heading={'Our Blog'} headerBgColor="bg-sky-500">
 	<div class="sm:grid sm:grid-cols-2 flex flex-col gap-5">
@@ -23,10 +77,10 @@
 				id="post-{blog.id}"
 				class="hover:bg-slate-50 dark:hover:bg-slate-900 transition rounded-xl !p-4"
 			>
-				<a href={`/blog/${blog.slug}`} class="flex flex-col gap-3 group">
+				<a href={`/blog/${blog.slug}`} title={blog.title} class="flex flex-col gap-3 group">
 					{#if blog.cover_image}
 						<div class="overflow-hidden rounded-xl">
-							<img src={getMediaUrl(blog.cover_image?.url)} alt="" class="" />
+							<img src={getMediaUrl(blog.cover_image?.url)} alt={blog.title} title={blog.title} class="" />
 						</div>
 					{/if}
 					<Card.Header class="px-0">
@@ -48,7 +102,7 @@
 						<p class="max-h-20 line-clamp-2 text-slate-600">{blog?.short_description}</p>
 						<div class="flex justify-start">
 							<a
-								href={`/blog/${blog.slug}`}
+								href={`/blog/${blog.slug}`} title="Learn More"
 								class="text-sky-500 font-medium inline-flex gap-1 items-center hover:text-rose-500 ease-in-out duration-200"
 								>Learn More <Icon name={ArrowRight} />
 							</a>

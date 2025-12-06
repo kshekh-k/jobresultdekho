@@ -2,7 +2,7 @@
 	import ArticleCardList from '$lib/components/ArticleCardList.svelte';
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
-	import { SITE_URL, SITE_NAME, OG_IMAGE } from '$lib/utils';
+	import { SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO } from '$lib/utils';
 	export let data: { category: any };
 
 	const headingColor = [
@@ -83,16 +83,17 @@
 			headers: answerKeyHeader,
 			color: headingColor[3]
 		},
-		{
-			key: 'syllabus',
-			type: 'syllabus',
-			headers: syllabusHeader,
-			color: headingColor[4]
-		},
+		
 		{
 			key: 'admissions',
 			type: 'admissions',
 			headers: commanHeader,
+			color: headingColor[4]
+		},
+		{
+			key: 'syllabus',
+			type: 'syllabus',
+			headers: syllabusHeader,
 			color: headingColor[5]
 		}
 	];
@@ -105,57 +106,75 @@
 
 	let fullYear = new Date().getFullYear();
 
-// Dynamic SEO Title
-	let pageTitle =
-		job
-			? `Latest Govt Jobs ${fullYear} - All Government Job Notifications`
-			: admitcard
+	// Dynamic SEO Title
+	let pageTitle = job
+		? `Latest Govt Jobs ${fullYear} - All Government Job Notifications`
+		: admitcard
 			? `Admit Card ${fullYear} - Download Govt Exam Hall Tickets`
 			: result
-			? `Sarkari Result ${fullYear} - Latest Government Exam Results`
-			: answerkey
-			? `Answer Key ${fullYear} - Official Govt Exam Solutions`
-			: syllabus
-			? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police Syllabus PDF`
-			: admission
-			? `Admissions in India ${fullYear} – Apply Online for Schools, Colleges & Universities`
-			: `Latest Govt Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admission Updates ${fullYear}`;
+				? `Sarkari Result ${fullYear} - Latest Government Exam Results`
+				: answerkey
+					? `Answer Key ${fullYear} - Official Govt Exam Solutions`
+					: syllabus
+						? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police Syllabus PDF`
+						: admission
+							? `Admissions in India ${fullYear} – Apply Online for Schools, Colleges & Universities`
+							: `Latest Govt Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admission Updates ${fullYear}`;
 
 	// Dynamic Description
-	let pageDesc =
-		job
-			? `Find the latest Govt Jobs ${fullYear} including SSC, Railways, Police, Banking, UPSC, Teaching, PSU & State Government vacancies updated daily.`
-			: admitcard
+	let pageDesc = job
+		? `Find the latest Govt Jobs ${fullYear} including SSC, Railways, Police, Banking, UPSC, Teaching, PSU & State Government vacancies updated daily.`
+		: admitcard
 			? `Download Admit Cards ${fullYear} for SSC, Railway, Police, Army, UPSC, Banking & other Govt Exams. Get fast and direct download links.`
 			: result
-			? `Check the latest Sarkari Result ${fullYear} for SSC, Railway, Police, Army, Bank & all major government exams. Updated instantly.`
-			: answerkey
-			? `Match official Answer Keys ${fullYear} for SSC, Railway, Police, Army, UPSC & other government exams. Verify your answers using official solutions.`
-			: syllabus
-			? `Download updated Govt Exam Syllabus ${fullYear} for SSC, Railway, Police, UPSC, Defence, Banking & State Government exams in PDF format.`
-			: admission
-			? `Get the latest Admission ${fullYear} updates for schools, colleges, universities, entrance exams & govt institutes. Check eligibility, fees & apply online links.`
-			: `Get the latest Govt Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admission updates in one place. Daily alerts & official links for ${fullYear}.`;
+				? `Check the latest Sarkari Result ${fullYear} for SSC, Railway, Police, Army, Bank & all major government exams. Updated instantly.`
+				: answerkey
+					? `Match official Answer Keys ${fullYear} for SSC, Railway, Police, Army, UPSC & other government exams. Verify your answers using official solutions.`
+					: syllabus
+						? `Download updated Govt Exam Syllabus ${fullYear} for SSC, Railway, Police, UPSC, Defence, Banking & State Government exams in PDF format.`
+						: admission
+							? `Get the latest Admission ${fullYear} updates for schools, colleges, universities, entrance exams & govt institutes. Check eligibility, fees & apply online links.`
+							: `Get the latest Govt Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admission updates in one place. Daily alerts & official links for ${fullYear}.`;
 
 	// JSON-LD Schema object
 	let schemaData = {
-		"@context": "https://schema.org",
-		"@type": "WebSite",
-		"name": pageTitle,
-		"url": `${SITE_URL}/${data.category.slug}`,
-		"description": pageDesc,
-		"potentialAction": {
-			"@type": "SearchAction",
-			"target": `${SITE_URL}/search?q={query}`,
-			"query-input": "required name=query"
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		'@id': `${SITE_URL}/${data.category.slug}#webpage`,
+		name: pageTitle,
+		url: `${SITE_URL}/${data.category.slug}`,
+		description: pageDesc,
+		publisher: {
+			'@type': 'Organization',
+			name: SITE_NAME,
+			logo: {
+				'@type': 'ImageObject',
+				url: SITE_LOGO
+			}
+		},
+		author: {
+			'@type': 'Organization',
+			name: SITE_NAME
+		},
+		isPartOf: {
+			'@type': 'WebSite',
+			'@id': `${SITE_URL}/${data.category.slug}/#website`,
+			name: SITE_NAME,
+			url: SITE_URL
+		},
+		inLanguage: 'en-IN',
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: `${SITE_URL}/search?q={search_term_string}`,
+			'query-input': 'required name=search_term_string'
 		}
 	};
 
-console.log(data.category.slug)
+	console.log(data.category.slug);
 </script>
 
 <svelte:head>
-	 <title>{pageTitle}</title>
+	<title>{pageTitle}</title>
 
 	<meta name="description" content={pageDesc} />
 	<link rel="canonical" href={`${SITE_URL}/${data.category.slug}`} />
@@ -176,7 +195,7 @@ console.log(data.category.slug)
 	<meta name="theme-color" content="#0c4a6e" />
 
 	<!-- JSON-LD Output -->
-		{@html `
+	{@html `
 	<script type="application/ld+json">
 	${JSON.stringify(schemaData)}
 	</script>
@@ -191,7 +210,7 @@ console.log(data.category.slug)
 			? 'bg-emerald-900'
 			: result
 				? 'bg-amber-900'
-				:  answerkey
+				: answerkey
 					? 'bg-indigo-900'
 					: syllabus
 						? 'bg-rose-900'

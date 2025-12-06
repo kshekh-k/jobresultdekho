@@ -2,7 +2,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
 	import { Calendar, ChevronDown, Clock, Landmark } from 'lucide-svelte';
-	import { cn } from '$lib/utils.js';
+	import { cn, SITE_NAME, SITE_URL } from '$lib/utils.js';
 	import Icon from './ui/Icon.svelte';
 	import Button from './ui/button/button.svelte';
 	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
@@ -12,7 +12,6 @@
 	export let slug: string = '/latest-job';
 	export let open: boolean = true;
 
-
 	let job = slug === 'latest-job';
 	let admitcard = slug === 'admit-card';
 	let result = slug === 'result';
@@ -20,21 +19,19 @@
 	let syllabus = slug === 'syllabus';
 	let admission = slug === 'admission';
 
-
-	export let buttonLabel: string | undefined =
-		job
-			? 'Apply'
-			: result
-				? 'View'
-				: admitcard
-					? 'Download'
-					: admission
-						? 'View'
-						: answerkey
-							? 'Match'
-							: syllabus
-								? 'Check'							  
-								: 'View';
+	export let buttonLabel: string | undefined = job
+		? 'Apply'
+		: result
+			? 'View'
+			: admitcard
+				? 'Download'
+				: admission
+					? 'View'
+					: answerkey
+						? 'Match'
+						: syllabus
+							? 'Check'
+							: 'View';
 
 	export let type: string | undefined;
 	export let items: {
@@ -42,7 +39,7 @@
 		department?: any;
 		slug?: string;
 		title?: string;
-		last_date?: any; 
+		last_date?: any;
 		target?: string;
 		reference_url?: string;
 	}[] = [];
@@ -51,7 +48,7 @@
 		id?: string;
 		department?: string;
 		label?: string;
-		date?: string; 
+		date?: string;
 		action?: string;
 	}[] = [];
 
@@ -76,13 +73,6 @@
 </script>
 
 <Card.Root class="overflow-hidden p-0 rounded-md gap-0" style="--headerColor:var({headerColor})">
-	<!-- Header -->
-	<!-- <Card.Header
-		class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 bg-(color:--headerColor)"
-	>
-		<h3 class="text-lg font-semibold text-white">{title}</h3>
-	</Card.Header> -->
-
 	<!-- Collapsible Content -->
 	{#if open}
 		<Card.Content class="p-0 divide-y">
@@ -94,10 +84,22 @@
 						<div class="shrink-0 min-w-6">{header.id}</div>
 						<div class="flex-1">{header.label}</div>
 					</div>
-					<div class="md:w-24 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Landmark} size={14}  /> </span>{header.department}</span></div>
+					<div class="md:w-24 shrink-0">
+						<span class="flex gap-1 items-center"
+							><span class="md:hidden inline-flex items-center"
+								><Icon name={Landmark} size={14} />
+							</span>{header.department}</span
+						>
+					</div>
 					{#if type !== 'syllabus'}
-						<div class="md:w-24 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Calendar} size={14}  /> </span>{header.date}</span></div>
-					{/if}					 
+						<div class="md:w-24 shrink-0">
+							<span class="flex gap-1 items-center"
+								><span class="md:hidden inline-flex items-center"
+									><Icon name={Calendar} size={14} />
+								</span>{header.date}</span
+							>
+						</div>
+					{/if}
 					<div class="md:w-48 shrink-0 text-right hidden md:flex justify-end">{header.action}</div>
 				{/each}
 			</div>
@@ -108,10 +110,12 @@
 					id="{slug}-{item.id}"
 					class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
 				>
-					<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
+					<div class="flex gap-2 md:flex-1 items-start w-full md:w-auto">
 						<div class="shrink-0 md:min-w-6">{(currentPage - 1) * perPage + index + 1}.</div>
 						<div class="flex-1 order-1">
 							<a
+								rel="nofollow noopener noreferrer external"
+								title={item.title}
 								href="{slug}/{type}/{item.slug}"
 								target={item.target}
 								class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-2 line-clamp-2"
@@ -130,9 +134,10 @@
 							<span class="text-sm">{formatDate(item.last_date)}</span>
 						</div>
 					{/if}
-					 
+
 					<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 						<Button
+							title="Detail"
 							href="{slug}/{type}/{item.slug}"
 							target={item.target}
 							variant="light"
@@ -140,11 +145,44 @@
 						>
 							Detail
 						</Button>
-						<Button href="{item.reference_url}" target="_blank" size="sm" class="bg-(color:--headerColor)">
-								{buttonLabel} 
-						</Button>					 
+						<Button
+							title={buttonLabel}
+							href={item.reference_url}
+							rel="nofollow noopener noreferrer external"
+							target="_blank"
+							size="sm"
+							class="bg-(color:--headerColor)"
+						>
+							{buttonLabel}
+						</Button>
 					</div>
 				</div>
+				<!-- ✅ Insert AD after every 10 items -->
+				{#if index === 5}
+					<div class="p-2 sm:px-4 bg-white text-center text-sm text-slate-600">
+						<!-- Your Ad / Banner / Script -->
+						<a
+							class="block rounded-md! sm:rounded-xl! overflow-hidden"
+							href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
+							target="_blank"
+							rel="nofollow noopener noreferrer external"
+							title="Neha Sharma Makeup Studio"
+						>
+							<img
+								src="/image/nehasharma-makeup-studio-h.jpg"
+								alt="Neha Sharma Makeup Studio"
+								title="Neha Sharma Makeup Studio"
+								class="object-cover sm:block hidden"
+							/>
+							<img
+								src="/image/nehasharma-makeup-studio-rect.jpg"
+								alt="Neha Sharma Makeup Studio"
+								title="Neha Sharma Makeup Studio"
+								class="object-cover block sm:hidden"
+							/>
+						</a>
+					</div>
+				{/if}
 			{/each}
 		</Card.Content>
 

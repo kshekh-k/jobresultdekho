@@ -70,7 +70,7 @@
 		>
 			<h3 class="text-lg font-semibold text-white">{title}</h3>
 			<div class="flex justify-between items-center gap-1">
-				<a href={slug} class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200">{viewText}</a>
+				<a href={slug} title={viewText} class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200">{viewText}</a>
 				<button
 					onclick={toggle}
 					class="p-1 rounded-sm  hover:bg-white/20 focus:outline-none text-white cursor-pointer"
@@ -103,16 +103,16 @@
 					<div
 						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center font-medium text-slate-600"
 					>
-						<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
+						<div class="flex gap-2 md:flex-1 items-start w-full md:w-auto">
 							<div class="shrink-0 md:min-w-6">{index + 1}.</div>
 
 							<div class="flex-1">
-								<a
-									href="{slug}/{type}/{item.slug}"
-									target={item.target}
+								<a  
+									href="{slug}/{type}/{item.slug}" title={item.title}
+								 
 									class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-1.5 line-clamp-2"
 								>
-									{item.title}
+									{item.title}	
 								</a>
 							</div>
 						</div>
@@ -131,13 +131,13 @@
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
 								href="{slug}/{type}/{item.slug}"
-								target={item.target}
+							 	title={'View Detail'}
 								variant="light"
 								size="sm"
 							>
 								View Detail
 							</Button>
-							<Button href={item.reference_url} target="_blank" size="sm" class="bg-(color:--headerColor)">
+							<Button href={item.reference_url} title={buttonLabel} rel="nofollow noopener noreferrer external" target="_blank" size="sm" class="bg-(color:--headerColor)">
 								{buttonLabel}
 							</Button>
 						</div>

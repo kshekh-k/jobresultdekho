@@ -23,8 +23,8 @@
   {#each links as { name, url, icon, brandColor }}
     <a
       href={url}
-      target="_blank"
-      rel="noopener noreferrer"
+      rel="nofollow noopener noreferrer external"
+      target="_blank"      
       aria-label={name} title={name}
       class="size-8 rounded-full ease-in-out duration-200 flex justify-center items-center {brandColor} {className}"
     >

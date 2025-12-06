@@ -46,10 +46,10 @@
 
 <!-- Notification Consent Banner -->
 {#if cookieConsent && !notificationConsent}
-<div class="fixed bottom-16 left-0 right-0 z-40 bg-gray-800 text-white shadow-lg">
+<div class="fixed bottom-16 left-0 right-0 z-40 bg-gray-800 text-white shadow-lg hidden">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between p-4 gap-4">
     <p class="text-sm md:text-base">
-      Enable browser notifications to receive booking updates and reminders.
+      Enable browser notifications to receive Latest Jobs, Admit Card, Result, Answer Keys and Admission.
     </p>
     <button
       on:click={requestNotifications}

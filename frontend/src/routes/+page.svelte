@@ -28,11 +28,12 @@
 	import Stats from '$lib/components/Stats.svelte';
 	import Desclaimer from '$lib/components/Desclaimer.svelte';
 	import { SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO } from '$lib/utils';
+	let title = `Latest Govt Jobs & Sarkari Result Today - ${SITE_NAME}`;
 	let fullYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-	<title>Latest Govt Jobs & Sarkari Result Today</title>
+	<title>{title}</title>
 
 	<meta
 		name="description"
@@ -45,7 +46,7 @@
 	/>
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Latest Govt Jobs & Sarkari Result Today" />
+	<meta property="og:title" content={title} />
 	<meta
 		property="og:description"
 		content="sarkari naukri, latest sarkari naukri, govt jobs, latest govt jobs, government jobs notification, sarkari jobs in india, sarkari result, sarkari result today, govt exam result, exam result {fullYear}, sarkari exam, govt exam, government competitive exams, admit card, exam admit card, govt exam admit card, sarkari admit card, answer key, official answer key, govt exam answer key, syllabus, exam syllabus pdf, govt exam syllabus, sarkari syllabus, admission, admission form {fullYear}, college admission, university admission, entrance exam admission, sarkari bharti, govt job apply online, sarkari naukri {fullYear}, govt jobs {fullYear}, exam notifications, job alerts india"
@@ -57,7 +58,7 @@
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Latest Govt Jobs & Sarkari Result Today" />
+	<meta name="twitter:title" content={title} />
 	<meta
 		name="twitter:description"
 		content="Stay updated with daily Govt Job alerts and Sarkari Results."
@@ -79,47 +80,68 @@
 	{@html `
 <script type="application/ld+json">
 ${JSON.stringify({
-	"@context": "https://schema.org",
-	"@type": "WebSite",
-	"name": "Latest Govt Jobs & Sarkari Result Today",
-	"headline":"Latest Govt Jobs & Sarkari Result Today",
-	"url": SITE_URL,
-	"image": OG_IMAGE,
-	"description": `sarkari naukri, latest sarkari naukri, govt jobs, latest govt jobs, government jobs notification, sarkari jobs in india, sarkari result, sarkari result today, govt exam result, exam result ${fullYear}, sarkari exam, govt exam, government competitive exams, admit card, exam admit card, govt exam admit card, sarkari admit card, answer key, official answer key, govt exam answer key, syllabus, exam syllabus pdf, govt exam syllabus, sarkari syllabus, admission, admission form ${fullYear}, college admission, university admission, entrance exam admission, sarkari bharti, govt job apply online, sarkari naukri ${fullYear}, govt jobs ${fullYear}, exam notifications, job alerts india`,
-	"publisher": {
-			"@type": "Organization",
-			"name": SITE_NAME,
-			"logo": {
-				"@type": "ImageObject",
-				"url": SITE_LOGO
-			}
-		},
-	"potentialAction": {
-		"@type": "SearchAction",
-		"target": `${SITE_URL}/search?q={query}`,
-		"query-input": "required name=query"
+	'@context': 'https://schema.org',
+	'@type': 'webpage',
+	'@id': `${SITE_URL}/#webpage`,
+	name: title,
+	headline: title,
+	url: SITE_URL,
+	image: OG_IMAGE,
+	description: `sarkari naukri, latest sarkari naukri, govt jobs, latest govt jobs, government jobs notification, sarkari jobs in india, sarkari result, sarkari result today, govt exam result, exam result ${fullYear}, sarkari exam, govt exam, government competitive exams, admit card, exam admit card, govt exam admit card, sarkari admit card, answer key, official answer key, govt exam answer key, syllabus, exam syllabus pdf, govt exam syllabus, sarkari syllabus, admission, admission form ${fullYear}, college admission, university admission, entrance exam admission, sarkari bharti, govt job apply online, sarkari naukri ${fullYear}, govt jobs ${fullYear}, exam notifications, job alerts india`,
+	publisher: {
+		'@type': 'Organization',
+		name: SITE_NAME,
+		logo: {
+			'@type': 'ImageObject',
+			url: SITE_LOGO
+		}
 	},
- 
+	isPartOf: {
+		'@type': 'WebSite',
+		'@id': `${SITE_URL}/#website`,
+		name: SITE_NAME,
+		url: SITE_URL
+	},
+	potentialAction: {
+		'@type': 'SearchAction',
+		target: `${SITE_URL}/search?q={search_term_string}`,
+		'query-input': 'required name=search_term_string'
+	}
 })}
 </script>
 `}
-
 </svelte:head>
+<h1 class="sr-only">Latest Govt Jobs & Sarkari Result Today - {SITE_NAME}</h1>
 <div class="space-y-5">
 	<HotPosts {hotPosts} />
 	<div class="max-w-screen-xl mx-auto px-3">
 		<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
 			<Card.Content class="flex items-center justify-center text-center p-1!  ">
-				<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden">
+				<a
+					href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
+					target="_blank"
+					rel="nofollow noopener noreferrer external"
+					title="Neha Sharma Makeup Studio"
+					class="rounded-md! sm:rounded-xl! overflow-hidden sm:block hidden"
+				>
 					<img
-						src="/image/JobResultDekho-Banner-horizontal.png"
-						alt="Job Result Dekho"
-						class="object-cover sm:block hidden"
-					/>
-					<img
-						src="/image/JobResultDekho-Banner-mobile.png"
-						alt="Job Result Dekho"
-						class="object-cover block sm:hidden"
+						src="/image/nehasharma-makeup-studio-h.jpg"
+						alt="Neha Sharma Makeup Studio"
+						title="Neha Sharma Makeup Studio"
+						class="object-cover"
+					/></a
+				>
+				<a
+					href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
+					target="_blank"
+					rel="nofollow noopener noreferrer external"
+					title="Neha Sharma Makeup Studio"
+					class="rounded-md! sm:rounded-xl! overflow-hidden block sm:hidden"
+					><img
+						src="/image/nehasharma-makeup-studio-rect.jpg"
+						alt="Neha Sharma Makeup Studio"
+						title="Neha Sharma Makeup Studio"
+						class="object-cover"
 					/>
 				</a>
 			</Card.Content>

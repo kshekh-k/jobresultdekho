@@ -48,16 +48,17 @@ const closeMenu = () => {
 <!-- ========================= -->
 <nav class="flex-1 flex justify-center">
 	<ul
-		class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center lg:gap-2 xl:gap-5 flex-1 divide-y divide-white/10 lg:divide-y-0"
+		class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center lg:gap-1 xl:gap-5 flex-1 divide-y divide-white/10 lg:divide-y-0"
 	>
 		{#each categories as cat}
 			<!-- HOME -->
 			{#if cat.title.toLowerCase() === 'home'}
 				<li>
 					<a
-						href="/"
+						href={SITE_URL} 
+						title={cat.title}
 						onclick={onNavigate}
-						class="block p-3 lg:py-1 md:px-2 text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
+						class="block p-3 lg:py-1 md:px-2 text-sm xl:text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
 							{currentPath === '/' 
 								? 'text-white bg-white/10'
 								: 'text-white hover:text-sky-200 hover:bg-white/10'}"
@@ -89,6 +90,7 @@ const closeMenu = () => {
 								<li>
 									<a
 										href={`/${child.slug}`}
+										title={child.title}
 										onclick={onNavigate}
 										class="block p-3 lg:py-2 lg:px-5 text-base font-medium ease-in-out duration-200
 											{isActive(child.slug)
@@ -111,6 +113,7 @@ const closeMenu = () => {
 				<li>
 					<a
 						href={`/${cat.slug}`}
+						title={cat.title}
 						onclick={onNavigate}
 						class="block p-3 lg:py-1 md:px-2 text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
 							{isActive(cat.slug)

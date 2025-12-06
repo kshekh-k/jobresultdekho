@@ -72,7 +72,7 @@
 	<div class="flex flex-wrap gap-2 items-center justify-center w-full">		 
         {#each share as item}
            <a href={item.url}
-			target="_blank"
+			target="_blank" rel="nofollow noopener noreferrer external" 
 			title={item.plateform}
 			class="p-2 rounded-sm text-white transition hover:opacity-85 {item.color}"
 		    >
