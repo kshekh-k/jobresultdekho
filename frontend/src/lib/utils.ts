@@ -4,7 +4,9 @@ import { twMerge } from "tailwind-merge";
 export const SITE_URL = import.meta.env.VITE_SITE_URL;
 export const API_URL = import.meta.env.VITE_API_URL;
 export const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
-
+export const SITE_NAME = "Job Result Dekho .Com";
+export const SITE_LOGO = `${SITE_URL}/image/jobresultdekho-logo-white.svg`
+export const OG_IMAGE = `${SITE_URL}/image/og-image.jpg`
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

@@ -53,7 +53,7 @@ const headingColor = [
 			title: "Jobs",
 			items: latestJobs,
 			viewText: "View All",
-			catLabel: "latest-job",
+			slug: "latest-job",
 			headers: commanHeader
 		},
 		{
@@ -62,7 +62,7 @@ const headingColor = [
 			title: "Admit Cards",
 			items: latestAdmitCards,
 			viewText: "View All",
-			catLabel: "admit-card",
+			slug: "admit-card",
 			headers: commanHeader
 		},
 		{
@@ -71,7 +71,7 @@ const headingColor = [
 			title: "Results",
 			items: latestResults,
 			viewText: "View All",
-			catLabel: "result",
+			slug: "result",
 			headers: resultHeader
 		},
 		{
@@ -80,7 +80,7 @@ const headingColor = [
 			title: "Answer Key",
 			items: latestAnswerKeys,
 			viewText: "View All",
-			catLabel: "answer-key",
+			slug: "answer-key",
 			headers: answerKeyHeader
 		},
 		{
@@ -89,7 +89,7 @@ const headingColor = [
 			title: "Admissions",
 			items: latestAdmissions,
 			viewText: "View All",
-			catLabel: "admissions",
+			slug: "admissions",
 			headers: commanHeader 
 		},
 		{
@@ -98,7 +98,7 @@ const headingColor = [
 			title: "Syllabus",
 			items: latestSyllabus,
 			viewText: "View All",
-			catLabel: "syllabus",
+			slug: "syllabus",
 			headers: syllabusHeader
 		}
 	].map((sec, index) => ({
@@ -145,7 +145,7 @@ const headingColor = [
 						headers={sec.headers}
 						title={sec.title}
 						items={sec.items}
-						catLabel={sec.catLabel}
+						slug={sec.slug}
 					/>
 				</div>
 			{/if}

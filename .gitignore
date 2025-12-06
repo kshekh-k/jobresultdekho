@@ -19,6 +19,7 @@ backend/build
 # OS junk
 .DS_Store
 Thumbs.db
+db.backup
 
 # Local env files
 .env

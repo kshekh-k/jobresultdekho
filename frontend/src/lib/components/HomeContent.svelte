@@ -53,12 +53,12 @@
 
 	// Sections
 	const articleSections = [
-		{ id: 'latest-job', type: 'jobs', title: 'Latest Jobs', items: latestJobs, viewText: 'View All', catLabel: 'latest-job', headers: commanHeader },
-		{ id: 'admit-card', type: 'admit-cards', title: 'Admit Cards', items: latestAdmitCards, viewText: 'View All', catLabel: 'admit-card', headers: commanHeader },
-		{ id: 'result', type: 'results', title: 'Results', items: latestResults, viewText: 'View All', catLabel: 'result', headers: resultHeader },
-		{ id: 'answer-key', type: 'answer-keys', title: 'Answer Key', items: latestAnswerKeys, viewText: 'View All', catLabel: 'answer-key', headers: answerKeyHeader },
-		{ id: 'admission', type: 'admissions', title: 'Admissions', items: latestAdmissions, viewText: 'View All', catLabel: 'admissions', headers: commanHeader },
-		{ id: 'syllabus', type: 'syllabus', title: 'Syllabus', items: latestSyllabus, viewText: 'View All', catLabel: 'syllabus', headers: syllabusHeader }
+		{ id: 'latest-job', type: 'jobs', title: 'Latest Jobs', items: latestJobs, viewText: 'View All', slug: 'latest-job', headers: commanHeader },
+		{ id: 'admit-card', type: 'admit-cards', title: 'Admit Cards', items: latestAdmitCards, viewText: 'View All', slug: 'admit-card', headers: commanHeader },
+		{ id: 'result', type: 'results', title: 'Results', items: latestResults, viewText: 'View All', slug: 'result', headers: resultHeader },
+		{ id: 'answer-key', type: 'answer-keys', title: 'Answer Key', items: latestAnswerKeys, viewText: 'View All', slug: 'answer-key', headers: answerKeyHeader },
+		{ id: 'admission', type: 'admissions', title: 'Admissions', items: latestAdmissions, viewText: 'View All', slug: 'admissions', headers: commanHeader },
+		{ id: 'syllabus', type: 'syllabus', title: 'Syllabus', items: latestSyllabus, viewText: 'View All', slug: 'syllabus', headers: syllabusHeader }
 	].map((sec, index) => ({ ...sec, headerColor: headingColor[index] }));
 
 	/* -------------------------
@@ -196,7 +196,7 @@
 					title={sec.title}
 					items={sec.items}
 					viewText={sec.viewText}
-					catLabel={sec.catLabel}
+					slug={sec.slug}
 				/>
 
 				{#if i === 2}

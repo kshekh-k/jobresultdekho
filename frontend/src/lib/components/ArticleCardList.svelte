@@ -9,24 +9,32 @@
 
 	export let title: string | undefined;
 	export let headerColor: string = 'bg-sky-500';
-	export let catLabel: string = '/latest-job';
+	export let slug: string = '/latest-job';
 	export let open: boolean = true;
+
+
+	let job = slug === 'latest-job';
+	let admitcard = slug === 'admit-card';
+	let result = slug === 'result';
+	let answerkey = slug === 'answer-key';
+	let syllabus = slug === 'syllabus';
+	let admission = slug === 'admission';
+
+
 	export let buttonLabel: string | undefined =
-		catLabel === 'latest-job'
+		job
 			? 'Apply'
-			: catLabel === 'result'
+			: result
 				? 'View'
-				: catLabel === 'admit-card'
+				: admitcard
 					? 'Download'
-					: catLabel === 'admission'
+					: admission
 						? 'View'
-						: catLabel === 'answer-key'
+						: answerkey
 							? 'Match'
-							: catLabel === 'syllabus'
-								? 'Check'
-							: catLabel === 'addmission'
-								? 'Apply'
-								: undefined;
+							: syllabus
+								? 'Check'							  
+								: 'View';
 
 	export let type: string | undefined;
 	export let items: {
@@ -97,14 +105,14 @@
 			<!-- ✅ Show only current page items -->
 			{#each paginatedItems as item, index}
 				<div
-					id="{catLabel}-{item.id}"
+					id="{slug}-{item.id}"
 					class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
 				>
 					<div class="flex gap-2 md:flex-1 items-center w-full md:w-auto">
 						<div class="shrink-0 md:min-w-6">{(currentPage - 1) * perPage + index + 1}.</div>
 						<div class="flex-1 order-1">
 							<a
-								href="{catLabel}/{type}/{item.slug}"
+								href="{slug}/{type}/{item.slug}"
 								target={item.target}
 								class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-2 line-clamp-2"
 							>
@@ -125,7 +133,7 @@
 					 
 					<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 						<Button
-							href="{catLabel}/{type}/{item.slug}"
+							href="{slug}/{type}/{item.slug}"
 							target={item.target}
 							variant="light"
 							size="sm"
