@@ -48,10 +48,10 @@
 </script>
 
 <svelte:head>
-	<title>Contact Us | {SITE_NAME}</title>
+	<title>Contact Us - {SITE_NAME}</title>
 	<meta
 		name="description"
-		content="Contact ${SITE_NAME} for support, partnership opportunities, advertising, or feedback. We collaborate with businesses, recruiters, and organizations to promote opportunities, increase reach, and build long-term, result-driven partnerships through our platform."
+		content="Contact {SITE_NAME} for support, partnership opportunities, advertising, or feedback. We collaborate with businesses, recruiters, and organizations to promote opportunities, increase reach, and build long-term, result-driven partnerships through our platform."
 	/>
 	<meta
 		name="keywords"
@@ -64,7 +64,7 @@
 	<meta property="og:title" content="Contact Us | {SITE_NAME}" />
 	<meta
 		property="og:description"
-		content="Contact ${SITE_NAME} for support, partnership opportunities, advertising, or feedback. We collaborate with businesses, recruiters, and organizations to promote opportunities, increase reach, and build long-term, result-driven partnerships through our platform."
+		content="Contact {SITE_NAME} for support, partnership opportunities, advertising, or feedback. We collaborate with businesses, recruiters, and organizations to promote opportunities, increase reach, and build long-term, result-driven partnerships through our platform."
 	/>
 	<meta property="og:url" content="{SITE_URL}/contact" />
 	<meta property="og:image" content={OG_IMAGE} />

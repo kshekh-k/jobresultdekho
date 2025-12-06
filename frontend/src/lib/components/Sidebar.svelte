@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	export let className: string = 'lg:col-span-4 xl:col-span-3 space-y-4';
-	import { Image, FileText, Calculator, Signature } from 'lucide-svelte';
+	import { Image, FileText, Calculator, Signature, Megaphone } from 'lucide-svelte';
 	import { CalendarRange, NotepadTextDashed, TypeOutline } from 'lucide-svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Widget from './Widget.svelte';
@@ -11,6 +11,7 @@
 		{ title: 'Name & DOB on photo', slug: `${SITE_URL}/photo-editor`, icon: CalendarRange },
 		{ title: 'Image to PDF Converter', slug: `${SITE_URL}/image-to-pdf`, icon: FileText },
 		{ title: 'Age Calculator', slug: `${SITE_URL}/age-calculator`, icon: Calculator },
+		{ title: "All Blogs", slug: `${SITE_URL}/blog`, icon: Megaphone  },
 		// { title: "Photo Signature", slug:  `${SITE_URL}/`, icon: Signature },
 		{
 			title: 'Case Converter',

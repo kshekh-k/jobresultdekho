@@ -191,7 +191,7 @@
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
 									<Button
 										href={data.content.reference_url}
-										target="_blank"
+										target="_blank" title={buttonLabel} rel="nofollow noopener noreferrer external" 
 										variant="success"
 										size="sm"
 										class={'no-underline !w-full'}
@@ -261,7 +261,7 @@
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
 									<Button
 										href={data.content.reference_url}
-										target="_blank"
+										target="_blank" title={buttonLabel} rel="nofollow noopener noreferrer external" 
 										variant="success"
 										size="sm"
 										class={'no-underline !w-full'}
@@ -296,13 +296,27 @@
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
 					<!-- This is job banner -->
-					<div class="flex justify-center items-center">
-						<img
-							src={getMediaUrl(data.content.banner_image?.url)}
-							alt=""
-							class="object-cover !mt-0"
-						/>
-					</div>
+					{#if data.content.banner_image?.url}
+						<div class="flex justify-center items-center">
+							<img
+								src={getMediaUrl(data.content.banner_image?.url)}
+								alt={data.content.title}
+								title={data.content.title}
+								class="object-cover !mt-0"
+							/>
+						</div>
+					{/if}
+					<h4 class="font-semibold">NOTE</h4>
+					<p class="italic">
+						छात्रों को सलाह दी जाती है कि फॉर्म भरने से पहले आधिकारिक सूचना में दी गई सभी शर्तों
+						(अंतिम तिथि, आयु सीमा, योग्यता आदि) की जांच अवश्य कर लें। सभी बिंदु पढ़ने के बाद ही
+						आवेदन करें।
+					</p>
+					<p class="italic mt-0!">
+						Students are advised to carefully review all the details mentioned in the official
+						notification (such as the last date, age limit, qualifications, etc.) before filling out
+						the form. Please submit your application only after thoroughly reading all the points.
+					</p>
 				</div>
 			</div>
 		</Card.Content>
@@ -313,64 +327,91 @@
 			<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5">
 				<!-- Ad Places -->
 				<div class="flex justify-center items-center rounded-sm bg-gray-100 col-span-5">
-					<a href="{SITE_URL}/contact" class="block rounded-sm overflow-hidden">
+					<a href="{SITE_URL}/contact" title={SITE_NAME} class="block rounded-sm overflow-hidden">
 						<img
 							src="/image/JobResultdekho-square.png"
-							alt="Job Result Dekho"
+							alt={SITE_NAME}
+							title={SITE_NAME}
 							class="object-cover block"
 						/>
 					</a>
 				</div>
 				{#if data.content.important_links}
-					<div class="prose max-w-none bg-indigo-50 rounded-sm p-3 col-span-7">
-						<h3 class="text-sky-800 text-center uppercase">Important Links</h3>
-						<table class="min-w-full border border-collapse table-auto">
-							<thead>
-								<tr class="bg-sky-800 text-white">
-									<th
-										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-nowrap text-white hidden sm:table-cell"
-										>Sr. No.</th
-									>
-									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white"
-										>Title</th
-									>
-									<th class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border text-white"
-										>Link</th
-									>
-								</tr>
-							</thead>
-							<tbody class="divide-y">
-								{#each data.content.important_links as link, index}
-									<tr class="odd:bg-white even:bg-slate-50">
-										<td
-											class="sm:px-4 p-2 text-xs sm:text-sm border hidden sm:table-cell"
-											valign="middle">{index + 1}.</td
+					<div class="prose max-w-none bg-sky-900 rounded-sm p-3 col-span-7 flex flex-col">
+						<h3 class="text-white text-center uppercase">Important Links</h3>
+						 
+							<table class="min-w-full border border-sky-900 border-collapse table-auto">
+								<thead>
+									<tr class="bg-rose-500 text-white">
+										 
+										<th
+											class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+											>Title</th
 										>
-										<th class="sm:px-4 p-2 text-xs sm:text-sm border w-full">{link.Label}</th>
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border">
-											{#if link.URL}
-												<a
-													href={link.URL}
-													target="_blank"
-													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
-													>Click Here
-												</a>
-											{:else}
-												<a
-													href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
-													target="_blank"
-													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
-													>Click Here
-												</a>
-												<p class="whitespace-nowrap !m-0 text-semibold italic">
-													Link activate soon
-												</p>
-											{/if}
-										</td>
+										<th
+											class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+											>Link</th
+										>
 									</tr>
-								{/each}
-							</tbody>
-						</table>
+								</thead>
+								<tbody class="divide-y">
+									{#each data.content.important_links as link, index}
+										<tr class="odd:bg-white even:bg-slate-50">
+											<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+												>{link.Label}</th
+											>
+											<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900">
+												{#if link.URL}
+													<a
+														href={link.URL}
+														rel="nofollow noopener noreferrer external"
+														target="_blank"
+														title={link.Label}
+														class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+														>Click Here
+													</a>
+												{:else}
+													<p class="whitespace-nowrap !m-0 text-semibold italic">
+														Link activate soon
+													</p>
+												{/if}
+											</td>
+										</tr>
+									{/each}
+
+									<tr class="odd:bg-white even:bg-slate-50">
+										<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+											>Join Whatsapp Channel</th
+										>
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
+											><a
+												href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+												target="_blank"
+												title="Join WhatsApp Channel"
+												rel="nofollow noopener noreferrer external"
+												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
+												>Click Here
+											</a></td
+										></tr
+									>
+									<tr class="odd:bg-white even:bg-slate-50">
+										<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+											>Join Telegram Channel</th
+										>
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
+											><a
+												href="https://t.me/sarkari_jobresultdekho"
+												target="_blank"
+												title="Join WhatsApp Channel"
+												rel="nofollow noopener noreferrer external"
+												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
+												>Click Here
+											</a></td
+										></tr
+									>
+								</tbody>
+							</table>
+					 
 					</div>
 				{/if}
 			</div>
@@ -415,6 +456,8 @@
 			href={data.content.reference_url}
 			variant="success"
 			target="_blank"
+			rel="nofollow noopener noreferrer external"
+			title={buttonLabel}
 			class="no-underline w-60"
 			size="xl">{buttonLabel}</Button
 		>
