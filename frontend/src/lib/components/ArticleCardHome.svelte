@@ -104,7 +104,7 @@
 						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center font-medium text-slate-600"
 					>
 						<div class="flex gap-2 md:flex-1 items-start w-full md:w-auto">
-							<div class="shrink-0 md:min-w-6">{index + 1}.</div>
+							<div class="shrink-0 md:min-w-6 md:py-1.5">{index + 1}.</div>
 
 							<div class="flex-1">
 								<a  
