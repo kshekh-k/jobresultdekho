@@ -142,19 +142,21 @@ const pageTitle = $derived(
 
 	// Dynamic Description
 	const pageDesc = $derived(
-	job
-		? `Find the latest Govt Jobs ${fullYear} including SSC, Railway, UPSC & State vacancies.`
-		: admitcard
-			? `Download Admit Cards ${fullYear} for SSC, Railway & other Govt exams.`
-			: result
-				? `Check the latest Sarkari Results ${fullYear} updated instantly.`
-				: answerkey
-					? `Official Answer Keys ${fullYear} for all major Govt exams.`
-					: syllabus
-						? `Download updated Govt Exam Syllabus ${fullYear} PDFs.`
-						: admission
-							? `Latest Admission updates ${fullYear} for schools & universities.`
-							: `Latest Govt Jobs, Results, Admit Cards & Exam Updates ${fullYear}.`
+job
+	? `Find the latest Government Jobs ${fullYear} and Sarkari Naukri updates including SSC, Railway, UPSC, Banking, Teaching, Police, Defence, PSU and State Govt Job vacancies. Get official notifications, eligibility details, important dates and apply online links in one place.`
+	: admitcard
+		? `Download Admit Cards ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Check exam dates, shift timings, centres, roll number details and access direct official links easily.`
+		: result
+			? `Check the latest Sarkari Results ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State Govt exams. View result updates, merit lists, scorecards, cut-off marks and official notifications instantly.`
+			: answerkey
+				? `Get official Answer Keys ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Download PDFs, verify answers, estimate scores and track objections through official sources.`
+				: syllabus
+					? `Download updated Sarkari Exam Syllabus ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State-level Govt exams. Access subject-wise syllabus PDFs, exam patterns and preparation guidance.`
+					: admission
+						? `Get the latest Admission updates ${fullYear} for schools, colleges, universities and Govt institutions. Check entrance exams, eligibility, fees, counselling details, Sarkari forms and online application links.`
+						: `Stay updated with the latest Sarkari Naukri, Govt Jobs, Sarkari Result, Admit Cards, Answer Keys, Syllabus and Admission notifications ${fullYear}. Get verified updates, official links and timely information.`
+
+
 );
 
 console.log(pageDesc);

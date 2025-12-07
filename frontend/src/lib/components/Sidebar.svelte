@@ -19,7 +19,7 @@
 			icon: NotepadTextDashed,
 			target: '_blank'
 		},
-		{ title: 'Typing Test', slug: `${SITE_URL}/#`, icon: TypeOutline }
+		// { title: 'Typing Test', slug: `${SITE_URL}/#`, icon: TypeOutline }
 	];
 
 	// Parent & children category
