@@ -12,7 +12,7 @@
 	/>
 </svelte:head>
  
-	  <Layout heading={"About Us"}>
+	  <Layout heading={"About Us"} headerBgColor="bg-sky-800">
 		<Card.Root class="overflow-hidden p-0 rounded-md gap-0 py-5">
 			<Card.Header class="py-2">
 				 

@@ -26,10 +26,8 @@
 <svelte:head>
   <title>Terms & Conditions | JobResultDekho.com</title>
   <meta name="description" content="Terms and Conditions for JobResultDekho.com — jobs, results, admit cards and study material for Indian students." />
-</svelte:head>
-<InnerHero heading="Terms &amp; Conditions" bgColor="bg-sky-800" textColor="text-white" className="mb-5 max-w-screen-xl mx-auto px-3"></InnerHero>
- 
-  <Layout heading={'Privacy Policy'}>	
+</svelte:head> 
+  <Layout heading={'Terms & Conditions'} headerBgColor="bg-sky-800">	
         <div class="text-slate-500 leading-relaxed space-y-6">
      <header class="mb-5 bg-white p-5 rounded-xl shadow-md">    
       <h2 class="text-sm text-slate-600">Effective Date: <strong>02 October 2025</strong></h2>

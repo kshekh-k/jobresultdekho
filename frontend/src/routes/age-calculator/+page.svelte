@@ -14,6 +14,6 @@
 	/>
 </svelte:head>
 
-<Layout heading={'Age Calculator'}>
+<Layout heading={'Age Calculator'} headerBgColor="bg-sky-800">
 	<AgeCalculator />
 </Layout>

@@ -108,7 +108,7 @@ ${JSON.stringify({
 </svelte:head>
 
 <!-- Content Section -->
-<Layout heading={'Contact us'}>
+<Layout heading={'Contact us'} headerBgColor="bg-sky-800">
 	<div class="bg-white p-5 rounded-xl shadow-md flex flex-col gap-5">
 		<div class="lg:grid lg:grid-cols-2 flex flex-col gap-10">
 			<!-- Left Form -->
