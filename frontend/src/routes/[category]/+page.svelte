@@ -3,7 +3,14 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO } from '$lib/utils';
-	export let data: { category: any };
+	import { page } from '$app/stores';
+	const { data } = $props<{
+		data: {
+			category?: {
+				slug: string;
+			};
+		};
+	}>();
 
 	const headingColor = [
 		'--color-sky-900',
@@ -83,7 +90,7 @@
 			headers: answerKeyHeader,
 			color: headingColor[3]
 		},
-		
+
 		{
 			key: 'admissions',
 			type: 'admissions',
@@ -97,17 +104,27 @@
 			color: headingColor[5]
 		}
 	];
-	let job = data.category.slug === 'latest-job';
-	let admitcard = data.category.slug === 'admit-card';
-	let result = data.category.slug === 'result';
-	let answerkey = data.category.slug === 'answer-key';
-	let syllabus = data.category.slug === 'syllabus';
-	let admission = data.category.slug === 'admission';
+	// let job = data.category.slug === 'latest-job';
+	// let admitcard = data.category.slug === 'admit-card';
+	// let result = data.category.slug === 'result';
+	// let answerkey = data.category.slug === 'answer-key';
+	// let syllabus = data.category.slug === 'syllabus';
+	// let admission = data.category.slug === 'admission';
+
+	const activeCategory = $derived(data?.category?.slug ?? null);
+
+	const job = $derived(activeCategory === 'latest-job');
+	const admitcard = $derived(activeCategory === 'admit-card');
+	const result = $derived(activeCategory === 'result');
+	const answerkey = $derived(activeCategory === 'answer-key');
+	const syllabus = $derived(activeCategory === 'syllabus');
+	const admission = $derived(activeCategory === 'admission');
 
 	let fullYear = new Date().getFullYear();
 
 	// Dynamic SEO Title
-	let pageTitle = job
+const pageTitle = $derived(
+	job
 		? `Latest Govt Jobs ${fullYear} - All Government Job Notifications`
 		: admitcard
 			? `Admit Card ${fullYear} - Download Govt Exam Hall Tickets`
@@ -116,28 +133,50 @@
 				: answerkey
 					? `Answer Key ${fullYear} - Official Govt Exam Solutions`
 					: syllabus
-						? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police Syllabus PDF`
+						? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police`
 						: admission
-							? `Admissions in India ${fullYear} – Apply Online for Schools, Colleges & Universities`
-							: `Latest Govt Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admission Updates ${fullYear}`;
+							? `Admissions in India ${fullYear} - Apply Online`
+							: `Latest Govt Updates ${fullYear}`
+);
+
 
 	// Dynamic Description
-	let pageDesc = job
-		? `Find the latest Govt Jobs ${fullYear} including SSC, Railways, Police, Banking, UPSC, Teaching, PSU & State Government vacancies updated daily.`
+	const pageDesc = $derived(
+	job
+		? `Find the latest Govt Jobs ${fullYear} including SSC, Railway, UPSC & State vacancies.`
 		: admitcard
-			? `Download Admit Cards ${fullYear} for SSC, Railway, Police, Army, UPSC, Banking & other Govt Exams. Get fast and direct download links.`
+			? `Download Admit Cards ${fullYear} for SSC, Railway & other Govt exams.`
 			: result
-				? `Check the latest Sarkari Result ${fullYear} for SSC, Railway, Police, Army, Bank & all major government exams. Updated instantly.`
+				? `Check the latest Sarkari Results ${fullYear} updated instantly.`
 				: answerkey
-					? `Match official Answer Keys ${fullYear} for SSC, Railway, Police, Army, UPSC & other government exams. Verify your answers using official solutions.`
+					? `Official Answer Keys ${fullYear} for all major Govt exams.`
 					: syllabus
-						? `Download updated Govt Exam Syllabus ${fullYear} for SSC, Railway, Police, UPSC, Defence, Banking & State Government exams in PDF format.`
+						? `Download updated Govt Exam Syllabus ${fullYear} PDFs.`
 						: admission
-							? `Get the latest Admission ${fullYear} updates for schools, colleges, universities, entrance exams & govt institutes. Check eligibility, fees & apply online links.`
-							: `Get the latest Govt Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admission updates in one place. Daily alerts & official links for ${fullYear}.`;
+							? `Latest Admission updates ${fullYear} for schools & universities.`
+							: `Latest Govt Jobs, Results, Admit Cards & Exam Updates ${fullYear}.`
+);
+
+console.log(pageDesc);
+	// Dynamic Description
+	const headerBgColor = $derived(job
+		? 'bg-sky-900'
+		: admitcard
+			? 'bg-emerald-900'
+			: result
+				? 'bg-amber-900'
+				: answerkey
+					? 'bg-indigo-900' : admission ? 'bg-rose-900'
+					: syllabus
+						? 'bg-yellow-900'
+						: 'bg-neutral-900'
+);
+
+
+ 
 
 	// JSON-LD Schema object
-	let schemaData = {
+	let schemaData = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'WebPage',
 		'@id': `${SITE_URL}/${data.category.slug}#webpage`,
@@ -168,7 +207,7 @@
 			target: `${SITE_URL}/search?q={search_term_string}`,
 			'query-input': 'required name=search_term_string'
 		}
-	};
+});
 
 	console.log(data.category.slug);
 </script>
@@ -204,25 +243,14 @@
 
 <Layout
 	heading={data.category.title}
-	headerBgColor={job
-		? 'bg-sky-900'
-		: admitcard
-			? 'bg-emerald-900'
-			: result
-				? 'bg-amber-900'
-				: answerkey
-					? 'bg-indigo-900'
-					: syllabus
-						? 'bg-rose-900'
-						: admission
-							? 'bg-yellow-900'
-							: 'bg-neutral-900'}
+	headerBgColor={headerBgColor}
 >
 	{#if data.category.description}
 		<Card.Root class="overflow-hidden rounded-md gap-5 ">
 			<Card.Content>
 				<p class="text-slate-600">{data.category.description}</p>
-			</Card.Content>
+				<p>pageTitle: {pageTitle}</p>		
+				</Card.Content>
 		</Card.Root>
 	{/if}
 
