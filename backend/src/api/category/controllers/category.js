@@ -54,13 +54,12 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     });
 
     if (!category) return ctx.notFound("Category not found");
-    const categoryId = category.id;
-
+  
     // 2. Generic helper for fetching records from any content type
     const fetchRecords = async (contentType, extraWhere = {}, extraSelect = []) => {
       return await strapi.db.query(contentType).findMany({
         where: {
-          category: { id: categoryId },
+          category: { slug: slug },
           publishedAt: { $notNull: true },
           ...extraWhere,
         },
