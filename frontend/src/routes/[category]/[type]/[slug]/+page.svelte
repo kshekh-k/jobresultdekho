@@ -23,6 +23,7 @@
 	$: currentUrl = $page.url.href;
 
 	export let data: { content: any; type: string };
+	
 	let job = data.type === 'jobs';
 	let admitcard = data.type === 'admit-cards';
 	let result = data.type === 'results';
