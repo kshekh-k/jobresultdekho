@@ -4,7 +4,7 @@
 	import { SITE_URL } from '$lib/utils';
 	import { page } from '$app/stores';
 
-	// ✅ Svelte 5 props
+	// Svelte 5 props
 	const {
 		onNavigate = () => {},
 		categories = []
@@ -23,13 +23,12 @@
 	let openMenu = $state<string | null>(null);
 
 	const toggleMenu = (key: string) => {
-	openMenu = openMenu === key ? null : key;
-	console.log('clicked:', key);
-};
+		openMenu = openMenu === key ? null : key;
+	};
 
-const closeMenu = () => {
-	openMenu = null;
-};
+	const closeMenu = () => {
+		openMenu = null;
+	};
 
 	// ------------------------------
 	// Pathname detection
@@ -40,7 +39,9 @@ const closeMenu = () => {
 	const isActive = (slug: string) => {
 		const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
 		return currentPath === normalizedSlug;
-	};	 
+	};
+
+	const excludedSlugs = ['disclaimer', 'pivacy-policies', 'terms-conditions']; 
 </script>
 
 <!-- ========================= -->
@@ -86,7 +87,7 @@ const closeMenu = () => {
 							class="lg:absolute lg:left-0 mt-2 lg:w-48 lg:bg-white lg:border lg:rounded-lg lg:shadow-lg lg:z-50 divide-y divide-white/10"
 							onmouseleave={closeMenu}
 						>
-							{#each cat.children as child, index}
+							{#each cat.children.filter(child => !excludedSlugs.includes(child.slug)) as child, index}
 								<li>
 									<a
 										href={`/${child.slug}`}

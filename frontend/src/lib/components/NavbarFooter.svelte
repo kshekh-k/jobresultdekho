@@ -4,7 +4,7 @@
 	import { SITE_URL } from '$lib/utils';
 	import { page } from '$app/stores';
 
-	// ✅ Svelte 5 props
+	// Svelte 5 props
 	const {
 		onNavigate = () => {},
 		categories = []
@@ -53,9 +53,8 @@
 					</a>
 				</li>
 
-		 {:else if cat.children?.length}
-			 <li class="hidden">{cat.title}</li>
-         
+		{:else if cat.children?.length}
+			<li class="hidden">{cat.title}</li>    
 
 			<!-- NORMAL LINK -->
 			{:else}
