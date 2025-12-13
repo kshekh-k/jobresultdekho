@@ -78,6 +78,8 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
       admit_cards: await fetchRecords("api::job.job", { stage: "Admit Card" }),
       results:     await fetchRecords("api::job.job", { stage: "Result" }),
       answer_keys: await fetchRecords("api::job.job", { stage: "Answer Key" }),
+      waiting_list: await fetchRecords("api::job.job", { stage: "Waiting List" }),
+      archive_jobs: await fetchRecords("api::job.job", { stage: "Archive Job" }),
 
       // admissions and syllabus are separate content types
       admissions:  await fetchRecords("api::admission.admission"),
