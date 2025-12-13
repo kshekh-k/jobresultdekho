@@ -11,7 +11,7 @@
 			};
 		};
 	}>();
-	console.log('Category List', data);
+	//console.log('Category List', data);
 	const headingColor = [
 		'--color-sky-900',
 		'--color-emerald-900',
@@ -107,13 +107,13 @@
 		},
 		{
 			key: 'waiting_list',
-			type: 'waiting-list',
+			type: 'waiting',
 			headers: commanHeader,
 			color: headingColor[6]
 		},
 		{
 			key: 'archive_jobs',
-			type: 'archive-jobs',
+			type: 'archive',
 			headers: commanHeader,
 			color: headingColor[7]
 		}
