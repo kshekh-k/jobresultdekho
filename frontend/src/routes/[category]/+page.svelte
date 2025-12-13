@@ -11,14 +11,16 @@
 			};
 		};
 	}>();
-
+	console.log('Category List', data);
 	const headingColor = [
 		'--color-sky-900',
 		'--color-emerald-900',
 		'--color-amber-900',
 		'--color-indigo-900',
 		'--color-rose-900',
-		'--color-yellow-900'
+		'--color-yellow-900',
+		'--color-orange-900',
+		'--color-lime-900',
 	];
 	// Header configs
 	const commanHeader = [
@@ -102,15 +104,21 @@
 			type: 'syllabus',
 			headers: syllabusHeader,
 			color: headingColor[5]
+		},
+		{
+			key: 'waiting_list',
+			type: 'waiting-list',
+			headers: commanHeader,
+			color: headingColor[6]
+		},
+		{
+			key: 'archive_jobs',
+			type: 'archive-jobs',
+			headers: commanHeader,
+			color: headingColor[7]
 		}
 	];
-	// let job = data.category.slug === 'latest-job';
-	// let admitcard = data.category.slug === 'admit-card';
-	// let result = data.category.slug === 'result';
-	// let answerkey = data.category.slug === 'answer-key';
-	// let syllabus = data.category.slug === 'syllabus';
-	// let admission = data.category.slug === 'admission';
-
+	
 	const activeCategory = $derived(data?.category?.slug ?? null);
 
 	const job = $derived(activeCategory === 'latest-job');
@@ -119,6 +127,8 @@
 	const answerkey = $derived(activeCategory === 'answer-key');
 	const syllabus = $derived(activeCategory === 'syllabus');
 	const admission = $derived(activeCategory === 'admission');
+	const waitinglist = $derived(activeCategory === 'waiting-list');
+	const archivejob = $derived(activeCategory === 'archive-job');
 
 	let fullYear = new Date().getFullYear();
 
@@ -158,17 +168,16 @@
 	);
 
 	// Dynamic Description
-	const headerBgColor = $derived(job
-		? 'bg-sky-900'
-		: admitcard
-			? 'bg-emerald-900'
-			: result
-				? 'bg-amber-900'
-				: answerkey
-					? 'bg-indigo-900' : admission ? 'bg-rose-900'
-					: syllabus
-						? 'bg-yellow-900'
-						: 'bg-neutral-900'
+	const headerBgColor = $derived(
+		job	? 'bg-sky-900'
+		: admitcard	? 'bg-emerald-900'
+			: result ? 'bg-amber-900'
+				: answerkey	? 'bg-indigo-900' 
+					: admission ? 'bg-rose-900'
+						: syllabus ? 'bg-yellow-900'
+							: waitinglist ? 'bg-orange-900'
+								: archivejob ? 'bg-lime-900'
+									: 'bg-neutral-900'
 	); 
 
 	// JSON-LD Schema object
@@ -253,6 +262,7 @@
 	     🔥 Single Loop → Auto Render All Sections 
 	     ============================================ -->
 	{#each sections as sec}
+		{console.log('sec.key', data.category[sec.key]?.length)}
 		{#if data.category[sec.key]?.length}
 			<ArticleCardList
 				type={sec.type}
