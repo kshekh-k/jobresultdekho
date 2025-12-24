@@ -1,6 +1,6 @@
 <script lang="ts"> 
 	import { SITE_URL, SITE_LOGO, SITE_NAME } from "$lib/utils";
-	import NavbarFooter from "./NavbarFooter.svelte";
+	import NavbarFooter from "./NavbarFooter---.svelte";
 	import SocialMedia from "./SocialMedia.svelte";
 
   export let categories: any[] = [];
