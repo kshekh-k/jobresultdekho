@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-
   let cookieConsent = false;
   let notificationConsent = false;
 
@@ -28,8 +27,8 @@
 </script>
 
 <!-- Cookie Consent Banner -->
-{#if !cookieConsent}
-<div class="fixed bottom-0 left-0 right-0 z-50 bg-gray-900 text-white shadow-lg">
+<!-- {#if !cookieConsent}
+<div class="fixed bottom-0 inset-x-0 z-50 bg-gray-900 text-white shadow-lg">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between p-4 gap-4">
     <p class="text-sm md:text-base">
       We use cookies to improve your experience. By continuing, you agree to our Privacy Policy.
@@ -42,7 +41,7 @@
     </button>
   </div>
 </div>
-{/if}
+{/if} -->
 
 <!-- Notification Consent Banner -->
 {#if cookieConsent && !notificationConsent}

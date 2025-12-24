@@ -7,9 +7,9 @@
 		formatDate,
 		getMediaUrl,
 		SITE_URL,
-		SITE_NAME,
-		OG_IMAGE,
+		SITE_NAME, 
 		SITE_LOGO,
+		OG_IMAGE,
 		richTextToPlainText,
 		extractTextFromRichText
 	} from '$lib/utils';
@@ -52,6 +52,11 @@
 		? data.content.SEO?.description
 		: `${metaShorDescipt} 
 		 Get complete details for ${data.content.title}`;
+
+const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.banner_image?.url) : OG_IMAGE
+
+
+
 </script>
 
 <svelte:head>
@@ -79,14 +84,14 @@
 	<meta property="og:title" content={pageTitle} />
 	<meta property="og:description" content={pageDesc} />
 	<meta property="og:url" content={currentUrl} />
-	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image" content={POST_OG_IMAGE} />
 	<meta property="og:site_name" content={SITE_NAME} />
 
 	<!-- TWITTER -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={pageTitle} />
 	<meta name="twitter:description" content={pageDesc} />
-	<meta name="twitter:image" content={OG_IMAGE} />
+	<meta name="twitter:image" content={POST_OG_IMAGE} />
 
 	<!-- PWA -->
 	<meta name="apple-mobile-web-app-title" content={SITE_NAME} />
@@ -104,7 +109,7 @@
 		headline: pageTitle,
 		description: pageDesc,
 		url: currentUrl,
-		image: OG_IMAGE,
+		image: POST_OG_IMAGE,
 		publisher: {
 			'@type': 'Organization',
 			name: SITE_NAME,
