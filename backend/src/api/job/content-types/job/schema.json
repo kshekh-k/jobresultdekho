@@ -83,7 +83,9 @@
         "Job",
         "Admit Card",
         "Result",
-        "Answer Key"
+        "Answer Key",
+        "Waiting List",
+        "Archive Job"
       ]
     },
     "SEO": {

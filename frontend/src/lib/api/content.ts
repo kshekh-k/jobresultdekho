@@ -5,23 +5,15 @@ import type { Result } from "./result";
 import type { Syllabus } from "./syllabus";
 import type { Admission } from "./admission";
 import type { AnswerKey } from "./answer-key";
+import type { WaitingList } from "./waiting-list";
+import type { ArchiveJob } from "./archive-job";
 
 import { getJobBySlug } from "./job";
-import { getAdmitCardBySlug } from "./admit-card";
-import { getResultBySlug } from "./result";
 import { getSyllabusBySlug } from "./syllabus";
 import { getAdmissionBySlug } from "./admission";
-import { getAnswerKeyBySlug } from "./answer-key";
-
 
 // A union type to cover all content
-export type Content =
-  | Job
-  | AdmitCard
-  | Result
-  | Syllabus
-  | Admission
-  | AnswerKey;
+export type Content = Job | AdmitCard | Result | Syllabus | Admission | WaitingList | ArchiveJob | AnswerKey;
 
 export async function getContentBySlug(
   type: string,
@@ -36,6 +28,10 @@ export async function getContentBySlug(
     case "answer-keys":
         return await getJobBySlug(slug, fetchFn);
     case "results":
+      return await getJobBySlug(slug, fetchFn);
+    case "waiting":
+      return await getJobBySlug(slug, fetchFn);
+    case "archive":
       return await getJobBySlug(slug, fetchFn);
     case "syllabus":
         return await getSyllabusBySlug(slug, fetchFn);

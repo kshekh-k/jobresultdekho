@@ -32,20 +32,18 @@
 			<!-- Desktop Menu -->
 			<div class="hidden lg:flex">
 				<Navbar categories={categories}  />
-			</div>
-
+			</div>			
 			
-			
-<div class="flex gap-1 items-center">
-			<!-- Search -->
-			<div class="flex w-40 sm:w-60 lg:w-40 xl:w-auto">
-			<SearchBox boxSize="w-full" />
+			<div class="flex gap-1 items-center">
+				<!-- Search -->
+				<div class="flex w-40 sm:w-60 lg:w-40 xl:w-auto">
+					<SearchBox boxSize="w-full" />
+				</div>
+				<!-- Mobile Menu Button -->
+				<button class="lg:hidden text-white p-3" on:click={() => (isMoreOpen = true)}>
+					<Icon name={Menu} size={20} />
+				</button>
 			</div>
-			<!-- Mobile Menu Button -->
-			<button class="lg:hidden text-white p-3" on:click={() => (isMoreOpen = true)}>
-				<Icon name={Menu} size={20} />
-			</button>
-		</div>
 		</div>
 	</div>
 

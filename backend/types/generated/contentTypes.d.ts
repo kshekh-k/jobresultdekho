@@ -817,7 +817,14 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     short_description: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stage: Schema.Attribute.Enumeration<
-      ['Job', 'Admit Card', 'Result', 'Answer Key']
+      [
+        'Job',
+        'Admit Card',
+        'Result',
+        'Answer Key',
+        'Waiting List',
+        'Archive Job',
+      ]
     > &
       Schema.Attribute.DefaultTo<'Job'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;

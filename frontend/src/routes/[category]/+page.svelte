@@ -11,14 +11,16 @@
 			};
 		};
 	}>();
-
+	//console.log('Category List', data);
 	const headingColor = [
 		'--color-sky-900',
 		'--color-emerald-900',
 		'--color-amber-900',
 		'--color-indigo-900',
 		'--color-rose-900',
-		'--color-yellow-900'
+		'--color-yellow-900',
+		'--color-orange-900',
+		'--color-lime-900',
 	];
 	// Header configs
 	const commanHeader = [
@@ -102,15 +104,21 @@
 			type: 'syllabus',
 			headers: syllabusHeader,
 			color: headingColor[5]
+		},
+		{
+			key: 'waiting_list',
+			type: 'waiting',
+			headers: commanHeader,
+			color: headingColor[6]
+		},
+		{
+			key: 'archive_jobs',
+			type: 'archive',
+			headers: commanHeader,
+			color: headingColor[7]
 		}
 	];
-	// let job = data.category.slug === 'latest-job';
-	// let admitcard = data.category.slug === 'admit-card';
-	// let result = data.category.slug === 'result';
-	// let answerkey = data.category.slug === 'answer-key';
-	// let syllabus = data.category.slug === 'syllabus';
-	// let admission = data.category.slug === 'admission';
-
+	
 	const activeCategory = $derived(data?.category?.slug ?? null);
 
 	const job = $derived(activeCategory === 'latest-job');
@@ -119,63 +127,58 @@
 	const answerkey = $derived(activeCategory === 'answer-key');
 	const syllabus = $derived(activeCategory === 'syllabus');
 	const admission = $derived(activeCategory === 'admission');
+	const waitinglist = $derived(activeCategory === 'waiting-list');
+	const archivejob = $derived(activeCategory === 'archive-job');
 
 	let fullYear = new Date().getFullYear();
 
 	// Dynamic SEO Title
-const pageTitle = $derived(
-	job
-		? `Latest Govt Jobs ${fullYear} - All Government Job Notifications`
-		: admitcard
-			? `Admit Card ${fullYear} - Download Govt Exam Hall Tickets`
-			: result
-				? `Sarkari Result ${fullYear} - Latest Government Exam Results`
-				: answerkey
-					? `Answer Key ${fullYear} - Official Govt Exam Solutions`
-					: syllabus
-						? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police`
-						: admission
-							? `Admissions in India ${fullYear} - Apply Online`
-							: `Latest Govt Updates ${fullYear}`
-);
+	const pageTitle = $derived(
+		job
+			? `Latest Govt Jobs ${fullYear} - All Government Job Notifications`
+			: admitcard
+				? `Admit Card ${fullYear} - Download Govt Exam Hall Tickets`
+				: result
+					? `Sarkari Result ${fullYear} - Latest Government Exam Results`
+					: answerkey
+						? `Answer Key ${fullYear} - Official Govt Exam Solutions`
+						: syllabus
+							? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police`
+							: admission
+								? `Admissions in India ${fullYear} - Apply Online`
+								: `Latest Govt Updates ${fullYear}`
+	);
 
 
 	// Dynamic Description
 	const pageDesc = $derived(
-job
-	? `Find the latest Government Jobs ${fullYear} and Sarkari Naukri updates including SSC, Railway, UPSC, Banking, Teaching, Police, Defence, PSU and State Govt Job vacancies. Get official notifications, eligibility details, important dates and apply online links in one place.`
-	: admitcard
-		? `Download Admit Cards ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Check exam dates, shift timings, centres, roll number details and access direct official links easily.`
-		: result
-			? `Check the latest Sarkari Results ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State Govt exams. View result updates, merit lists, scorecards, cut-off marks and official notifications instantly.`
-			: answerkey
-				? `Get official Answer Keys ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Download PDFs, verify answers, estimate scores and track objections through official sources.`
-				: syllabus
-					? `Download updated Sarkari Exam Syllabus ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State-level Govt exams. Access subject-wise syllabus PDFs, exam patterns and preparation guidance.`
-					: admission
-						? `Get the latest Admission updates ${fullYear} for schools, colleges, universities and Govt institutions. Check entrance exams, eligibility, fees, counselling details, Sarkari forms and online application links.`
-						: `Stay updated with the latest Sarkari Naukri, Govt Jobs, Sarkari Result, Admit Cards, Answer Keys, Syllabus and Admission notifications ${fullYear}. Get verified updates, official links and timely information.`
-
-
-);
-
-console.log(pageDesc);
-	// Dynamic Description
-	const headerBgColor = $derived(job
-		? 'bg-sky-900'
+	job
+		? `Find the latest Government Jobs ${fullYear} and Sarkari Naukri updates including SSC, Railway, UPSC, Banking, Teaching, Police, Defence, PSU and State Govt Job vacancies. Get official notifications, eligibility details, important dates and apply online links in one place.`
 		: admitcard
-			? 'bg-emerald-900'
+			? `Download Admit Cards ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Check exam dates, shift timings, centres, roll number details and access direct official links easily.`
 			: result
-				? 'bg-amber-900'
+				? `Check the latest Sarkari Results ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State Govt exams. View result updates, merit lists, scorecards, cut-off marks and official notifications instantly.`
 				: answerkey
-					? 'bg-indigo-900' : admission ? 'bg-rose-900'
+					? `Get official Answer Keys ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Download PDFs, verify answers, estimate scores and track objections through official sources.`
 					: syllabus
-						? 'bg-yellow-900'
-						: 'bg-neutral-900'
-);
+						? `Download updated Sarkari Exam Syllabus ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State-level Govt exams. Access subject-wise syllabus PDFs, exam patterns and preparation guidance.`
+						: admission
+							? `Get the latest Admission updates ${fullYear} for schools, colleges, universities and Govt institutions. Check entrance exams, eligibility, fees, counselling details, Sarkari forms and online application links.`
+							: `Stay updated with the latest Sarkari Naukri, Govt Jobs, Sarkari Result, Admit Cards, Answer Keys, Syllabus and Admission notifications ${fullYear}. Get verified updates, official links and timely information.`
+	);
 
-
- 
+	// Dynamic Description
+	const headerBgColor = $derived(
+		job	? 'bg-sky-900'
+		: admitcard	? 'bg-emerald-900'
+			: result ? 'bg-amber-900'
+				: answerkey	? 'bg-indigo-900' 
+					: admission ? 'bg-rose-900'
+						: syllabus ? 'bg-yellow-900'
+							: waitinglist ? 'bg-orange-900'
+								: archivejob ? 'bg-lime-900'
+									: 'bg-neutral-900'
+	); 
 
 	// JSON-LD Schema object
 	let schemaData = $derived({
@@ -209,9 +212,8 @@ console.log(pageDesc);
 			target: `${SITE_URL}/search?q={search_term_string}`,
 			'query-input': 'required name=search_term_string'
 		}
-});
+	});
 
-	console.log(data.category.slug);
 </script>
 
 <svelte:head>
@@ -260,6 +262,7 @@ console.log(pageDesc);
 	     🔥 Single Loop → Auto Render All Sections 
 	     ============================================ -->
 	{#each sections as sec}
+		{console.log('sec.key', data.category[sec.key]?.length)}
 		{#if data.category[sec.key]?.length}
 			<ArticleCardList
 				type={sec.type}

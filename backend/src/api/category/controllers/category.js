@@ -54,33 +54,36 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     });
 
     if (!category) return ctx.notFound("Category not found");
-    const categoryId = category.id;
-
-    // 2. Helper for each listing type
-    const fetchStageRecords = async (stage) => {
-      return await strapi.db.query("api::job.job").findMany({
+  
+    // 2. Generic helper for fetching records from any content type
+    const fetchRecords = async (contentType, extraWhere = {}, extraSelect = []) => {
+      return await strapi.db.query(contentType).findMany({
         where: {
-          stage,
-          category: { id: categoryId },
+          category: { slug: slug },
           publishedAt: { $notNull: true },
+          ...extraWhere,
         },
         orderBy: [{ last_date: "asc" }],
-        select: ["id", "title", "slug", "last_date", "reference_url", "stage"],
+        select: ["id", "title", "slug", "last_date", "reference_url", ...extraSelect],
         populate: {
           department: { select: ["title", "slug"] },
         },
       });
     };
 
-    // 3. Return NEW immutable object (important!)
+    // 3. Return NEW immutable object
     return {
       ...category,
-      jobs:        await fetchStageRecords("Job"),      
-      admit_cards: await fetchStageRecords("Admit Card"),
-      results:     await fetchStageRecords("Result"),
-      admissions:  await fetchStageRecords("Admission"),
-      syllabus:    await fetchStageRecords("Syllabus"),
-      answer_keys: await fetchStageRecords("Answer Key"),
+      jobs:        await fetchRecords("api::job.job", { stage: "Job" }),
+      admit_cards: await fetchRecords("api::job.job", { stage: "Admit Card" }),
+      results:     await fetchRecords("api::job.job", { stage: "Result" }),
+      answer_keys: await fetchRecords("api::job.job", { stage: "Answer Key" }),
+      waiting_list: await fetchRecords("api::job.job", { stage: "Waiting List" }),
+      archive_jobs: await fetchRecords("api::job.job", { stage: "Archive Job" }),
+
+      // admissions and syllabus are separate content types
+      admissions:  await fetchRecords("api::admission.admission"),
+      syllabus:    await fetchRecords("api::syllabus.syllabus"),
     };
   },
 

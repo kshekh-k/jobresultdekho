@@ -16,6 +16,8 @@ async function autoAssignCategory(event) {
     "Admit Card": "admit-card",
     "Result": "result",
     "Syllabus": "syllabus",
+    "Waiting List": "waiting-list",
+    "Archive Job": "archive-job",
     "Admission": "admission",
     "Answer Key": "answer-key",
   };
