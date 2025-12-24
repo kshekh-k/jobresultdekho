@@ -25,8 +25,6 @@ export function stripHtmlForSEO(html: string = '', limit = 160): string {
 	return text.length > limit ? text.slice(0, limit) + '…' : text;
 }
 
-
-
 /**
  * Limit text length safely (SEO friendly)
  */
@@ -83,9 +81,6 @@ export function extractTextFromRichText(
 
   return limit ? limitText(text, limit) : text;
 }
-
-
-
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
