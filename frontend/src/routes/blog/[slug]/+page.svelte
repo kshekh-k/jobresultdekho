@@ -3,6 +3,8 @@
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
+	import { marked } from 'marked';
+	import DOMPurify from 'dompurify';
 	import {
 		formatDate,
 		getMediaUrl,
@@ -13,7 +15,7 @@
 		SITE_LOGO,
 		OG_IMAGE
 	} from '$lib/utils';
-	import { ArrowRight, Calendar, User } from 'lucide-svelte';
+	import { Calendar, User } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	export let data;
 	let author = 'Admin';
@@ -23,6 +25,14 @@
 		: extractTextFromRichText(data.blog?.content, 160);
 
 	$: currentUrl = $page.url.href;
+
+// 👉 Convert README.md (Markdown) to safe HTML
+	$: blogHtml = data.blog?.content
+		? DOMPurify.sanitize(marked.parse(data.blog.content))
+		: '';
+
+	const BLOG_OG_IMAGE = data.blog?.cover_image?.url ? getMediaUrl(data.blog?.cover_image?.url) : OG_IMAGE
+
 </script>
 
 <svelte:head>
@@ -36,43 +46,43 @@
 	<meta property="og:title" content="{data.blog?.title} - {SITE_NAME}" />
 	<meta property="og:description" content={metaShorDescipt} />
 	<meta property="og:url" content={currentUrl} />
-	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image" content={BLOG_OG_IMAGE} />
 	<meta property="og:type" content="website" />
 
 	<!-- Schema.org JSON-LD (SEO Boost) -->
 	{@html `
-<script type="application/ld+json">
-${JSON.stringify({
-	'@context': 'https://schema.org',
-	'@type': 'WebPage',
-	'@id': `${currentUrl}/#WebPage`,
-	name: `Blog - ${SITE_NAME}`,
-	headline: `Blog - ${SITE_NAME}`,
-	url: `${SITE_URL}/contact`,
-	image: OG_IMAGE,
-	description: metaShorDescipt,
-	isPartOf: {
-		'@type': 'WebSite',
-		'@id': `${currentUrl}/#website`,
-		inLanguage: 'en-IN',
-		name: SITE_NAME,
-		url: SITE_NAME
-	},
-	author: {
-		'@type': 'Organization',
-		name: author,
-		logo: {
-			'@type': 'ImageObject',
-			url: SITE_LOGO
+	<script type="application/ld+json">
+	${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		'@id': `${currentUrl}/#WebPage`,
+		name: `Blog - ${SITE_NAME}`,
+		headline: `Blog - ${SITE_NAME}`,
+		url: `${SITE_URL}/contact`,
+		image: BLOG_OG_IMAGE,
+		description: metaShorDescipt,
+		isPartOf: {
+			'@type': 'WebSite',
+			'@id': `${currentUrl}/#website`,
+			inLanguage: 'en-IN',
+			name: SITE_NAME,
+			url: SITE_NAME
+		},
+		author: {
+			'@type': 'Organization',
+			name: author,
+			logo: {
+				'@type': 'ImageObject',
+				url: SITE_LOGO
+			}
+		},
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: `${SITE_URL}/search?q={search_term_string}`,
+			'query-input': 'required name=search_term_string'
 		}
-	},
-	potentialAction: {
-		'@type': 'SearchAction',
-		target: `${SITE_URL}/search?q={search_term_string}`,
-		'query-input': 'required name=search_term_string'
-	}
-})}
-</script>
+	})}
+	</script>
 `}
 </svelte:head>
 <Layout header={false} heading={'Our Blog'}>
@@ -98,7 +108,17 @@ ${JSON.stringify({
 					<img src={getMediaUrl(data.blog?.cover_image?.url)} alt={data.blog?.title} title={data.blog?.title} class="" />
 				</div>
 			{/if}
-			<RichTextRenderer content={data.blog?.content} />
+			<!-- <RichTextRenderer content={data.blog?.content} /> -->
+			 <div
+		class="prose prose-slate max-w-none
+		       prose-headings:font-semibold
+		       prose-a:text-rose-500
+		       prose-pre:bg-slate-900
+		       prose-pre:text-slate-100
+		       prose-code:text-rose-500"
+	>
+		{@html blogHtml}
+	</div>
 		</Card.Content>
 	</Card.Root>
 </Layout>

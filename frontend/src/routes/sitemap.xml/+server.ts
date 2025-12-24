@@ -11,7 +11,11 @@ export const GET: RequestHandler = async () => {
     '/result',
     '/answer-key',
     '/syllabus',
-    '/contact'
+    '/blog',
+    '/contact',
+    '/about-us',
+    '/waiting-list',
+    '/archive-job'
   ];
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>

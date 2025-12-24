@@ -55,7 +55,7 @@
 	const toggle = () => (open = !open);
 
 	// ✅ Pagination setup
-	let perPage = 20;
+	let perPage = 25;
 	let currentPage = 1;
 
 	// ✅ Derived pagination data
@@ -158,7 +158,7 @@
 					</div>
 				</div>
 				<!-- ✅ Insert AD after every 10 items -->
-				{#if index === 5}
+				{#if index === 3}
 					<div class="p-2 sm:px-4 bg-white text-center text-sm text-slate-600">
 						<!-- Your Ad / Banner / Script -->
 						<a
@@ -183,6 +183,33 @@
 						</a>
 					</div>
 				{/if}
+
+				{#if index === 15}
+					<div class="p-2 sm:px-4 bg-white text-center text-sm text-slate-600">
+						<!-- Your Ad / Banner / Script -->
+						<a
+							class="block rounded-md! sm:rounded-xl! overflow-hidden"
+							href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
+							target="_blank"
+							rel="nofollow noopener noreferrer external"
+							title="Neha Sharma Makeup Studio"
+						>
+							<img
+								src="/image/nehasharma-makeup-studio-h.jpg"
+								alt="Neha Sharma Makeup Studio"
+								title="Neha Sharma Makeup Studio"
+								class="object-cover sm:block hidden"
+							/>
+							<img
+								src="/image/nehasharma-makeup-studio-rect.jpg"
+								alt="Neha Sharma Makeup Studio"
+								title="Neha Sharma Makeup Studio"
+								class="object-cover block sm:hidden"
+							/>
+						</a>
+					</div>
+				{/if}
+
 			{/each}
 		</Card.Content>
 

@@ -5,7 +5,10 @@ WORKDIR /app
 
 # Install deps first (cached layer)
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+# Increase Yarn network timeout and ensure registry is set before install
+RUN yarn config set network-timeout 600000 && \
+	yarn config set registry https://registry.yarnpkg.com && \
+	yarn install --frozen-lockfile
 
 # Copy app code (but in dev we mount this as a volume instead)
 COPY . .
