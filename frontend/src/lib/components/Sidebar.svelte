@@ -53,7 +53,7 @@
 					class="rounded-md! sm:rounded-xl! overflow-hidden block "
 				>
 					<img
-						src="/image/JobResultdekho-square.png"
+						src="/image/JobResultdekho.png"
 						alt="Job Result Dekho" title="Job Result Dekho"
 						class="object-cover"
 					/></a

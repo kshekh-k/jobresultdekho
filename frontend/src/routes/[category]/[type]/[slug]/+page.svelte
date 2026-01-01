@@ -55,12 +55,10 @@
 
 const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.banner_image?.url) : OG_IMAGE
 
-
-
 </script>
 
 <svelte:head>
-	<title>{data.content.title} - {SITE_NAME}</title>
+	<title>{pageTitle} - {SITE_NAME}</title>
 	<!-- META DESCRIPTION -->
 	<meta name="description" content={pageDesc} />
 
@@ -80,7 +78,7 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 	<link rel="canonical" href={currentUrl} />
 
 	<!-- OG META -->
-	<meta property="og:type" content="article" />
+	<meta property="og:type" content="website" />
 	<meta property="og:title" content={pageTitle} />
 	<meta property="og:description" content={pageDesc} />
 	<meta property="og:url" content={currentUrl} />

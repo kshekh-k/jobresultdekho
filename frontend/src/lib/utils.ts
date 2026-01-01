@@ -6,7 +6,7 @@ export const API_URL = import.meta.env.VITE_API_URL;
 export const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 export const SITE_NAME = "Job Result Dekho .Com";
 export const SITE_LOGO = `${SITE_URL}/image/jobresultdekho-logo-white.svg`
-export const OG_IMAGE = `${SITE_URL}/image/JobResultdekho.com-sq-banner.png`
+export const OG_IMAGE = `${SITE_URL}/image/JobResultdekhocom-sq-banner.png`
 
 export function stripHtmlForSEO(html: string = '', limit = 160): string {
 	if (!html) return '';

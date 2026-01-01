@@ -2,13 +2,34 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
+	import * as Pagination from '$lib/components/ui/pagination/index.js';
 	import { formatDate, getMediaUrl, OG_IMAGE, SITE_LOGO, SITE_NAME, SITE_URL } from '$lib/utils';
 	import { ArrowRight, Calendar, User } from 'lucide-svelte';
 
 	export let data;
-  	const { blogs } = data;
-	
+	const { blogs } = data;
+
+	// ✅ Pagination state
+	const perPage = 10;
+	let currentPage = 1;
+
+	$: totalItems = blogs.length;
+
+	// ✅ Paginated blogs
+	$: paginatedBlogs = blogs.slice(
+		(currentPage - 1) * perPage,
+		currentPage * perPage
+	);
+
+	function handlePageChange(page: number) {
+		if (page < 1 || page > Math.ceil(totalItems / perPage)) return;
+		currentPage = page;
+
+		// optional: scroll to top
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	}
 </script>
+
 <svelte:head>
 	 
 
@@ -72,7 +93,7 @@ ${JSON.stringify({
 </svelte:head>
 <Layout heading={'Our Blog'} headerBgColor="bg-sky-500">
 	<div class="sm:grid sm:grid-cols-2 flex flex-col gap-5">
-		{#each blogs as blog}
+		{#each paginatedBlogs as blog}
 			<Card.Root
 				id="post-{blog.id}"
 				class="hover:bg-slate-50 dark:hover:bg-slate-900 transition rounded-xl !p-4"
@@ -103,7 +124,7 @@ ${JSON.stringify({
 						<div class="flex justify-start">
 							<a
 								href={`/blog/${blog.slug}`} title="Learn More"
-								class="text-sky-500 font-medium inline-flex gap-1 items-center hover:text-rose-500 ease-in-out duration-200"
+								class="text-sky-900 font-medium inline-flex gap-1 items-center hover:text-rose-500 ease-in-out duration-200"
 								>Learn More <Icon name={ArrowRight} />
 							</a>
 						</div>
@@ -111,5 +132,48 @@ ${JSON.stringify({
 				</a>
 			</Card.Root>
 		{/each}
+
+
+{#if totalItems > perPage}
+	<div class="p-3 flex justify-center">
+		<Pagination.Root count={totalItems} {perPage}>
+			{#snippet children({ pages, currentPage })}
+				<Pagination.Content>
+					<Pagination.Item>
+						<Pagination.PrevButton
+							onclick={() => handlePageChange(currentPage - 1)}
+						/>
+					</Pagination.Item>
+
+					{#each pages as page (page.key)}
+						{#if page.type === 'ellipsis'}
+							<Pagination.Item>
+								<Pagination.Ellipsis />
+							</Pagination.Item>
+						{:else}
+							<Pagination.Item>
+								<Pagination.Link
+									{page}
+									isActive={currentPage === page.value}
+									onclick={() => handlePageChange(page.value)}
+								>
+									{page.value}
+								</Pagination.Link>
+							</Pagination.Item>
+						{/if}
+					{/each}
+
+					<Pagination.Item>
+						<Pagination.NextButton
+							onclick={() => handlePageChange(currentPage + 1)}
+						/>
+					</Pagination.Item>
+				</Pagination.Content>
+			{/snippet}
+		</Pagination.Root>
+	</div>
+{/if}
+
+
 	</div>
 </Layout>
