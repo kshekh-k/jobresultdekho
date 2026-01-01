@@ -236,5 +236,6 @@ ${JSON.stringify({
 				</form>
 			</div>
 		</div>
+		<p class="text-slate-600 mb-8">For any inquiries, suggestions, or support related to Sarkari Results, government job notifications, admit cards, or other information on our website, please feel free to get in touch with us. Our dedicated team strives to deliver accurate and up-to-date information and will respond to your concerns promptly.</p>
 	</div>
 </Layout>
