@@ -53,7 +53,7 @@
 					class="rounded-md! sm:rounded-xl! overflow-hidden block "
 				>
 					<img
-						src="/image/JobResultDekho-Banner-mobile.png"
+						src="/image/JobResultdekho-square.png"
 						alt="Job Result Dekho" title="Job Result Dekho"
 						class="object-cover"
 					/></a
@@ -62,7 +62,7 @@
 		</Card.Content>
 	</Card.Root>
 	<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
-	<Card.Root class="bg-slate-300 p-0!" variant={'default'}>
+	<!-- <Card.Root class="bg-slate-300 p-0!" variant={'default'}>
 		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">
 			<div class="overflow-hidden rounded-xl">
 				<video controls class="w-full h-auto">
@@ -73,6 +73,6 @@
 				</video>
 			</div>
 		</Card.Content>
-	</Card.Root>
+	</Card.Root> -->
 	<Widget title="All Categories" menus={filteredParents} headerColor="bg-slate-900" />
 </aside>

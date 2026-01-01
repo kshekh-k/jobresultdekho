@@ -159,3 +159,13 @@ export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, "childre
 export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
 
+
+
+
+// Cookies and Notifications
+import { writable } from 'svelte/store';
+
+export const cookieConsent = writable(false);
+export const notificationConsent = writable(false);
+
+

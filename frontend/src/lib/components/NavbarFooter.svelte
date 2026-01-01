@@ -34,7 +34,7 @@
 <!-- ========================= -->
 <nav class="flex-1 flex justify-center">
 	<ul
-		class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center lg:gap-2 xl:gap-5 flex-1 divide-y divide-white/10 lg:divide-y-0"
+		class="flex flex-wrap items-stretch lg:items-center justify-center gap-x-2 gap-y-1 xl:gap-5 flex-1  "
 	>
 		{#each categories as cat}
 			<!-- HOME -->
@@ -47,8 +47,7 @@
 						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center
 							{currentPath === '/' 
 								? 'text-white'
-							: 'hover:text-white text-white/60'}"
-					>
+							: 'hover:text-white text-white/60'}">
 						{cat.title}
 					</a>
 				</li>
