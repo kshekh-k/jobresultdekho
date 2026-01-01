@@ -189,21 +189,21 @@
 						<!-- Your Ad / Banner / Script -->
 						<a
 							class="block rounded-md! sm:rounded-xl! overflow-hidden"
-							href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
+							href="/contact"
 							target="_blank"
-							rel="nofollow noopener noreferrer external"
-							title="Neha Sharma Makeup Studio"
+							rel="internal"
+							title="Job Result Dekho .com"
 						>
 							<img
-								src="/image/nehasharma-makeup-studio-h.jpg"
-								alt="Neha Sharma Makeup Studio"
-								title="Neha Sharma Makeup Studio"
+								src="/image/JobResultDekho-Banner-horizontal.png"
+								alt="Job Result Dekho .com"
+								title="Job Result Dekho .com"
 								class="object-cover sm:block hidden"
 							/>
 							<img
-								src="/image/nehasharma-makeup-studio-rect.jpg"
-								alt="Neha Sharma Makeup Studio"
-								title="Neha Sharma Makeup Studio"
+								src="/image/JobResultDekho-Banner-mobile.png"
+								alt="Job Result Dekho .com"
+								title="Job Result Dekho .com"
 								class="object-cover block sm:hidden"
 							/>
 						</a>

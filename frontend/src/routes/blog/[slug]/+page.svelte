@@ -104,7 +104,7 @@
 		</Card.Header>
 		<Card.Content>
 			{#if data.blog?.cover_image}
-				<div class="overflow-hidden rounded-xl">
+				<div class="overflow-hidden rounded-xl mb-5">
 					<img src={getMediaUrl(data.blog?.cover_image?.url)} alt={data.blog?.title} title={data.blog?.title} class="" />
 				</div>
 			{/if}
