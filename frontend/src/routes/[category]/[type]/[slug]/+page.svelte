@@ -333,7 +333,7 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 				<div class="flex justify-center items-center rounded-sm bg-gray-100 col-span-5">
 					<a href="{SITE_URL}/contact" title={SITE_NAME} class="block rounded-sm overflow-hidden">
 						<img
-							src="/image/JobResultdekho-square.png"
+							src="/image/JobResultdekho.png"
 							alt={SITE_NAME}
 							title={SITE_NAME}
 							class="object-cover block"

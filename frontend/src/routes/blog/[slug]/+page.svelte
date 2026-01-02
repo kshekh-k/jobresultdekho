@@ -3,6 +3,7 @@
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
+	import { marked } from 'marked'
 	import {
 		formatDate,
 		getMediaUrl,
@@ -12,13 +13,14 @@
 		OG_IMAGE
 	} from '$lib/utils';
 	import { Calendar, User } from 'lucide-svelte';
+	import DOMPurify from 'dompurify'
 	import { page } from '$app/stores';
 	export let data;
 	let author = 'Admin';
 	console.log("blog data", data);
 	$: currentUrl = $page.url.href;
 	const BLOG_OG_IMAGE = data.blog?.cover_image?.url ? getMediaUrl(data.blog?.cover_image?.url) : OG_IMAGE;
-
+$: html = DOMPurify.sanitize(marked.parse(data.blog?.content))
 </script>
 
 <svelte:head>
@@ -27,7 +29,6 @@
 	<meta name="keywords" content={data.blog.SEO?.tags} />
 	<meta property="og:site_name" content={SITE_NAME} />
 	<link rel="canonical" href={currentUrl} />
-
 	<meta property="og:title" content="{data.blog.SEO?.title} - {SITE_NAME}" />
 	<meta property="og:description" content={data.blog.SEO?.description} />
 	<meta property="og:url" content={currentUrl} />
@@ -101,8 +102,10 @@
 					prose-pre:bg-slate-900
 					prose-pre:text-slate-100
 					prose-code:text-rose-500"
+					
 			>
-			<RichTextRenderer content={data.blog?.content} />
+			<div {@html html}></div>
+			<!-- <RichTextRenderer content={data.blog?.content} /> -->
 			</div>
 		</Card.Content>
 	</Card.Root>
