@@ -4,7 +4,6 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import { marked } from 'marked';
-	import DOMPurify from 'dompurify';
 	import {
 		formatDate,
 		getMediaUrl,
@@ -19,32 +18,21 @@
 	import { page } from '$app/stores';
 	export let data;
 	let author = 'Admin';
-
-	let metaShorDescipt = Array.isArray(data.blog?.content)
-		? richTextToPlainText(data.blog?.content, 160)
-		: extractTextFromRichText(data.blog?.content, 160);
-
+	console.log("blog data", data);
 	$: currentUrl = $page.url.href;
-
-// 👉 Convert README.md (Markdown) to safe HTML
-	$: blogHtml = data.blog?.content
-		? DOMPurify.sanitize(marked.parse(data.blog.content))
-		: '';
-
-	const BLOG_OG_IMAGE = data.blog?.cover_image?.url ? getMediaUrl(data.blog?.cover_image?.url) : OG_IMAGE
+	const BLOG_OG_IMAGE = data.blog?.cover_image?.url ? getMediaUrl(data.blog?.cover_image?.url) : OG_IMAGE;
 
 </script>
 
 <svelte:head>
-	<title>{data.blog?.title} - {SITE_NAME}</title>
-	<meta name="description" content={metaShorDescipt} />
-
-	<meta name="keywords" content={metaShorDescipt} />
+	<title>{data.blog?.title} - {data.blog.SEO?.title}</title>
+	<meta name="description" content={data.blog.SEO?.description} />
+	<meta name="keywords" content={data.blog.SEO?.tags} />
 	<meta property="og:site_name" content={SITE_NAME} />
 	<link rel="canonical" href={currentUrl} />
 
-	<meta property="og:title" content="{data.blog?.title} - {SITE_NAME}" />
-	<meta property="og:description" content={metaShorDescipt} />
+	<meta property="og:title" content="{data.blog.SEO?.title} - {SITE_NAME}" />
+	<meta property="og:description" content={data.blog.SEO?.description} />
 	<meta property="og:url" content={currentUrl} />
 	<meta property="og:image" content={BLOG_OG_IMAGE} />
 	<meta property="og:type" content="website" />
@@ -60,7 +48,7 @@
 		headline: `Blog - ${SITE_NAME}`,
 		url: `${SITE_URL}/contact`,
 		image: BLOG_OG_IMAGE,
-		description: metaShorDescipt,
+		description: `${data.blog.SEO?.description}`,
 		isPartOf: {
 			'@type': 'WebSite',
 			'@id': `${currentUrl}/#website`,
@@ -108,17 +96,17 @@
 					<img src={getMediaUrl(data.blog?.cover_image?.url)} alt={data.blog?.title} title={data.blog?.title} class="" />
 				</div>
 			{/if}
-			<!-- <RichTextRenderer content={data.blog?.content} /> -->
+			
 			 <div
-		class="prose prose-slate max-w-none
-		       prose-headings:font-semibold
-		       prose-a:text-rose-500
-		       prose-pre:bg-slate-900
-		       prose-pre:text-slate-100
-		       prose-code:text-rose-500"
-	>
-		{@html blogHtml}
-	</div>
+				class="prose prose-slate max-w-none
+					prose-headings:font-semibold
+					prose-a:text-rose-500
+					prose-pre:bg-slate-900
+					prose-pre:text-slate-100
+					prose-code:text-rose-500"
+			>
+			<RichTextRenderer content={data.blog?.content} />
+			</div>
 		</Card.Content>
 	</Card.Root>
 </Layout>

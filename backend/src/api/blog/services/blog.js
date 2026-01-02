@@ -32,6 +32,9 @@ module.exports = {
       populate: {
         cover_image: true,
         category: true,
+        SEO: {
+          select: ['title', 'tags', 'description']
+        },
         comments: {
           where: { is_approved: true },
           orderBy: [{ createdAt: "asc" }],
