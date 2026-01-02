@@ -47,6 +47,7 @@
 
 	// Headers
 	const commanHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Last Date', action: 'Action' }];
+	const admitHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Exam Date', action: 'Action' }];
 	const resultHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Result Date', action: 'Action' }];
 	const answerKeyHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Release Date', action: 'Action' }];
 	const syllabusHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Exam Date', action: 'Action' }];
@@ -54,7 +55,7 @@
 	// Sections
 	const articleSections = [
 		{ id: 'latest-job', type: 'jobs', title: 'Latest Jobs', items: latestJobs, viewText: 'View All', slug: 'latest-job', headers: commanHeader },
-		{ id: 'admit-card', type: 'admit-cards', title: 'Admit Cards', items: latestAdmitCards, viewText: 'View All', slug: 'admit-card', headers: commanHeader },
+		{ id: 'admit-card', type: 'admit-cards', title: 'Admit Cards', items: latestAdmitCards, viewText: 'View All', slug: 'admit-card', headers: admitHeader },
 		{ id: 'result', type: 'results', title: 'Results', items: latestResults, viewText: 'View All', slug: 'result', headers: resultHeader },
 		{ id: 'answer-key', type: 'answer-keys', title: 'Answer Key', items: latestAnswerKeys, viewText: 'View All', slug: 'answer-key', headers: answerKeyHeader },
 		{ id: 'admission', type: 'admissions', title: 'Admissions', items: latestAdmissions, viewText: 'View All', slug: 'admission', headers: commanHeader },
