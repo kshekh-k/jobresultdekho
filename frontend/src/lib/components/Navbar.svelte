@@ -59,7 +59,7 @@
 						href={SITE_URL} 
 						title={cat.title}
 						onclick={onNavigate}
-						class="block p-3 lg:py-1 md:px-2 text-sm xl:text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
+						class="block p-3 lg:py-1 md:px-2 text-base xl:text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
 							{currentPath === '/' 
 								? 'text-white bg-white/10'
 								: 'text-white hover:text-sky-200 hover:bg-white/10'}"
