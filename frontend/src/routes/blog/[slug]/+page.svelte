@@ -3,12 +3,9 @@
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
-	import { marked } from 'marked';
 	import {
 		formatDate,
 		getMediaUrl,
-		richTextToPlainText,
-		extractTextFromRichText,
 		SITE_URL,
 		SITE_NAME,
 		SITE_LOGO,
