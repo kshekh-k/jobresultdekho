@@ -568,7 +568,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::blog-comment.blog-comment'
     >;
-    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     cover_image: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
