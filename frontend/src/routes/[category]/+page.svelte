@@ -33,6 +33,16 @@
 			action: 'Action'
 		}
 	];
+	const admitHeader = [
+		{
+			id: 'No.',
+			department: 'Dept',
+			label: 'Title',
+			date: 'Exam Date',
+			timeLeft: 'Time Left',
+			action: 'Action'
+		}
+	];
 
 	const resultHeader = [
 		{
@@ -77,7 +87,7 @@
 		{
 			key: 'admit_cards',
 			type: 'admit-cards',
-			headers: commanHeader,
+			headers: admitHeader,
 			color: headingColor[1]
 		},
 		{
