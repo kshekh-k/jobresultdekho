@@ -25,5 +25,8 @@
   },
   "strapi": {
     "uuid": "xyresults-backend"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.11"
   }
 }
