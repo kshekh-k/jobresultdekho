@@ -135,11 +135,8 @@ The backend is built with Strapi 5. To develop the backend:
    ```
 ### Database dump
 
-1. Project dump on Server
-   
-  docker exec -t xyresult-postgres-1 \
-  pg_dump -U xyresults_user -d xyresults \
-  -F c -f /tmp/db.dump
+1. Project dump on Server   
+   docker exec -t xyresults-postgres-1 pg_dump -U xyresults_user -d xyresults -F c > db.dump
   
 2. Download locally
    scp root@148.135.137.104:JobResultDekho/db.dump ./db.dump
