@@ -7,7 +7,7 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 const findLatestByStage = require("../../../utils/findLatestByStage");
 
-module.exports = createCoreController('api::job.job', ({strapi}) => ({
+module.exports = createCoreController('api::job.job', ({ strapi }) => ({
 
     async search(ctx) {
         const query = ctx.request.query;
@@ -17,17 +17,17 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
             meta: { pagination: { total: results.length } },
         };
     },
-    
+
     async findHotPosts(ctx) {
         try {
             const jobs = await strapi.db.query('api::job.job').findMany({
-                where: { 
+                where: {
                     publishedAt: { $notNull: true },
                     hot_post: true,
                 },
                 orderBy: { updatedAt: 'desc' },
-                limit: 6,
-                select: ['title', 'total_posts', 'slug']                
+                limit: 8,
+                select: ['title', 'total_posts', 'slug']
             });
 
             return jobs;
@@ -40,13 +40,13 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
     async findHighAlertPosts(ctx) {
         try {
             const jobs = await strapi.db.query('api::job.job').findMany({
-                where: { 
+                where: {
                     publishedAt: { $notNull: true },
                     high_alert: true,
                 },
                 orderBy: { updatedAt: 'desc' },
                 limit: 20,
-                select: ['title', 'total_posts', 'slug']                
+                select: ['title', 'total_posts', 'slug']
             });
 
             return jobs;
@@ -73,12 +73,12 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
         const job = await strapi.db.query('api::job.job').findOne({
             where: { slug },
             select: [
-                'title','slug','short_description','content','last_date',
-                'reference_url','total_posts','stage',
+                'title', 'slug', 'short_description', 'content', 'last_date',
+                'reference_url', 'total_posts', 'stage',
             ],
             populate: {
                 category: {
-                    select: ['id','title','slug']
+                    select: ['id', 'title', 'slug']
                 },
                 department: {
                     select: ['title', 'slug']
@@ -101,7 +101,7 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                         'title', 'content'
                     ]
                 },
-                job_disclaimer : {
+                job_disclaimer: {
                     select: ['title', 'content']
                 },
                 important_links: {
