@@ -73,7 +73,17 @@
       }
     },
     "Link_Activate_Message": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Link_not_available"
+            },
+            true
+          ]
+        }
+      }
     },
     "FAQs": {
       "type": "component",

@@ -42,6 +42,7 @@
 		last_date?: any;
 		target?: string;
 		reference_url?: string;
+		Link_not_available?: boolean;
 	}[] = [];
 
 	export let headers: {
@@ -147,7 +148,8 @@
 						>
 							Detail
 						</Button>
-						{#if item.Link_not_available == false}
+                         <!-- {console.log(item.reference_url)} -->
+						{#if item.reference_url}
 							<Button
 								title={buttonLabel}
 								href={item.reference_url}
@@ -159,6 +161,7 @@
 								{buttonLabel}
 							</Button>
 						{/if}
+						 
 					</div>
 				</div>
 				<!-- ✅ Insert AD after every 10 items -->

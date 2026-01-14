@@ -24,7 +24,7 @@ module.exports = async function findLatestByStage(stage, limit = 10) {
     where: whereCondition,
     orderBy: [{ last_date: "asc" }],
     limit,
-    select: ["id", "title", "last_date", "reference_url", "slug"],
+    select: ["id", "title", "last_date", "reference_url", "slug", "Link_not_available"],
     populate: {
       department: { select: ["title", "slug"] },
       category: { select: ["title", "slug"] },

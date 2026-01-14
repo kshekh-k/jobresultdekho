@@ -339,7 +339,7 @@
 					<ImportantDates dates={data.content.important_dates} />
 					<!-- Application Fee -->
 					<!-- <ApplicationFees fees={data.content.application_fee} /> -->
-					<ApplicationFees fees={data.content.application_fee} />
+					<ApplicationFees fees={data.content.Fees_of_application} />
 				</div>
 				<!-- Eligibility Criteria -->
 				<div class="flex flex-col mt-5">
