@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_fees",
+  "info": {
+    "displayName": "Fees",
+    "icon": "priceTag"
+  },
+  "options": {},
+  "attributes": {
+    "Fees_Label": {
+      "type": "string"
+    },
+    "Fees_Value": {
+      "type": "decimal",
+      "default": 0
+    },
+    "Fees_message": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

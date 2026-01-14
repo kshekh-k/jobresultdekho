@@ -11,6 +11,8 @@ async function autoAssignCategory(event) {
   const data = event.params.data;
   if (!data || !data.stage) return;
 
+  
+
   const mapping = {
     "Job": "latest-job",
     "Admit Card": "admit-card",

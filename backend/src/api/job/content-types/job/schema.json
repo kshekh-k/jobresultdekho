@@ -38,14 +38,41 @@
       "target": "api::department.department"
     },
     "last_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Start_date"
+            },
+            true
+          ]
+        }
+      }
     },
     "important_links": {
       "type": "component",
       "component": "shared.link-item",
       "repeatable": true
     },
+    "Link_not_available": {
+      "type": "boolean",
+      "default": false
+    },
     "reference_url": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Link_not_available"
+            },
+            false
+          ]
+        }
+      }
+    },
+    "Link_Activate_Message": {
       "type": "string"
     },
     "FAQs": {
@@ -110,6 +137,28 @@
         "videos",
         "audios"
       ]
+    },
+    "Fees_of_application": {
+      "type": "component",
+      "component": "shared.fees",
+      "repeatable": true
+    },
+    "Apply_date_Start_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Start_date"
+            },
+            false
+          ]
+        }
+      }
+    },
+    "Start_date": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

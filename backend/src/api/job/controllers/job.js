@@ -74,7 +74,7 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
             where: { slug },
             select: [
                 'title', 'slug', 'short_description', 'content', 'last_date',
-                'reference_url', 'total_posts', 'stage',
+                'Link_not_available', 'reference_url', 'Link_Activate_Message', 'total_posts', 'stage', 'Start_date', 'Apply_date_Start_message',
             ],
             populate: {
                 category: {
@@ -87,13 +87,15 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
                 important_dates: {
                     select: [
                         'vacancy_notification_date', 'apply_online_start_date', 'apply_online_end_date',
-                        'fee_payment_last_date', 'correction_date', 'admit_card', 'exam_date', 'result_date'
+                        'fee_payment_last_date', 'correction_date', 'admit_card', 'exam_date', 'result_date',
+                        'No_Notification_date', 'No_notification_date_message', 'No_Apply_date', 'No_Apply_date_message', 'No_Admitcard_date', 'No_admitcard_date_message', 'No_Exam_date', 'No_Exam_date_message',
+                        'No_Notification_date', 'No_notification_date_message', 'No_Apply_date', 'No_Apply_date_message', 'No_Admitcard_date', 'No_admitcard_date_message', 'No_Exam_date', 'No_Exam_date_message',
+                        'No_Result_date', 'No_Result_date_message',
                     ]
                 },
-                application_fee: {
+                Fees_of_application: {
                     select: [
-                        'general_obc_ews', 'sc_st_pwd', 'female_transgender',
-                        'online_payment', 'offline_payment'
+                        'Fees_Label', 'Fees_Value', 'Fees_message'
                     ]
                 },
                 eligiblity_criterea: {
@@ -105,8 +107,12 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
                     select: ['title', 'content']
                 },
                 important_links: {
-                    select: ['label', 'url']
+                    select: ['label', 'url', 'Link_message_require', 'Link_message', 'Need_PDF_upload'],
+                    populate: {
+                        Upload_PDF: true
+                    }
                 },
+                Upload_PDF: true,
                 FAQs: {
                     select: ['question', 'answer']
                 },

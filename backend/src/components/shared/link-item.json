@@ -10,7 +10,58 @@
       "type": "string"
     },
     "URL": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Link_message_require"
+            },
+            false
+          ]
+        }
+      }
+    },
+    "Link_message_require": {
+      "type": "boolean",
+      "default": false
+    },
+    "Link_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Link_message_require"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "Need_PDF_upload": {
+      "type": "boolean",
+      "default": false
+    },
+    "Upload_PDF": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "Need_PDF_upload"
+            },
+            false
+          ]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   },
   "config": {}

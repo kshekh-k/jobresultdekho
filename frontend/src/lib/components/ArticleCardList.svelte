@@ -111,7 +111,9 @@
 					class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
 				>
 					<div class="flex gap-2 md:flex-1 items-start w-full md:w-auto">
-						<div class="shrink-0 md:min-w-6 md:py-2">{(currentPage - 1) * perPage + index + 1}.</div>
+						<div class="shrink-0 md:min-w-6 md:py-2">
+							{(currentPage - 1) * perPage + index + 1}.
+						</div>
 						<div class="flex-1 order-1">
 							<a
 								rel="nofollow noopener noreferrer external"
@@ -145,16 +147,18 @@
 						>
 							Detail
 						</Button>
-						<Button
-							title={buttonLabel}
-							href={item.reference_url}
-							rel="nofollow noopener noreferrer external"
-							target="_blank"
-							size="sm"
-							class="bg-(color:--headerColor)"
-						>
-							{buttonLabel}
-						</Button>
+						{#if item.Link_not_available == false}
+							<Button
+								title={buttonLabel}
+								href={item.reference_url}
+								rel="nofollow noopener noreferrer external"
+								target="_blank"
+								size="sm"
+								class="bg-(color:--headerColor)"
+							>
+								{buttonLabel}
+							</Button>
+						{/if}
 					</div>
 				</div>
 				<!-- ✅ Insert AD after every 10 items -->
@@ -209,7 +213,6 @@
 						</a>
 					</div>
 				{/if}
-
 			{/each}
 		</Card.Content>
 

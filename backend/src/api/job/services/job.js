@@ -29,7 +29,7 @@ module.exports = createCoreService('api::job.job', ({ strapi }) => ({
         sort: { createdAt: 'desc' },
         start,
         limit: safePageSize,
-        fields: ['title', 'slug', 'last_date', 'reference_url'],
+        fields: ['title', 'slug', 'last_date','Link_not_available' ,'reference_url' ,'Link_Activate_Message', ''],
         populate: {
           department: { fields: ['title'] }
         },

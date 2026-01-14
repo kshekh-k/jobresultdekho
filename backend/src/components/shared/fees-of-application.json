@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_fees_of_application_s",
+  "info": {
+    "displayName": "Fees of Application ",
+    "icon": "priceTag"
+  },
+  "options": {},
+  "attributes": {
+    "Fees_Label": {
+      "type": "string"
+    },
+    "Fees_Value": {
+      "type": "decimal"
+    },
+    "Fees_message": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

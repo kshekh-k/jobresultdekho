@@ -46,7 +46,17 @@
       "repeatable": true
     },
     "reference_url": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "URL_not_available"
+            },
+            false
+          ]
+        }
+      }
     },
     "FAQs": {
       "type": "component",
@@ -57,6 +67,22 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "URL_not_available": {
+      "type": "boolean"
+    },
+    "Link_update_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "URL_not_available"
+            },
+            true
+          ]
+        }
+      }
     }
   }
 }

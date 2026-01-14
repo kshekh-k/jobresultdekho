@@ -397,6 +397,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
     FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
+    Link_update_message: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -411,6 +412,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    URL_not_available: Schema.Attribute.Boolean;
   };
 }
 
@@ -779,6 +781,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'shared.application-fee',
       false
     >;
+    Apply_date_Start_message: Schema.Attribute.String;
     banner_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
@@ -796,6 +799,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::eligiblity-criterea.eligiblity-criterea'
     >;
     FAQs: Schema.Attribute.Component<'shared.faq', true>;
+    Fees_of_application: Schema.Attribute.Component<'shared.fees', true>;
     high_alert: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hot_post: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     important_dates: Schema.Attribute.Component<
@@ -808,6 +812,9 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::job-disclaimer.job-disclaimer'
     >;
     last_date: Schema.Attribute.Date;
+    Link_Activate_Message: Schema.Attribute.String;
+    Link_not_available: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
       Schema.Attribute.Private;
@@ -827,6 +834,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       ]
     > &
       Schema.Attribute.DefaultTo<'Job'>;
+    Start_date: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     total_posts: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
