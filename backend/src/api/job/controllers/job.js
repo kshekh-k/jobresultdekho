@@ -93,6 +93,7 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
                         'No_Result_date', 'No_Result_date_message',
                     ]
                 },
+                application_fee: true,
                 Fees_of_application: {
                     select: [
                         'Fees_Label', 'Fees_Value', 'Fees_message'

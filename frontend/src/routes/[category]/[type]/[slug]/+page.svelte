@@ -16,6 +16,7 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
+	import OldFees from '$lib/components/job/Old_Fees.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
 	import { page } from '$app/stores';
@@ -271,6 +272,7 @@
 												>{data.content.Apply_date_Start_message}</span
 											>
 										{:else}
+										 
 											{formatDate(data.content.last_date)}
 										{/if}
 									</td>
@@ -309,6 +311,7 @@
 										>
 											{buttonLabel}
 										</Button>
+								 
 									{/if}
 									{#if data.content.Link_not_available == true}
 										<div class="flex flex-col">
@@ -326,6 +329,7 @@
 										</div>
 									{/if}
 								</td>
+								
 							</tr>
 						</tbody>
 					</table>
@@ -338,8 +342,11 @@
 					<!-- Important Dates -->
 					<ImportantDates dates={data.content.important_dates} />
 					<!-- Application Fee -->
-					<!-- <ApplicationFees fees={data.content.application_fee} /> -->
-					<ApplicationFees fees={data.content.Fees_of_application} />
+					{#if data.content.application_fee}
+						<OldFees fees={data.content.application_fee} />
+					{:else}
+						<ApplicationFees fees={data.content.Fees_of_application} />
+					{/if}
 				</div>
 				<!-- Eligibility Criteria -->
 				<div class="flex flex-col mt-5">

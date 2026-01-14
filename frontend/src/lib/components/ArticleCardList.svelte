@@ -148,7 +148,7 @@
 						>
 							Detail
 						</Button>
-                         <!-- {console.log(item.reference_url)} -->
+                        
 						{#if item.reference_url}
 							<Button
 								title={buttonLabel}
