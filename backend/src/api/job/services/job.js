@@ -14,10 +14,10 @@ module.exports = createCoreService('api::job.job', ({ strapi }) => ({
     // Build filters
     const filters = q
       ? {
-          $or: [
-            { title: { $containsi: q } },
-          ],
-        }
+        $or: [
+          { title: { $containsi: q } },
+        ],
+      }
       : {};
 
     // Strapi v4: use findMany + count
@@ -29,7 +29,16 @@ module.exports = createCoreService('api::job.job', ({ strapi }) => ({
         sort: { createdAt: 'desc' },
         start,
         limit: safePageSize,
-        fields: ['title', 'slug', 'last_date','Link_not_available' ,'reference_url' ,'Link_Activate_Message', ''],
+        fields: [
+          'title',
+          'slug',
+          'last_date',
+          'Link_not_available',
+          'reference_url',
+          'Link_Activate_Message',
+          'Start_date',
+          'Apply_date_Start_message'
+        ],
         populate: {
           department: { fields: ['title'] }
         },

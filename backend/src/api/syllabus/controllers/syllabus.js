@@ -45,8 +45,12 @@ module.exports = createCoreController('api::syllabus.syllabus', ({strapi}) => ({
                     select: ['title', 'slug']
                 },
                 important_links: {
-                    select: ['label', 'url']
+                    select: ['label', 'url', 'Link_message_require', 'Link_message', 'Need_PDF_upload'],
+                       populate: {
+                        Upload_PDF: true
+                    } 
                 },
+                Upload_PDF: true,
                 FAQs: {
                     select: ['question', 'answer']
                 }

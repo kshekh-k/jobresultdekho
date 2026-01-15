@@ -39,7 +39,7 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
 
     return rootCategories;
   },
-  
+
   async findOne(ctx) {
     const { slug } = ctx.params;
 
@@ -54,7 +54,7 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     });
 
     if (!category) return ctx.notFound("Category not found");
-  
+
     // 2. Generic helper for fetching records from any content type
     const fetchRecords = async (contentType, extraWhere = {}, extraSelect = []) => {
       return await strapi.db.query(contentType).findMany({
@@ -74,16 +74,16 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     // 3. Return NEW immutable object
     return {
       ...category,
-      jobs:        await fetchRecords("api::job.job", { stage: "Job" }),
+      jobs: await fetchRecords("api::job.job", { stage: "Job" }),
       admit_cards: await fetchRecords("api::job.job", { stage: "Admit Card" }),
-      results:     await fetchRecords("api::job.job", { stage: "Result" }),
+      results: await fetchRecords("api::job.job", { stage: "Result" }),
       answer_keys: await fetchRecords("api::job.job", { stage: "Answer Key" }),
       waiting_list: await fetchRecords("api::job.job", { stage: "Waiting List" }),
       archive_jobs: await fetchRecords("api::job.job", { stage: "Archive Job" }),
 
       // admissions and syllabus are separate content types
-      admissions:  await fetchRecords("api::admission.admission"),
-      syllabus:    await fetchRecords("api::syllabus.syllabus"),
+      admissions: await fetchRecords("api::admission.admission"),
+      syllabus: await fetchRecords("api::syllabus.syllabus"),
     };
   },
 

@@ -53,7 +53,8 @@
     "important_links": {
       "type": "component",
       "component": "shared.link-item",
-      "repeatable": true
+      "repeatable": true,
+      "min": 0
     },
     "Link_not_available": {
       "type": "boolean",

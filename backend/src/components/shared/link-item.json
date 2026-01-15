@@ -7,7 +7,8 @@
   "options": {},
   "attributes": {
     "Label": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "URL": {
       "type": "string",
@@ -45,16 +46,6 @@
     },
     "Upload_PDF": {
       "type": "media",
-      "conditions": {
-        "visible": {
-          "!=": [
-            {
-              "var": "Need_PDF_upload"
-            },
-            false
-          ]
-        }
-      },
       "multiple": false,
       "allowedTypes": [
         "images",
@@ -63,6 +54,7 @@
         "audios"
       ]
     }
+    
   },
   "config": {}
 }

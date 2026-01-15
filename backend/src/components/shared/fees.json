@@ -7,7 +7,8 @@
   "options": {},
   "attributes": {
     "Fees_Label": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "Fees_Value": {
       "type": "decimal",

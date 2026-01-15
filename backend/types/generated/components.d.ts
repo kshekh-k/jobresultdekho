@@ -35,7 +35,7 @@ export interface SharedFees extends Struct.ComponentSchema {
     icon: 'priceTag';
   };
   attributes: {
-    Fees_Label: Schema.Attribute.String;
+    Fees_Label: Schema.Attribute.String & Schema.Attribute.Required;
     Fees_message: Schema.Attribute.String;
     Fees_Value: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
   };
@@ -91,7 +91,7 @@ export interface SharedLinkItem extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    Label: Schema.Attribute.String;
+    Label: Schema.Attribute.String & Schema.Attribute.Required;
     Link_message: Schema.Attribute.String;
     Link_message_require: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;

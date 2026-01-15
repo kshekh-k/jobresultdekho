@@ -43,6 +43,8 @@
 		target?: string;
 		reference_url?: string;
 		Link_not_available?: boolean;
+		Start_date?: boolean;
+		Apply_date_Start_message?: string;
 	}[] = [];
 
 	export let headers: {
@@ -134,7 +136,13 @@
 					{#if type !== 'syllabus'}
 						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
 							<Icon name={Calendar} size={14} className="md:hidden" />
-							<span class="text-sm">{formatDate(item.last_date)}</span>
+							{#if item.Start_date === false && item.Apply_date_Start_message}
+								<span class="text-sm block line-clamp-2">{item.Apply_date_Start_message}</span>
+							{:else if item.last_date}
+								<span class="text-sm block line-clamp-2">{formatDate(item.last_date)}</span>
+							{:else}
+								<span class="text-sm block line-clamp-2">—</span>
+							{/if}
 						</div>
 					{/if}
 
@@ -148,8 +156,7 @@
 						>
 							Detail
 						</Button>
-                        
-						{#if item.reference_url}
+						{#if item.reference_url && !item.Link_not_available}
 							<Button
 								title={buttonLabel}
 								href={item.reference_url}
@@ -161,7 +168,6 @@
 								{buttonLabel}
 							</Button>
 						{/if}
-						 
 					</div>
 				</div>
 				<!-- ✅ Insert AD after every 10 items -->

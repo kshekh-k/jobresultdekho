@@ -397,7 +397,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
     FAQs: Schema.Attribute.Component<'shared.faq', true>;
     important_links: Schema.Attribute.Component<'shared.link-item', true>;
     last_date: Schema.Attribute.Date;
-    Link_update_message: Schema.Attribute.String;
+    Link_Activate_Message: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -806,7 +806,13 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'shared.important-dates',
       false
     >;
-    important_links: Schema.Attribute.Component<'shared.link-item', true>;
+    important_links: Schema.Attribute.Component<'shared.link-item', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     job_disclaimer: Schema.Attribute.Relation<
       'oneToOne',
       'api::job-disclaimer.job-disclaimer'

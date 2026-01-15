@@ -58,6 +58,13 @@
 	const POST_OG_IMAGE = data.content.banner_image?.url
 		? getMediaUrl(data.content.banner_image?.url)
 		: OG_IMAGE;
+
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
 </script>
 
 <svelte:head>
@@ -189,7 +196,7 @@
 								>
 								{#if data.type !== 'syllabus'}
 									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
-										{#if data.content.Start_date === false && data.content.Apply_date_Start_message}
+										{#if data.content.Start_date == false && data.content.Apply_date_Start_message}
 											<span class="text-sm text-gray-600 italic"
 												>{data.content.Apply_date_Start_message}</span
 											>
@@ -204,7 +211,7 @@
 								>
 
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
-									{#if data.content.Link_not_available == false}
+									{#if !data.content.Link_not_available || data.content.Link_not_available == false}
 										<Button
 											href={data.content.reference_url}
 											target="_blank"
@@ -215,8 +222,8 @@
 											class={'no-underline !w-full'}
 										>
 											{buttonLabel}
-										</Button>{/if}
-									{#if data.content.Link_not_available == true}
+										</Button>
+									{:else if data.content.Link_not_available == true}
 										<div class="flex flex-col">
 											<p class="text-neutral-600 text-sm m-0!">
 												{data.content.Link_Activate_Message}
@@ -267,12 +274,11 @@
 								>
 								{#if data.type !== 'syllabus'}
 									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
-										{#if data.content.Start_date === false && data.content.Apply_date_Start_message}
+										{#if data.content.Start_date == false && data.content.Apply_date_Start_message}
 											<span class="text-sm text-gray-600 italic"
 												>{data.content.Apply_date_Start_message}</span
 											>
 										{:else}
-										 
 											{formatDate(data.content.last_date)}
 										{/if}
 									</td>
@@ -299,7 +305,7 @@
 									>{data.content.total_posts}</td
 								>
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
-									{#if data.content.Link_not_available == false}
+									{#if data.content.Link_not_available == false && data.content.reference_url}
 										<Button
 											href={data.content.reference_url}
 											target="_blank"
@@ -311,7 +317,6 @@
 										>
 											{buttonLabel}
 										</Button>
-								 
 									{/if}
 									{#if data.content.Link_not_available == true}
 										<div class="flex flex-col">
@@ -329,7 +334,6 @@
 										</div>
 									{/if}
 								</td>
-								
 							</tr>
 						</tbody>
 					</table>
@@ -434,7 +438,7 @@
 													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
 													>Click Here
 												</a>
-											{:else if link.Link_message_require == false}
+											{:else if link.Link_message_require == false && link.URL}
 												<a
 													href={link.URL}
 													rel="nofollow noopener noreferrer external"
@@ -531,15 +535,25 @@
 		</Card.Content>
 	</Card.Root>
 	<div class="flex justify-center pt-5">
-		<Button
-			href={data.content.reference_url}
-			variant="success"
-			target="_blank"
-			rel="nofollow noopener noreferrer external"
-			title={buttonLabel}
-			class="no-underline w-60"
-			size="xl">{buttonLabel}</Button
-		>
+		{#if !data.content.Link_not_available || data.content.Link_not_available == false}
+			<Button
+				href={data.content.reference_url}
+				variant="success"
+				target="_blank"
+				rel="nofollow noopener noreferrer external"
+				title={buttonLabel}
+				class="no-underline w-60"
+				size="xl">{buttonLabel}</Button
+			>
+		{:else}
+			<Button
+				onclick={scrollToTop}
+				variant="success"
+				title="Back to top"
+				class="no-underline w-60 cursor-pointer"
+				size="xl">Go to top</Button
+			>
+		{/if}
 	</div>
 
 	<ShareButtons url={currentUrl} title={data.content.title} />
