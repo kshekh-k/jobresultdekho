@@ -25,7 +25,7 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
                     publishedAt: { $notNull: true },
                     hot_post: true,
                 },
-                orderBy: { updatedAt: 'desc' },
+                orderBy: { createdAt: 'desc' },
                 limit: 8,
                 select: ['title', 'total_posts', 'slug']
             });
@@ -44,7 +44,7 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
                     publishedAt: { $notNull: true },
                     high_alert: true,
                 },
-                orderBy: { updatedAt: 'desc' },
+                orderBy: { createdAt: 'desc' },
                 limit: 20,
                 select: ['title', 'total_posts', 'slug']
             });

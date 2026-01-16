@@ -9,20 +9,20 @@ export const SITE_LOGO = `${SITE_URL}/image/jobresultdekho-logo-white.svg`
 export const OG_IMAGE = `${SITE_URL}/image/JobResultdekhocom-sq-banner.png`
 
 export function stripHtmlForSEO(html: string = '', limit = 160): string {
-	if (!html) return '';
+  if (!html) return '';
 
-	const text = html
-		.replace(/<style[^>]*>.*?<\/style>/gi, '') // remove style tags
-		.replace(/<script[^>]*>.*?<\/script>/gi, '') // remove script tags
-		.replace(/<\/?[^>]+>/gi, '') // remove all HTML tags
-		.replace(/&nbsp;/g, ' ') // decode common entities
-		.replace(/&amp;/g, '&')
-		.replace(/&quot;/g, '"')
-		.replace(/&#39;/g, "'")
-		.replace(/\s+/g, ' ') // normalize spaces
-		.trim();
- 
-	return text.length > limit ? text.slice(0, limit) + '…' : text;
+  const text = html
+    .replace(/<style[^>]*>.*?<\/style>/gi, '') // remove style tags
+    .replace(/<script[^>]*>.*?<\/script>/gi, '') // remove script tags
+    .replace(/<\/?[^>]+>/gi, '') // remove all HTML tags
+    .replace(/&nbsp;/g, ' ') // decode common entities
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ') // normalize spaces
+    .trim();
+
+  return text.length > limit ? text.slice(0, limit) + '…' : text;
 }
 
 /**
@@ -88,9 +88,9 @@ export function cn(...inputs: ClassValue[]) {
 
 //Date format in - dd-MM-yyyy
 export function formatDate(value: string) {
-  if (!value) return 'To be announced';
+  if (!value) return '';
   const d = new Date(value);
-  if (isNaN(d.getTime())) return "-";
+  if (isNaN(d.getTime())) return "";
   // return d .toLocaleDateString("en-IN", { year: "numeric", month: "numeric", day: "numeric", }) .replaceAll('/', '-')
 
   const day = String(d.getDate()).padStart(2, "0");

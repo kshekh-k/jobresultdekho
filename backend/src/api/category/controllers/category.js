@@ -55,16 +55,30 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
 
     if (!category) return ctx.notFound("Category not found");
 
-    // 2. Generic helper for fetching records from any content type
-    const fetchRecords = async (contentType, extraWhere = {}, extraSelect = []) => {
-      return await strapi.db.query(contentType).findMany({
+    // 2. Separate helpers for different content types
+    const fetchJobs = async (extraWhere = {}) => {
+      return await strapi.db.query("api::job.job").findMany({
         where: {
           category: { slug: slug },
           publishedAt: { $notNull: true },
           ...extraWhere,
         },
-        orderBy: [{ last_date: "asc" }],
-        select: ["id", "title", "slug", "last_date", "reference_url", ...extraSelect],
+        orderBy: [{ createdAt: "desc" }],
+        select: ["id", "title", "slug", "last_date", "reference_url", "Link_not_available", "Start_date", "Apply_date_Start_message"],
+        populate: {
+          department: { select: ["title", "slug"] },
+        },
+      });
+    };
+
+    const fetchOtherRecords = async (contentType) => {
+      return await strapi.db.query(contentType).findMany({
+        where: {
+          category: { slug: slug },
+          publishedAt: { $notNull: true },
+        },
+        orderBy: [{ createdAt: "desc" }],
+        select: ["id", "title", "slug", "last_date", "reference_url"],
         populate: {
           department: { select: ["title", "slug"] },
         },
@@ -74,16 +88,16 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
     // 3. Return NEW immutable object
     return {
       ...category,
-      jobs: await fetchRecords("api::job.job", { stage: "Job" }),
-      admit_cards: await fetchRecords("api::job.job", { stage: "Admit Card" }),
-      results: await fetchRecords("api::job.job", { stage: "Result" }),
-      answer_keys: await fetchRecords("api::job.job", { stage: "Answer Key" }),
-      waiting_list: await fetchRecords("api::job.job", { stage: "Waiting List" }),
-      archive_jobs: await fetchRecords("api::job.job", { stage: "Archive Job" }),
+      jobs: await fetchJobs({ stage: "Job" }),
+      admit_cards: await fetchJobs({ stage: "Admit Card" }),
+      results: await fetchJobs({ stage: "Result" }),
+      answer_keys: await fetchJobs({ stage: "Answer Key" }),
+      waiting_list: await fetchJobs({ stage: "Waiting List" }),
+      archive_jobs: await fetchJobs({ stage: "Archive Job" }),
 
       // admissions and syllabus are separate content types
-      admissions: await fetchRecords("api::admission.admission"),
-      syllabus: await fetchRecords("api::syllabus.syllabus"),
+      admissions: await fetchOtherRecords("api::admission.admission"),
+      syllabus: await fetchOtherRecords("api::syllabus.syllabus"),
     };
   },
 

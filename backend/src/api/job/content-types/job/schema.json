@@ -104,11 +104,6 @@
       "component": "shared.important-dates",
       "repeatable": false
     },
-    "application_fee": {
-      "type": "component",
-      "component": "shared.application-fee",
-      "repeatable": false
-    },
     "eligiblity_criterea": {
       "type": "relation",
       "relation": "oneToOne",
@@ -170,6 +165,11 @@
     "Start_date": {
       "type": "boolean",
       "default": true
+    },
+    "application_fee": {
+      "type": "component",
+      "component": "shared.application-fee",
+      "repeatable": false
     }
   }
 }

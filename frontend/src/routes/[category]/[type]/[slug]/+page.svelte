@@ -365,6 +365,7 @@
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
 					<!-- This is job banner -->
+					{console.log(data.content.banner_image?.url)}
 					{#if data.content.banner_image?.url}
 						<div class="flex justify-center items-center">
 							<img
@@ -429,7 +430,7 @@
 											>{link.Label}</th
 										>
 										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900">
-											{#if link.Need_PDF_upload && link.Upload_PDF}
+											{#if link.Need_PDF_upload && link.Upload_PDF?.url}
 												<a
 													href={getMediaUrl(link.Upload_PDF.url)}
 													rel="nofollow noopener noreferrer external"

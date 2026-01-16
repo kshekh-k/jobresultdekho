@@ -136,11 +136,11 @@
 					{#if type !== 'syllabus'}
 						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
 							<Icon name={Calendar} size={14} className="md:hidden" />
-							{#if item.Start_date === false && item.Apply_date_Start_message}
+							{#if item.Apply_date_Start_message}
 								<span class="text-sm block line-clamp-2">{item.Apply_date_Start_message}</span>
-							{:else if item.last_date}
+							{:else if formatDate(item.last_date)}
 								<span class="text-sm block line-clamp-2">{formatDate(item.last_date)}</span>
-							{:else}
+							{:else if !item.Apply_date_Start_message && !formatDate(item.last_date)}
 								<span class="text-sm block line-clamp-2">—</span>
 							{/if}
 						</div>
