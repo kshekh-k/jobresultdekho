@@ -67,6 +67,56 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
         }
     },
 
+    async getStats(ctx) {
+        try {
+            const stages = ["Job", "Admit Card", "Result", "Answer Key", "Waiting List", "Syllabus", "Admission"];
+
+            const counts = await Promise.all(
+                stages.map(async (stage) => {
+                    const count = await strapi.db.query('api::job.job').count({
+                        where: {
+                            publishedAt: { $notNull: true },
+                            stage
+                        }
+                    });
+                    return { stage, count };
+                })
+            );
+
+            // Also get admission and syllabus counts from their respective tables
+            const admissionCount = await strapi.db.query('api::admission.admission').count({
+                where: { publishedAt: { $notNull: true } }
+            });
+
+            const syllabusCount = await strapi.db.query('api::syllabus.syllabus').count({
+                where: { publishedAt: { $notNull: true } }
+            });
+
+            // Get department count
+            const departmentCount = await strapi.db.query('api::department.department').count({
+                where: { publishedAt: { $notNull: true } }
+            });
+
+            const total = counts.reduce((sum, item) => sum + item.count, 0) + admissionCount + syllabusCount;
+
+            return {
+                total,
+                jobs: counts.find(c => c.stage === "Job")?.count || 0,
+                admitCards: counts.find(c => c.stage === "Admit Card")?.count || 0,
+                results: counts.find(c => c.stage === "Result")?.count || 0,
+                answerKeys: counts.find(c => c.stage === "Answer Key")?.count || 0,
+                waitingList: counts.find(c => c.stage === "Waiting List")?.count || 0,
+                admissions: admissionCount,
+                syllabus: syllabusCount,
+                departments: departmentCount,
+                breakdown: counts
+            };
+        } catch (err) {
+            strapi.log.error("❌ Error fetching stats: " + err.message);
+            ctx.throw(500, "Unable to fetch stats");
+        }
+    },
+
     async findOne(ctx) {
         const { slug } = ctx.params;
 

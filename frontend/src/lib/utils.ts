@@ -167,5 +167,126 @@ import { writable } from 'svelte/store';
 
 export const cookieConsent = writable(false);
 export const notificationConsent = writable(false);
+// ============================================
+// Number Formatting Utilities
+// ============================================
 
+/**
+ * Options for formatting short numbers
+ */
+interface FormatShortNumberOptions {
+  decimals?: number;    // Number of decimal places (default: 1)
+  trimZeros?: boolean;  // Remove trailing zeros (default: true)
+  fallback?: string;    // Value to return if input is invalid (default: '0')
+}
 
+/**
+ * Options for the shortNumber Svelte action
+ */
+interface ShortNumberOptions extends FormatShortNumberOptions {
+  value?: string | number | null;  // The value to format
+}
+
+/**
+ * Unit definition for number formatting
+ */
+interface Unit {
+  v: number;  // Threshold value (e.g., 1000, 1000000, 1000000000)
+  s: string;  // Suffix string (e.g., 'K', 'M', 'B')
+}
+
+/**
+ * Format a number into a short string with K, M, B suffix
+ * 
+ * Examples:
+ * - formatShortNumber(1500) => "1.5K"
+ * - formatShortNumber(2300000) => "2.3M"
+ * - formatShortNumber(1000000000) => "1B"
+ * - formatShortNumber("1,234,567") => "1.2M"
+ * 
+ * @param value - The number to format (can be number, string, or null/undefined)
+ * @param options - Formatting options
+ * @returns Formatted string with K/M/B suffix or fallback value
+ */
+export function formatShortNumber(
+  value: string | number | null | undefined,
+  {
+    decimals = 1,
+    trimZeros = true,
+    fallback = '0'
+  }: FormatShortNumberOptions = {}
+): string {
+  // Return fallback for invalid input
+  if (value === null || value === undefined || value === '') return fallback;
+
+  // Parse number - handle comma-separated strings like "1,234,567"
+  const n = typeof value === 'number'
+    ? value
+    : Number(String(value).replace(/,/g, '').trim());
+
+  // Return fallback if not a valid finite number
+  if (!Number.isFinite(n)) return fallback;
+
+  const abs = Math.abs(n);
+  const sign = n < 0 ? '-' : '';
+
+  // Define units for billions, millions, and thousands
+  const units: Unit[] = [
+    { v: 1e9, s: 'B' },   // Billion
+    { v: 1e6, s: 'M' },   // Million
+    { v: 1e3, s: 'K' },   // Thousand
+  ];
+
+  // Numbers below 1000 show as-is without suffix
+  if (abs < 1000) return sign + String(Math.round(abs) === abs ? abs : abs);
+
+  // Find the appropriate unit (B, M, or K)
+  const unit = units.find(u => abs >= u.v) || units[units.length - 1];
+
+  // Calculate formatted value
+  let out = (abs / unit.v).toFixed(decimals);
+
+  // Trim trailing zeros if requested
+  if (trimZeros && decimals > 0) {
+    out = out.replace(/\.0+$/, '').replace(/(\.\d*?)0+$/, '$1');
+  }
+
+  return `${sign}${out}${unit.s}`;
+}
+
+/**
+ * Svelte action (hook) to auto-format text content with short number format
+ * 
+ * Usage in Svelte component:
+ * ```svelte
+ * <span use:shortNumber={{ value: 1500, decimals: 1 }}>
+ *   This text will be replaced with "1.5K"
+ * </span>
+ * 
+ * <span use:shortNumber={{ value: totalPosts }}>
+ *   Shows formatted post count
+ * </span>
+ * ```
+ * 
+ * @param node - The HTML element to apply formatting to
+ * @param options - Formatting options including the value to display
+ * @returns Svelte action object with update method
+ */
+export function shortNumber(node: HTMLElement, options: ShortNumberOptions = {}) {
+  const apply = (opts: ShortNumberOptions) => {
+    // Use provided value or fallback to current text content
+    const value = opts?.value ?? node.textContent;
+    // Update the element's text with formatted number
+    node.textContent = formatShortNumber(value, opts);
+  };
+
+  // Apply formatting on initialization
+  apply(options);
+
+  return {
+    // Re-apply formatting when options change
+    update(newOptions: ShortNumberOptions) {
+      apply(newOptions);
+    }
+  };
+}

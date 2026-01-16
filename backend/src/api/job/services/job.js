@@ -16,6 +16,7 @@ module.exports = createCoreService('api::job.job', ({ strapi }) => ({
       ? {
         $or: [
           { title: { $containsi: q } },
+          { department: { title: { $containsi: q } } },
         ],
       }
       : {};
