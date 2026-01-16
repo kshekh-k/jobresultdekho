@@ -15,7 +15,7 @@ services:
       - xyresults
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER}" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -104,4 +104,5 @@ volumes:
   redis_data:
   caddy_data:
   caddy_config:
+
 
