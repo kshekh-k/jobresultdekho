@@ -1,0 +1,15 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Force Unix (LF) line endings for shell scripts
+*.sh text eol=lf
+
+# Force Unix (LF) line endings for Dockerfiles
+Dockerfile text eol=lf
+Dockerfile.* text eol=lf
+
+# Force Unix (LF) line endings for docker-compose files
+docker-compose*.yml text eol=lf
+
+# Ensure these are always LF even on Windows
+Caddyfile text eol=lf
