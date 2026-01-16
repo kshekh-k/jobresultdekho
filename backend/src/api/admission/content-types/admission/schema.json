@@ -57,6 +57,23 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "URL_not_available": {
+      "type": "boolean"
+    },
+    "Link_Activate_Message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "URL_not_available"
+            },
+            true
+          ]
+        }
+      }
     }
   }
 }
+  

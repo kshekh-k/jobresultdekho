@@ -5,10 +5,20 @@
    */
   export let content: any = [];
   export let className: string  | null = null
+  import { getMediaUrl } from '$lib/utils';
   
   // Helper to safely extract text from nested children
   function getText(children = []) {
     return children.map((child:any) => child.text || '').join('');
+  }
+
+  // Normalize image block and return full URL using getMediaUrl
+  function getImageUrl(block:any) {
+    if (!block) return '';
+
+    // Common shapes: block.url, block.src, block.data?.target?.attributes?.url
+    const path = block.url || block.src || block.data?.target?.attributes?.url || block.attributes?.url || block.attributes?.src || '';
+    return path ? getMediaUrl(path) : '';
   }
 
   // Helper to apply inline text styles
@@ -68,7 +78,7 @@
       </a>
     {:else if block.type === 'image'}
       <figure class="my-4">
-        <img src={block.url} alt={block.alt || ''} class="rounded-md shadow" />
+        <img src={getImageUrl(block)} alt={block.alt || block.caption || ''} class="rounded-md shadow" />
         {#if block.caption}
           <figcaption class="text-sm text-gray-500 mt-1">{block.caption}</figcaption>
         {/if}

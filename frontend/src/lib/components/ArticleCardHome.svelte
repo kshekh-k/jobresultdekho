@@ -8,7 +8,7 @@
 
 	export let title: string | undefined;
 	export let articleId: any | undefined;
-	export let articleWrap: string | undefined; 
+	export let articleWrap: string | undefined;
 	export let headerColor: string = '--color-neutral-900';
 	export let slug: string = '/latest-job';
 
@@ -19,20 +19,19 @@
 	let syllabus = slug === 'syllabus';
 	let admission = slug === 'admission';
 
-	export let buttonLabel: string | undefined =
-		job
-			? 'Apply'
-			: result
-				? 'View'
-				: admitcard
-					? 'Download'
-					: admission
-						? 'View'
-						: answerkey
-							? 'Match'
-							: syllabus
-								? 'Check'							  
-								: 'View';
+	export let buttonLabel: string | undefined = job
+		? 'Apply'
+		: result
+			? 'View'
+			: admitcard
+				? 'Download'
+				: admission
+					? 'View'
+					: answerkey
+						? 'Match'
+						: syllabus
+							? 'Check'
+							: 'View';
 
 	export let type: string | undefined;
 	export let items: {
@@ -41,16 +40,19 @@
 		category?: any;
 		slug?: string;
 		title?: string;
-		last_date?: any; 
+		last_date?: any;
 		target?: string;
 		reference_url?: string;
+		Link_not_available?: boolean;
+		Start_date?: boolean;
+		Apply_date_Start_message?: string;
 	}[] = [];
 
 	export let headers: {
 		id?: string;
 		department?: string;
 		label?: string;
-		date?: string; 
+		date?: string;
 		action?: string;
 	}[] = [];
 
@@ -70,10 +72,15 @@
 		>
 			<h3 class="text-lg font-semibold text-white">{title}</h3>
 			<div class="flex justify-between items-center gap-1">
-				<a href={slug} title={viewText} class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200">{viewText}</a>
+				<a
+					href={slug}
+					title={viewText}
+					class="sm:px-3 p-2 bg-white/20 hover:bg-white/10 text-sm rounded text-white no-underline leading-none ease-in-out duration-200"
+					>{viewText}</a
+				>
 				<button
 					onclick={toggle}
-					class="p-1 rounded-sm  hover:bg-white/20 focus:outline-none text-white cursor-pointer"
+					class="p-1 rounded-sm hover:bg-white/20 focus:outline-none text-white cursor-pointer"
 				>
 					<Icon name={ChevronDown} className={open ? 'rotate-180' : 'rotate-0'} size={20} />
 				</button>
@@ -91,12 +98,26 @@
 							<div class="shrink-0 md:min-w-6">{header.id}</div>
 							<div class="flex-1">{header.label}</div>
 						</div>
-						<div class="md:w-20 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Landmark} size={14}  /> </span>{header.department}</span></div>
+						<div class="md:w-20 shrink-0">
+							<span class="flex gap-1 items-center"
+								><span class="md:hidden inline-flex items-center"
+									><Icon name={Landmark} size={14} />
+								</span>{header.department}</span
+							>
+						</div>
 						{#if type !== 'syllabus'}
-							<div class="md:w-24 shrink-0"><span class="flex gap-1 items-center"><span class="md:hidden inline-flex items-center"><Icon name={Calendar} size={14}  /> </span>{header.date}</span></div>
+							<div class="md:w-24 shrink-0">
+								<span class="flex gap-1 items-center"
+									><span class="md:hidden inline-flex items-center"
+										><Icon name={Calendar} size={14} />
+									</span>{header.date}</span
+								>
+							</div>
 						{/if}
-					 
-						<div class="w-full md:w-48 shrink-0 text-right hidden md:flex justify-end">{header.action}</div>
+
+						<div class="w-full md:w-48 shrink-0 text-right hidden md:flex justify-end">
+							{header.action}
+						</div>
 					{/each}
 				</div>
 				{#each items.slice(0, 10) as item, index}
@@ -107,12 +128,12 @@
 							<div class="shrink-0 md:min-w-6 md:py-1.5">{index + 1}.</div>
 
 							<div class="flex-1">
-								<a  
-									href="{slug}/{type}/{item.slug}" title={item.title}
-								 
+								<a
+									href="{slug}/{type}/{item.slug}"
+									title={item.title}
 									class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-1.5 line-clamp-2"
 								>
-									{item.title}	
+									{item.title}
 								</a>
 							</div>
 						</div>
@@ -123,23 +144,37 @@
 						{#if type !== 'syllabus'}
 							<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
 								<Icon name={Calendar} size={14} className="md:hidden" />
-								<span class="text-sm">{formatDate(item.last_date)}</span>
+								{#if item.Apply_date_Start_message}
+									<span class="text-sm block line-clamp-2">{item.Apply_date_Start_message}</span>
+								{:else if formatDate(item.last_date)}
+									<span class="text-sm block line-clamp-2">{formatDate(item.last_date)}</span>
+								{:else}
+									<span class="text-sm block line-clamp-2">—</span>
+								{/if}
 							</div>
 						{/if}
 
-						 
 						<div class="w-full md:w-48 gap-1 shrink-0 flex justify-between md:justify-end order-6">
 							<Button
 								href="{slug}/{type}/{item.slug}"
-							 	title={'View Detail'}
+								title={'View Detail'}
 								variant="light"
 								size="sm"
 							>
 								View Detail
 							</Button>
-							<Button href={item.reference_url} title={buttonLabel} rel="nofollow noopener noreferrer external" target="_blank" size="sm" class="bg-(color:--headerColor)">
-								{buttonLabel}
-							</Button>
+							{#if item.reference_url && !item.Link_not_available}
+								<Button
+									href={item.reference_url}
+									title={buttonLabel}
+									rel="nofollow noopener noreferrer external"
+									target="_blank"
+									size="sm"
+									class="bg-(color:--headerColor)"
+								>
+									{buttonLabel}
+								</Button>
+							{/if}
 						</div>
 					</div>
 				{/each}

@@ -42,6 +42,9 @@
 		last_date?: any;
 		target?: string;
 		reference_url?: string;
+		Link_not_available?: boolean;
+		Start_date?: boolean;
+		Apply_date_Start_message?: string;
 	}[] = [];
 
 	export let headers: {
@@ -111,7 +114,9 @@
 					class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center text-sm font-medium text-slate-600"
 				>
 					<div class="flex gap-2 md:flex-1 items-start w-full md:w-auto">
-						<div class="shrink-0 md:min-w-6 md:py-2">{(currentPage - 1) * perPage + index + 1}.</div>
+						<div class="shrink-0 md:min-w-6 md:py-2">
+							{(currentPage - 1) * perPage + index + 1}.
+						</div>
 						<div class="flex-1 order-1">
 							<a
 								rel="nofollow noopener noreferrer external"
@@ -131,7 +136,13 @@
 					{#if type !== 'syllabus'}
 						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
 							<Icon name={Calendar} size={14} className="md:hidden" />
-							<span class="text-sm">{formatDate(item.last_date)}</span>
+							{#if item.Apply_date_Start_message}
+								<span class="text-sm block line-clamp-2">{item.Apply_date_Start_message}</span>
+							{:else if formatDate(item.last_date)}
+								<span class="text-sm block line-clamp-2">{formatDate(item.last_date)}</span>
+							{:else if !item.Apply_date_Start_message && !formatDate(item.last_date)}
+								<span class="text-sm block line-clamp-2">—</span>
+							{/if}
 						</div>
 					{/if}
 
@@ -145,16 +156,18 @@
 						>
 							Detail
 						</Button>
-						<Button
-							title={buttonLabel}
-							href={item.reference_url}
-							rel="nofollow noopener noreferrer external"
-							target="_blank"
-							size="sm"
-							class="bg-(color:--headerColor)"
-						>
-							{buttonLabel}
-						</Button>
+						{#if item.reference_url && !item.Link_not_available}
+							<Button
+								title={buttonLabel}
+								href={item.reference_url}
+								rel="nofollow noopener noreferrer external"
+								target="_blank"
+								size="sm"
+								class="bg-(color:--headerColor)"
+							>
+								{buttonLabel}
+							</Button>
+						{/if}
 					</div>
 				</div>
 				<!-- ✅ Insert AD after every 10 items -->
@@ -209,7 +222,6 @@
 						</a>
 					</div>
 				{/if}
-
 			{/each}
 		</Card.Content>
 

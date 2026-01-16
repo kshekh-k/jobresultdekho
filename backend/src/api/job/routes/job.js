@@ -2,6 +2,12 @@ module.exports = {
   routes: [
     {
       method: 'GET',
+      path: '/jobs/stats',
+      handler: 'job.getStats',
+      config: { auth: false }
+    },
+    {
+      method: 'GET',
       path: '/jobs/hot-posts',
       handler: 'job.findHotPosts',
       config: { auth: false }

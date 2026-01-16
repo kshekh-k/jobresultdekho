@@ -7,7 +7,7 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 const findLatestByStage = require("../../../utils/findLatestByStage");
 
-module.exports = createCoreController('api::job.job', ({strapi}) => ({
+module.exports = createCoreController('api::job.job', ({ strapi }) => ({
 
     async search(ctx) {
         const query = ctx.request.query;
@@ -17,17 +17,17 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
             meta: { pagination: { total: results.length } },
         };
     },
-    
+
     async findHotPosts(ctx) {
         try {
             const jobs = await strapi.db.query('api::job.job').findMany({
-                where: { 
+                where: {
                     publishedAt: { $notNull: true },
                     hot_post: true,
                 },
-                orderBy: { updatedAt: 'desc' },
-                limit: 6,
-                select: ['title', 'total_posts', 'slug']                
+                orderBy: { createdAt: 'desc' },
+                limit: 8,
+                select: ['title', 'total_posts', 'slug']
             });
 
             return jobs;
@@ -40,13 +40,13 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
     async findHighAlertPosts(ctx) {
         try {
             const jobs = await strapi.db.query('api::job.job').findMany({
-                where: { 
+                where: {
                     publishedAt: { $notNull: true },
                     high_alert: true,
                 },
-                orderBy: { updatedAt: 'desc' },
+                orderBy: { createdAt: 'desc' },
                 limit: 20,
-                select: ['title', 'total_posts', 'slug']                
+                select: ['title', 'total_posts', 'slug']
             });
 
             return jobs;
@@ -67,18 +67,68 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
         }
     },
 
+    async getStats(ctx) {
+        try {
+            const stages = ["Job", "Admit Card", "Result", "Answer Key", "Waiting List", "Syllabus", "Admission"];
+
+            const counts = await Promise.all(
+                stages.map(async (stage) => {
+                    const count = await strapi.db.query('api::job.job').count({
+                        where: {
+                            publishedAt: { $notNull: true },
+                            stage
+                        }
+                    });
+                    return { stage, count };
+                })
+            );
+
+            // Also get admission and syllabus counts from their respective tables
+            const admissionCount = await strapi.db.query('api::admission.admission').count({
+                where: { publishedAt: { $notNull: true } }
+            });
+
+            const syllabusCount = await strapi.db.query('api::syllabus.syllabus').count({
+                where: { publishedAt: { $notNull: true } }
+            });
+
+            // Get department count
+            const departmentCount = await strapi.db.query('api::department.department').count({
+                where: { publishedAt: { $notNull: true } }
+            });
+
+            const total = counts.reduce((sum, item) => sum + item.count, 0) + admissionCount + syllabusCount;
+
+            return {
+                total,
+                jobs: counts.find(c => c.stage === "Job")?.count || 0,
+                admitCards: counts.find(c => c.stage === "Admit Card")?.count || 0,
+                results: counts.find(c => c.stage === "Result")?.count || 0,
+                answerKeys: counts.find(c => c.stage === "Answer Key")?.count || 0,
+                waitingList: counts.find(c => c.stage === "Waiting List")?.count || 0,
+                admissions: admissionCount,
+                syllabus: syllabusCount,
+                departments: departmentCount,
+                breakdown: counts
+            };
+        } catch (err) {
+            strapi.log.error("❌ Error fetching stats: " + err.message);
+            ctx.throw(500, "Unable to fetch stats");
+        }
+    },
+
     async findOne(ctx) {
         const { slug } = ctx.params;
 
         const job = await strapi.db.query('api::job.job').findOne({
             where: { slug },
             select: [
-                'title','slug','short_description','content','last_date',
-                'reference_url','total_posts','stage',
+                'title', 'slug', 'short_description', 'content', 'last_date',
+                'Link_not_available', 'reference_url', 'Link_Activate_Message', 'total_posts', 'stage', 'Start_date', 'Apply_date_Start_message',
             ],
             populate: {
                 category: {
-                    select: ['id','title','slug']
+                    select: ['id', 'title', 'slug']
                 },
                 department: {
                     select: ['title', 'slug']
@@ -87,13 +137,16 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                 important_dates: {
                     select: [
                         'vacancy_notification_date', 'apply_online_start_date', 'apply_online_end_date',
-                        'fee_payment_last_date', 'correction_date', 'admit_card', 'exam_date', 'result_date'
+                        'fee_payment_last_date', 'correction_date', 'admit_card', 'exam_date', 'result_date',
+                        'No_Notification_date', 'No_notification_date_message', 'No_Apply_date', 'No_Apply_date_message', 'No_Admitcard_date', 'No_admitcard_date_message', 'No_Exam_date', 'No_Exam_date_message',
+                        'No_Notification_date', 'No_notification_date_message', 'No_Apply_date', 'No_Apply_date_message', 'No_Admitcard_date', 'No_admitcard_date_message', 'No_Exam_date', 'No_Exam_date_message',
+                        'No_Result_date', 'No_Result_date_message',
                     ]
                 },
-                application_fee: {
+                application_fee: true,
+                Fees_of_application: {
                     select: [
-                        'general_obc_ews', 'sc_st_pwd', 'female_transgender',
-                        'online_payment', 'offline_payment'
+                        'Fees_Label', 'Fees_Value', 'Fees_message'
                     ]
                 },
                 eligiblity_criterea: {
@@ -101,12 +154,16 @@ module.exports = createCoreController('api::job.job', ({strapi}) => ({
                         'title', 'content'
                     ]
                 },
-                job_disclaimer : {
+                job_disclaimer: {
                     select: ['title', 'content']
                 },
                 important_links: {
-                    select: ['label', 'url']
+                    select: ['label', 'url', 'Link_message_require', 'Link_message', 'Need_PDF_upload'],
+                    populate: {
+                        Upload_PDF: true
+                    }
                 },
+                Upload_PDF: true,
                 FAQs: {
                     select: ['question', 'answer']
                 },

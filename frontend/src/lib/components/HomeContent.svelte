@@ -6,7 +6,7 @@
 	export let latestResults;
 	export let latestSyllabus;
 	export let categoryTree;
- 
+
 	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
 	import { PanelRightDashed } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
@@ -21,7 +21,8 @@
 	const children = [];
 	for (const cat of categoryTree) {
 		if (!cat.parent) parents.push({ title: cat.title, slug: cat.slug });
-		if (cat.children?.length) for (const child of cat.children) children.push({ title: child.title, slug: child.slug });
+		if (cat.children?.length)
+			for (const child of cat.children) children.push({ title: child.title, slug: child.slug });
 	}
 
 	const excludedSlugs = ['home', 'more'];
@@ -46,20 +47,78 @@
 	];
 
 	// Headers
-	const commanHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Last Date', action: 'Action' }];
-	const admitHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Exam Date', action: 'Action' }];
-	const resultHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Result Date', action: 'Action' }];
-	const answerKeyHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Release Date', action: 'Action' }];
-	const syllabusHeader = [{ id: 'No.', department: 'Dept', label: 'Title', date: 'Exam Date', action: 'Action' }];
+	const commanHeader = [
+		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Last Date', action: 'Action' }
+	];
+	const admitHeader = [
+		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Exam Date', action: 'Action' }
+	];
+	const resultHeader = [
+		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Result Date', action: 'Action' }
+	];
+	const answerKeyHeader = [
+		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Release Date', action: 'Action' }
+	];
+	const syllabusHeader = [
+		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Exam Date', action: 'Action' }
+	];
 
 	// Sections
 	const articleSections = [
-		{ id: 'latest-job', type: 'jobs', title: 'Latest Jobs', items: latestJobs, viewText: 'View All', slug: 'latest-job', headers: commanHeader },
-		{ id: 'admit-card', type: 'admit-cards', title: 'Admit Cards', items: latestAdmitCards, viewText: 'View All', slug: 'admit-card', headers: admitHeader },
-		{ id: 'result', type: 'results', title: 'Results', items: latestResults, viewText: 'View All', slug: 'result', headers: resultHeader },
-		{ id: 'answer-key', type: 'answer-keys', title: 'Answer Key', items: latestAnswerKeys, viewText: 'View All', slug: 'answer-key', headers: answerKeyHeader },
-		{ id: 'admission', type: 'admissions', title: 'Admissions', items: latestAdmissions, viewText: 'View All', slug: 'admission', headers: commanHeader },
-		{ id: 'syllabus', type: 'syllabus', title: 'Syllabus', items: latestSyllabus, viewText: 'View All', slug: 'syllabus', headers: syllabusHeader }
+		{
+			id: 'latest-job',
+			type: 'jobs',
+			title: 'Latest Jobs',
+			items: latestJobs,
+			viewText: 'View All',
+			slug: 'latest-job',
+			headers: commanHeader
+		},
+		{
+			id: 'admit-card',
+			type: 'admit-cards',
+			title: 'Admit Cards',
+			items: latestAdmitCards,
+			viewText: 'View All',
+			slug: 'admit-card',
+			headers: admitHeader
+		},
+		{
+			id: 'result',
+			type: 'results',
+			title: 'Results',
+			items: latestResults,
+			viewText: 'View All',
+			slug: 'result',
+			headers: resultHeader
+		},
+		{
+			id: 'answer-key',
+			type: 'answer-keys',
+			title: 'Answer Key',
+			items: latestAnswerKeys,
+			viewText: 'View All',
+			slug: 'answer-key',
+			headers: answerKeyHeader
+		},
+		{
+			id: 'admission',
+			type: 'admissions',
+			title: 'Admissions',
+			items: latestAdmissions,
+			viewText: 'View All',
+			slug: 'admission',
+			headers: commanHeader
+		},
+		{
+			id: 'syllabus',
+			type: 'syllabus',
+			title: 'Syllabus',
+			items: latestSyllabus,
+			viewText: 'View All',
+			slug: 'syllabus',
+			headers: syllabusHeader
+		}
 	].map((sec, index) => ({ ...sec, headerColor: headingColor[index] }));
 
 	/* -------------------------
@@ -154,32 +213,35 @@
 
 <!-- PAGE LAYOUT -->
 <div class="max-w-screen-xl mx-auto px-3 space-y-5">
-
 	<!-- Sticky Tabs -->
 	<div class="hidden md:block {isFixed ? 'h-16' : 'h-auto'}" bind:this={navEl}>
-		<div class="{isFixed ? 'fixed inset-x-0 top-0 z-20 ' : ''}">
-			<div class="{isFixed ? 'max-w-screen-xl mx-auto px-3' : ''}">
-				<div class="flex gap-2 flex-wrap p-3  bg-white shadow-sm {isFixed ? 'rounded-b-md' : 'rounded-md'}">
-				{#each articleSections as parent}
-					<Button
-						onclick={() => handleClick(parent.id)}
-						style="--btnColor:var({active === parent.id ? parent.headerColor : '--color-neutral-300'}); --btnHover:var({parent.headerColor})"
-						variant="light"
-						class="flex-1 !px-2 md:!px-4 rounded-md 
+		<div class={isFixed ? 'fixed inset-x-0 top-0 z-20 ' : ''}>
+			<div class={isFixed ? 'max-w-screen-xl mx-auto px-3' : ''}>
+				<div
+					class="flex gap-2 flex-wrap p-3 bg-white shadow-sm {isFixed
+						? 'rounded-b-md'
+						: 'rounded-md'}"
+				>
+					{#each articleSections as parent}
+						<Button
+							onclick={() => handleClick(parent.id)}
+							style="--btnColor:var({active === parent.id
+								? parent.headerColor
+								: '--color-neutral-300'}); --btnHover:var({parent.headerColor})"
+							variant="light"
+							class="flex-1 !px-2 md:!px-4 rounded-md 
 							hover:bg-(color:--btnHover)! 
-							{active === parent.id 
-								? 'text-white bg-(color:--btnColor)' 
-								: 'text-neutral-600'}"
-					>
-						{parent.title}
-					</Button>
-				{/each}
+							{active === parent.id ? 'text-white bg-(color:--btnColor)' : 'text-neutral-600'}"
+						>
+							{parent.title}
+						</Button>
+					{/each}
 
-				<Button variant="bordered" class="lg:!hidden">
-					<Icon name={PanelRightDashed} size={20} />
-				</Button>
+					<Button variant="bordered" class="lg:!hidden">
+						<Icon name={PanelRightDashed} size={20} />
+					</Button>
+				</div>
 			</div>
-		</div>
 		</div>
 	</div>
 
@@ -203,9 +265,23 @@
 				{#if i === 2}
 					<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
 						<Card.Content class="flex items-center justify-center text-center p-1!  ">
-							<a href="{SITE_URL}/contact" class="block rounded-md! sm:rounded-xl! overflow-hidden" title={SITE_NAME}>
-								<img src="/image/JobResultDekho-Banner-horizontal.png" alt={SITE_NAME} title={SITE_NAME} class="object-cover sm:block hidden" />
-								<img src="/image/JobResultDekho-Banner-mobile.png" alt={SITE_NAME} title={SITE_NAME} class="object-cover block sm:hidden" />
+							<a
+								href="{SITE_URL}/contact"
+								class="block rounded-md! sm:rounded-xl! overflow-hidden"
+								title={SITE_NAME}
+							>
+								<img
+									src="/image/JobResultDekho-Banner-horizontal.png"
+									alt={SITE_NAME}
+									title={SITE_NAME}
+									class="object-cover sm:block hidden"
+								/>
+								<img
+									src="/image/JobResultDekho-Banner-mobile.png"
+									alt={SITE_NAME}
+									title={SITE_NAME}
+									class="object-cover block sm:hidden"
+								/>
 							</a>
 						</Card.Content>
 					</Card.Root>

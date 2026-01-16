@@ -6,28 +6,193 @@
   "options": {},
   "attributes": {
     "vacancy_notification_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Notification_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "apply_online_start_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Apply_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "apply_online_end_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Apply_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "fee_payment_last_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Apply_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "correction_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Apply_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "admit_card": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Admitcard_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "exam_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Exam_date"
+            },
+            false
+          ]
+        }
+      }
     },
     "result_date": {
-      "type": "date"
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Result_date"
+            },
+            false
+          ]
+        }
+      }
+    },
+    "No_Apply_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "No_Apply_date_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Apply_date"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "No_Admitcard_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "No_admitcard_date_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Admitcard_date"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "No_Exam_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "No_Exam_date_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Exam_date"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "No_Result_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "No_Result_date_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Result_date"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "No_Notification_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "No_notification_date_message": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "No_Notification_date"
+            },
+            true
+          ]
+        }
+      }
     }
   },
   "config": {}

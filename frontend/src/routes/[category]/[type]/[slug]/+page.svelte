@@ -7,7 +7,7 @@
 		formatDate,
 		getMediaUrl,
 		SITE_URL,
-		SITE_NAME, 
+		SITE_NAME,
 		SITE_LOGO,
 		OG_IMAGE,
 		richTextToPlainText,
@@ -16,6 +16,7 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import ImportantDates from '$lib/components/job/Dates.svelte';
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
+	import OldFees from '$lib/components/job/Old_Fees.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
 	import { page } from '$app/stores';
@@ -23,7 +24,8 @@
 	$: currentUrl = $page.url.href;
 
 	export let data: { content: any; type: string };
-	
+	console.log(data.content);
+
 	let job = data.type === 'jobs';
 	let admitcard = data.type === 'admit-cards';
 	let result = data.type === 'results';
@@ -53,8 +55,16 @@
 		: `${metaShorDescipt} 
 		 Get complete details for ${data.content.title}`;
 
-const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.banner_image?.url) : OG_IMAGE
+	const POST_OG_IMAGE = data.content.banner_image?.url
+		? getMediaUrl(data.content.banner_image?.url)
+		: OG_IMAGE;
 
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
 </script>
 
 <svelte:head>
@@ -172,6 +182,7 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Total Posts</th
 								>
+
 								<th
 									class="sm:px-4 p-2 text-left text-sm font-medium border whitespace-nowrap text-white"
 									>Action</th
@@ -185,23 +196,48 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 								>
 								{#if data.type !== 'syllabus'}
 									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
-										{formatDate(data.content.last_date)}
+										{#if data.content.Start_date == false && data.content.Apply_date_Start_message}
+											<span class="text-sm text-gray-600 italic"
+												>{data.content.Apply_date_Start_message}</span
+											>
+										{:else}
+											{formatDate(data.content.last_date)}
+										{/if}
 									</td>
 								{/if}
 
 								<td class="sm:px-4 p-2 text-sm border font-semibold text-green-600"
 									>{data.content.total_posts}</td
 								>
+
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
-									<Button
-										href={data.content.reference_url}
-										target="_blank" title={buttonLabel} rel="nofollow noopener noreferrer external" 
-										variant="success"
-										size="sm"
-										class={'no-underline !w-full'}
-									>
-										{buttonLabel}
-									</Button>
+									{#if !data.content.Link_not_available || data.content.Link_not_available == false}
+										<Button
+											href={data.content.reference_url}
+											target="_blank"
+											title={buttonLabel}
+											rel="nofollow noopener noreferrer external"
+											variant="success"
+											size="sm"
+											class={'no-underline !w-full'}
+										>
+											{buttonLabel}
+										</Button>
+									{:else if data.content.Link_not_available == true}
+										<div class="flex flex-col">
+											<p class="text-neutral-600 text-sm m-0!">
+												{data.content.Link_Activate_Message}
+											</p>
+											<a
+												href="https://www.instagram.com/job_resultdekho/"
+												rel="nofollow noopener noreferrer external"
+												target="_blank"
+												title={'Join our Instagram'}
+												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+												>Click Here</a
+											>
+										</div>
+									{/if}
 								</td>
 							</tr>
 						</tbody>
@@ -237,9 +273,15 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 									>{data.content.department?.title || '—'}</td
 								>
 								{#if data.type !== 'syllabus'}
-									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold"
-										>{formatDate(data.content.last_date)}</td
-									>
+									<td class="sm:px-4 p-2 text-sm border whitespace-nowrap font-semibold">
+										{#if data.content.Start_date == false && data.content.Apply_date_Start_message}
+											<span class="text-sm text-gray-600 italic"
+												>{data.content.Apply_date_Start_message}</span
+											>
+										{:else}
+											{formatDate(data.content.last_date)}
+										{/if}
+									</td>
 								{/if}
 							</tr>
 						</tbody>
@@ -263,15 +305,34 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 									>{data.content.total_posts}</td
 								>
 								<td class="sm:px-4 p-2 text-sm border font-semibold">
-									<Button
-										href={data.content.reference_url}
-										target="_blank" title={buttonLabel} rel="nofollow noopener noreferrer external" 
-										variant="success"
-										size="sm"
-										class={'no-underline !w-full'}
-									>
-										{buttonLabel}
-									</Button>
+									{#if data.content.Link_not_available == false && data.content.reference_url}
+										<Button
+											href={data.content.reference_url}
+											target="_blank"
+											title={buttonLabel}
+											rel="nofollow noopener noreferrer external"
+											variant="success"
+											size="sm"
+											class={'no-underline !w-full'}
+										>
+											{buttonLabel}
+										</Button>
+									{/if}
+									{#if data.content.Link_not_available == true}
+										<div class="flex flex-col">
+											<p class="text-neutral-600 text-sm m-0!">
+												{data.content.Link_Activate_Message}
+											</p>
+											<a
+												href="https://www.instagram.com/job_resultdekho/"
+												rel="nofollow noopener noreferrer external"
+												target="_blank"
+												title={'Join our Instagram'}
+												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+												>Click Here</a
+											>
+										</div>
+									{/if}
 								</td>
 							</tr>
 						</tbody>
@@ -285,7 +346,11 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 					<!-- Important Dates -->
 					<ImportantDates dates={data.content.important_dates} />
 					<!-- Application Fee -->
-					<ApplicationFees fees={data.content.application_fee} />
+					{#if data.content.application_fee}
+						<OldFees fees={data.content.application_fee} />
+					{:else}
+						<ApplicationFees fees={data.content.Fees_of_application} />
+					{/if}
 				</div>
 				<!-- Eligibility Criteria -->
 				<div class="flex flex-col mt-5">
@@ -300,6 +365,7 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
 					<RichTextRenderer content={data.content?.content} />
 					<!-- This is job banner -->
+					{console.log(data.content.banner_image?.url)}
 					{#if data.content.banner_image?.url}
 						<div class="flex justify-center items-center">
 							<img
@@ -343,79 +409,93 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 				{#if data.content.important_links}
 					<div class="prose max-w-none bg-sky-900 rounded-sm p-3 col-span-7 flex flex-col">
 						<h3 class="text-white text-center uppercase">Important Links</h3>
-						 
-							<table class="min-w-full border border-sky-900 border-collapse table-auto">
-								<thead>
-									<tr class="bg-rose-500 text-white">
-										 
-										<th
-											class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
-											>Title</th
+
+						<table class="min-w-full border border-sky-900 border-collapse table-fixed">
+							<thead>
+								<tr class="bg-rose-500 text-white">
+									<th
+										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+										>Title</th
+									>
+									<th
+										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+										>Link</th
+									>
+								</tr>
+							</thead>
+							<tbody class="divide-y">
+								{#each data.content.important_links as link, index}
+									<tr class="odd:bg-white even:bg-slate-50">
+										<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+											>{link.Label}</th
 										>
-										<th
-											class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
-											>Link</th
-										>
-									</tr>
-								</thead>
-								<tbody class="divide-y">
-									{#each data.content.important_links as link, index}
-										<tr class="odd:bg-white even:bg-slate-50">
-											<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
-												>{link.Label}</th
-											>
-											<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900">
-												{#if link.URL}
+										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900">
+											{#if link.Need_PDF_upload && link.Upload_PDF?.url}
+												<a
+													href={getMediaUrl(link.Upload_PDF.url)}
+													rel="nofollow noopener noreferrer external"
+													target="_blank"
+													title={link.Label}
+													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+													>Click Here
+												</a>
+											{:else if link.Link_message_require == false && link.URL}
+												<a
+													href={link.URL}
+													rel="nofollow noopener noreferrer external"
+													target="_blank"
+													title={link.Label}
+													class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+													>Click Here
+												</a>
+											{:else}
+												<div class="flex flex-col">
+													<p class="text-neutral-600 text-sm m-0!">{link.Link_message}</p>
 													<a
-														href={link.URL}
+														class="text-red-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
+														href="https://www.instagram.com/job_resultdekho/"
 														rel="nofollow noopener noreferrer external"
 														target="_blank"
-														title={link.Label}
-														class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
-														>Click Here
-													</a>
-												{:else}
-													<p class="whitespace-nowrap !m-0 text-semibold italic">
-														Link activate soon
-													</p>
-												{/if}
-											</td>
-										</tr>
-									{/each}
+														title="Join our Instagram">Click Here</a
+													>
+												</div>
+											{/if}
+										</td>
+									</tr>
+								{/each}
 
-									<tr class="odd:bg-white even:bg-slate-50">
-										<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
-											>Join Whatsapp Channel</th
-										>
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
-											><a
-												href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
-												target="_blank"
-												title="Join WhatsApp Channel"
-												rel="nofollow noopener noreferrer external"
-												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
-												>Click Here
-											</a></td
-										></tr
+								<tr class="odd:bg-white even:bg-slate-50">
+									<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+										>Join Whatsapp Channel</th
 									>
-									<tr class="odd:bg-white even:bg-slate-50">
-										<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
-											>Join Telegram Channel</th
-										>
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
-											><a
-												href="https://t.me/sarkari_jobresultdekho"
-												target="_blank"
-												title="Join WhatsApp Channel"
-												rel="nofollow noopener noreferrer external"
-												class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
-												>Click Here
-											</a></td
-										></tr
+									<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
+										><a
+											href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
+											target="_blank"
+											title="Join WhatsApp Channel"
+											rel="nofollow noopener noreferrer external"
+											class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
+											>Click Here
+										</a></td
+									></tr
+								>
+								<tr class="odd:bg-white even:bg-slate-50">
+									<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+										>Join Telegram Channel</th
 									>
-								</tbody>
-							</table>
-					 
+									<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
+										><a
+											href="https://t.me/sarkari_jobresultdekho"
+											target="_blank"
+											title="Join WhatsApp Channel"
+											rel="nofollow noopener noreferrer external"
+											class="text-rose-600 hover:text-indigo-600 font-semibold no-underline text-nowrap m-0"
+											>Click Here
+										</a></td
+									></tr
+								>
+							</tbody>
+						</table>
 					</div>
 				{/if}
 			</div>
@@ -456,15 +536,25 @@ const POST_OG_IMAGE = data.content.banner_image?.url ? getMediaUrl(data.content.
 		</Card.Content>
 	</Card.Root>
 	<div class="flex justify-center pt-5">
-		<Button
-			href={data.content.reference_url}
-			variant="success"
-			target="_blank"
-			rel="nofollow noopener noreferrer external"
-			title={buttonLabel}
-			class="no-underline w-60"
-			size="xl">{buttonLabel}</Button
-		>
+		{#if !data.content.Link_not_available || data.content.Link_not_available == false}
+			<Button
+				href={data.content.reference_url}
+				variant="success"
+				target="_blank"
+				rel="nofollow noopener noreferrer external"
+				title={buttonLabel}
+				class="no-underline w-60"
+				size="xl">{buttonLabel}</Button
+			>
+		{:else}
+			<Button
+				onclick={scrollToTop}
+				variant="success"
+				title="Back to top"
+				class="no-underline w-60 cursor-pointer"
+				size="xl">Go to top</Button
+			>
+		{/if}
 	</div>
 
 	<ShareButtons url={currentUrl} title={data.content.title} />

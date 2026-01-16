@@ -28,6 +28,32 @@ export interface SharedFaq extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedFees extends Struct.ComponentSchema {
+  collectionName: 'components_shared_fees';
+  info: {
+    displayName: 'Fees';
+    icon: 'priceTag';
+  };
+  attributes: {
+    Fees_Label: Schema.Attribute.String & Schema.Attribute.Required;
+    Fees_message: Schema.Attribute.String;
+    Fees_Value: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+  };
+}
+
+export interface SharedFeesOfApplication extends Struct.ComponentSchema {
+  collectionName: 'components_shared_fees_of_application_s';
+  info: {
+    displayName: 'Fees of Application ';
+    icon: 'priceTag';
+  };
+  attributes: {
+    Fees_Label: Schema.Attribute.String;
+    Fees_message: Schema.Attribute.String;
+    Fees_Value: Schema.Attribute.Decimal;
+  };
+}
+
 export interface SharedImportantDates extends Struct.ComponentSchema {
   collectionName: 'components_shared_important_dates';
   info: {
@@ -40,6 +66,19 @@ export interface SharedImportantDates extends Struct.ComponentSchema {
     correction_date: Schema.Attribute.Date;
     exam_date: Schema.Attribute.Date;
     fee_payment_last_date: Schema.Attribute.Date;
+    No_Admitcard_date: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    No_admitcard_date_message: Schema.Attribute.String;
+    No_Apply_date: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    No_Apply_date_message: Schema.Attribute.String;
+    No_Exam_date: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    No_Exam_date_message: Schema.Attribute.String;
+    No_Notification_date: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    No_notification_date_message: Schema.Attribute.String;
+    No_Result_date: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    No_Result_date_message: Schema.Attribute.String;
     result_date: Schema.Attribute.Date;
     vacancy_notification_date: Schema.Attribute.Date;
   };
@@ -52,7 +91,15 @@ export interface SharedLinkItem extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    Label: Schema.Attribute.String;
+    Label: Schema.Attribute.String & Schema.Attribute.Required;
+    Link_message: Schema.Attribute.String;
+    Link_message_require: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    Need_PDF_upload: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    Upload_PDF: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     URL: Schema.Attribute.String;
   };
 }
@@ -80,6 +127,8 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'shared.application-fee': SharedApplicationFee;
       'shared.faq': SharedFaq;
+      'shared.fees': SharedFees;
+      'shared.fees-of-application': SharedFeesOfApplication;
       'shared.important-dates': SharedImportantDates;
       'shared.link-item': SharedLinkItem;
       'shared.seo': SharedSeo;
