@@ -33,8 +33,8 @@ export default defineConfig({
     }
   ],
   server: {
-    host: '127.0.0.1', // allows access from localhost and LAN
-    port: 5173         // sets the default port
+    host: '0.0.0.0', // allows access from Docker network
+    port: 3000       // sets the default port
   }
 });
 
