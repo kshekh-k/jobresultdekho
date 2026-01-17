@@ -9,8 +9,10 @@ WORKDIR /app
 # Copy package.json and yarn.lock (if exists)
 COPY package.json yarn.lock* ./
 
+RUN yarn install
+
 # Install dependencies
-RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
+#RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
 
 # Copy app source
 COPY . .
