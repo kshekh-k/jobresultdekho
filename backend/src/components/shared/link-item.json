@@ -46,6 +46,16 @@
     },
     "Upload_PDF": {
       "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Need_PDF_upload"
+            },
+            true
+          ]
+        }
+      },
       "multiple": false,
       "allowedTypes": [
         "images",
@@ -54,7 +64,6 @@
         "audios"
       ]
     }
-    
   },
   "config": {}
 }
