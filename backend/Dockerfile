@@ -12,8 +12,8 @@ COPY package.json yarn.lock* ./
 RUN yarn install
 
 # Install dependencies
-#RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
-RUN yarn install --frozen-lockfile
+RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
+#RUN yarn install --frozen-lockfile
 
 # Copy app source
 COPY . .
