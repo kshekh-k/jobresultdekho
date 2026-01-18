@@ -12,6 +12,8 @@
 		'contact',
 		'blog',
 		'faqs',
+		'waiting-list',
+		'archive-job',
 		'photo-editor',
 		'age-calculator',
 		'image-to-pdf'
