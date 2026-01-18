@@ -35,7 +35,7 @@
 		},
 		{
 			label: 'Your visit number',
-			stat: 10000,
+			stat: formatShortNumber(10000),
 			icon: UsersRound
 		},
 		{
