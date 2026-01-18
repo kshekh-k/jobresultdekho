@@ -9,7 +9,7 @@ WORKDIR /app
 # Copy package.json and yarn.lock (if exists)
 COPY package.json yarn.lock* ./
 
-RUN yarn install
+#RUN yarn install
 
 # Install dependencies
 RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
@@ -25,4 +25,5 @@ RUN yarn build
 EXPOSE 1337
 
 # Start Strapi
-CMD ["yarn", "start"]
+#CMD ["yarn", "start"]
+CMD ["yarn", "develop"]
