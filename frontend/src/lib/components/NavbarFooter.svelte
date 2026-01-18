@@ -41,7 +41,7 @@
 						href={SITE_URL}
 						title={cat.title}
 						onclick={onNavigate}
-						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center
+						class="block py-1 lg:py-1.5 text-sm ease-in-out duration-200 text-center
 							{currentPath === '/' ? 'text-white' : 'hover:text-white text-white/60'}"
 					>
 						{cat.title}
@@ -50,17 +50,19 @@
 			{:else if cat.children?.length}
 				<li class="hidden">{cat.title}</li>
 				{#each cat.children as child}
-					<li>
-						<a
-							href={`/${child.slug}`}
-							title={child.title}
-							onclick={onNavigate}
-							class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center
+					{#if child.slug !== 'privacy-policies' && child.slug !== 'terms-conditions' && child.slug !== 'disclaimer'}
+						<li>
+							<a
+								href={`/${child.slug}`}
+								title={child.title}
+								onclick={onNavigate}
+								class="block py-1 lg:py-1.5 text-sm ease-in-out duration-200 text-center
 								{isActive(child.slug) ? 'text-white' : 'hover:text-white text-white/60'}"
-						>
-							{child.title}
-						</a>
-					</li>
+							>
+								{child.title}
+							</a>
+						</li>
+					{/if}
 				{/each}
 				<!-- NORMAL LINK -->
 			{:else}
