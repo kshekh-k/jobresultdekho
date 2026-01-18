@@ -13,12 +13,12 @@
 			const response = await fetch(`${API_URL}/jobs/stats`);
 			const data = await response.json();
 			console.log(data);
-			totalPosts = data.total || 20000;
-			departmentCount = data.departments || 500;
+			totalPosts = formatShortNumber(data.total);
+			departmentCount = formatShortNumber(data.departments);
 		} catch (error) {
 			console.error('Error fetching stats:', error);
-			totalPosts = 20000;
-			departmentCount = 500;
+			totalPosts = 'N/A';
+			departmentCount = 'N/A';
 		}
 	});
 
@@ -72,7 +72,7 @@
 									{#if item.label === 'Real Time Update'}
 										{item.stat}%
 									{:else}
-										{formatShortNumber(item.stat)}
+										{item.stat}
 									{/if}
 								</h4>
 								<p class="text-center md:text-left font-medium text-slate-600 leading-snug">
