@@ -16,9 +16,25 @@
   function getImageUrl(block:any) {
     if (!block) return '';
 
-    // Common shapes: block.url, block.src, block.data?.target?.attributes?.url
-    const path = block.url || block.src || block.data?.target?.attributes?.url || block.attributes?.url || block.attributes?.src || '';
+    // Strapi blocks image is usually in block.image.url.
+    // Keep broad fallbacks for older/custom payload shapes.
+    const path =
+      block.image?.url ||
+      block.url ||
+      block.src ||
+      block.data?.target?.attributes?.url ||
+      block.attributes?.url ||
+      block.attributes?.src ||
+      '';
     return path ? getMediaUrl(path) : '';
+  }
+
+  function getImageAlt(block: any) {
+    return block?.image?.alternativeText || block?.alt || block?.caption || block?.image?.caption || '';
+  }
+
+  function getImageCaption(block: any) {
+    return block?.caption || block?.image?.caption || '';
   }
 
   // Helper to apply inline text styles
@@ -78,9 +94,9 @@
       </a>
     {:else if block.type === 'image'}
       <figure class="my-4">
-        <img src={getImageUrl(block)} alt={block.alt || block.caption || ''} class="rounded-md shadow" />
-        {#if block.caption}
-          <figcaption class="text-sm text-gray-500 mt-1">{block.caption}</figcaption>
+        <img src={getImageUrl(block)} alt={getImageAlt(block)} class="rounded-md shadow" />
+        {#if getImageCaption(block)}
+          <figcaption class="text-sm text-gray-500 mt-1">{getImageCaption(block)}</figcaption>
         {/if}
       </figure>
 
@@ -92,4 +108,3 @@
     {/if}
   {/each}
 </div>
-
