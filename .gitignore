@@ -6,6 +6,7 @@ frontend/.svelte-kit
 /build
 frontend/build
 backend/build
+backend/public/uploads
 /.vercel
 /.netlify
 /.wrangler

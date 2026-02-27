@@ -4,7 +4,8 @@ WORKDIR /app
 
 # Copy dependency manifests and install
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+#RUN yarn install --frozen-lockfile
+RUN yarn install --network-timeout 1000000
 
 # Accept build argument from docker-compose
 ARG VITE_API_URL
