@@ -45,3 +45,5 @@ docker-compose-local*
 # Strapi
 backend/.strapi-updater.json
 backend/.strapi
+backend/public/uploads
+uploads
