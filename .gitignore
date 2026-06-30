@@ -18,6 +18,7 @@ backend/public/uploads
 /backend/node_modules
 /frontend/node_modules
 /frontend/yarn.lock
+
 /frontend/.yarn/
 /frontend/.yarnrc.yml
 
