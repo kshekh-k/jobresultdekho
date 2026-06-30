@@ -23,10 +23,14 @@
 			<!-- Logo -->
 			<div class="xl:text-xl font-bold text-blue-600">
 				<a href="{SITE_URL}" title={SITE_NAME}>
+				<picture>
+					<source srcset="/image/jobresultdekho-icon.svg" media="(max-width:767px)" />
+					<source srcset="/image/jobresultdekho-logo-white.svg" media="(min-width:768px)" />
 					<img src="/image/jobresultdekho-logo-white.svg"
-						alt="Job Result Dekho logo"	title="Job Result Dekho logo"
+						alt="Job Result Dekho logo" title="Job Result Dekho logo"
 						class="h-6 md:h-8 lg:h-10"
 					/>
+				</picture>
 				</a>
 			</div>
 
