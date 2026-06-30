@@ -44,7 +44,7 @@
 	$: filteredParents = parents.filter((p) => !excludedSlugs.includes(p.slug));
 </script>
 
-<aside class={className}>
+<aside class={className} translate="no">
 	<Card.Root class="bg-slate-300 p-0!" variant={'default'}>
 		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">
 			<div class="overflow-hidden rounded-xl">

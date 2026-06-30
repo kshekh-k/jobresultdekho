@@ -34,15 +34,15 @@
 <button
     on:click={toggle}
     title={isHindi ? 'Switch to English' : 'हिंदी में पढ़ें'}
-    class="flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold
-           bg-white/10 hover:bg-white/20 text-white transition-colors
-           border border-white/20 select-none"
-    class:opacity-50={!ready}
+    class="flex items-center gap-1 text-sm font-semibold
+            text-white transition-colors p-2 cursor-pointer  
+            select-none"
+     
     disabled={!ready}
 >
     {#if isHindi}
         <span>EN</span>
     {:else}
-        <span>हिं</span>
+        <span><span class="hidden md:inline-block">हिंदी</span><span class="md:hidden">हिं</span></span>
     {/if}
 </button>
