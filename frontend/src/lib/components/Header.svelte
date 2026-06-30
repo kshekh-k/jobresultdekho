@@ -13,7 +13,7 @@
 	let isMoreOpen = false;
 </script>
 
-<header class="w-full bg-sky-800">
+<header class="w-full bg-sky-800" translate="no">
 	<!-- 🔴 High Alerts Row -->
 	<Annoucment highAlertPosts={highAlertPosts} />
 

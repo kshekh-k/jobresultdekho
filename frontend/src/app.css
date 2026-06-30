@@ -1,7 +1,17 @@
 @import "tailwindcss";
-/* @import "cropperjs/dist/cropper.css"; */ 
+/* @import "cropperjs/dist/cropper.css"; */
 
 @import "tw-animate-css";
+
+/* Hide Google Translate injected top banner — we use our own toggle button */
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:is(.dark *));
 
