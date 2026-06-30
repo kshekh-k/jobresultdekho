@@ -27,7 +27,8 @@ docker-compose.local.yml
 .DS_Store
 Thumbs.db
 db.backup
-
+db.dump
+*.sql.gz
 # Local env files
 .env
 .env.*
