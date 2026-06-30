@@ -17,7 +17,17 @@ jobresultdekho.com {
 
 api.jobresultdekho.com {
     encode gzip
-    reverse_proxy strapi:1337
+
+    request_body {
+        max_size 100MB
+    }
+
+    reverse_proxy strapi:1337 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
 }
 
 # Optional: redirect www → non-www
