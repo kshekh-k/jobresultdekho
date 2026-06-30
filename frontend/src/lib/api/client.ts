@@ -1,4 +1,11 @@
-export const API_URL =  import.meta.env.VITE_API_URL || "https://api.jobresultdekho.com/api";
+import { browser } from '$app/environment';
+
+// Browser uses VITE_API_URL (public); SSR uses VITE_INTERNAL_API_URL to reach
+// the Strapi container by its Docker service name instead of localhost.
+export const API_URL = browser
+  ? (import.meta.env.VITE_API_URL || "https://api.jobresultdekho.com/api")
+  : (import.meta.env.VITE_INTERNAL_API_URL || import.meta.env.VITE_API_URL || "https://api.jobresultdekho.com/api");
+
 console.log("API URL:", API_URL);
 
 // GET wrapper

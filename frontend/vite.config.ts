@@ -21,8 +21,8 @@ export default defineConfig({
     }
   ],
   server: {
-    host: '127.0.0.1',  // 👈 allows access from localhost only (local dev)
-    port: 5173          // 👈 default Vite port for local dev
+    host: process.env.HOST ?? '127.0.0.1',
+    port: Number(process.env.PORT ?? 5173)
   }
 });
 

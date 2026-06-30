@@ -14,8 +14,14 @@ backend/public/uploads
 /frontend/src/routes/typing-test
 # Dependency directories
 /node_modules
+/backend/yarn.lock
 /backend/node_modules
 /frontend/node_modules
+/frontend/yarn.lock
+/frontend/.yarn/
+/frontend/.yarnrc.yml
+
+docker-compose.local.yml
 
 # OS junk
 .DS_Store
