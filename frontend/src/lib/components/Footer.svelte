@@ -30,7 +30,7 @@
 		.filter((child) => !excludedSlugs.has(child.slug));
 </script>
 
-<footer class="bg-slate-900 {!$cookieConsent ? 'pb-32 xl:pb-20' : ''}">
+<footer class="bg-slate-900 {!$cookieConsent ? 'pb-32 xl:pb-20' : ''}" translate="no">
 	<div class="max-w-screen-xl mx-auto px-4 divide-y divide-white/10">
 		<div class="py-4 flex flex-wrap items-center justify-between gap-2 flex-col md:flex-row">
 			<h4 class="xl:text-xl font-bold text-white">
