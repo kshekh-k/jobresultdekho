@@ -5,6 +5,7 @@
 	import Annoucment from './Annoucment.svelte';
 	import SearchBox from './SearchBox.svelte';
 	import Panel from '$lib/components/ui/Panel.svelte';
+	import TranslateToggle from './TranslateToggle.svelte';
 	import { SITE_NAME, SITE_URL } from '$lib/utils';
 	export let categories: any[] = [];
 	export let highAlertPosts: any[] = [];
@@ -39,6 +40,8 @@
 				<div class="flex w-40 sm:w-60 lg:w-40 xl:w-auto">
 					<SearchBox boxSize="w-full" />
 				</div>
+				<!-- Hindi / English toggle -->
+				<TranslateToggle />
 				<!-- Mobile Menu Button -->
 				<button class="lg:hidden text-white p-3" on:click={() => (isMoreOpen = true)}>
 					<Icon name={Menu} size={20} />
