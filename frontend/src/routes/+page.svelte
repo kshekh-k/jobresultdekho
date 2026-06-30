@@ -118,29 +118,26 @@ ${JSON.stringify({
 		<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
 			<Card.Content class="flex items-center justify-center text-center p-1!  ">
 				<a
-					href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
-					target="_blank"
-					rel="nofollow noopener noreferrer external"
-					title="Neha Sharma Makeup Studio"
+					href="https://jobresultdekho.com/"
+					 				 
+					 
 					class="rounded-md! sm:rounded-xl! overflow-hidden sm:block hidden"
 				>
 					<img
-						src="/image/nehasharma-makeup-studio-h.jpg"
-						alt="Neha Sharma Makeup Studio"
-						title="Neha Sharma Makeup Studio"
+						src="/image/JobResultDekho-Banner-horizontal.png"
+						alt="Job Result Dekho .Com"
+						title="Job Result Dekho .Com"
 						class="object-cover"
 					/></a
 				>
 				<a
-					href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
-					target="_blank"
-					rel="nofollow noopener noreferrer external"
-					title="Neha Sharma Makeup Studio"
+					href="https://jobresultdekho.com/"					 
+					title="Job Result Dekho .Com"
 					class="rounded-md! sm:rounded-xl! overflow-hidden block sm:hidden"
 					><img
-						src="/image/nehasharma-makeup-studio-rect.jpg"
-						alt="Neha Sharma Makeup Studio"
-						title="Neha Sharma Makeup Studio"
+						src="/image/JobResultdekho.png"
+						alt="Job Result Dekho .Com"
+						title="Job Result Dekho .Com"
 						class="object-cover"
 					/>
 				</a>

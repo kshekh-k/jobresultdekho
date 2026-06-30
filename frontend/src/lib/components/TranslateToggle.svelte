@@ -35,7 +35,7 @@
     on:click={toggle}
     title={isHindi ? 'Switch to English' : 'हिंदी में पढ़ें'}
     class="flex items-center gap-1 text-sm font-semibold
-            text-white transition-colors p-2 cursor-pointer  
+            text-white transition-colors p-2 px-3 border border-white/20 rounded cursor-pointer  
             select-none"
      
     disabled={!ready}
