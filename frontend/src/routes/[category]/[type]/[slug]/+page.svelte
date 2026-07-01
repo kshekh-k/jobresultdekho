@@ -18,6 +18,7 @@
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
 	import OldFees from '$lib/components/job/Old_Fees.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
+	import DynamicAd from '$lib/components/DynamicAd.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
 	import { page } from '$app/stores';
 	import {
@@ -373,17 +374,11 @@
 					
 					<RichTextRenderer content={data.content?.content}>
 						<svelte:fragment slot="ad">
-							<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl! not-prose">
-								<Card.Content class="flex items-center justify-center text-center p-1!">
-									<a href="https://jobresultdekho.com/" title="Job Result Dekho .Com" class="rounded-md! sm:rounded-xl! overflow-hidden sm:block hidden">
-										<img src="/image/JobResultDekho-Banner-horizontal.png" alt="Job Result Dekho .Com" title="Job Result Dekho .Com" class="object-cover" />
-									</a>
-									<a href="https://jobresultdekho.com/" title="Job Result Dekho .Com" class="rounded-md! sm:rounded-xl! overflow-hidden block sm:hidden">
-										<img src="/image/JobResultdekho.png" alt="Job Result Dekho .Com" title="Job Result Dekho .Com" class="object-cover" />
-									</a>
-								</Card.Content>
-							</Card.Root>
-						</svelte:fragment>
+						<!-- Ads Section -->
+						<div class="not-prose py-1">
+							<DynamicAd adSlug="article-mid-ad" />
+						</div>
+					</svelte:fragment>
 					</RichTextRenderer>
 
 					

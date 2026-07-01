@@ -6,6 +6,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Widget from './Widget.svelte';
 	import { SITE_URL } from '$lib/utils';
+	import DynamicAd from './DynamicAd.svelte';
 
 	let userMenus = [
 		{ title: 'Name & DOB on photo', slug: `${SITE_URL}/photo-editor`, icon: CalendarRange },
@@ -45,24 +46,17 @@
 </script>
 
 <aside class={className} translate="no">
+<!-- Ads Section Banner -->
 	<Card.Root class="bg-slate-300 p-0!" variant={'default'}>
 		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">
-			<div class="overflow-hidden rounded-xl">
-				<a
-					href="{SITE_URL}/contact" title="Job Result Dekho"
-					class="rounded-md! sm:rounded-xl! overflow-hidden block "
-				>
-					<img
-						src="/image/JobResultdekho.png"
-						alt="Job Result Dekho" title="Job Result Dekho"
-						class="object-cover"
-					/></a
-				>				 
+			<div class="overflow-hidden rounded-xl w-full">
+				<DynamicAd adSlug="sidebar-ad" />
 			</div>
 		</Card.Content>
 	</Card.Root>
 	<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
-	<!-- <Card.Root class="bg-slate-300 p-0!" variant={'default'}>
+	<!-- Special Promotion Area -->
+	 <Card.Root class="bg-slate-300 p-0!" variant={'default'}>
 		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">
 			<div class="overflow-hidden rounded-xl">
 				<video controls class="w-full h-auto">
@@ -73,6 +67,6 @@
 				</video>
 			</div>
 		</Card.Content>
-	</Card.Root> -->
+	</Card.Root> 
 	<Widget title="All Categories" menus={filteredParents} headerColor="bg-slate-900" />
 </aside>

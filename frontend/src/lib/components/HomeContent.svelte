@@ -15,6 +15,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { SITE_NAME, SITE_URL } from '$lib/utils';
+	import DynamicAd from '$lib/components/DynamicAd.svelte';
 
 	// Parent categories
 	const parents: { title: string; slug: string }[] = [];
@@ -263,26 +264,10 @@
 				/>
 
 				{#if i === 2}
+				<!-- Ads Section Banner with option Mobile and Desktop as well option for Google Adsense -->
 					<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
-						<Card.Content class="flex items-center justify-center text-center p-1!  ">
-							<a
-								href="{SITE_URL}/contact"
-								class="block rounded-md! sm:rounded-xl! overflow-hidden"
-								title={SITE_NAME}
-							>
-								<img
-									src="/image/JobResultDekho-Banner-horizontal.png"
-									alt={SITE_NAME}
-									title={SITE_NAME}
-									class="object-cover sm:block hidden"
-								/>
-								<img
-									src="/image/JobResultDekho-Banner-mobile.png"
-									alt={SITE_NAME}
-									title={SITE_NAME}
-									class="object-cover block sm:hidden"
-								/>
-							</a>
+						<Card.Content class="flex items-center justify-center text-center p-1!">
+							<DynamicAd adSlug="home-mid-ad" />
 						</Card.Content>
 					</Card.Root>
 				{/if}

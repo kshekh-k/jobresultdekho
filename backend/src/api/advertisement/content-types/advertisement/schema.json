@@ -1,0 +1,88 @@
+{
+  "kind": "collectionType",
+  "collectionName": "advertisements",
+  "info": {
+    "singularName": "advertisement",
+    "pluralName": "advertisements",
+    "displayName": "Advertisement",
+    "description": "Manage native and Google AdSense ads shown across the site"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "adType": {
+      "type": "enumeration",
+      "enum": ["native", "google_adsense"],
+      "required": true,
+      "default": "native"
+    },
+    "adLink": {
+      "type": "string",
+      "description": "Destination URL for native ads"
+    },
+    "openInNewTab": {
+      "type": "boolean",
+      "default": true
+    },
+    "imageMode": {
+      "type": "enumeration",
+      "enum": ["single", "responsive"],
+      "default": "responsive",
+      "description": "single = one image; responsive = separate desktop + mobile images"
+    },
+    "singleImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "desktopImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "mobileImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "googleAdSlot": {
+      "type": "string",
+      "description": "Google AdSense slot ID (digits only)"
+    },
+    "googleAdFormat": {
+      "type": "enumeration",
+      "enum": ["auto", "rectangle", "banner", "vertical", "horizontal"],
+      "default": "auto"
+    },
+    "googleAdClient": {
+      "type": "string",
+      "description": "Override ca-pub-XXXX if different from global client"
+    },
+    "impressions": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "clicks": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    }
+  }
+}
