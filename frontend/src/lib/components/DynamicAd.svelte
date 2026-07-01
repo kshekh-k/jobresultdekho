@@ -7,6 +7,8 @@
 
   let ad: Advertisement | null = null;
   let ready = false;
+  // Resolved in script so no TypeScript `as` assertion leaks into the template
+  const globalAdClient: string = import.meta.env.VITE_GOOGLE_AD_CLIENT ?? '';
 
   onMount(async () => {
     ad = await getAdBySlug(adSlug);
@@ -17,13 +19,8 @@
   });
 
   function initAdsense(adData: Advertisement) {
-    const clientId =
-      adData.googleAdClient ||
-      (import.meta.env.VITE_GOOGLE_AD_CLIENT as string) ||
-      '';
+    const clientId = adData.googleAdClient || globalAdClient;
     if (!clientId) return;
-
-    // Load AdSense script once globally if not already present
     if (!document.querySelector('script[src*="pagead2.googlesyndication"]')) {
       const script = document.createElement('script');
       script.async = true;
@@ -31,14 +28,10 @@
       script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
       document.head.appendChild(script);
     }
-
-    // Push the ad unit after the script has a chance to load
     setTimeout(() => {
       try {
         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      } catch (e) {
-        // silently ignore if adsbygoogle not ready yet
-      }
+      } catch (_) { /* adsbygoogle not ready yet */ }
     }, 200);
   }
 
@@ -91,7 +84,7 @@
     <ins
       class="adsbygoogle"
       style="display:block"
-      data-ad-client={ad.googleAdClient || (import.meta.env.VITE_GOOGLE_AD_CLIENT as string) || ''}
+      data-ad-client={ad.googleAdClient || globalAdClient}
       data-ad-slot={ad.googleAdSlot}
       data-ad-format={ad.googleAdFormat || 'auto'}
       data-full-width-responsive="true"

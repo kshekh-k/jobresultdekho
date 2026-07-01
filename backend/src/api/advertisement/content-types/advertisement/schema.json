@@ -33,8 +33,7 @@
       "default": "native"
     },
     "adLink": {
-      "type": "string",
-      "description": "Destination URL for native ads"
+      "type": "string"
     },
     "openInNewTab": {
       "type": "boolean",
@@ -43,8 +42,7 @@
     "imageMode": {
       "type": "enumeration",
       "enum": ["single", "responsive"],
-      "default": "responsive",
-      "description": "single = one image; responsive = separate desktop + mobile images"
+      "default": "responsive"
     },
     "singleImage": {
       "type": "media",
@@ -62,8 +60,7 @@
       "allowedTypes": ["images"]
     },
     "googleAdSlot": {
-      "type": "string",
-      "description": "Google AdSense slot ID (digits only)"
+      "type": "string"
     },
     "googleAdFormat": {
       "type": "enumeration",
@@ -71,18 +68,15 @@
       "default": "auto"
     },
     "googleAdClient": {
-      "type": "string",
-      "description": "Override ca-pub-XXXX if different from global client"
+      "type": "string"
     },
     "impressions": {
       "type": "integer",
-      "default": 0,
-      "min": 0
+      "default": 0
     },
     "clicks": {
       "type": "integer",
-      "default": 0,
-      "min": 0
+      "default": 0
     }
   }
 }
