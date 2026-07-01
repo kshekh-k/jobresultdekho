@@ -8,7 +8,7 @@
   let ad: Advertisement | null = null;
   let ready = false;
   // Resolved in script so no TypeScript `as` assertion leaks into the template
-  const globalAdClient: string = import.meta.env.VITE_GOOGLE_AD_CLIENT ?? '';
+  const globalAdClient: string = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 
   onMount(async () => {
     ad = await getAdBySlug(adSlug);
