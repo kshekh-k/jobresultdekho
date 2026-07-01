@@ -61,7 +61,7 @@
 						onclick={onNavigate}
 						class="block p-3 lg:py-1 text-base xl:text-base font-medium text-left lg:text-center ease-in-out duration-200
 							{currentPath === '/' 
-								? 'text-yellow-500 bg-white/10'
+								? 'text-yellow-500'
 								: 'text-white hover:text-yellow-500'}"
 					>
 						{cat.title}
@@ -75,7 +75,7 @@
 						onclick={() => toggleMenu(cat.title)}
 						class="flex items-center justify-between lg:justify-center w-full p-3 lg:py-1 text-base font-medium ease-in-out duration-200
 							{openMenu === cat.title
-								? 'text-yellow-500 bg-white/10'
+								? 'text-yellow-500'
 								: 'text-white hover:text-yellow-500'}"
 					>
 						{cat.title}
@@ -118,7 +118,7 @@
 						onclick={onNavigate}
 						class="block p-3 lg:p-1 text-base font-medium text-left lg:text-center ease-in-out duration-200
 							{isActive(cat.slug)
-								? 'text-yellow-500 bg-white/10'
+								? 'text-yellow-500'
 								: 'text-white hover:text-yellow-500'}"
 					>
 						{cat.title}
