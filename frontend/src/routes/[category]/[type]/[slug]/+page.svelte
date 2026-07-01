@@ -409,16 +409,9 @@
 			<h3 class="text-sky-800 text-center text-xl font-semibold uppercase mb-3">Important Links</h3>
 		</Card.Header>
 			<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5">
-				<!-- Ad Places -->
+				<!-- Ads Section Places Important Link -->
 				<div class="flex justify-center items-start col-span-4">
-					<a href="{SITE_URL}/contact" title={SITE_NAME} class="block overflow-hidden">
-						<img
-							src="/image/JobResultdekho.png"
-							alt={SITE_NAME}
-							title={SITE_NAME}
-							class="object-cover block"
-						/>
-					</a>
+					<DynamicAd adSlug="article-important-links-ad" />
 				</div>
 				{#if data.content.important_links}
 					<div class="prose max-w-none col-span-8 flex flex-col">

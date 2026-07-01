@@ -9,8 +9,9 @@ const SLUG_TO_LOCATION = {
   'home-mid-ad':    'Home - Mid Section',
   'list-mid-ad-1':  'Article List - After 4th Item',
   'list-mid-ad-2':  'Article List - After 16th Item',
-  'sidebar-ad':     'Sidebar - Top',
-  'article-mid-ad': 'Article Page - Mid Content',
+  'sidebar-ad':                   'Sidebar - Top',
+  'article-mid-ad':               'Article Page - Mid Content',
+  'article-important-links-ad':   'Article Page - Important Links',
 };
 
 function buildWhere(slug) {
