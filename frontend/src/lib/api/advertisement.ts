@@ -7,12 +7,17 @@ export interface AdImage {
   height?: number;
 }
 
+export interface AdVideo {
+  url: string;
+  mime?: string;
+}
+
 export interface Advertisement {
   id: number;
   title: string;
   slug: string;
   isActive: boolean;
-  adType: 'native' | 'google_adsense';
+  adType: 'native' | 'video' | 'google_adsense';
   // Native
   adLink?: string;
   openInNewTab?: boolean;
@@ -20,6 +25,11 @@ export interface Advertisement {
   singleImage?: AdImage;
   desktopImage?: AdImage;
   mobileImage?: AdImage;
+  // Video
+  videoFile?: AdVideo;
+  videoPoster?: AdImage;
+  videoLoop?: boolean;
+  videoMuted?: boolean;
   // AdSense
   googleAdSlot?: string;
   googleAdFormat?: 'auto' | 'rectangle' | 'banner' | 'vertical' | 'horizontal';

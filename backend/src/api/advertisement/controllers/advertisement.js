@@ -12,6 +12,7 @@ const SLUG_TO_LOCATION = {
   'sidebar-ad':                   'Sidebar - Top',
   'article-mid-ad':               'Article Page - Mid Content',
   'article-important-links-ad':   'Article Page - Important Links',
+  'sidebar-video-ad':             'Sidebar - Video Promotion',
 };
 
 function buildWhere(slug) {
@@ -27,13 +28,13 @@ module.exports = createCoreController('api::advertisement.advertisement', ({ str
     const { slug } = ctx.params;
     let entry = await strapi.db.query('api::advertisement.advertisement').findOne({
       where: { ...buildWhere(slug), isActive: true },
-      populate: { singleImage: true, desktopImage: true, mobileImage: true },
+      populate: { singleImage: true, desktopImage: true, mobileImage: true, videoFile: true, videoPoster: true },
     });
     // If not found by location, try by raw slug as fallback
     if (!entry && SLUG_TO_LOCATION[slug]) {
       entry = await strapi.db.query('api::advertisement.advertisement').findOne({
         where: { slug, isActive: true },
-        populate: { singleImage: true, desktopImage: true, mobileImage: true },
+        populate: { singleImage: true, desktopImage: true, mobileImage: true, videoFile: true, videoPoster: true },
       });
     }
     if (!entry) return ctx.notFound('Advertisement not found');

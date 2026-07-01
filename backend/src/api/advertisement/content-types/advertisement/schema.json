@@ -30,7 +30,8 @@
         "Article List - After 16th Item",
         "Sidebar - Top",
         "Article Page - Mid Content",
-        "Article Page - Important Links"
+        "Article Page - Important Links",
+        "Sidebar - Video Promotion"
       ]
     },
     "isActive": {
@@ -44,6 +45,7 @@
       "default": "native",
       "enum": [
         "native",
+        "video",
         "google_adsense"
       ]
     },
@@ -141,6 +143,44 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "videoFile": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": ["videos"]
+    },
+    "videoPoster": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "videoLoop": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "default": false
+    },
+    "videoMuted": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "default": false
     },
     "googleAdSlot": {
       "type": "string",

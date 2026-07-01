@@ -80,6 +80,18 @@
       {/if}
     </a>
 
+  {:else if ad.adType === 'video' && ad.videoFile?.url}
+    <video
+      controls
+      class="w-full h-auto rounded-xl"
+      poster={ad.videoPoster ? getMediaUrl(ad.videoPoster.url) : undefined}
+      loop={ad.videoLoop || false}
+      muted={ad.videoMuted || false}
+    >
+      <source src={getMediaUrl(ad.videoFile.url)} type={ad.videoFile.mime || 'video/mp4'} />
+      Your browser does not support HTML5 video.
+    </video>
+
   {:else if ad.adType === 'google_adsense' && ad.googleAdSlot}
     <ins
       class="adsbygoogle"

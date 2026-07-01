@@ -56,15 +56,10 @@
 	</Card.Root>
 	<Widget title="Helping Tools" menus={userMenus} headerColor="bg-slate-900" />
 	<!-- Special Promotion Area -->
-	 <Card.Root class="bg-slate-300 p-0!" variant={'default'}>
+	<Card.Root class="bg-slate-300 p-0!" variant={'default'}>
 		<Card.Content class="flex items-center justify-center text-center p-0! overflow-hidden">
-			<div class="overflow-hidden rounded-xl">
-				<video controls class="w-full h-auto">
-					<source src="/image/sir-video.webm" type="video/webm" />
-					<source src="/image/sir-video.mp4" type="video/mp4" />
-					<track kind="captions" src="/image/sir-video.vtt" srclang="en" label="English" default />
-					Your browser does not support HTML5 video.
-				</video>
+			<div class="overflow-hidden rounded-xl w-full">
+				<DynamicAd adSlug="sidebar-video-ad" />
 			</div>
 		</Card.Content>
 	</Card.Root> 
