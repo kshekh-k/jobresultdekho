@@ -6,31 +6,31 @@
 		%sveltekit.head%
 		<link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
 		<!-- Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-11C88603JN"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=%sveltekit.env.PUBLIC_GA_ID%"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
 			}
 			gtag('js', new Date());
-			gtag('config', 'G-11C88603JN');
+			gtag('config', '%sveltekit.env.PUBLIC_GA_ID%');
 		</script>
 		<!-- End Google Analytics -->
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17848597592"></script>
+		<!-- Google Ads -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=%sveltekit.env.PUBLIC_GOOGLE_ADS_ID%"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
 			}
 			gtag('js', new Date());
-			gtag('config', 'AW-17848597592');
+			gtag('config', '%sveltekit.env.PUBLIC_GOOGLE_ADS_ID%');
 		</script>
 
-		<!-- Google Adsense -->
+		<!-- Google AdSense -->
 		<script
 			async
-			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7632650685111594"
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%sveltekit.env.PUBLIC_ADSENSE_CLIENT%"
 			crossorigin="anonymous"
 		></script>
 	</head>

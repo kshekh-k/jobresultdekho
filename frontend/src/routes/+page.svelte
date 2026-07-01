@@ -24,6 +24,7 @@
 
 	import * as Card from '$lib/components/ui/card/index.js';
 	import HotPosts from '$lib/components/HotPosts.svelte';
+	import DynamicAd from '$lib/components/DynamicAd.svelte';
 	import HomeContent from '$lib/components/HomeContent.svelte';
 	import Stats from '$lib/components/Stats.svelte';
 	import Desclaimer from '$lib/components/Desclaimer.svelte';
@@ -115,32 +116,10 @@ ${JSON.stringify({
 <div class="space-y-5">
 	<HotPosts {hotPosts} />
 	<div class="max-w-screen-xl mx-auto px-3">
+	<!-- Home Page top Area for Ads Section for Mobile desktop and Google Adsense -->
 		<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
-			<Card.Content class="flex items-center justify-center text-center p-1!  ">
-				<a
-					href="https://jobresultdekho.com/"
-					 				 
-					 
-					class="rounded-md! sm:rounded-xl! overflow-hidden sm:block hidden"
-				>
-					<img
-						src="/image/JobResultDekho-Banner-horizontal.png"
-						alt="Job Result Dekho .Com"
-						title="Job Result Dekho .Com"
-						class="object-cover"
-					/></a
-				>
-				<a
-					href="https://jobresultdekho.com/"					 
-					title="Job Result Dekho .Com"
-					class="rounded-md! sm:rounded-xl! overflow-hidden block sm:hidden"
-					><img
-						src="/image/JobResultdekho.png"
-						alt="Job Result Dekho .Com"
-						title="Job Result Dekho .Com"
-						class="object-cover"
-					/>
-				</a>
+			<Card.Content class="flex items-center justify-center text-center p-1!">
+				<DynamicAd adSlug="home-top-ad" />
 			</Card.Content>
 		</Card.Root>
 	</div>
