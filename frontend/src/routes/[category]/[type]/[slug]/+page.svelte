@@ -370,7 +370,25 @@
 				</div>
 				<div class="flex flex-col mt-5">
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
-					<RichTextRenderer content={data.content?.content} />
+					
+					<RichTextRenderer content={data.content?.content}>
+						<svelte:fragment slot="ad">
+							<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl! not-prose">
+								<Card.Content class="flex items-center justify-center text-center p-1!">
+									<a href="https://jobresultdekho.com/" title="Job Result Dekho .Com" class="rounded-md! sm:rounded-xl! overflow-hidden sm:block hidden">
+										<img src="/image/JobResultDekho-Banner-horizontal.png" alt="Job Result Dekho .Com" title="Job Result Dekho .Com" class="object-cover" />
+									</a>
+									<a href="https://jobresultdekho.com/" title="Job Result Dekho .Com" class="rounded-md! sm:rounded-xl! overflow-hidden block sm:hidden">
+										<img src="/image/JobResultdekho.png" alt="Job Result Dekho .Com" title="Job Result Dekho .Com" class="object-cover" />
+									</a>
+								</Card.Content>
+							</Card.Root>
+						</svelte:fragment>
+					</RichTextRenderer>
+
+					
+					
+					
 					<!-- This is job banner -->
 					{console.log(data.content.banner_image?.url)}
 					{#if data.content.banner_image?.url}
@@ -388,6 +406,7 @@
 			</div>
 		</Card.Content>
 	</Card.Root>
+
 
 	<Card.Root class="overflow-hidden rounded-md gap-0">
 		<Card.Content class="px-3 lg:px-6">

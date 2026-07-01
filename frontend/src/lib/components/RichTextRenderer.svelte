@@ -4,7 +4,15 @@
    * Supports text formatting, headings, lists, links, and images.
    */
   export let content: any = [];
-  export let className: string  | null = null
+  export let className: string  | null = null;
+  // Optional: override which block index to insert the ad slot after.
+  // Defaults to midpoint of content; set to -1 to disable.
+  export let adAfterBlock: number | null = null;
+  $: insertAdAt = $$slots.ad
+    ? (content?.length >= 4
+        ? (adAfterBlock !== null ? adAfterBlock : Math.floor(content.length / 2))
+        : -1)
+    : -1;
   import { getMediaUrl } from '$lib/utils';
   
   // Helper to safely extract text from nested children
@@ -54,6 +62,9 @@
 
 <div class="{className}">
   {#each content as block, i}
+    {#if i === insertAdAt}
+      <slot name="ad" />
+    {/if}
     {#if block.type === 'paragraph'}
       <p>{@html block.children.map(renderText).join('')}</p>
     {:else if block.type === 'heading'}
