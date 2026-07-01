@@ -6,7 +6,6 @@
 	export let title: string = 'Menu'; // 🟢 title prop
 	export let side: 'left' | 'right' | 'top' | 'bottom' = 'left';
 	export let close: () => void = () => {};
-
 	export let siteLogo = false
 
 	// Handle Escape key to close drawer

@@ -465,6 +465,75 @@ export interface ApiAdmitCardAdmitCard extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAdvertisementAdvertisement
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'advertisements';
+  info: {
+    description: 'Manage native and Google AdSense ads shown across the site';
+    displayName: 'Advertisement';
+    pluralName: 'advertisements';
+    singularName: 'advertisement';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    adLink: Schema.Attribute.String;
+    adType: Schema.Attribute.Enumeration<
+      ['native', 'video', 'google_adsense']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'native'>;
+    clicks: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desktopImage: Schema.Attribute.Media<'images'>;
+    googleAdClient: Schema.Attribute.String;
+    googleAdFormat: Schema.Attribute.Enumeration<
+      ['auto', 'rectangle', 'banner', 'vertical', 'horizontal']
+    > &
+      Schema.Attribute.DefaultTo<'auto'>;
+    googleAdSlot: Schema.Attribute.String;
+    imageMode: Schema.Attribute.Enumeration<['single', 'responsive']>;
+    impressions: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    isActive: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::advertisement.advertisement'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.Enumeration<
+      [
+        'Home - Top Banner',
+        'Home - Mid Section',
+        'Article List - After 4th Item',
+        'Article List - After 16th Item',
+        'Sidebar - Top',
+        'Article Page - Mid Content',
+        'Article Page - Important Links',
+        'Sidebar - Video Promotion',
+      ]
+    >;
+    mobileImage: Schema.Attribute.Media<'images'>;
+    openInNewTab: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    publishedAt: Schema.Attribute.DateTime;
+    singleImage: Schema.Attribute.Media<'images'>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    videoFile: Schema.Attribute.Media<'videos'>;
+    videoLoop: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    videoMuted: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    videoPoster: Schema.Attribute.Media<'images'>;
+  };
+}
+
 export interface ApiAnswerKeyAnswerKey extends Struct.CollectionTypeSchema {
   collectionName: 'answer_keys';
   info: {
@@ -1450,6 +1519,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::admission.admission': ApiAdmissionAdmission;
       'api::admit-card.admit-card': ApiAdmitCardAdmitCard;
+      'api::advertisement.advertisement': ApiAdvertisementAdvertisement;
       'api::answer-key.answer-key': ApiAnswerKeyAnswerKey;
       'api::blog-comment.blog-comment': ApiBlogCommentBlogComment;
       'api::blog.blog': ApiBlogBlog;

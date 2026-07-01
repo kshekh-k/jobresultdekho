@@ -56,7 +56,7 @@
 	</div>
 
 	<!-- Drawer for Mobile Menu -->
-	<Panel open={isMoreOpen} close={() => (isMoreOpen = false)} side="left" title="Menu">
+	<Panel open={isMoreOpen} close={() => (isMoreOpen = false)} side="left" title="Menu" siteLogo={true}>
 		<Navbar categories={categories} onNavigate={() => (isMoreOpen = false)} />
 	</Panel>
 </header>
