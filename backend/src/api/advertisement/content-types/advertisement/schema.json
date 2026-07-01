@@ -21,54 +21,172 @@
       "targetField": "title",
       "required": true
     },
+    "location": {
+      "type": "enumeration",
+      "enum": [
+        "Home - Top Banner",
+        "Home - Mid Section",
+        "Article List - After 4th Item",
+        "Article List - After 16th Item",
+        "Sidebar - Top",
+        "Article Page - Mid Content"
+      ]
+    },
     "isActive": {
       "type": "boolean",
-      "default": true,
-      "required": true
+      "required": true,
+      "default": true
     },
     "adType": {
       "type": "enumeration",
-      "enum": ["native", "google_adsense"],
       "required": true,
-      "default": "native"
+      "default": "native",
+      "enum": [
+        "native",
+        "google_adsense"
+      ]
     },
     "adLink": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "native"
+          ]
+        }
+      }
     },
     "openInNewTab": {
       "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "native"
+          ]
+        }
+      },
       "default": true
     },
     "imageMode": {
       "type": "enumeration",
-      "enum": ["single", "responsive"],
-      "default": "responsive"
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "native"
+          ]
+        }
+      },
+      "enum": [
+        "single",
+        "responsive"
+      ]
     },
     "singleImage": {
       "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "imageMode"
+            },
+            "single"
+          ]
+        }
+      },
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "desktopImage": {
       "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "imageMode"
+            },
+            "responsive"
+          ]
+        }
+      },
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "mobileImage": {
       "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "imageMode"
+            },
+            "responsive"
+          ]
+        }
+      },
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "googleAdSlot": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "google_adsense"
+          ]
+        }
+      }
     },
     "googleAdFormat": {
       "type": "enumeration",
-      "enum": ["auto", "rectangle", "banner", "vertical", "horizontal"],
-      "default": "auto"
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "google_adsense"
+          ]
+        }
+      },
+      "default": "auto",
+      "enum": [
+        "auto",
+        "rectangle",
+        "banner",
+        "vertical",
+        "horizontal"
+      ]
     },
     "googleAdClient": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "google_adsense"
+          ]
+        }
+      }
     },
     "impressions": {
       "type": "integer",
