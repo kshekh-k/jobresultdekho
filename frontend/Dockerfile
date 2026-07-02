@@ -2,38 +2,36 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy dependency manifests and install
 COPY package.json yarn.lock ./
-#RUN yarn install --frozen-lockfile
 RUN yarn install --network-timeout 1000000
 
-# Accept build argument from docker-compose
+# VITE_* vars are embedded by Vite at build time
 ARG VITE_API_URL
-# This ENV line ensures Vite sees the value during the build step
 ENV VITE_API_URL=${VITE_API_URL}
 
-# Copy all source files
 COPY . .
-
-# Print for debugging (optional)
-RUN echo "Building with VITE_API_URL=$VITE_API_URL"
-
-# Build your SvelteKit app (Vite will embed the value)
 RUN yarn build
-
 
 # ---------- Stage 2: Runtime ----------
 FROM node:20-alpine
 WORKDIR /app
 
-# Copy the built app and production dependencies only
+# Copy built output and install only production deps
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/yarn.lock ./
 
-RUN yarn install --production --frozen-lockfile
+RUN yarn install --production --frozen-lockfile \
+    && chown -R node:node /app
+
+# PUBLIC_* vars are resolved at request-time by the Node adapter;
+# pass them via docker-compose environment — no need to embed at build time.
+
+USER node
 
 EXPOSE 3000
 
-# Run the built app
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+  CMD wget -qO /dev/null http://localhost:3000 || exit 1
+
 CMD ["node", "build/index.js"]
