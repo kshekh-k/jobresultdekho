@@ -25,6 +25,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
 
   redis:
     image: redis:7-alpine
@@ -55,6 +56,7 @@ services:
       retries: 5
 
   strapi:
+    container_name: xyresults-strapi-1
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -74,7 +76,8 @@ services:
     # Bind to loopback only — Caddy on the same host proxies inward; never expose to 0.0.0.0
     ports:
       - "127.0.0.1:${STRAPI_PORT}:1337"
-    volumes:
+      - URL=https://api.jobresultdekho.com
+     volumes:
       - ./uploads:/app/public/uploads
     depends_on:
       postgres:
@@ -103,11 +106,12 @@ services:
       retries: 3
 
   frontend:
+    container_name: xyresults-frontend-1
     build:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_URL=${API_URL}
+        - VITE_API_URL=https://api.jobresultdekho.com
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - VITE_API_URL=${API_URL}
