@@ -3,7 +3,9 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN yarn install --network-timeout 1000000
+RUN yarn config set registry https://registry.npmjs.org \
+ && yarn config set network-timeout 600000 -g \
+ && yarn install --frozen-lockfile --prefer-offline
 
 # VITE_* vars are embedded by Vite at build time
 ARG VITE_API_URL
@@ -21,8 +23,10 @@ COPY --from=builder /app/build ./build
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/yarn.lock ./
 
-RUN yarn install --production --frozen-lockfile \
-    && chown -R node:node /app
+RUN yarn config set network-timeout 600000 -g \
+ && yarn config set registry https://registry.npmjs.org \
+ && yarn install --production --frozen-lockfile \
+ && chown -R node:node .
 
 # PUBLIC_* vars are resolved at request-time by the Node adapter;
 # pass them via docker-compose environment — no need to embed at build time.
