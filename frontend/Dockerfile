@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn config set registry https://registry.npmjs.org \
  && yarn config set network-timeout 600000 -g \
- && yarn install --frozen-lockfile --prefer-offline
+ && yarn install --prefer-offline
 
 # VITE_* vars are embedded by Vite at build time
 ARG VITE_API_URL
@@ -25,7 +25,7 @@ COPY --from=builder /app/yarn.lock ./
 
 RUN yarn config set network-timeout 600000 -g \
  && yarn config set registry https://registry.npmjs.org \
- && yarn install --production --frozen-lockfile \
+ && yarn install --production \
  && chown -R node:node .
 
 # PUBLIC_* vars are resolved at request-time by the Node adapter;
