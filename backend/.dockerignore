@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.*
+.strapi
+dist
+build
+.cache
+coverage
+*.log
+.git
+.gitignore
+README.md
