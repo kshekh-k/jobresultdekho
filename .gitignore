@@ -21,6 +21,7 @@ backend/public/uploads
 
 /frontend/.yarn/
 /frontend/.yarnrc.yml
+/backend/.yarn/
 
 docker-compose.local.yml
 
