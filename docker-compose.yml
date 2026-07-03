@@ -94,13 +94,13 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    healthcheck:
-      # /admin is a reliable Strapi endpoint; /_health does not exist by default
-      test: ["CMD-SHELL", "wget -qO /dev/null http://localhost:1337/admin || exit 1"]
-      interval: 30s
-      timeout: 10s
-      start_period: 60s
-      retries: 3
+    # healthcheck:
+    #   # /admin is a reliable Strapi endpoint; /_health does not exist by default
+    #   test: ["CMD-SHELL", "wget -qO /dev/null http://localhost:1337/admin || exit 1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   start_period: 60s
+    #   retries: 3
 
   frontend:
     build:
@@ -134,9 +134,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    depends_on:
-      strapi:
-        condition: service_healthy
+    # depends_on:
+    #   - strapi 
 
   # caddy:
   #   image: caddy:2.8-alpine
@@ -163,5 +162,5 @@ networks:
 volumes:
   postgres_data:
   redis_data:
-  caddy_data:
-  caddy_config:
+  # caddy_data:
+  # caddy_config:
