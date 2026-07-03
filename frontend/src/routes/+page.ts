@@ -30,7 +30,7 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
 		getLatestResults(fetch),
 		getLatestSyllabus(fetch),
 		getCategoryTree(fetch),
-	]).then(results => results.map(r => (r.status === 'fulfilled' ? r.value : null)));
+	]).then(results => results.map(r => (r.status === 'fulfilled' ? (r.value ?? []) : [])));
 
 	return {
 		latestAdmissions,
