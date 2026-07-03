@@ -3,34 +3,45 @@ import type { PageLoad } from './$types';
 import { getLatestAdmissions } from '$lib/api/admission';
 import { getLatestAdmitCards } from '$lib/api/admit-card';
 import { getLatestAnswerKeys } from '$lib/api/answer-key';
-import { getHotPosts } from '$lib/api/job';
-import { getHighAlertPosts } from '$lib/api/job';
-import { getLatestJobs } from '$lib/api/job';
+import { getHotPosts, getHighAlertPosts, getLatestJobs } from '$lib/api/job';
 import { getLatestResults } from '$lib/api/result';
 import { getLatestSyllabus } from '$lib/api/syllabus';
 import { getCategoryTree } from '$lib/api/category';
 
 export async function load({ fetch }: { fetch: typeof window.fetch }) {
-	const latestAdmissions = await getLatestAdmissions(fetch);
-	const latestAdmitCards = await getLatestAdmitCards(fetch);
-	const latestAnswerKeys = await getLatestAnswerKeys(fetch);
-	const hotPosts = await getHotPosts(fetch);
-	const highAlertPosts = await getHighAlertPosts(fetch);
-  	const latestJobs = await getLatestJobs(fetch);
-	const latestResults = await getLatestResults(fetch);
-	const latestSyllabus = await getLatestSyllabus(fetch);
-	const categoryTree = await getCategoryTree(fetch);
-	
-  	return { 
-		latestAdmissions, 
-		latestAdmitCards, 
+	// Run all fetches in parallel; a failed API call returns null instead of throwing.
+	const [
+		latestAdmissions,
+		latestAdmitCards,
 		latestAnswerKeys,
 		hotPosts,
 		highAlertPosts,
-		latestJobs, 
-		latestResults, 
+		latestJobs,
+		latestResults,
 		latestSyllabus,
-		categoryTree
+		categoryTree,
+	] = await Promise.allSettled([
+		getLatestAdmissions(fetch),
+		getLatestAdmitCards(fetch),
+		getLatestAnswerKeys(fetch),
+		getHotPosts(fetch),
+		getHighAlertPosts(fetch),
+		getLatestJobs(fetch),
+		getLatestResults(fetch),
+		getLatestSyllabus(fetch),
+		getCategoryTree(fetch),
+	]).then(results => results.map(r => (r.status === 'fulfilled' ? r.value : null)));
+
+	return {
+		latestAdmissions,
+		latestAdmitCards,
+		latestAnswerKeys,
+		hotPosts,
+		highAlertPosts,
+		latestJobs,
+		latestResults,
+		latestSyllabus,
+		categoryTree,
 	};
 }
 
