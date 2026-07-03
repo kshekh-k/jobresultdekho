@@ -2,7 +2,21 @@ module.exports = [
     'strapi::logger',
     'strapi::errors',
     'strapi::security',
-    'strapi::cors',
+    {
+    name: 'strapi::cors',
+    config: {
+      origin: [
+        env('CLIENT_URL', 'http://localhost:3000'),
+        env('ADMIN_URL', 'http://localhost:1337'),
+        'http://localhost:3000',
+        'https://jobresultdekho.com',
+        'https://www.jobresultdekho.com',
+        'https://api.jobresultdekho.com',
+      ],
+      headers: '*',
+      credentials: true,
+    },
+  },    
     'strapi::poweredBy',
     'strapi::query',
     {
