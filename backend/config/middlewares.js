@@ -1,8 +1,8 @@
-module.exports = [
-    'strapi::logger',
-    'strapi::errors',
-    'strapi::security',
-    {
+module.exports = ({ env }) => [
+  'strapi::logger',
+  'strapi::errors',
+  'strapi::security',
+  {
     name: 'strapi::cors',
     config: {
       origin: [
@@ -16,21 +16,21 @@ module.exports = [
       headers: '*',
       credentials: true,
     },
-  },    
-    'strapi::poweredBy',
-    'strapi::query',
-    {
-        name: 'strapi::body',
-        config: {
-            formLimit: '256mb',
-            jsonLimit: '256mb',
-            textLimit: '256mb',
-            formidable: {
-                maxFileSize: 200 * 1024 * 1024,
-            },
-        },
+  },
+  'strapi::poweredBy',
+  'strapi::query',
+  {
+    name: 'strapi::body',
+    config: {
+      formLimit: '256mb',
+      jsonLimit: '256mb',
+      textLimit: '256mb',
+      formidable: {
+        maxFileSize: 200 * 1024 * 1024,
+      },
     },
-    'strapi::session',
-    'strapi::favicon',
-    'strapi::public',
+  },
+  'strapi::session',
+  'strapi::favicon',
+  'strapi::public',
 ];
