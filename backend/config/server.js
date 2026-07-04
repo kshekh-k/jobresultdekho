@@ -1,7 +1,7 @@
 module.exports = ({ env }) => ({
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', 1337),
-  url: 'https://api.jobresultdekho.com', // Strapi 5 base URL
+  url: env('URL', `http://localhost:${env.int('PORT', 1337)}`), // Strapi 5 base URL
   proxy: {
     koa: true,
   },
