@@ -11,6 +11,12 @@ RUN yarn config set registry https://registry.npmjs.org \
 ARG VITE_API_URL
 ENV VITE_API_URL=${VITE_API_URL}
 
+ARG VITE_STRAPI_URL
+ENV VITE_STRAPI_URL=${VITE_STRAPI_URL}
+
+ARG VITE_SITE_URL
+ENV VITE_SITE_URL=${VITE_SITE_URL}
+
 COPY . .
 RUN yarn build
 

@@ -109,10 +109,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_URL=https://api.jobresultdekho.com
+        - VITE_API_URL=${API_URL}
+        - VITE_STRAPI_URL=https://api.jobresultdekho.com
+        - VITE_SITE_URL=https://jobresultdekho.com
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - VITE_API_URL=${API_URL}
+      - VITE_STRAPI_URL=https://api.jobresultdekho.com
+      - VITE_SITE_URL=https://jobresultdekho.com
       # PUBLIC_* vars are resolved at request-time by the Node adapter (not build-time)
       - PUBLIC_GA_ID=${PUBLIC_GA_ID}
       - PUBLIC_GOOGLE_ADS_ID=${PUBLIC_GOOGLE_ADS_ID}
