@@ -16,6 +16,16 @@ function escapeHtml(str = '') {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+// Strapi Blocks (rich text) fields are arrays of block nodes, not plain strings.
+function blocksToText(value) {
+  if (typeof value === 'string') return value;
+  if (!Array.isArray(value)) return '';
+  return value
+    .map((block) => (block.children || []).map((child) => child.text || '').join(''))
+    .filter(Boolean)
+    .join('\n');
+}
+
 // First publish vs republish-after-edit, inferred from timestamp proximity
 // (publish doesn't tell us this directly — entry only carries publishedAt/createdAt).
 function isFirstPublish(entry) {
@@ -28,7 +38,7 @@ function formatTelegramPost(uid, entry) {
   const label = LABELS[uid] || 'Post';
   const heading = isFirstPublish(entry) ? `New ${label} Posted` : `${label} Updated`;
   const emoji = isFirstPublish(entry) ? '🆕' : '🔄';
-  const description = entry.short_description || entry.description;
+  const description = blocksToText(entry.short_description || entry.description);
   const url = entry.slug ? `${SITE_URL}/${entry.slug}` : SITE_URL;
 
   let text = `${emoji} <b>${heading}</b>\n\n<b>${escapeHtml(entry.title)}</b>`;

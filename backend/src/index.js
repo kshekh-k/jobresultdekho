@@ -23,7 +23,7 @@ module.exports = {
         return result;
       }
 
-      const entry = Array.isArray(result) ? result[0] : result;
+      const entry = Array.isArray(result) ? result[0] : result?.entries ? result.entries[0] : result;
       if (!entry?.publishedAt) return result;
 
       sendTelegramMessage(formatTelegramPost(context.uid, entry)).catch((err) => {
