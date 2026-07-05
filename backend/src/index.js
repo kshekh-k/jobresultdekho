@@ -1,18 +1,34 @@
 'use strict';
 
 const bootstrap = require('./bootstrap');
-const { sendTelegramMessage } = require('./utils/telegram');
+const { sendTelegramMessage, sendTelegramPhoto } = require('./utils/telegram');
 const { formatTelegramPost } = require('./utils/formatTelegramPost');
+const { sendWhatsappMessage, sendWhatsappImage } = require('./utils/whapi');
+const { formatWhatsappPost } = require('./utils/formatWhatsappPost');
+const { resolvePostMedia } = require('./utils/postMedia');
+const TRACKED_UIDS = require('./utils/trackedContentTypes');
 
-const TRACKED_UIDS = [
-  'api::job.job',
-  'api::result.result',
-  'api::admit-card.admit-card',
-  'api::answer-key.answer-key',
-  'api::admission.admission',
-  'api::syllabus.syllabus',
-  'api::blog.blog',
-];
+async function notifyTelegram(text, imageUrl) {
+  if (imageUrl) {
+    try {
+      return await sendTelegramPhoto(imageUrl, text);
+    } catch (err) {
+      strapi.log.error(`Telegram photo send failed, falling back to text: ${err.message}`);
+    }
+  }
+  return sendTelegramMessage(text);
+}
+
+async function notifyWhatsapp(text, imageUrl) {
+  if (imageUrl) {
+    try {
+      return await sendWhatsappImage(imageUrl, text);
+    } catch (err) {
+      strapi.log.error(`WhatsApp image send failed, falling back to text: ${err.message}`);
+    }
+  }
+  return sendWhatsappMessage(text);
+}
 
 module.exports = {
   register({ strapi }) {
@@ -26,8 +42,21 @@ module.exports = {
       const entry = Array.isArray(result) ? result[0] : result?.entries ? result.entries[0] : result;
       if (!entry?.publishedAt) return result;
 
-      sendTelegramMessage(formatTelegramPost(context.uid, entry)).catch((err) => {
+      // Resolved inline (not deferred) — the document service's DB transaction
+      // is gone by the next tick, so this lookup can't happen inside a .then().
+      const { imageUrl, departmentName } = await resolvePostMedia(context.uid, entry).catch((err) => {
+        strapi.log.error(`Post media resolve failed: ${err.message}`);
+        return { imageUrl: null, departmentName: null };
+      });
+
+      const telegramText = formatTelegramPost(context.uid, entry, departmentName);
+      notifyTelegram(telegramText, imageUrl).catch((err) => {
         strapi.log.error(`Telegram notify failed: ${err.message}`);
+      });
+
+      const whatsappText = formatWhatsappPost(context.uid, entry, departmentName);
+      notifyWhatsapp(whatsappText, imageUrl).catch((err) => {
+        strapi.log.error(`WhatsApp notify failed: ${err.message}`);
       });
 
       return result;
