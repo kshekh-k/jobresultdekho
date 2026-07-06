@@ -1,6 +1,6 @@
 'use strict';
 
-const { buildPostFields } = require('./postFields');
+const { buildPostFields, buildPostPath } = require('./postFields');
 
 const SITE_URL = process.env.TELEGRAM_SITE_URL || 'https://jobresultdekho.com';
 
@@ -10,7 +10,8 @@ function escapeHtml(str = '') {
 
 function formatTelegramPost(uid, entry, departmentName) {
   const fields = buildPostFields(uid, entry, departmentName);
-  const url = entry.slug ? `${SITE_URL}/${entry.slug}` : SITE_URL;
+  const path = buildPostPath(uid, entry.slug);
+  const url = path ? `${SITE_URL}/${path}` : SITE_URL;
 
   let text = `🔔 <b>${escapeHtml(fields.typeLabel)}</b>\n\n`;
   text += `<b>Title:</b> ${escapeHtml(fields.title)}\n`;

@@ -12,6 +12,25 @@ const TYPE_LABELS = {
   'api::blog.blog': 'Blog Update',
 };
 
+// Maps each content type to the frontend's /{category}/{type}/{slug} route
+// segments (matches frontend/src/routes/[category]/[type]/[slug]). Blog
+// posts use a flat /blog/{slug} route instead.
+const URL_PATH_SEGMENTS = {
+  'api::job.job': 'latest-job/jobs',
+  'api::admit-card.admit-card': 'admit-card/admit-cards',
+  'api::result.result': 'result/results',
+  'api::answer-key.answer-key': 'answer-key/answer-keys',
+  'api::admission.admission': 'admission/admissions',
+  'api::syllabus.syllabus': 'syllabus/syllabus',
+  'api::blog.blog': 'blog',
+};
+
+function buildPostPath(uid, slug) {
+  if (!slug) return '';
+  const segment = URL_PATH_SEGMENTS[uid];
+  return segment ? `${segment}/${slug}` : slug;
+}
+
 function formatDate(value) {
   if (!value) return null;
   const date = new Date(value);
@@ -34,4 +53,4 @@ function buildPostFields(uid, entry, departmentName) {
   };
 }
 
-module.exports = { buildPostFields };
+module.exports = { buildPostFields, buildPostPath };
