@@ -44,7 +44,7 @@
 
 		<div class="flex flex-col-reverse md:flex-row justify-between items-center gap-1 py-2">
 			<p class="text-sm text-white/60 py-1">
-				JobResultDekho.com &copy; {new Date().getFullYear()} | All rights reserved
+				JobResultDekho.com &copy; {new Date().getFullYear()} | All rights reserved | A Unit of RPNews Network Pvt. Ltd.
 			</p>
 			<div class="flex flex-wrap gap-x-2 gap-y-1 text-sm justify-center">
 				{#if childCategories.length > 0}
