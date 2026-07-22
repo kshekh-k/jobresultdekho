@@ -1,6 +1,6 @@
-# XYResults Project
+# JobResultDekho Project
 
-A centralized Docker setup for XYResults with a Svelte frontend and Strapi backend.
+A centralised Docker setup for XYResults with a Svelte frontend and Strapi backend.
 
 ## Architecture
 
