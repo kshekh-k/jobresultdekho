@@ -32,7 +32,7 @@ A centralised Docker setup for XYResults with a Svelte frontend and Strapi backe
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd xyresults
+   cd jobresultdekho
    ```
 
 2. Start the application:
