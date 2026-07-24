@@ -9,7 +9,7 @@
 	export let align: string | undefined = "text-center";
 	export let className: string | undefined = "";
 	export let backgroundImage: string | undefined = "";
- 
+ let fullYear = new Date().getFullYear();
 </script>
 
 <section class={`mx-auto ${maxWidth} ${className}`}>
@@ -19,7 +19,7 @@
 			? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;`
 			: ""}
 	>
-		<h1 class="text-3xl font-bold">{heading}</h1>
+		<h1 class="text-3xl font-bold">{heading} {fullYear}</h1>
 		<slot />
 	</div>
 </section>

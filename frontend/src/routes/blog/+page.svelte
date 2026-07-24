@@ -28,25 +28,28 @@
 		// optional: scroll to top
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
+	let fullYear = new Date().getFullYear();
+	let title = `Sarkari Result ${fullYear}: Latest Govt Jobs, Sarkari Naukri, Admit Card & Results.  - ${SITE_NAME}`
+	let description = `Read latest blog posts on sarkari naukri, govt jobs preparation, exam tips, career guidance, admit card, results and admission updates at ${SITE_NAME}`
 </script>
 
 <svelte:head>
 	 
 
-<title>Blog - {SITE_NAME}</title>
+<title>{title}</title>
  
 	<meta
 		name="description"
-		content="Explore the {SITE_NAME} blog for daily government job updates, recruitment news, exam alerts, results, admit cards, and career guidance trusted by job seekers across India."
+		content={description}
 	/>
 <meta name="keywords" content="government jobs, sarkari naukri, latest government job updates, job result dekho, recruitment notifications, SSC jobs, UPSC jobs, railway jobs, exam results, admit card updates">
 	<meta property="og:site_name" content={SITE_NAME} />
 	<link rel="canonical" href={`${SITE_URL}/blog`} />
 
-	<meta property="og:title" content="Blog - {SITE_NAME}" />
+	<meta property="og:title" content="{title}" />
 	<meta
 		property="og:description"
-		content="Explore the {SITE_NAME} blog for daily government job updates, recruitment news, exam alerts, results, admit cards, and career guidance trusted by job seekers across India."
+		content={description}
 	/>
 	<meta property="og:url" content="{SITE_URL}/blog" />
 	<meta property="og:image" content={OG_IMAGE} />
@@ -63,7 +66,7 @@ ${JSON.stringify({
 	headline: `Blog - ${SITE_NAME}`,
 	url: `${SITE_URL}/contact`,
 	image: OG_IMAGE,
-	description: `Explore the ${SITE_NAME} blog for daily government job updates, recruitment news, exam alerts, results, admit cards, and career guidance trusted by job seekers across India.`,
+	description: description,
 	isPartOf: {
 		'@type': 'WebSite',
 		'@id': `${SITE_URL}/#website`,

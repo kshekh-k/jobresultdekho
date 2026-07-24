@@ -145,34 +145,34 @@
 	// Dynamic SEO Title
 	const pageTitle = $derived(
 		job
-			? `Latest Govt Jobs ${fullYear} - All Government Job Notifications`
+			? `Latest Govt Jobs ${fullYear} – Apply Online for Sarkari Naukri `
 			: admitcard
-				? `Admit Card ${fullYear} - Download Govt Exam Hall Tickets`
+				? `Admit Card ${fullYear} – Download Sarkari Exam Admit card`
 				: result
-					? `Sarkari Result ${fullYear} - Latest Government Exam Results`
+					? ` Sarkari Result Today ${fullYear} – Check Latest Govt Exam Results `
 					: answerkey
-						? `Answer Key ${fullYear} - Official Govt Exam Solutions`
+						? `Latest Answer Key ${fullYear} | Govt Exam Answer Key | Sarkari Answer Key - Job Result Dekho`
 						: syllabus
 							? `Govt Exam Syllabus ${fullYear} - SSC, Railway, Police`
 							: admission
-								? `Admissions in India ${fullYear} - Apply Online`
+								? `Admission Form ${fullYear} - Online Application, College & University Admission | JobResultDekho`
 								: `Latest Govt Updates ${fullYear}`
 	);
 
 	// Dynamic Description
 	const pageDesc = $derived(
 		job
-			? `Find the latest Government Jobs ${fullYear} and Sarkari Naukri updates including SSC, Railway, UPSC, Banking, Teaching, Police, Defence, PSU and State Govt Job vacancies. Get official notifications, eligibility details, important dates and apply online links in one place.`
+			? `Find latest govt jobs ${fullYear} and apply online for sarkari naukri. Get daily updates on new vacancy, recruitment notification and job alerts in India.`
 			: admitcard
-				? `Download Admit Cards ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Check exam dates, shift timings, centres, roll number details and access direct official links easily.`
+				? `Download Admit Card ${fullYear} for all govt exams. Check exam date, sarkari admit card updates and get direct download links for all exams. `
 				: result
-					? `Check the latest Sarkari Results ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State Govt exams. View result updates, merit lists, scorecards, cut-off marks and official notifications instantly.`
+					? `Check Sarkari Result Today ${fullYear} for all govt exams. Get latest updates on exam results, scorecard, merit list and direct result links online. `
 					: answerkey
-						? `Get official Answer Keys ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and other Sarkari Exams. Download PDFs, verify answers, estimate scores and track objections through official sources.`
+						? `Check latest govt exam answer key ${fullYear} including SSC, UPSC, रेलवे, बैंक और अन्य परीक्षाओं की official answer key. Download PDF and verify your answers easily at Job Result Dekho. `
 						: syllabus
 							? `Download updated Sarkari Exam Syllabus ${fullYear} for SSC, Railway, Banking, Police, Defence, UPSC and State-level Govt exams. Access subject-wise syllabus PDFs, exam patterns and preparation guidance.`
 							: admission
-								? `Get the latest Admission updates ${fullYear} for schools, colleges, universities and Govt institutions. Check entrance exams, eligibility, fees, counselling details, Sarkari forms and online application links.`
+								? `Get latest Admission Form ${fullYear} updates for colleges, universities & entrance exams. Apply online for admission, check eligibility, last date and admission notifications at JobResultDekho. `
 								: `Stay updated with the latest Sarkari Naukri, Govt Jobs, Sarkari Result, Admit Cards, Answer Keys, Syllabus and Admission notifications ${fullYear}. Get verified updates, official links and timely information.`
 	);
 
@@ -265,8 +265,8 @@
 	{#if data.category.description}
 		<Card.Root class="overflow-hidden rounded-md gap-5 ">
 			<Card.Content>
-				<p class="text-slate-600">{data.category.description}</p>
-				<p>pageTitle: {pageTitle}</p>
+				<h2>{pageTitle}</h2>
+				<p class="text-slate-600">{data.category.description}</p>				
 			</Card.Content>
 		</Card.Root>
 	{/if}
