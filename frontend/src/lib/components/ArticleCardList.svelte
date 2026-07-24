@@ -6,6 +6,7 @@
 	import Icon from './ui/Icon.svelte';
 	import Button from './ui/button/button.svelte';
 	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
+	import DynamicAd from './DynamicAd.svelte';
 
 	export let title: string | undefined;
 	export let headerColor: string = 'bg-sky-500';
@@ -172,54 +173,16 @@
 				</div>
 				<!-- ✅ Insert AD after every 10 items -->
 				{#if index === 3}
-					<div class="p-2 sm:px-4 bg-white text-center text-sm text-slate-600">
-						<!-- Your Ad / Banner / Script -->
-						<a
-							class="block rounded-md! sm:rounded-xl! overflow-hidden"
-							href="https://www.instagram.com/nehasharmamakeupstudio?igsh=MWh2bTB6dWp0cjBq"
-							target="_blank"
-							rel="nofollow noopener noreferrer external"
-							title="Neha Sharma Makeup Studio"
-						>
-							<img
-								src="/image/nehasharma-makeup-studio-h.jpg"
-								alt="Neha Sharma Makeup Studio"
-								title="Neha Sharma Makeup Studio"
-								class="object-cover sm:block hidden"
-							/>
-							<img
-								src="/image/nehasharma-makeup-studio-rect.jpg"
-								alt="Neha Sharma Makeup Studio"
-								title="Neha Sharma Makeup Studio"
-								class="object-cover block sm:hidden"
-							/>
-						</a>
+					<div class="p-2 sm:px-4 bg-white text-center">
+						<!-- Your Ads Section / Banner / Script Ad for Mobile desktop and Google Adsense-->
+						<DynamicAd adSlug="list-mid-ad-1" />
 					</div>
 				{/if}
 
 				{#if index === 15}
-					<div class="p-2 sm:px-4 bg-white text-center text-sm text-slate-600">
+					<div class="p-2 sm:px-4 bg-white text-center">
 						<!-- Your Ad / Banner / Script -->
-						<a
-							class="block rounded-md! sm:rounded-xl! overflow-hidden"
-							href="/contact"
-							target="_blank"
-							rel="internal"
-							title="Job Result Dekho .com"
-						>
-							<img
-								src="/image/JobResultDekho-Banner-horizontal.png"
-								alt="Job Result Dekho .com"
-								title="Job Result Dekho .com"
-								class="object-cover sm:block hidden"
-							/>
-							<img
-								src="/image/JobResultDekho-Banner-mobile.png"
-								alt="Job Result Dekho .com"
-								title="Job Result Dekho .com"
-								class="object-cover block sm:hidden"
-							/>
-						</a>
+						<DynamicAd adSlug="list-mid-ad-2" />
 					</div>
 				{/if}
 			{/each}

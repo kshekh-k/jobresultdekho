@@ -11,17 +11,29 @@
     setContext('categoryTree', data.categories);
 
     onMount(() => {
+        // reCAPTCHA
         const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
         if (!siteKey) {
             console.warn('Missing VITE_RECAPTCHA_SITE_KEY');
-            return;
+        } else {
+            const recaptcha = document.createElement('script');
+            recaptcha.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+            recaptcha.async = true;
+            recaptcha.defer = true;
+            document.head.appendChild(recaptcha);
         }
 
-        const script = document.createElement('script');
-        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
+        // Google Translate (English → Hindi)
+        (window as any).googleTranslateInit = () => {
+            new (window as any).google.translate.TranslateElement(
+                { pageLanguage: 'en', includedLanguages: 'hi', autoDisplay: false },
+                'google_translate_element'
+            );
+        };
+        const translate = document.createElement('script');
+        translate.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateInit';
+        translate.async = true;
+        document.head.appendChild(translate);
     });
 </script>
 

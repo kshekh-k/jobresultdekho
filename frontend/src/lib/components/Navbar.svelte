@@ -49,7 +49,7 @@
 <!-- ========================= -->
 <nav class="flex-1 flex justify-center">
 	<ul
-		class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center lg:gap-1 xl:gap-5 flex-1 divide-y divide-white/10 lg:divide-y-0"
+		class="flex flex-col lg:flex-row items-stretch lg:items-center lg:justify-center lg:gap-1 xl:gap-3 flex-1 divide-y divide-white/10 lg:divide-y-0"
 	>
 		{#each categories as cat}
 			<!-- HOME -->
@@ -59,10 +59,10 @@
 						href={SITE_URL} 
 						title={cat.title}
 						onclick={onNavigate}
-						class="block p-3 lg:py-1 md:px-2 text-base xl:text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
+						class="block p-3 lg:py-1 text-base xl:text-base font-medium text-left lg:text-center ease-in-out duration-200
 							{currentPath === '/' 
-								? 'text-white bg-white/10'
-								: 'text-white hover:text-sky-200 hover:bg-white/10'}"
+								? 'text-yellow-500'
+								: 'text-white hover:text-yellow-500'}"
 					>
 						{cat.title}
 					</a>
@@ -73,10 +73,10 @@
 				<li class="relative">
 					<button
 						onclick={() => toggleMenu(cat.title)}
-						class="flex items-center justify-between lg:justify-center w-full p-3 lg:py-1 md:px-2 text-base font-medium rounded-sm ease-in-out duration-200
+						class="flex items-center justify-between lg:justify-center w-full p-3 lg:py-1 text-base font-medium ease-in-out duration-200
 							{openMenu === cat.title
-								? 'text-white bg-white/10'
-								: 'text-white hover:text-sky-200 hover:bg-white/10'}"
+								? 'text-yellow-500'
+								: 'text-white hover:text-yellow-500'}"
 					>
 						{cat.title}
 						<Icon name={ChevronDown} size={16} className="ml-1 {openMenu === cat.title ? 'rotate-180':''}" />
@@ -116,10 +116,10 @@
 						href={`/${cat.slug}`}
 						title={cat.title}
 						onclick={onNavigate}
-						class="block p-3 lg:py-1 md:px-2 text-base font-medium text-left lg:text-center rounded-sm ease-in-out duration-200
+						class="block p-3 lg:p-1 text-base font-medium text-left lg:text-center ease-in-out duration-200
 							{isActive(cat.slug)
-								? 'text-white bg-white/10'
-								: 'text-white hover:text-sky-200 hover:bg-white/10'}"
+								? 'text-yellow-500'
+								: 'text-white hover:text-yellow-500'}"
 					>
 						{cat.title}
 					</a>

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Icon from './Icon.svelte';
 	import { X } from 'lucide-svelte';
+	import { SITE_NAME, SITE_URL } from '$lib/utils';
 	export let open = false;
 	export let title: string = 'Menu'; // 🟢 title prop
 	export let side: 'left' | 'right' | 'top' | 'bottom' = 'left';
 	export let close: () => void = () => {};
+	export let siteLogo = false
 
 	// Handle Escape key to close drawer
 	const handleKeydown = (e: KeyboardEvent) => {
@@ -14,12 +16,13 @@
 
 {#if open}
 	<!-- Overlay -->
-	<div
-		class="fixed inset-0 bg-black/50 z-40"
+	<button
+		type="button"
+		class="fixed inset-0 bg-black/50 z-40 cursor-default"
+		aria-label="Close menu"
 		on:click={close}
 		on:keydown={handleKeydown}
-		tabindex="0"
-	></div>
+	></button>
 {/if}
 
 <!-- Drawer Panel -->
@@ -39,7 +42,21 @@
 	<!-- Header -->
 	<div class="flex items-center justify-between p-4">
 		<slot name="header">
-			<h2 class="text-lg font-semibold text-white">{title}</h2>
+			{#if siteLogo}
+				<div class="relative">
+					<a href={SITE_URL} title={SITE_NAME}>
+						<img
+							src="/image/jobresultdekho-logo-white.svg"
+							alt="Job Result Dekho logo"
+							title="Job Result Dekho logo"
+							class="h-8"
+						/>
+					</a>
+					<h2 class="text-lg font-semibold text-white sr-only">{title}</h2>
+				</div>
+			{:else}
+				<h2 class="text-lg font-semibold text-white">{title}</h2>
+			{/if}
 			<button on:click={close} class="text-white hover:text-red-100 text-xl font-bold">
 				<Icon name={X} size={20} />
 			</button>

@@ -1,29 +1,37 @@
-FROM node:20-alpine
+# ---------- Stage 1: Build ----------
+FROM node:20-alpine AS builder
 
-# Install dependencies
+# Build-time native deps for sharp / vips / node-gyp
 RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git python3
 
-# Create app directory
 WORKDIR /app
 
-# Copy package.json and yarn.lock (if exists)
 COPY package.json yarn.lock* ./
-
-#RUN yarn install
-
-# Install dependencies
-RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
-#RUN yarn install --frozen-lockfile
-
-# Copy app source
+RUN yarn config set registry https://registry.npmjs.org \
+ && yarn config set network-timeout 600000 -g \
+ && yarn install
 COPY . .
-
-# Build Strapi
 RUN yarn build
 
-# Expose the port Strapi runs on
+# ---------- Stage 2: Runtime ----------
+FROM node:20-alpine
+
+# Only the vips shared library is needed at runtime (sharp uses it)
+RUN apk add --no-cache vips
+
+WORKDIR /app
+
+# Copy the compiled app from builder — build tools (gcc, python3, git) are NOT present here
+COPY --from=builder /app .
+
+# Ensure the uploads mount-point exists and is owned by the non-root node user
+RUN mkdir -p public/uploads && chown -R node:node /app
+
+USER node
+
 EXPOSE 1337
 
-# Start Strapi
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD wget -qO /dev/null http://localhost:1337/_health || exit 1
+
 CMD ["yarn", "start"]
-# CMD ["yarn", "develop"]

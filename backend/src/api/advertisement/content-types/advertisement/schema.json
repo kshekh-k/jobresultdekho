@@ -1,0 +1,241 @@
+{
+  "kind": "collectionType",
+  "collectionName": "advertisements",
+  "info": {
+    "singularName": "advertisement",
+    "pluralName": "advertisements",
+    "displayName": "Advertisement",
+    "description": "Manage native and Google AdSense ads shown across the site"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "location": {
+      "type": "enumeration",
+      "enum": [
+        "Home - Top Banner",
+        "Home - Mid Section",
+        "Article List - After 4th Item",
+        "Article List - After 16th Item",
+        "Sidebar - Top",
+        "Article Page - Mid Content",
+        "Article Page - Important Links",
+        "Sidebar - Video Promotion"
+      ]
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "adType": {
+      "type": "enumeration",
+      "required": true,
+      "default": "native",
+      "enum": [
+        "native",
+        "video",
+        "google_adsense"
+      ]
+    },
+    "adLink": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "native"
+          ]
+        }
+      }
+    },
+    "openInNewTab": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "native"
+          ]
+        }
+      },
+      "default": true
+    },
+    "imageMode": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "native"
+          ]
+        }
+      },
+      "enum": [
+        "single",
+        "responsive"
+      ]
+    },
+    "singleImage": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "imageMode"
+            },
+            "single"
+          ]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "desktopImage": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "imageMode"
+            },
+            "responsive"
+          ]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "mobileImage": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "imageMode"
+            },
+            "responsive"
+          ]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "videoFile": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": ["videos"]
+    },
+    "videoPoster": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "videoLoop": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "default": false
+    },
+    "videoMuted": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "adType" }, "video"]
+        }
+      },
+      "default": false
+    },
+    "googleAdSlot": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "google_adsense"
+          ]
+        }
+      }
+    },
+    "googleAdFormat": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "google_adsense"
+          ]
+        }
+      },
+      "default": "auto",
+      "enum": [
+        "auto",
+        "rectangle",
+        "banner",
+        "vertical",
+        "horizontal"
+      ]
+    },
+    "googleAdClient": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "adType"
+            },
+            "google_adsense"
+          ]
+        }
+      }
+    },
+    "impressions": {
+      "type": "integer",
+      "default": 0
+    },
+    "clicks": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

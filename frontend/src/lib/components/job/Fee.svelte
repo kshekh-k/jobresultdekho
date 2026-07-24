@@ -4,7 +4,7 @@
 
 	function formatFee(value: number | string | null | undefined): string {
 		if (value == null || value === '') {
-			return '₹ 0';
+			return '';
 		}
 		return `₹ ${value}`;
 	}
@@ -15,22 +15,15 @@
 		<h3 class="text-xl font-semibold text-white !m-0 p-0">Application Fee</h3>
 	</div>
 	<div class="max-w-full overflow-auto m-0">
-		<table class="w-full border border-slate-300 !m-0">
+		<table class="w-full border border-slate-300 !m-0 ">
 			<tbody>
 				{#if safeFees.length > 0}
 					{#each safeFees as fee}
+						{@const formattedFee = formatFee(fee.Fees_Value)}
 						<tr class="border-b">
 							<td class="p-2 whitespace-nowrap">{fee.Fees_Label}:</td>
 							<td class="p-2 font-medium">
-								{#if fee.Fees_message}
-									<span
-										>{formatFee(fee.Fees_Value)}<span class="text-sm text-gray-600 italic px-10"
-											>{fee.Fees_message}</span
-										></span
-									>
-								{:else}
-									<span>{formatFee(fee.Fees_Value)}</span>
-								{/if}
+								<p class="text-sm/5 text-gray-600 min-w-48 md:min-w-[inherit]">{formattedFee}{#if formattedFee && fee.Fees_message} | {/if}{#if fee.Fees_message}<span>{fee.Fees_message}</span>{/if}</p>
 							</td>
 						</tr>
 					{/each}

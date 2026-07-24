@@ -18,8 +18,16 @@
 	import ApplicationFees from '$lib/components/job/Fee.svelte';
 	import OldFees from '$lib/components/job/Old_Fees.svelte';
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
+	import DynamicAd from '$lib/components/DynamicAd.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
 	import { page } from '$app/stores';
+	import {
+	 
+		RiTelegram2Fill,
+		 
+		RiWhatsappLine
+	} from 'svelte-remixicon';
+	import { Header } from '$lib/components/ui/drawer';
 
 	$: currentUrl = $page.url.href;
 
@@ -363,7 +371,19 @@
 				</div>
 				<div class="flex flex-col mt-5">
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
-					<RichTextRenderer content={data.content?.content} />
+					
+					<RichTextRenderer content={data.content?.content}>
+						<svelte:fragment slot="ad">
+						<!-- Ads Section -->
+						<div class="not-prose py-1">
+							<DynamicAd adSlug="article-mid-ad" />
+						</div>
+					</svelte:fragment>
+					</RichTextRenderer>
+
+					
+					
+					
 					<!-- This is job banner -->
 					{console.log(data.content.banner_image?.url)}
 					{#if data.content.banner_image?.url}
@@ -376,49 +396,36 @@
 							/>
 						</div>
 					{/if}
-					<h4 class="font-semibold">NOTE</h4>
-					<p class="italic">
-						छात्रों को सलाह दी जाती है कि फॉर्म भरने से पहले आधिकारिक सूचना में दी गई सभी शर्तों
-						(अंतिम तिथि, आयु सीमा, योग्यता आदि) की जांच अवश्य कर लें। सभी बिंदु पढ़ने के बाद ही
-						आवेदन करें।
-					</p>
-					<p class="italic mt-0!">
-						Students are advised to carefully review all the details mentioned in the official
-						notification (such as the last date, age limit, qualifications, etc.) before filling out
-						the form. Please submit your application only after thoroughly reading all the points.
-					</p>
+					 
 				</div>
 			</div>
 		</Card.Content>
 	</Card.Root>
 
+
 	<Card.Root class="overflow-hidden rounded-md gap-0">
 		<Card.Content class="px-3 lg:px-6">
+		<Card.Header>
+			<h3 class="text-sky-800 text-center text-xl font-semibold uppercase mb-3">Important Links</h3>
+		</Card.Header>
 			<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5">
-				<!-- Ad Places -->
-				<div class="flex justify-center items-center rounded-sm bg-gray-100 col-span-5">
-					<a href="{SITE_URL}/contact" title={SITE_NAME} class="block rounded-sm overflow-hidden">
-						<img
-							src="/image/JobResultdekho.png"
-							alt={SITE_NAME}
-							title={SITE_NAME}
-							class="object-cover block"
-						/>
-					</a>
+				<!-- Ads Section Places Important Link -->
+				<div class="flex justify-center items-start col-span-4">
+					<DynamicAd adSlug="article-important-links-ad" />
 				</div>
 				{#if data.content.important_links}
-					<div class="prose max-w-none bg-sky-900 rounded-sm p-3 col-span-7 flex flex-col">
-						<h3 class="text-white text-center uppercase">Important Links</h3>
+					<div class="prose max-w-none col-span-8 flex flex-col">
+						
 
 						<table class="min-w-full border border-sky-900 border-collapse table-fixed">
 							<thead>
-								<tr class="bg-rose-500 text-white">
+								<tr class="bg-sky-900 text-white">
 									<th
 										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
 										>Title</th
 									>
 									<th
-										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+										class="md:w-6/10 sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
 										>Link</th
 									>
 								</tr>
@@ -426,10 +433,10 @@
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
+										<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
 											>{link.Label}</th
 										>
-										<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900">
+										<td class="sm:px-4 p-2 text-base border border-sky-900">
 											{#if link.Need_PDF_upload && link.Upload_PDF?.url}
 												<a
 													href={getMediaUrl(link.Upload_PDF.url)}
@@ -450,7 +457,7 @@
 												</a>
 											{:else}
 												<div class="flex flex-col">
-													<p class="text-neutral-600 text-sm m-0!">{link.Link_message}</p>
+													<p class="text-neutral-600  text-base m-0!">{link.Link_message}</p>
 													<a
 														class="text-red-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
 														href="https://www.instagram.com/job_resultdekho/"
@@ -465,10 +472,10 @@
 								{/each}
 
 								<tr class="odd:bg-white even:bg-slate-50">
-									<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
-										>Join Whatsapp Channel</th
+									<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
+										><span class="inline-flex items-center gap-2"><span class="size-7 flex justify-center items-center rounded-full bg-green-500 text-white"><RiWhatsappLine className="size-6" /></span>Join <span class="hidden sm:inline-block">WhatsApp</span></span></th
 									>
-									<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
+									<td class="sm:px-4 p-2 text-base border border-sky-900"
 										><a
 											href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
 											target="_blank"
@@ -480,10 +487,10 @@
 									></tr
 								>
 								<tr class="odd:bg-white even:bg-slate-50">
-									<th class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900 w-full"
-										>Join Telegram Channel</th
+									<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
+										><span class="inline-flex items-center gap-2"><span class="size-7 flex justify-center items-center rounded-full bg-blue-500 text-white"><RiTelegram2Fill className="size-6" /></span>Join <span class="hidden sm:inline-block">Telegram</span></span></th
 									>
-									<td class="sm:px-4 p-2 text-xs sm:text-sm border border-sky-900"
+									<td class="sm:px-4 p-2 text-base border border-sky-900"
 										><a
 											href="https://t.me/sarkari_jobresultdekho"
 											target="_blank"
