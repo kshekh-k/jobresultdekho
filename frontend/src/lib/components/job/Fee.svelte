@@ -21,7 +21,7 @@
 					{#each safeFees as fee}
 						{@const formattedFee = formatFee(fee.Fees_Value)}
 						<tr class="border-b">
-							<td class="p-2 whitespace-nowrap w-1/2">{fee.Fees_Label}:</td>
+							<td class="p-2 w-1/2">{fee.Fees_Label}:</td>
 							<td class="p-2 font-medium w-1/2">
 								<p class="text-sm/5 text-gray-600 min-w-48 md:min-w-[inherit]"><span class="whitespace-nowrap">{formattedFee}</span>{#if formattedFee && fee.Fees_message}{/if}{#if fee.Fees_message}<span>&nbsp;|&nbsp;{fee.Fees_message}</span>{/if}</p>
 							</td>
