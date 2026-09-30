@@ -21,6 +21,9 @@
       "targetField": "title",
       "required": true
     },
+    "short_intro": {
+      "type": "richtext"
+    },
     "short_description": {
       "type": "text"
     },
@@ -31,10 +34,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "content": {
-      "type": "blocks",
-      "required": false
     },
     "category": {
       "type": "relation",
@@ -55,8 +54,9 @@
     "content_md": {
       "type": "richtext"
     },
-    "short_intro": {
-      "type": "richtext"
+    "content": {
+      "type": "blocks",
+      "required": false
     }
   }
 }

@@ -20,9 +20,6 @@
       "targetField": "title",
       "required": true
     },
-    "description": {
-      "type": "text"
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
@@ -55,6 +52,9 @@
         }
       }
     },
+    "content_md": {
+      "type": "richtext"
+    },
     "FAQs": {
       "type": "component",
       "component": "shared.faq",
@@ -82,8 +82,8 @@
         }
       }
     },
-    "content_md": {
-      "type": "richtext"
+    "description": {
+      "type": "text"
     }
   }
 }
