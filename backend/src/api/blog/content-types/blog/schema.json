@@ -34,7 +34,7 @@
     },
     "content": {
       "type": "blocks",
-      "required": true
+      "required": false
     },
     "category": {
       "type": "relation",
@@ -51,6 +51,12 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "content_md": {
+      "type": "richtext"
+    },
+    "short_intro": {
+      "type": "richtext"
     }
   }
 }

@@ -3,7 +3,7 @@
 	import RichTextRenderer from '$lib/components/RichTextRenderer.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Icon from '$lib/components/ui/Icon.svelte';
-	
+	import { marked } from 'marked';
 	
 	import {
 		formatDate,
@@ -14,24 +14,28 @@
 		OG_IMAGE
 	} from '$lib/utils';
 	import { Calendar, User } from 'lucide-svelte';
+	import type { Blog } from '$lib/api/blog';
 	
 	import { page } from '$app/stores';
-	export let data;
+	export let data: { blog?: Blog };
 	let author = 'Admin';
 	console.log("blog data", data);
 	$: currentUrl = $page.url.href;
 	const BLOG_OG_IMAGE = data.blog?.cover_image?.url ? getMediaUrl(data.blog?.cover_image?.url) : OG_IMAGE;
- 
+
+	const renderMarkdown = (markdown: string) => {
+		return marked.parse(markdown || '');
+	};
 </script>
 
 <svelte:head>
-	<title>{data.blog?.title} - {data.blog.SEO?.title}</title>
-	<meta name="description" content={data.blog.SEO?.description} />
-	<meta name="keywords" content={data.blog.SEO?.tags} />
+	<title>{data.blog?.title} - {data.blog?.SEO?.title || SITE_NAME}</title>
+	<meta name="description" content={data.blog?.SEO?.description} />
+	<meta name="keywords" content={data.blog?.SEO?.tags} />
 	<meta property="og:site_name" content={SITE_NAME} />
 	<link rel="canonical" href={currentUrl} />
-	<meta property="og:title" content="{data.blog.SEO?.title} - {SITE_NAME}" />
-	<meta property="og:description" content={data.blog.SEO?.description} />
+	<meta property="og:title" content="{data.blog?.SEO?.title || data.blog?.title || ''} - {SITE_NAME}" />
+	<meta property="og:description" content={data.blog?.SEO?.description} />
 	<meta property="og:url" content={currentUrl} />
 	<meta property="og:image" content={BLOG_OG_IMAGE} />
 	<meta property="og:type" content="website" />
@@ -47,7 +51,7 @@
 		headline: `Blog - ${SITE_NAME}`,
 		url: `${SITE_URL}/contact`,
 		image: BLOG_OG_IMAGE,
-		description: `${data.blog.SEO?.description}`,
+		description: `${data.blog?.SEO?.description || ''}`,
 		isPartOf: {
 			'@type': 'WebSite',
 			'@id': `${currentUrl}/#website`,
@@ -82,7 +86,7 @@
 			</h2>
 			<div class="flex gap-2 divide-x divide-slate-300">
 				<p class="text-slate-500 text-sm pr-2 flex gap-1 items-center">
-					<Icon name={Calendar} size={14} />{formatDate(data.blog.publishedAt)}
+					<Icon name={Calendar} size={14} />{data.blog?.publishedAt ? formatDate(data.blog.publishedAt) : ''}
 				</p>
 				<p class="text-slate-500 text-sm flex gap-1 items-center">
 					<Icon name={User} size={14} />{author}
@@ -90,23 +94,38 @@
 			</div>
 		</Card.Header>
 		<Card.Content>
+			{#if data.blog?.short_intro}
+				<div
+					class="prose prose-slate max-w-none mb-5
+						prose-headings:font-semibold
+						prose-a:text-rose-500
+						prose-pre:bg-slate-900
+						prose-pre:text-slate-100
+						prose-code:text-rose-500"
+				>
+					{@html renderMarkdown(data.blog.short_intro)}
+				</div>
+			{/if}
+
 			{#if data.blog?.cover_image}
 				<div class="overflow-hidden rounded-xl mb-5">
 					<img src={getMediaUrl(data.blog?.cover_image?.url)} alt={data.blog?.title} title={data.blog?.title} class="" />
 				</div>
 			{/if}
 			
-			 <div
+			<div
 				class="prose prose-slate max-w-none
 					prose-headings:font-semibold
 					prose-a:text-rose-500
 					prose-pre:bg-slate-900
 					prose-pre:text-slate-100
 					prose-code:text-rose-500"
-					
 			>
-			 
-			<RichTextRenderer content={data.blog?.content} />
+				{#if data.blog?.content_md}
+					{@html renderMarkdown(data.blog.content_md)}
+				{:else}
+					<RichTextRenderer content={data.blog?.content} />
+				{/if}
 			</div>
 		</Card.Content>
 	</Card.Root>

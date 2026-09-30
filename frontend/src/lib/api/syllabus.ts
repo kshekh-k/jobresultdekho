@@ -11,6 +11,7 @@ export interface Syllabus {
   slug?: string;
   description: string;
   content: string;
+  content_md?: string;
 }
 
 export async function getLatestSyllabus(customFetch?: typeof fetch): Promise<Syllabus> {

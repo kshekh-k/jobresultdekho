@@ -57,6 +57,9 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "content_md": {
+      "type": "richtext"
     }
   }
 }

@@ -20,11 +20,8 @@
       "targetField": "title",
       "required": true
     },
-    "short_description": {
-      "type": "blocks"
-    },
-    "content": {
-      "type": "blocks"
+    "short_intro": {
+      "type": "richtext"
     },
     "category": {
       "type": "relation",
@@ -94,20 +91,15 @@
     "total_posts": {
       "type": "integer"
     },
-    "job_disclaimer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::job-disclaimer.job-disclaimer"
-    },
     "important_dates": {
       "type": "component",
       "component": "shared.important-dates",
       "repeatable": false
     },
-    "eligiblity_criterea": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::eligiblity-criterea.eligiblity-criterea"
+    "application_fee": {
+      "type": "component",
+      "component": "shared.fees",
+      "repeatable": false
     },
     "stage": {
       "type": "enumeration",
@@ -166,10 +158,21 @@
       "type": "boolean",
       "default": true
     },
-    "application_fee": {
-      "type": "component",
-      "component": "shared.application-fee",
-      "repeatable": false
+    "eligiblity_criterea": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::eligiblity-criterea.eligiblity-criterea"
+    },
+    "job_disclaimer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job-disclaimer.job-disclaimer"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "content_md": {
+      "type": "richtext"
     }
   }
 }

@@ -432,6 +432,8 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     registrationToken: Schema.Attribute.String & Schema.Attribute.Private;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
+    resetPasswordTokenExpiresAt: Schema.Attribute.DateTime &
+      Schema.Attribute.Private;
     roles: Schema.Attribute.Relation<'manyToMany', 'admin::role'> &
       Schema.Attribute.Private;
     updatedAt: Schema.Attribute.DateTime;
@@ -453,7 +455,7 @@ export interface ApiAdmissionAdmission extends Struct.CollectionTypeSchema {
   };
   attributes: {
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    content: Schema.Attribute.Blocks;
+    content_md: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -708,7 +710,8 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::blog-comment.blog-comment'
     >;
-    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    content: Schema.Attribute.Blocks;
+    content_md: Schema.Attribute.RichText;
     cover_image: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -719,6 +722,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'shared.seo', false>;
     short_description: Schema.Attribute.Text;
+    short_intro: Schema.Attribute.RichText;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -915,16 +919,14 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    application_fee: Schema.Attribute.Component<
-      'shared.application-fee',
-      false
-    >;
+    application_fee: Schema.Attribute.Component<'shared.fees', false>;
     Apply_date_Start_message: Schema.Attribute.String;
     banner_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     content: Schema.Attribute.Blocks;
+    content_md: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -933,7 +935,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'api::department.department'
     >;
     eligiblity_criterea: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::eligiblity-criterea.eligiblity-criterea'
     >;
     FAQs: Schema.Attribute.Component<'shared.faq', true>;
@@ -952,7 +954,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
         number
       >;
     job_disclaimer: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::job-disclaimer.job-disclaimer'
     >;
     last_date: Schema.Attribute.Date;
@@ -965,7 +967,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     reference_url: Schema.Attribute.String;
     SEO: Schema.Attribute.Component<'shared.seo', false>;
-    short_description: Schema.Attribute.Blocks;
+    short_intro: Schema.Attribute.RichText;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stage: Schema.Attribute.Enumeration<
       [
@@ -1048,6 +1050,7 @@ export interface ApiSyllabusSyllabus extends Struct.CollectionTypeSchema {
   attributes: {
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     content: Schema.Attribute.Blocks;
+    content_md: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1577,7 +1580,7 @@ export interface PluginUsersPermissionsUser
 }
 
 declare module '@strapi/strapi' {
-  export module Public {
+  export namespace Public {
     export interface ContentTypeSchemas {
       'admin::api-token': AdminApiToken;
       'admin::api-token-permission': AdminApiTokenPermission;

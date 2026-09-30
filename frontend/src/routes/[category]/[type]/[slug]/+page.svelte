@@ -21,14 +21,9 @@
 	import DynamicAd from '$lib/components/DynamicAd.svelte';
 	import ShareButtons from '$lib/components/ShareButtons.svelte';
 	import { page } from '$app/stores';
-	import {
-	 
-		RiTelegram2Fill,
-		 
-		RiWhatsappLine
-	} from 'svelte-remixicon';
+	import { RiTelegram2Fill, RiWhatsappLine } from 'svelte-remixicon';
 	import { Header } from '$lib/components/ui/drawer';
-
+	import { marked } from 'marked';
 	$: currentUrl = $page.url.href;
 
 	export let data: { content: any; type: string };
@@ -54,17 +49,20 @@
 						: syllabus
 							? 'Check Now'
 							: 'View Now';
-	let metaShorDescipt = Array.isArray(data.content.short_description)
-		? richTextToPlainText(data.content.short_description, 160)
-		: extractTextFromRichText(data.content.short_description, 160);
-	const pageTitle = data.content.SEO?.title ? data.content.SEO?.title : data.content.title;
-	const pageDesc = data.content.SEO?.description
-		? data.content.SEO?.description
-		: `${metaShorDescipt} 
-		 Get complete details for ${data.content.title}`;
+	let metaShorDescipt = data.content.short_description
+		? Array.isArray(data.content.short_description)
+			? richTextToPlainText(data.content.short_description, 160)
+			: extractTextFromRichText(data.content.short_description, 160)
+		: data.content.description || '';
+	const pageTitle = data.content.SEO?.title || data.content.title;
+
+	const pageDesc =
+		data.content.SEO?.description ||
+		metaShorDescipt ||
+		`Get complete details for ${data.content.title}`;
 
 	const POST_OG_IMAGE = data.content.banner_image?.url
-		? getMediaUrl(data.content.banner_image?.url)
+		? getMediaUrl(data.content.banner_image.url)
 		: OG_IMAGE;
 
 	function scrollToTop() {
@@ -72,6 +70,45 @@
 			top: 0,
 			behavior: 'smooth'
 		});
+	}
+
+	const renderMarkdown = (markdown: string) => {
+		return marked.parse(markdown || '');
+	};
+
+	$: mdParts = renderMarkdownParts(data.content?.content_md);
+
+	function renderMarkdownParts(markdown: string) {
+		if (!markdown) return { part1: '', part2: '' };
+		const html = marked.parse(markdown || '') as string;
+		const blockRegex = /<(p|h[1-6]|ul|ol|table|blockquote|figure|div)[^>]*>[\s\S]*?<\/\1>/gi;
+		const blocks = html.match(blockRegex);
+
+		if (!blocks || blocks.length < 4) {
+			return { part1: html, part2: '' };
+		}
+
+		const mid = Math.floor(blocks.length / 2);
+		let count = 0;
+		let splitPos = -1;
+		let match;
+		const regex = /<(p|h[1-6]|ul|ol|table|blockquote|figure|div)[^>]*>[\s\S]*?<\/\1>/gi;
+		while ((match = regex.exec(html)) !== null) {
+			count++;
+			if (count === mid) {
+				splitPos = regex.lastIndex;
+				break;
+			}
+		}
+
+		if (splitPos !== -1) {
+			return {
+				part1: html.slice(0, splitPos),
+				part2: html.slice(splitPos)
+			};
+		}
+
+		return { part1: html, part2: '' };
 	}
 </script>
 
@@ -162,8 +199,13 @@
 			<h1 class="text-center md:text-left text-2xl md:text-4xl font-bold text-sky-700">
 				{data.content.title}
 			</h1>
-			<div class="prose max-w-none w-full">
-				<RichTextRenderer content={data.content.short_description} className="" />
+			<div class="prose max-w-none w-full pt-2">
+				{#if data.content?.short_intro}
+					{@html renderMarkdown(data.content.short_intro)}
+				{:else}
+					<RichTextRenderer content={data.content.short_description} className="" />
+				{/if}
+
 				<div class="hidden sm:block pb-1">
 					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
 						<thead>
@@ -361,29 +403,42 @@
 					{/if}
 				</div>
 				<!-- Eligibility Criteria -->
-				<div class="flex flex-col mt-5">
+				<!-- <div class="flex flex-col mt-5">
 					<div class="bg-sky-800 py-2 px-3">
 						<h3 class="text-xl font-semibold text-white !m-0 p-0">Eligibility Criteria</h3>
 					</div>
 					<div class="border border-slate-200 !mt-0 px-3 sm:px-5">
 						<RichTextRenderer content={data.content.eligiblity_criterea?.content} />
 					</div>
-				</div>
+				</div> -->
 				<div class="flex flex-col mt-5">
 					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
-					
-					<RichTextRenderer content={data.content?.content}>
-						<svelte:fragment slot="ad">
-						<!-- Ads Section -->
-						<div class="not-prose py-1">
-							<DynamicAd adSlug="article-mid-ad" />
-						</div>
-					</svelte:fragment>
-					</RichTextRenderer>
 
-					
-					
-					
+					{#if data.content?.content_md}
+						<div class="prose max-w-none w-full">
+							{@html mdParts.part1}
+
+							{#if mdParts.part2}
+								<div class="not-prose py-1">
+									<DynamicAd adSlug="article-mid-ad" />
+								</div>
+
+								{@html mdParts.part2}
+							{/if}
+						</div>
+					{:else if data.content?.content}
+						<RichTextRenderer content={data.content.content}>
+							<svelte:fragment slot="ad">
+								<div class="not-prose py-1">
+									<DynamicAd adSlug="article-mid-ad" />
+								</div>
+							</svelte:fragment>
+						</RichTextRenderer>
+					{:else if data.content?.description}
+						<div class="prose max-w-none w-full">
+							{@html renderMarkdown(data.content.description)}
+						</div>
+					{/if}
 					<!-- This is job banner -->
 					{console.log(data.content.banner_image?.url)}
 					{#if data.content.banner_image?.url}
@@ -396,18 +451,18 @@
 							/>
 						</div>
 					{/if}
-					 
 				</div>
 			</div>
 		</Card.Content>
 	</Card.Root>
 
-
 	<Card.Root class="overflow-hidden rounded-md gap-0">
 		<Card.Content class="px-3 lg:px-6">
-		<Card.Header>
-			<h3 class="text-sky-800 text-center text-xl font-semibold uppercase mb-3">Important Links</h3>
-		</Card.Header>
+			<Card.Header>
+				<h3 class="text-sky-800 text-center text-xl font-semibold uppercase mb-3">
+					Important Links
+				</h3>
+			</Card.Header>
 			<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5">
 				<!-- Ads Section Places Important Link -->
 				<div class="flex justify-center items-start col-span-4">
@@ -415,8 +470,6 @@
 				</div>
 				{#if data.content.important_links}
 					<div class="prose max-w-none col-span-8 flex flex-col">
-						
-
 						<table class="min-w-full border border-sky-900 border-collapse table-fixed">
 							<thead>
 								<tr class="bg-sky-900 text-white">
@@ -433,9 +486,7 @@
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
-											>{link.Label}</th
-										>
+										<th class="sm:px-4 p-2 text-base border border-sky-900 w-full">{link.Label}</th>
 										<td class="sm:px-4 p-2 text-base border border-sky-900">
 											{#if link.Need_PDF_upload && link.Upload_PDF?.url}
 												<a
@@ -457,7 +508,7 @@
 												</a>
 											{:else}
 												<div class="flex flex-col">
-													<p class="text-neutral-600  text-base m-0!">{link.Link_message}</p>
+													<p class="text-neutral-600 text-base m-0!">{link.Link_message}</p>
 													<a
 														class="text-red-600 hover:text-indigo-600 font-semibold no-underline text-nowrap"
 														href="https://www.instagram.com/job_resultdekho/"
@@ -473,7 +524,12 @@
 
 								<tr class="odd:bg-white even:bg-slate-50">
 									<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
-										><span class="inline-flex items-center gap-2"><span class="size-7 flex justify-center items-center rounded-full bg-green-500 text-white"><RiWhatsappLine className="size-6" /></span>Join <span class="hidden sm:inline-block">WhatsApp</span></span></th
+										><span class="inline-flex items-center gap-2"
+											><span
+												class="size-7 flex justify-center items-center rounded-full bg-green-500 text-white"
+												><RiWhatsappLine className="size-6" /></span
+											>Join <span class="hidden sm:inline-block">WhatsApp</span></span
+										></th
 									>
 									<td class="sm:px-4 p-2 text-base border border-sky-900"
 										><a
@@ -488,7 +544,12 @@
 								>
 								<tr class="odd:bg-white even:bg-slate-50">
 									<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
-										><span class="inline-flex items-center gap-2"><span class="size-7 flex justify-center items-center rounded-full bg-blue-500 text-white"><RiTelegram2Fill className="size-6" /></span>Join <span class="hidden sm:inline-block">Telegram</span></span></th
+										><span class="inline-flex items-center gap-2"
+											><span
+												class="size-7 flex justify-center items-center rounded-full bg-blue-500 text-white"
+												><RiTelegram2Fill className="size-6" /></span
+											>Join <span class="hidden sm:inline-block">Telegram</span></span
+										></th
 									>
 									<td class="sm:px-4 p-2 text-base border border-sky-900"
 										><a
@@ -534,14 +595,14 @@
 	{/if}
 
 	<!-- Education Criterea -->
-	<Card.Root class="overflow-hidden rounded-md gap-0 p-2">
+	<!-- <Card.Root class="overflow-hidden rounded-md gap-0 p-2">
 		<Card.Header class="flex flex-col items-start justify-start gap-3 px-2 sm:px-4">
 			<h3 class="text-sky-800 text-center uppercase font-semibold">Disclaimer</h3>
 		</Card.Header>
 		<Card.Content class="p-2 sm:px-4 ">
 			<RichTextRenderer content={data.content.job_disclaimer?.content} />
 		</Card.Content>
-	</Card.Root>
+	</Card.Root> -->
 	<div class="flex justify-center pt-5">
 		{#if !data.content.Link_not_available || data.content.Link_not_available == false}
 			<Button

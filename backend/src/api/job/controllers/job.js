@@ -123,7 +123,7 @@ module.exports = createCoreController('api::job.job', ({ strapi }) => ({
         const job = await strapi.db.query('api::job.job').findOne({
             where: { slug },
             select: [
-                'title', 'slug', 'short_description', 'content', 'last_date',
+                'title', 'slug', 'short_description', 'short_intro', 'content', 'content_md', 'last_date',
                 'Link_not_available', 'reference_url', 'Link_Activate_Message', 'total_posts', 'stage', 'Start_date', 'Apply_date_Start_message',
             ],
             populate: {

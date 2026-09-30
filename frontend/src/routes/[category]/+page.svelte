@@ -3,6 +3,7 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOGO } from '$lib/utils';
+
 	import { page } from '$app/stores';
 	const { data } = $props<{
 		data: {
@@ -266,7 +267,7 @@
 		<Card.Root class="overflow-hidden rounded-md gap-5 ">
 			<Card.Content>
 				<h2>{pageTitle}</h2>
-				<p class="text-slate-600">{data.category.description}</p>				
+				<p class="text-slate-600">{data.category.description}</p>
 			</Card.Content>
 		</Card.Root>
 	{/if}

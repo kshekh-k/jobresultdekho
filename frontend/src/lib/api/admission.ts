@@ -11,6 +11,7 @@ export interface Admission {
   slug?: string;
   description: string;
   content: string;
+  content_md?: string;
 }
 
 export async function getLatestAdmissions(customFetch?: typeof fetch): Promise<Admission> {

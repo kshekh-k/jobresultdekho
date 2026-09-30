@@ -7,12 +7,20 @@ export interface Blog {
   title: string;
   slug: string;
   short_description?: string;
-  content?: string;
-  cover_image?: string;
-  category?: string;
+  short_intro?: string;
+  content_md?: string;
+  content?: any;
+  cover_image?: any;
+  category?: any;
   publishedAt?: string;
   createdAt?: string;
   updatedAt?: string;
+  SEO?: {
+    title?: string;
+    description?: string;
+    tags?: string;
+  };
+  comments?: any[];
 }
 
 export async function getLatestBlog(customFetch?: typeof fetch): Promise<Blog> {
