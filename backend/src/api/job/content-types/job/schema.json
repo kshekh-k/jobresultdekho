@@ -136,6 +136,9 @@
         "audios"
       ]
     },
+    "content_md": {
+      "type": "richtext"
+    },
     "Fees_of_application": {
       "type": "component",
       "component": "shared.fees",
@@ -170,9 +173,6 @@
     },
     "content": {
       "type": "blocks"
-    },
-    "content_md": {
-      "type": "richtext"
     }
   }
 }

@@ -20,11 +20,8 @@
       "targetField": "title",
       "required": true
     },
-    "description": {
-      "type": "text"
-    },
-    "content": {
-      "type": "blocks"
+    "content_md": {
+      "type": "richtext"
     },
     "category": {
       "type": "relation",
@@ -58,8 +55,11 @@
       "component": "shared.seo",
       "repeatable": false
     },
-    "content_md": {
-      "type": "richtext"
+    "content": {
+      "type": "blocks"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
