@@ -46,6 +46,10 @@
 		Link_not_available?: boolean;
 		Start_date?: boolean;
 		Apply_date_Start_message?: string;
+		createdAt?: string;
+		updatedAt?: string;
+		created_at?: string;
+		updated_at?: string;
 	}[] = [];
 
 	export let headers: {
@@ -62,12 +66,24 @@
 	let perPage = 25;
 	let currentPage = 1;
 
+	$: sortedItems = [...items].sort((a, b) => {
+		const aDate = new Date(
+			a.updatedAt || a.updated_at || a.createdAt || a.created_at || 0
+		).getTime();
+
+		const bDate = new Date(
+			b.updatedAt || b.updated_at || b.createdAt || b.created_at || 0
+		).getTime();
+
+		return bDate - aDate;
+	});
+
 	// ✅ Derived pagination data
-	$: totalItems = items.length;
+	$: totalItems = sortedItems.length;
 	$: totalPages = Math.ceil(totalItems / perPage);
 	$: start = (currentPage - 1) * perPage;
 	$: end = start + perPage;
-	$: paginatedItems = items.slice(start, end);
+	$: paginatedItems = sortedItems.slice(start, end);
 
 	function handlePageChange(page: number) {
 		if (page >= 1 && page <= totalPages) {
