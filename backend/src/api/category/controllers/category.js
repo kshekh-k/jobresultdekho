@@ -63,8 +63,22 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
           publishedAt: { $notNull: true },
           ...extraWhere,
         },
-        orderBy: [{ createdAt: "desc" }],
-        select: ["id", "title", "slug", "last_date", "reference_url", "Link_not_available", "Start_date", "Apply_date_Start_message"],
+        orderBy: [
+          { updatedAt: "desc" },
+          { createdAt: "desc" }
+        ],
+        select: [
+          "id",
+          "title",
+          "slug",
+          "last_date",
+          "reference_url",
+          "Link_not_available",
+          "Start_date",
+          "Apply_date_Start_message",
+          "createdAt",
+          "updatedAt"
+        ],
         populate: {
           department: { select: ["title", "slug"] },
         },
@@ -77,8 +91,19 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
           category: { slug: slug },
           publishedAt: { $notNull: true },
         },
-        orderBy: [{ createdAt: "desc" }],
-        select: ["id", "title", "slug", "last_date", "reference_url"],
+        orderBy: [
+          { updatedAt: "desc" },
+          { createdAt: "desc" }
+        ],
+        select: [
+          "id",
+          "title",
+          "slug",
+          "last_date",
+          "reference_url",
+          "createdAt",
+          "updatedAt"
+        ],
         populate: {
           department: { select: ["title", "slug"] },
         },

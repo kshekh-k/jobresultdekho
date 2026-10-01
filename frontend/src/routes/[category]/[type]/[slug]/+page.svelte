@@ -199,7 +199,7 @@
 			<h1 class="text-center md:text-left text-2xl md:text-4xl font-bold text-sky-700">
 				{data.content.title}
 			</h1>
-			<div class="prose max-w-none w-full pt-2">
+			<div class="prose max-w-none w-full pt-2 md:pt-3">
 				{#if data.content?.short_intro}
 					{@html renderMarkdown(data.content.short_intro)}
 				{:else}
@@ -207,7 +207,7 @@
 				{/if}
 
 				<div class="hidden sm:block pb-1">
-					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
+					<table class="min-w-full border border-slate-300 border-collapse table-auto m-0!">
 						<thead>
 							<tr class="bg-sky-800 text-white">
 								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white"
@@ -269,7 +269,7 @@
 											rel="nofollow noopener noreferrer external"
 											variant="success"
 											size="sm"
-											class={'no-underline !w-full'}
+											class={'no-underline w-full!'}
 										>
 											{buttonLabel}
 										</Button>
@@ -295,7 +295,7 @@
 				</div>
 
 				<div class="flex flex-col gap-5 pb-1 sm:hidden">
-					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
+					<table class="min-w-full border border-slate-300 border-collapse table-auto m-0!">
 						<thead>
 							<tr class="bg-sky-800 text-white">
 								<th class="sm:px-4 p-2 text-left text-sm font-medium border text-white w-1/2"
@@ -336,7 +336,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="min-w-full border border-slate-300 border-collapse table-auto !m-0">
+					<table class="min-w-full border border-slate-300 border-collapse table-auto m-0!">
 						<thead>
 							<tr class="bg-sky-800 text-white">
 								<th
@@ -363,7 +363,7 @@
 											rel="nofollow noopener noreferrer external"
 											variant="success"
 											size="sm"
-											class={'no-underline !w-full'}
+											class={'no-underline w-full!'}
 										>
 											{buttonLabel}
 										</Button>
@@ -412,10 +412,10 @@
 					</div>
 				</div> -->
 				<div class="flex flex-col mt-5">
-					<h2 class="!m-0 text-sky-800 text-3xl">Overview & Vacancy Details</h2>
+					<h2 class="m-0! text-sky-800 text-3xl pb-2 md:pb-3">Overview & Vacancy Details</h2>
 
 					{#if data.content?.content_md}
-						<div class="prose max-w-none w-full">
+						<div class="prose max-w-none w-full pt-2">
 							{@html mdParts.part1}
 
 							{#if mdParts.part2}
@@ -442,13 +442,38 @@
 					<!-- This is job banner -->
 					{console.log(data.content.banner_image?.url)}
 					{#if data.content.banner_image?.url}
-						<div class="flex justify-center items-center">
-							<img
-								src={getMediaUrl(data.content.banner_image?.url)}
-								alt={data.content.title}
-								title={data.content.title}
-								class="object-cover !mt-0"
-							/>
+						<div class="flex justify-center items-center pt-2 md:pt-3">
+							{#if !data.content.Link_not_available || data.content.Link_not_available == false}
+								<Button
+									href={data.content.reference_url}
+									target="_blank"
+									title={buttonLabel}
+									rel="nofollow noopener noreferrer external"
+									variant="link"
+									size="sm"
+									class={'no-underline flex justify-center items-center'}
+									><img
+										src={getMediaUrl(data.content.banner_image?.url)}
+										alt={data.content.title}
+										title={data.content.title}
+										class="object-cover mt-0!"
+									/></Button
+								>
+							{:else if data.content.Link_not_available == true}
+								<a
+									href="https://www.instagram.com/job_resultdekho/"
+									rel="nofollow noopener noreferrer external"
+									target="_blank"
+									title={'Join our Instagram'}
+									class="flex justify-center items-center"
+									><img
+										src={getMediaUrl(data.content.banner_image?.url)}
+										alt={data.content.title}
+										title={data.content.title}
+										class="object-cover mt-0!"
+									/></a
+								>
+							{/if}
 						</div>
 					{/if}
 				</div>
@@ -474,7 +499,7 @@
 							<thead>
 								<tr class="bg-sky-900 text-white">
 									<th
-										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white w-full"
 										>Title</th
 									>
 									<th

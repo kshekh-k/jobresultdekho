@@ -46,6 +46,10 @@
 		Link_not_available?: boolean;
 		Start_date?: boolean;
 		Apply_date_Start_message?: string;
+		createdAt?: string;
+		updatedAt?: string;
+		created_at?: string;
+		updated_at?: string;
 	}[] = [];
 
 	export let headers: {
@@ -62,6 +66,32 @@
 	const toggle = () => {
 		open = !open;
 	};
+
+	$: sortedItems = [...items].sort((a, b) => {
+		const aUpdated = new Date(
+			a.updatedAt || a.updated_at || a.createdAt || a.created_at || 0
+		).getTime();
+
+		const bUpdated = new Date(
+			b.updatedAt || b.updated_at || b.createdAt || b.created_at || 0
+		).getTime();
+
+		// Latest updated post first
+		if (bUpdated !== aUpdated) {
+			return bUpdated - aUpdated;
+		}
+
+		// If updated time is same, latest created post first
+		const aCreated = new Date(a.createdAt || a.created_at || 0).getTime();
+		const bCreated = new Date(b.createdAt || b.created_at || 0).getTime();
+
+		if (bCreated !== aCreated) {
+			return bCreated - aCreated;
+		}
+
+		// Final stable fallback
+		return (b.id || 0) - (a.id || 0);
+	});
 </script>
 
 <div id={articleId} class={articleWrap} style="--headerColor:var({headerColor})">
@@ -120,7 +150,7 @@
 						</div>
 					{/each}
 				</div>
-				{#each items.slice(0, 10) as item, index}
+				{#each sortedItems.slice(0, 10) as item, index}
 					<div
 						class="flex flex-wrap justify-between gap-2 md:gap-y-2 px-2 sm:px-4 even:bg-white odd:bg-slate-50 py-2 md:py-1 items-start md:items-center font-medium text-slate-600"
 					>
