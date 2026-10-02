@@ -22,13 +22,31 @@ module.exports = async function findLatestByStage(stage, limit = 10) {
 
   return await strapi.db.query("api::job.job").findMany({
     where: whereCondition,
-    orderBy: [{ createdAt: "desc" }],
+
+    // Latest updated first, latest created as fallback
+    orderBy: [
+      { updatedAt: "desc" },
+      { createdAt: "desc" }
+    ],
+
     limit,
-    select: ["id", "title", "last_date", "reference_url", "slug", "Link_not_available", "Apply_date_Start_message", "Start_date"],
+
+    select: [
+      "id",
+      "title",
+      "last_date",
+      "reference_url",
+      "slug",
+      "Link_not_available",
+      "Apply_date_Start_message",
+      "Start_date",
+      "createdAt",
+      "updatedAt"
+    ],
+
     populate: {
       department: { select: ["title", "slug"] },
       category: { select: ["title", "slug"] },
     },
-
   });
-}
+};

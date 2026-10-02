@@ -494,16 +494,16 @@
 					<DynamicAd adSlug="article-important-links-ad" />
 				</div>
 				{#if data.content.important_links}
-					<div class="prose max-w-none col-span-8 flex flex-col">
-						<table class="min-w-full border border-sky-900 border-collapse table-fixed">
+					<div class="prose max-w-full col-span-8 flex flex-col">
+						<table class="w-full border border-sky-900 border-collapse table-fixed">
 							<thead>
 								<tr class="bg-sky-900 text-white">
 									<th
-										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white w-full"
+										class="sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white w-2/3"
 										>Title</th
 									>
 									<th
-										class="md:w-6/10 sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
+										class="w-1/3 sm:px-4 p-2 text-left text-xs sm:text-sm font-medium border border-sky-900 text-white"
 										>Link</th
 									>
 								</tr>
@@ -511,8 +511,8 @@
 							<tbody class="divide-y">
 								{#each data.content.important_links as link, index}
 									<tr class="odd:bg-white even:bg-slate-50">
-										<th class="sm:px-4 p-2 text-base border border-sky-900 w-full">{link.Label}</th>
-										<td class="sm:px-4 p-2 text-base border border-sky-900">
+										<th class="sm:px-4 p-2 text-base border border-sky-900 w-2/3">{link.Label}</th>
+										<td class="sm:px-4 p-2 text-base border border-sky-900 w-1/3">
 											{#if link.Need_PDF_upload && link.Upload_PDF?.url}
 												<a
 													href={getMediaUrl(link.Upload_PDF.url)}
@@ -548,7 +548,7 @@
 								{/each}
 
 								<tr class="odd:bg-white even:bg-slate-50">
-									<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
+									<th class="sm:px-4 p-2 text-base border border-sky-900 w-2/3"
 										><span class="inline-flex items-center gap-2"
 											><span
 												class="size-7 flex justify-center items-center rounded-full bg-green-500 text-white"
@@ -556,7 +556,7 @@
 											>Join <span class="hidden sm:inline-block">WhatsApp</span></span
 										></th
 									>
-									<td class="sm:px-4 p-2 text-base border border-sky-900"
+									<td class="sm:px-4 p-2 text-base border border-sky-900 w-1/3"
 										><a
 											href="https://whatsapp.com/channel/0029VbBRYR7BA1f2coUANV3b"
 											target="_blank"
@@ -568,7 +568,7 @@
 									></tr
 								>
 								<tr class="odd:bg-white even:bg-slate-50">
-									<th class="sm:px-4 p-2 text-base border border-sky-900 w-full"
+									<th class="sm:px-4 p-2 text-base border border-sky-900 w-2/3"
 										><span class="inline-flex items-center gap-2"
 											><span
 												class="size-7 flex justify-center items-center rounded-full bg-blue-500 text-white"
@@ -576,7 +576,7 @@
 											>Join <span class="hidden sm:inline-block">Telegram</span></span
 										></th
 									>
-									<td class="sm:px-4 p-2 text-base border border-sky-900"
+									<td class="sm:px-4 p-2 text-base border border-sky-900 w-1/3"
 										><a
 											href="https://t.me/sarkari_jobresultdekho"
 											target="_blank"
