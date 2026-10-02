@@ -451,7 +451,7 @@
 									rel="nofollow noopener noreferrer external"
 									variant="link"
 									size="sm"
-									class={'no-underline flex justify-center items-center'}
+									class={'no-underline flex justify-center items-center max-w-full! h-auto!'}
 									><img
 										src={getMediaUrl(data.content.banner_image?.url)}
 										alt={data.content.title}
@@ -465,7 +465,7 @@
 									rel="nofollow noopener noreferrer external"
 									target="_blank"
 									title={'Join our Instagram'}
-									class="flex justify-center items-center"
+									class="flex justify-center items-center max-w-full! h-auto!"
 									><img
 										src={getMediaUrl(data.content.banner_image?.url)}
 										alt={data.content.title}
