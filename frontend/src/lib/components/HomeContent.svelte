@@ -65,7 +65,7 @@
 	];
 
 	// Sections
-	const articleSections = [
+	$: articleSections = [
 		{
 			id: 'latest-job',
 			type: 'jobs',
@@ -264,7 +264,7 @@
 				/>
 
 				{#if i === 2}
-				<!-- Ads Section Banner with option Mobile and Desktop as well option for Google Adsense -->
+					<!-- Ads Section Banner with option Mobile and Desktop as well option for Google Adsense -->
 					<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
 						<Card.Content class="flex items-center justify-center text-center p-1!">
 							<DynamicAd adSlug="home-mid-ad" />

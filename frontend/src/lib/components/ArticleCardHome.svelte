@@ -92,6 +92,15 @@
 		// Final stable fallback
 		return (b.id || 0) - (a.id || 0);
 	});
+
+	$: console.log(
+		'LATEST JOBS ORDER:',
+		sortedItems.slice(0, 10).map((item) => ({
+			title: item.title,
+			updatedAt: item.updatedAt,
+			createdAt: item.createdAt
+		}))
+	);
 </script>
 
 <div id={articleId} class={articleWrap} style="--headerColor:var({headerColor})">
