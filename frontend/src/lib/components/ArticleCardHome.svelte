@@ -115,12 +115,10 @@
 		<Card.Header
 			class="flex items-center justify-between cursor-pointer py-2 px-4 gap-2 bg-(--headerColor)"
 		>
-			<div class="flex items-center gap-2">
-				{#if isClosingSoon}
-					<Icon name={Clock} size={20} className="text-white" />
-				{/if}
+		 
+			 
 				<h3 class="text-lg font-semibold text-white">{title}</h3>
-			</div>
+			 
 			<div class="flex justify-between items-center gap-1">
 				<a
 					href={viewAllHref || slug}
