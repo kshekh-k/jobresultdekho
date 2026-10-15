@@ -13,7 +13,7 @@ module.exports = async function findLatestByStage(stage, limit = 10) {
   };
 
   // Add date validation ONLY when stage is not in ignore list
-  if (!ignoreDateFor.includes(stage)) {
+  if (stage !== "Job" && !ignoreDateFor.includes(stage)) {
     whereCondition.$or = [
       { last_date: { $gte: currentDate } },
       { last_date: { $null: true } }
