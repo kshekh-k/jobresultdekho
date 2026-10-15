@@ -11,12 +11,13 @@
 	export let data: { jobs: Job[] };
 	const { jobs = [] } = data;
 
-	const commanHeader = [
+	const closingSoonHeader = [
 		{
 			id: 'No.',
 			department: 'Dept',
 			label: 'Post',
 			date: 'Last Date',
+			closingIn: 'Closing In',
 			action: 'Action'
 		}
 	];
@@ -106,11 +107,12 @@
 		<ArticleCardList
 			type="jobs"
 			headerColor="--color-rose-900"
-			headers={commanHeader}
+			headers={closingSoonHeader}
 			title={pageHeading}
 			items={jobs}
 			slug="/latest-job"
 			sortBy="last_date"
+			isClosingSoon={true}
 		/>
 	{:else}
 		<Card.Root class="overflow-hidden rounded-md p-8 text-center bg-white border border-slate-200">

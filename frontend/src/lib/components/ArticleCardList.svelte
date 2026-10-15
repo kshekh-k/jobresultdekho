@@ -54,11 +54,21 @@ export let title: string | undefined;
 		updated_at?: string;
 	}[] = [];
 
+	export let isClosingSoon: boolean = false;
+	$: isClosingSoonResolved =
+		isClosingSoon ||
+		Boolean(
+			headers.some((h) => !!h.closingIn) ||
+				slug?.includes('closing') ||
+				title?.toLowerCase().includes('closing')
+		);
+
 	export let headers: {
 		id?: string;
 		department?: string;
 		label?: string;
 		date?: string;
+		closingIn?: string;
 		action?: string;
 	}[] = [];
 
@@ -133,6 +143,15 @@ export let title: string | undefined;
 							>
 						</div>
 					{/if}
+					{#if isClosingSoonResolved}
+						<div class="md:w-24 shrink-0 text-center">
+							<span class="flex gap-1 items-center justify-center">
+								<span class="md:hidden inline-flex items-center"
+									><Icon name={Clock} size={14} />
+								</span>{header.closingIn || 'Closing In'}</span
+							>
+						</div>
+					{/if}
 					<div class="md:w-48 shrink-0 text-right hidden md:flex justify-end">{header.action}</div>
 				{/each}
 			</div>
@@ -176,7 +195,7 @@ export let title: string | undefined;
 									<span class="text-sm block line-clamp-2">—</span>
 								{/if}
 							</div>
-							{#if days !== null && days >= 0 && days <= 7}
+							{#if !isClosingSoonResolved && days !== null && days >= 0 && days <= 7}
 								<span
 									class="text-[11px] font-semibold rounded px-1.5 py-0.5 inline-block text-center w-fit {days <=
 									1
@@ -187,6 +206,25 @@ export let title: string | undefined;
 										{days === 0 ? 'Closes Today' : `${days} ${days === 1 ? 'day' : 'days'} left`}
 									{:else if days === 1}
 										1 day left
+									{:else}
+										{days} days left
+									{/if}
+								</span>
+							{/if}
+						</div>
+					{/if}
+					{#if isClosingSoonResolved}
+						{@const days = getCalendarDaysRemaining(item.last_date)}
+						<div class="md:w-24 shrink-0 order-4 md:order-5 flex items-center md:justify-center">
+							{#if days !== null && days >= 0 && days <= 7}
+								<span
+									class="text-sm inline-block text-center w-fit {days <=
+									1
+										? 'bg-rose-50 text-rose-700'
+										: 'bg-amber-50 text-amber-700'}"
+								>
+									{#if days === 0}
+										End Today
 									{:else}
 										{days} days left
 									{/if}
