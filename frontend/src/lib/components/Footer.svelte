@@ -24,6 +24,13 @@
 		(cat) => Array.isArray(cat.children) && cat.children.length > 0
 	);
 
+	const footerMenus = [
+		{ title: 'Disclaimer', slug: 'disclaimer' },
+		{ title: 'Privacy Policy', slug: 'privacy-policies' },
+		{ title: 'Terms & Conditions', slug: 'terms-conditions' },
+		 
+	];
+
 	// Flatten and exclude
 	const childCategories = parentsWithChildren
 		.flatMap((cat) => cat.children)
@@ -31,7 +38,7 @@
 </script>
 
 <footer class="bg-slate-900 {!$cookieConsent ? 'pb-32 xl:pb-20' : ''}" translate="no">
-	<div class="max-w-screen-xl mx-auto px-4 divide-y divide-white/10">
+	<div class="max-w-7xl mx-auto px-4 divide-y divide-white/10">
 		<div class="py-4 flex flex-wrap items-center justify-between gap-2 flex-col md:flex-row">
 			<h4 class="xl:text-xl font-bold text-white">
 				<a href={SITE_URL} title={SITE_URL}>
@@ -47,8 +54,8 @@
 				JobResultDekho.com &copy; {new Date().getFullYear()} | All rights reserved | A Unit of RPNews Network Pvt. Ltd.
 			</p>
 			<div class="flex flex-wrap gap-x-2 gap-y-1 text-sm justify-center">
-				{#if childCategories.length > 0}
-					{#each childCategories as child}
+				<!-- {#if childCategories.length > 0} -->
+					{#each footerMenus as child}
 						<a
 							href={`/${child.slug}`}
 							title={child.title}
@@ -57,7 +64,7 @@
 							{child.title}
 						</a>
 					{/each}
-				{/if}
+				<!-- {/if} -->
 			</div>
 		</div>
 	</div>

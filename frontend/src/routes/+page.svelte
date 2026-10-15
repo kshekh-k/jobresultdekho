@@ -9,6 +9,7 @@
 		latestResults?: any[];
 		latestSyllabus?: any[];
 		categoryTree?: any[];
+		closingSoonJobs?: any[];
 	};
 	const {
 		latestAdmissions = [],
@@ -19,7 +20,8 @@
 		latestJobs = [],
 		latestResults = [],
 		latestSyllabus = [],
-		categoryTree = []
+		categoryTree = [],
+		closingSoonJobs = []
 	} = data;
 
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -132,23 +134,23 @@ ${JSON.stringify({
 		{latestResults}
 		{latestSyllabus}
 		{categoryTree}
+		{closingSoonJobs}
 	/>
 	<Stats />
-<div class="max-w-screen-xl mx-auto px-3 space-y-5">
-	<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
-		<Card.Content class="flex items-center justify-center p-1!">
-			<div class="prose max-w-none p-3">
-				<h2 class="mb-0!">All Sarkari Results {fullYear} in One Place</h2>
+	<div class="max-w-screen-xl mx-auto px-3 space-y-5">
+		<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
+			<Card.Content class="flex items-center justify-center p-1!">
+				<div class="prose max-w-none p-3">
+					<h2 class="mb-0!">All Sarkari Results {fullYear} in One Place</h2>
 
-				<p>
-					Sarkari Result {fullYear} par aapko milti hai latest govt jobs, sarkari naukri updates, admit
-					card, answer key aur exam results ki fast aur accurate jankari. Yahan aap daily new vacancy
-					aur recruitment notification check kar sakte hain.
-				</p>
-			</div>
-		</Card.Content>
-
-	</Card.Root>
-</div>
+					<p>
+						Sarkari Result {fullYear} par aapko milti hai latest govt jobs, sarkari naukri updates, admit
+						card, answer key aur exam results ki fast aur accurate jankari. Yahan aap daily new vacancy
+						aur recruitment notification check kar sakte hain.
+					</p>
+				</div>
+			</Card.Content>
+		</Card.Root>
+	</div>
 	<Desclaimer />
 </div>
