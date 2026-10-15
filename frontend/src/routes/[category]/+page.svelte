@@ -199,71 +199,79 @@
 	);
 
 	// JSON-LD Schema object
-	let schemaData = $derived({
-		'@context': 'https://schema.org',
-		'@type': 'WebPage',
-		'@id': `${SITE_URL}/${data.category.slug}#webpage`,
-		name: pageTitle,
-		url: `${SITE_URL}/${data.category.slug}`,
-		description: pageDesc,
-		publisher: {
-			'@type': 'Organization',
-			name: SITE_NAME,
-			logo: {
-				'@type': 'ImageObject',
-				url: SITE_LOGO
-			}
-		},
-		author: {
-			'@type': 'Organization',
-			name: SITE_NAME
-		},
-		isPartOf: {
-			'@type': 'WebSite',
-			'@id': `${SITE_URL}/${data.category.slug}/#website`,
-			name: SITE_NAME,
-			url: SITE_URL
-		},
-		inLanguage: 'en-IN',
-		potentialAction: {
-			'@type': 'SearchAction',
-			target: `${SITE_URL}/search?q={search_term_string}`,
-			'query-input': 'required name=search_term_string'
-		}
-	});
+	let schemaData = $derived(
+		data?.category?.slug
+			? {
+					'@context': 'https://schema.org',
+					'@type': 'WebPage',
+					'@id': `${SITE_URL}/${data.category.slug}#webpage`,
+					name: pageTitle,
+					url: `${SITE_URL}/${data.category.slug}`,
+					description: pageDesc,
+					publisher: {
+						'@type': 'Organization',
+						name: SITE_NAME,
+						logo: {
+							'@type': 'ImageObject',
+							url: SITE_LOGO
+						}
+					},
+					author: {
+						'@type': 'Organization',
+						name: SITE_NAME
+					},
+					isPartOf: {
+						'@type': 'WebSite',
+						'@id': `${SITE_URL}/${data.category.slug}/#website`,
+						name: SITE_NAME,
+						url: SITE_URL
+					},
+					inLanguage: 'en-IN',
+					potentialAction: {
+						'@type': 'SearchAction',
+						target: `${SITE_URL}/search?q={search_term_string}`,
+						'query-input': 'required name=search_term_string'
+					}
+				}
+			: null
+	);
 </script>
 
 <svelte:head>
 	<title>{pageTitle}</title>
 
 	<meta name="description" content={pageDesc} />
-	<link rel="canonical" href={`${SITE_URL}/${data.category.slug}`} />
+	{#if data?.category?.slug}
+		<link rel="canonical" href={`${SITE_URL}/${data.category.slug}`} />
 
-	<meta property="og:title" content={pageTitle} />
-	<meta property="og:description" content={pageDesc} />
-	<meta property="og:url" content={`${SITE_URL}/${data.category.slug}`} />
-	<meta property="og:image" content={OG_IMAGE} />
-	<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDesc} />
+		<meta property="og:url" content={`${SITE_URL}/${data.category.slug}`} />
+		<meta property="og:image" content={OG_IMAGE} />
+		<meta property="og:site_name" content={SITE_NAME} />
 
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={pageTitle} />
-	<meta name="twitter:description" content={pageDesc} />
-	<meta name="twitter:image" content={OG_IMAGE} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDesc} />
+		<meta name="twitter:image" content={OG_IMAGE} />
+	{/if}
 
 	<meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 	<meta name="application-name" content={SITE_NAME} />
 	<meta name="theme-color" content="#0c4a6e" />
 
 	<!-- JSON-LD Output -->
-	{@html `
-	<script type="application/ld+json">
-	${JSON.stringify(schemaData)}
-	</script>
-	`}
+	{#if schemaData}
+		{@html `
+		<script type="application/ld+json">
+		${JSON.stringify(schemaData)}
+		</script>
+		`}
+	{/if}
 </svelte:head>
 
-<Layout heading={data.category.title} {headerBgColor}>
-	{#if data.category.description}
+<Layout heading={data?.category?.title || 'Categories'} {headerBgColor}>
+	{#if data?.category?.description}
 		<Card.Root class="overflow-hidden rounded-md gap-5 ">
 			<Card.Content>
 				<h2>{pageTitle}</h2>
@@ -275,17 +283,35 @@
 	<!-- ============================================
 	     🔥 Single Loop → Auto Render All Sections 
 	     ============================================ -->
-	{#each sections as sec}
-		{console.log('sec.key', data.category[sec.key]?.length)}
-		{#if data.category[sec.key]?.length}
-			<ArticleCardList
-				type={sec.type}
-				headerColor={sec.color}
-				headers={sec.headers}
-				title={data.category.title}
-				items={data.category[sec.key]}
-				slug={data.category.slug}
-			/>
-		{/if}
-	{/each}
+	{#if data?.category}
+		{#each sections as sec}
+			{#if data.category[sec.key]?.length}
+				<ArticleCardList
+					type={sec.type}
+					headerColor={sec.color}
+					headers={sec.headers}
+					title={data.category.title}
+					items={data.category[sec.key]}
+					slug={data.category.slug}
+				/>
+			{/if}
+		{/each}
+	{:else}
+		<Card.Root class="overflow-hidden rounded-md p-8 text-center bg-white border border-slate-200">
+			<Card.Content class="space-y-4">
+				<h3 class="text-xl font-semibold text-slate-800">Category Not Found</h3>
+				<p class="text-slate-600 max-w-md mx-auto text-sm">
+					The requested category could not be found. Please browse our latest jobs and updates.
+				</p>
+				<div>
+					<a
+						href="/latest-job"
+						class="inline-block px-4 py-2 bg-sky-900 text-white rounded text-sm hover:bg-sky-800 transition"
+					>
+						Explore Latest Jobs
+					</a>
+				</div>
+			</Card.Content>
+		</Card.Root>
+	{/if}
 </Layout>

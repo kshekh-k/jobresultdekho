@@ -4,38 +4,39 @@ import type { RequestHandler } from './$types';
 const baseUrl = SITE_URL;
 
 export const GET: RequestHandler = async () => {
-  const pages = [
-    '/',
-    '/latest-job',
-    '/admit-card',
-    '/result',
-    '/answer-key',
-    '/syllabus',
-    '/blog',
-    '/contact',
-    '/about-us',
-    '/waiting-list',
-    '/archive-job'
-  ];
+	const pages = [
+		'/',
+		'/latest-job',
+		'/closing-soon',
+		'/admit-card',
+		'/result',
+		'/answer-key',
+		'/syllabus',
+		'/blog',
+		'/contact',
+		'/about-us',
+		'/waiting-list',
+		'/archive-job'
+	];
 
-  const body = `<?xml version="1.0" encoding="UTF-8"?>
+	const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages
-  .map(
-    (page) => `
+	.map(
+		(page) => `
   <url>
     <loc>${baseUrl}${page}</loc>
     <changefreq>daily</changefreq>
     <priority>${page === '/' ? '1.0' : '0.9'}</priority>
   </url>
 `
-  )
-  .join('')}
+	)
+	.join('')}
 </urlset>`;
 
-  return new Response(body, {
-    headers: {
-      'Content-Type': 'application/xml'
-    }
-  });
+	return new Response(body, {
+		headers: {
+			'Content-Type': 'application/xml'
+		}
+	});
 };

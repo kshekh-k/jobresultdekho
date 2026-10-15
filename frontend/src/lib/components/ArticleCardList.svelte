@@ -6,9 +6,11 @@
 	import Icon from './ui/Icon.svelte';
 	import Button from './ui/button/button.svelte';
 	import { daysLeft, daysLeftLabel, formatDate } from '$lib/utils';
+	import { getCalendarDaysRemaining } from '$lib/closingSoon';
 	import DynamicAd from './DynamicAd.svelte';
 
-	export let title: string | undefined;
+	// svelte-ignore export_let_unused
+export let title: string | undefined;
 	export let headerColor: string = 'bg-sky-500';
 	export let slug: string = '/latest-job';
 	export let open: boolean = true;
@@ -62,11 +64,22 @@
 
 	const toggle = () => (open = !open);
 
+	export let sortBy: 'updatedAt' | 'last_date' | 'none' = 'updatedAt';
+
 	// ✅ Pagination setup
 	let perPage = 25;
 	let currentPage = 1;
 
 	$: sortedItems = [...items].sort((a, b) => {
+		if (sortBy === 'none') return 0;
+		if (sortBy === 'last_date') {
+			const aDiff = getCalendarDaysRemaining(a.last_date);
+			const bDiff = getCalendarDaysRemaining(b.last_date);
+			const aVal = aDiff !== null ? aDiff : Infinity;
+			const bVal = bDiff !== null ? bDiff : Infinity;
+			if (aVal !== bVal) return aVal - bVal;
+			return (a.title || '').localeCompare(b.title || '');
+		}
 		const aDate = new Date(
 			a.updatedAt || a.updated_at || a.createdAt || a.created_at || 0
 		).getTime();
@@ -97,7 +110,7 @@
 	{#if open}
 		<Card.Content class="p-0 divide-y">
 			<div
-				class="flex flex-wrap justify-between gap-2 px-2 sm:px-4 bg-(color:--headerColor) text-sm font-medium py-2 text-white"
+				class="flex flex-wrap justify-between gap-2 px-2 sm:px-4 bg-(--headerColor) text-sm font-medium py-2 text-white"
 			>
 				{#each headers as header}
 					<div class="hidden md:flex gap-2 flex-1">
@@ -140,7 +153,7 @@
 								title={item.title}
 								href="{slug}/{type}/{item.slug}"
 								target={item.target}
-								class="text-neutral-700 hover:text-(color:--headerColor) font-medium transition-colors flex-1 md:py-2 line-clamp-2"
+								class="text-neutral-700 hover:text-(--headerColor) font-medium transition-colors flex-1 md:py-2 line-clamp-2"
 							>
 								{item.title}
 							</a>
@@ -151,14 +164,33 @@
 						<span class="max-w-full truncate text-sm">{item.department?.title || '—'}</span>
 					</div>
 					{#if type !== 'syllabus'}
-						<div class="md:w-24 shrink-0 order-3 md:order-4 flex gap-1 items-center">
-							<Icon name={Calendar} size={14} className="md:hidden" />
-							{#if item.Apply_date_Start_message}
-								<span class="text-sm block line-clamp-2">{item.Apply_date_Start_message}</span>
-							{:else if formatDate(item.last_date)}
-								<span class="text-sm block line-clamp-2">{formatDate(item.last_date)}</span>
-							{:else if !item.Apply_date_Start_message && !formatDate(item.last_date)}
-								<span class="text-sm block line-clamp-2">—</span>
+						{@const days = getCalendarDaysRemaining(item.last_date)}
+						<div class="md:w-24 shrink-0 order-3 md:order-4 flex flex-col gap-0.5 justify-center">
+							<div class="flex gap-1 items-center">
+								<Icon name={Calendar} size={14} className="md:hidden" />
+								{#if item.Apply_date_Start_message}
+									<span class="text-sm block line-clamp-2">{item.Apply_date_Start_message}</span>
+								{:else if formatDate(item.last_date)}
+									<span class="text-sm block line-clamp-2">{formatDate(item.last_date)}</span>
+								{:else if !item.Apply_date_Start_message && !formatDate(item.last_date)}
+									<span class="text-sm block line-clamp-2">—</span>
+								{/if}
+							</div>
+							{#if days !== null && days >= 0 && days <= 7}
+								<span
+									class="text-[11px] font-semibold rounded px-1.5 py-0.5 inline-block text-center w-fit {days <=
+									1
+										? 'text-rose-700 bg-rose-50'
+										: 'text-amber-800 bg-amber-50'}"
+								>
+									{#if days === 0}
+										{days === 0 ? 'Closes Today' : `${days} ${days === 1 ? 'day' : 'days'} left`}
+									{:else if days === 1}
+										1 day left
+									{:else}
+										{days} days left
+									{/if}
+								</span>
 							{/if}
 						</div>
 					{/if}
@@ -180,7 +212,7 @@
 								rel="nofollow noopener noreferrer external"
 								target="_blank"
 								size="sm"
-								class="bg-(color:--headerColor)"
+								class="bg-(--headerColor)"
 							>
 								{buttonLabel}
 							</Button>

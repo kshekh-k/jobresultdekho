@@ -3,7 +3,7 @@ import type { PageLoad } from './$types';
 import { getLatestAdmissions } from '$lib/api/admission';
 import { getLatestAdmitCards } from '$lib/api/admit-card';
 import { getLatestAnswerKeys } from '$lib/api/answer-key';
-import { getHotPosts, getHighAlertPosts, getLatestJobs } from '$lib/api/job';
+import { getHotPosts, getHighAlertPosts, getLatestJobs, getClosingSoonJobs } from '$lib/api/job';
 import { getLatestResults } from '$lib/api/result';
 import { getLatestSyllabus } from '$lib/api/syllabus';
 import { getCategoryTree } from '$lib/api/category';
@@ -20,6 +20,7 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
 		latestResults,
 		latestSyllabus,
 		categoryTree,
+		closingSoonJobs
 	] = await Promise.allSettled([
 		getLatestAdmissions(fetch),
 		getLatestAdmitCards(fetch),
@@ -30,7 +31,8 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
 		getLatestResults(fetch),
 		getLatestSyllabus(fetch),
 		getCategoryTree(fetch),
-	]).then(results => results.map(r => (r.status === 'fulfilled' ? (r.value ?? []) : [])));
+		getClosingSoonJobs({ pageSize: 15 }, fetch)
+	]).then((results) => results.map((r) => (r.status === 'fulfilled' ? (r.value ?? []) : [])));
 
 	return {
 		latestAdmissions,
@@ -42,6 +44,6 @@ export async function load({ fetch }: { fetch: typeof window.fetch }) {
 		latestResults,
 		latestSyllabus,
 		categoryTree,
+		closingSoonJobs
 	};
 }
-

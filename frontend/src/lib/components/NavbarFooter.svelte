@@ -41,7 +41,7 @@
 						href={SITE_URL}
 						title={cat.title}
 						onclick={onNavigate}
-						class="block py-1 lg:py-1.5 text-sm ease-in-out duration-200 text-center
+						class="block py-1 text-sm ease-in-out duration-200 text-center
 							{currentPath === '/' ? 'text-white' : 'hover:text-white text-white/60'}"
 					>
 						{cat.title}
@@ -56,7 +56,7 @@
 								href={`/${child.slug}`}
 								title={child.title}
 								onclick={onNavigate}
-								class="block py-1 lg:py-1.5 text-sm ease-in-out duration-200 text-center
+								class="block py-1 text-sm ease-in-out duration-200 text-center
 								{isActive(child.slug) ? 'text-white' : 'hover:text-white text-white/60'}"
 							>
 								{child.title}
@@ -71,7 +71,7 @@
 						href={`/${cat.slug}`}
 						title={cat.title}
 						onclick={onNavigate}
-						class="block py-1 lg:py-4 text-sm ease-in-out duration-200 text-center
+						class="block py-1 text-sm ease-in-out duration-200 text-center
 							{isActive(cat.slug) ? 'text-white' : 'hover:text-white text-white/60'}"
 					>
 						{cat.title}

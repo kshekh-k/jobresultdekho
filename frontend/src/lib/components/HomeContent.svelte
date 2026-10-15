@@ -6,6 +6,7 @@
 	export let latestResults;
 	export let latestSyllabus;
 	export let categoryTree;
+	export let closingSoonJobs: any[] = [];
 
 	import ArticleCard from '$lib/components/ArticleCardHome.svelte';
 	import { PanelRightDashed } from 'lucide-svelte';
@@ -40,16 +41,20 @@
 	// Colors (CSS variables you already use)
 	const headingColor = [
 		'--color-sky-900',
+		'--color-rose-900',
 		'--color-emerald-900',
 		'--color-amber-900',
 		'--color-indigo-900',
-		'--color-rose-900',
+		'--color-purple-900',
 		'--color-yellow-900'
 	];
 
 	// Headers
 	const commanHeader = [
 		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Last Date', action: 'Action' }
+	];
+	const closingSoonHeader = [
+		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Last Date', closingIn: 'Closing In', action: 'Action' }
 	];
 	const admitHeader = [
 		{ id: 'No.', department: 'Dept', label: 'Post', date: 'Exam Date', action: 'Action' }
@@ -73,7 +78,22 @@
 			items: latestJobs,
 			viewText: 'View All',
 			slug: 'latest-job',
-			headers: commanHeader
+			viewAllHref: '/latest-job',
+			headers: commanHeader,
+			headerColor: '--color-sky-900',
+			sortBy: 'updatedAt' as const
+		},
+		{
+			id: 'closing-soon',
+			type: 'jobs',
+			title: 'Closing Soon',
+			items: closingSoonJobs,
+			viewText: 'View All',
+			slug: 'latest-job',
+			viewAllHref: '/closing-soon',
+			headers: closingSoonHeader,
+			headerColor: '--color-rose-900',
+			sortBy: 'none' as const
 		},
 		{
 			id: 'admit-card',
@@ -82,7 +102,10 @@
 			items: latestAdmitCards,
 			viewText: 'View All',
 			slug: 'admit-card',
-			headers: admitHeader
+			viewAllHref: '/admit-card',
+			headers: admitHeader,
+			headerColor: '--color-emerald-900',
+			sortBy: 'updatedAt' as const
 		},
 		{
 			id: 'result',
@@ -91,7 +114,10 @@
 			items: latestResults,
 			viewText: 'View All',
 			slug: 'result',
-			headers: resultHeader
+			viewAllHref: '/result',
+			headers: resultHeader,
+			headerColor: '--color-amber-900',
+			sortBy: 'updatedAt' as const
 		},
 		{
 			id: 'answer-key',
@@ -100,7 +126,10 @@
 			items: latestAnswerKeys,
 			viewText: 'View All',
 			slug: 'answer-key',
-			headers: answerKeyHeader
+			viewAllHref: '/answer-key',
+			headers: answerKeyHeader,
+			headerColor: '--color-indigo-900',
+			sortBy: 'updatedAt' as const
 		},
 		{
 			id: 'admission',
@@ -109,7 +138,10 @@
 			items: latestAdmissions,
 			viewText: 'View All',
 			slug: 'admission',
-			headers: commanHeader
+			viewAllHref: '/admission',
+			headers: commanHeader,
+			headerColor: '--color-purple-900',
+			sortBy: 'updatedAt' as const
 		},
 		{
 			id: 'syllabus',
@@ -118,9 +150,12 @@
 			items: latestSyllabus,
 			viewText: 'View All',
 			slug: 'syllabus',
-			headers: syllabusHeader
+			viewAllHref: '/syllabus',
+			headers: syllabusHeader,
+			headerColor: '--color-yellow-900',
+			sortBy: 'updatedAt' as const
 		}
-	].map((sec, index) => ({ ...sec, headerColor: headingColor[index] }));
+	];
 
 	/* -------------------------
 	   Scroll spy (precise)
@@ -213,11 +248,11 @@
 </script>
 
 <!-- PAGE LAYOUT -->
-<div class="max-w-screen-xl mx-auto px-3 space-y-5">
+<div class="max-w-7xl mx-auto px-3 space-y-5">
 	<!-- Sticky Tabs -->
 	<div class="hidden md:block {isFixed ? 'h-16' : 'h-auto'}" bind:this={navEl}>
 		<div class={isFixed ? 'fixed inset-x-0 top-0 z-20 ' : ''}>
-			<div class={isFixed ? 'max-w-screen-xl mx-auto px-3' : ''}>
+			<div class={isFixed ? 'max-w-7xl mx-auto px-3' : ''}>
 				<div
 					class="flex gap-2 flex-wrap p-3 bg-white shadow-sm {isFixed
 						? 'rounded-b-md'
@@ -230,15 +265,15 @@
 								? parent.headerColor
 								: '--color-neutral-300'}); --btnHover:var({parent.headerColor})"
 							variant="light"
-							class="flex-1 !px-2 md:!px-4 rounded-md 
-							hover:bg-(color:--btnHover)! 
-							{active === parent.id ? 'text-white bg-(color:--btnColor)' : 'text-neutral-600'}"
+							class="flex-1 px-2! md:px-4! rounded-md 
+							hover:bg-(--btnHover)! 
+							{active === parent.id ? 'text-white bg-(--btnColor)' : 'text-neutral-600'}"
 						>
 							{parent.title}
 						</Button>
 					{/each}
 
-					<Button variant="bordered" class="lg:!hidden">
+					<Button variant="bordered" class="lg:hidden!">
 						<Icon name={PanelRightDashed} size={20} />
 					</Button>
 				</div>
@@ -261,9 +296,11 @@
 					items={sec.items}
 					viewText={sec.viewText}
 					slug={sec.slug}
+					viewAllHref={sec.viewAllHref}
+					sortBy={sec.sortBy}
 				/>
 
-				{#if i === 2}
+				{#if i === 3}
 					<!-- Ads Section Banner with option Mobile and Desktop as well option for Google Adsense -->
 					<Card.Root variant="default" class="py-0! rounded-md! sm:rounded-xl!">
 						<Card.Content class="flex items-center justify-center text-center p-1!">
@@ -274,6 +311,6 @@
 			{/each}
 		</div>
 
-		<Sidebar />
+		<Sidebar {closingSoonJobs} />
 	</section>
 </div>
